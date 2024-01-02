@@ -1,6 +1,4 @@
-﻿using Microsoft.VisualBasic;
-
-namespace DO;
+﻿namespace DO;
 /// <summary>
 /// A task entity represents a task with all its data.
 /// </summary>
