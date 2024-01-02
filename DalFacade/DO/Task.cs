@@ -2,7 +2,7 @@
 /// <summary>
 /// A task entity represents a task with all its data.
 /// </summary>
-/// <param name="id">Personal unique ID for the task (automatic number).</param>
+/// <param name="Id">Personal unique ID for the task (automatic number).</param>
 /// <param name="NickName">Nickname of the task.</param>
 /// <param name="Description">A description of what needs to be done in the task in order for it to be completed.</param>
 /// <param name="ScheduledDate">Desired date for the start of the task.</param>
