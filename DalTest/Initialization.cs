@@ -17,7 +17,9 @@ public static class Initialization
 
     private static readonly Random s_rand = new();
 
-
+    /// <summary>
+    /// Initializing the task list with 20 tasks
+    /// </summary>
     private static void createTasks()
     {
 
