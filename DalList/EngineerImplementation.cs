@@ -27,9 +27,26 @@ public class EngineerImplementation : IEngineer
         return engineer.ID;
     }
 
+    /// <summary>
+    /// The function change the status of the recieved engineer to unemployed.
+    /// </summary>
+    /// <param name="id">The ID of the engineer we want to delete(change to unemployed)</param>
+    /// <exception cref="Exception">If the engineer you want to delete does not exist in the list</exception>
     public void Delete(int id)
     {
-        throw new NotImplementedException();
+        Engineer? engineer = DataSource.Engineers.Find(e => e.ID == id);
+
+        if (engineer != null) 
+        {
+            Engineer unemployedEngineer = engineer with { isEmployed = false};
+            DataSource.Engineers.Remove(engineer);
+            DataSource.Engineers.Add(unemployedEngineer);
+        }
+        else
+        {
+            throw new Exception($"An object of type Engineer with ID={engineer.ID} does not exist");
+        }
+
     }
 
     /// <summary>
