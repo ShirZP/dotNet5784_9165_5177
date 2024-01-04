@@ -35,7 +35,7 @@ public class DependencyImplementation : IDependency
             DataSource.Dependencies.Remove(dependency);
         }
         else
-            throw new Exception("An object of type Dependency with this ID does not exist");
+            throw new Exception($"An object of type Dependency with ID={id} does Not exist");
     }
 
     /// <summary>
@@ -76,7 +76,7 @@ public class DependencyImplementation : IDependency
         }
         else
         {
-            throw new Exception("An object of type Dependency with this ID does not exist");
+            throw new Exception($"An object of type Dependency with ID={dependency.ID} does Not exist");
         }
     }
 }
