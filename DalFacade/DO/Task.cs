@@ -2,7 +2,7 @@
 /// <summary>
 /// A task entity represents a task with all its data.
 /// </summary>
-/// <param name="Id">Personal unique ID for the task (automatic number).</param>
+/// <param name="ID">Personal unique ID for the task (automatic number).</param>
 /// <param name="NickName">Nickname of the task.</param>
 /// <param name="Description">A description of what needs to be done in the task in order for it to be completed.</param>
 /// <param name="ScheduledDate">Desired date for the start of the task.</param>
@@ -17,7 +17,7 @@
 /// <param name="IsMileStone">Does the task depend on other tasks before and after it.</param>
 public record Task
 (
-    int Id,//TODO: מספר רץ
+    int ID,//TODO: מספר רץ
     string NickName,
     string Description,  
     DateTime? ScheduledDate,  
