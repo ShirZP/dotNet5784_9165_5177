@@ -71,7 +71,108 @@
 
         private static void engineerSubMenu()
         {
+            int choice, id, level, cost;
+            string? nameEngineer, email;
+            Engineer? engineer, newEngineer;
             printSubMenu("Engineer");
+            choice = Console.Read();
+
+
+            while(choice!=0) 
+            {
+                switch (choice)
+                {
+                    case 1:  //Create
+                        Console.WriteLine("Enter engineer ID:");
+                        id = Console.Read();
+
+                        Console.WriteLine("Enter engineer full name:");
+                        nameEngineer = Console.ReadLine();
+
+                        Console.WriteLine("Enter engineer email:");
+                        email = Console.ReadLine();
+                        Console.WriteLine("Choose engineer level:" + "0 - Beginner\n" + "1 - AdvancedBeginner\n" + "2 - Intermediate\n" + "3 - Advanced\n" + "4 - Expert\n");
+                        level = Console.Read();
+
+                        Console.WriteLine("Enter engineer cost:");
+                        cost = Console.Read();
+
+                        newEngineer = new Engineer(id, nameEngineer, email, ((EngineerExperience)level), cost);
+                        s_dalEngineer!.Create(newEngineer);
+
+                        break;
+
+                    case 2:  //Read
+                        Console.WriteLine("Enter engineer ID:");
+                        id = Console.Read();
+                        engineer = s_dalEngineer!.Read(id);
+                        if (engineer != null)
+                        {
+                            Console.WriteLine(engineer);
+                        }
+                        else
+                        {
+                            Console.WriteLine($"The engineer with ID = {id} does not exist");
+                        }
+                        break; 
+
+                    case 3:  //ReadAll
+                        List<Engineer> engineersList = s_dalEngineer!.ReadAll();
+                        foreach(var e in engineersList)
+                        {
+                            Console.WriteLine(e);    
+                        }
+                        break;
+
+                    case 4:  //Update
+                        Console.WriteLine("Enter engineer ID to update:");
+                        id = Console.Read();
+                        engineer = s_dalEngineer!.Read(id);
+                        if (engineer != null)
+                        {
+                            Console.WriteLine(engineer);
+
+                            Console.WriteLine("Enter engineer full name:");
+                            nameEngineer = Console.ReadLine();
+
+                            Console.WriteLine("Enter engineer email:");
+                            email = Console.ReadLine();
+
+                            Console.WriteLine("Choose engineer level:" + "0 - Beginner\n" + "1 - AdvancedBeginner\n" + "2 - Intermediate\n" + "3 - Advanced\n" + "4 - Expert\n");
+                            level = Console.Read();
+
+                            Console.WriteLine("Enter engineer cost:");
+                            cost = Console.Read();
+
+                            newEngineer = new Engineer(id, nameEngineer, email, ((EngineerExperience)level), cost);
+                            s_dalEngineer!.Update(newEngineer);
+
+                            Console.WriteLine($"Engineer { id } update successfully");
+                        }
+                        else
+                        {
+                            Console.WriteLine($"The engineer with ID = {id} does not exist");
+                        }
+                        break;
+
+                    case 5:  //Delete
+                        Console.WriteLine("Enter engineer ID to read:");
+                        id = Console.Read();
+                        s_dalEngineer!.Delete(id);
+                        Console.WriteLine($"Engineer {id} deleted successfully");
+                        break;
+
+                    case 0:
+                        break;
+
+                    default:
+                        break;
+                }
+
+                printSubMenu("Engineer");
+                choice = Console.Read();
+            }
+
         }
 
         private static void dependencySubMenu()
