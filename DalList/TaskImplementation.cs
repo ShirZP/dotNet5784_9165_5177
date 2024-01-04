@@ -10,13 +10,13 @@ public class TaskImplementation : ITask
     /// <summary>
     /// The function adds the new task to the list of tasks with a unique ID for it.
     /// </summary>
-    /// <param name="item">New task to add to the tasksList</param>
+    /// <param name="task">New task to add to the tasksList</param>
     /// <returns>The new task uniqe id</returns>
-    public int Create(Task item)
+    public int Create(Task task)
     {
         int newId = DataSource.Config.NextTaskId;
-        Task taskWithNewID = item with { ID =  newId };
 
+        Task taskWithNewID = task with { ID =  newId };
         DataSource.Tasks.Add(taskWithNewID);
 
         return newId;
