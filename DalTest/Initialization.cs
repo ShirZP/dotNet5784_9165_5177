@@ -112,9 +112,39 @@ public static class Initialization
         }
     }
 
+    /// <summary>
+    /// Initializing the dependency list with 40 Dependencies
+    /// </summary>
     private static void createDependencies()
     {
-        
+        int _dependentTaskID;
+        int _dependensOnTaskID;
+        List<Task>? tasksList = s_dalTask!.ReadAll();
+
+
+        for (int i = 0; i < 40;i++)
+        {
+            if (tasksList != null )
+            {
+                //DependentTask
+                Task t = tasksList[s_rand.Next(0, 20)];  //choose a Task from the list
+                _dependentTaskID = t.ID;
+                DateTime? dependentTaskScheduledDate = t.ScheduledDate;
+
+                //DependensOnTask
+                do   //If the scheduled task start date of the dependent task is before the task it depends on, repeat the loop
+                {
+                    t = tasksList[s_rand.Next(0, 20)];
+                } while (dependentTaskScheduledDate <= t.ScheduledDate);
+
+                _dependensOnTaskID = t.ID;
+
+                Dependency newDependency = new Dependency(0, _dependentTaskID, _dependensOnTaskID);
+                s_dalDependency!.Create(newDependency);
+            }
+
+        }
+
 
     }
 
