@@ -22,9 +22,22 @@ public class TaskImplementation : ITask
         return newId;
     }
 
+    /// <summary>
+    /// The function deletes the recieved task from the tasks list
+    /// </summary>
+    /// <param name="id">The ID of the task to delete</param>
+    /// <exception cref="Exception">If the task does not exist in the tasks list</exception>
     public void Delete(int id)
     {
-        throw new NotImplementedException();
+        Task? task = DataSource.Tasks.Find(t => t.ID == id);
+        if (task != null)
+        {
+            DataSource.Tasks.Remove(task);
+        }
+        else
+        {
+            throw new Exception("An object of type Task with this ID does not exist");
+        }
     }
 
     /// <summary>
