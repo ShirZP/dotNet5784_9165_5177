@@ -33,6 +33,6 @@ public record Task
 )
 {
     public Task() : this(0, "", "", null, null, null, null, "", "", 0, null) { }
-    //TODO: Ctor parameters
+    
     public DateTime CreateAtDate => DateTime.Now;
 }
