@@ -22,9 +22,20 @@ public class DependencyImplementation : IDependency
         return newId;
     }
 
+    /// <summary>
+    /// The function deletes the received dependency from the Dependencies list
+    /// </summary>
+    /// <param name="id">The ID of the dependency to delete</param>
+    /// <exception cref="Exception">If the dependncy does not exist in the Dependencies list</exception>
     public void Delete(int id)
     {
-        throw new NotImplementedException();
+        Dependency? dependency = DataSource.Dependencies.Find(d => d.ID == id);
+        if (dependency != null)
+        {
+            DataSource.Dependencies.Remove(dependency);
+        }
+        else
+            throw new Exception("An object of type Dependency with this ID does not exist");
     }
 
     /// <summary>

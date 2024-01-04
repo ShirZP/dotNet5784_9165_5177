@@ -3,8 +3,8 @@
 /// Indicates the dependency between tasks, which task depends on another.
 /// </summary>
 /// <param name="ID">Personal unique ID for the task (automatic number).</param>
-/// <param name="DependentTask">Which task depends on the current task.</param>
-/// <param name="DependensOnTask">Which task the current task depends on.</param>
+/// <param name="DependentTask">The dependent task</param>
+/// <param name="DependensOnTask">Which task the 'DependentTask' depends on.</param>
 public record Dependency
 (
     int ID,
