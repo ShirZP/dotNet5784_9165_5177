@@ -17,6 +17,5 @@ public record Engineer
 )
 {
     public Engineer() : this(0, "", "", null, 0) { } //empty ctor for stage 3
-    // TODO: parameter ctor
 
 }
