@@ -36,7 +36,7 @@ public class TaskImplementation : ITask
         }
         else
         {
-            throw new Exception("An object of type Task with this ID does not exist");
+            throw new Exception($"An object of type Task with ID={id} does not exist");
         }
     }
 
@@ -78,7 +78,7 @@ public class TaskImplementation : ITask
         }
         else
         {
-            throw new Exception("An object of type Task with this ID does not exist");
+            throw new Exception($"An object of type Task with ID={task.ID} does not exist");
         }    
     }
 }

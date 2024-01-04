@@ -17,7 +17,7 @@ public class EngineerImplementation : IEngineer
         Engineer? searchSameEngineer = DataSource.Engineers.Find(e => e.ID == engineer.ID);  //Checking if there is already an engineer with such an id in the list.
         if (searchSameEngineer != null) 
         {
-            throw new Exception("An object of type Engineer with this ID already exist");
+            throw new Exception($"An object of type Engineer with ID={engineer.ID} already exist");
         }
         else
         {
@@ -70,7 +70,7 @@ public class EngineerImplementation : IEngineer
         }
         else
         {
-            throw new Exception("An object of type Engineer with this ID does not exist");
+            throw new Exception($"An object of type Engineer with ID={engineer.ID} does not exist");
         }
     }
 }
