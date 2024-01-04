@@ -17,7 +17,7 @@
 /// <param name="IsMileStone">Does the task depend on other tasks before and after it.</param>
 public record Task
 (
-    int ID,//TODO: מספר רץ
+    int ID,
     string NickName,
     string Description,  
     DateTime? ScheduledDate,  
