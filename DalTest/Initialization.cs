@@ -148,7 +148,13 @@ public static class Initialization
 
     }
 
-
+    /// <summary>
+    /// Initializes the 3 lists of 3 entities respectively. 
+    /// </summary>
+    /// <param name="dalTask">An interface type to a task entity</param>
+    /// <param name="dalEngineer">An interface type to a task engineer</param>
+    /// <param name="dalDependency">An interface type to a task dependency</param>
+    /// <exception cref="NullReferenceException"></exception>
     public static void Do(ITask? dalTask, IEngineer? dalEngineer, IDependency? dalDependency)
     {
         s_dalTask = dalTask ?? throw new NullReferenceException("DALTASK can not be null!");
