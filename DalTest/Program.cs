@@ -18,7 +18,6 @@
             printMainMenu();
             choice = Console.Read();
 
-
             do
             {
                 try
@@ -67,6 +66,7 @@
         private static void taskSubMenu()
         {
             int choice, id;
+            Task? task;
             printSubMenu("Task");
             choice = Console.Read();
 
@@ -75,14 +75,15 @@
                 switch (choice)
                 {
                     case 1:  //Create
-                        
 
+                        task = receivingTaskDataFromUser();
+                        s_dalTask!.Create(task);
                         break;
 
                     case 2:  //Read
                         Console.WriteLine("Enter Task ID to read:");
                         id = Console.Read();
-                        Task? task = s_dalTask!.Read(id);
+                        task = s_dalTask!.Read(id);
                         if (task != null)
                         {
                             Console.WriteLine(task);
@@ -101,8 +102,9 @@
                         }
                         break;
 
-                    case 4:
-                        
+                    case 4: //Update
+                        task = receivingTaskDataFromUser();
+                        s_dalTask!.Update(task);
                         break;
 
                     case 5:  //Delete
@@ -232,7 +234,7 @@
         private static void dependencySubMenu()
         {
             int choice;
-            int id, dependentTaskID, DependensOnTaskID;
+            int id;
             Dependency? dependency;
             printSubMenu("Dependency");
             choice = Console.Read();
@@ -242,13 +244,8 @@
                 switch (choice)
                 {
                     case 1:  //Create
-                        Console.WriteLine("Enter the ID of the dependent task:");
-                        dependentTaskID = Console.Read();
+                        dependency = receivingDependencyDataFromUser();
 
-                        Console.WriteLine($"Enter the ID of the task Which the task {dependentTaskID} depends on:");
-                        DependensOnTaskID = Console.Read();
-
-                        dependency = new Dependency(0, dependentTaskID, DependensOnTaskID);
                         s_dalDependency!.Create(dependency);
                         break;
 
@@ -283,13 +280,8 @@
                         {
                             Console.WriteLine(dependency);
 
-                            Console.WriteLine("Enter the ID of the dependent task:");
-                            dependentTaskID = Console.Read();
+                            dependency = receivingDependencyDataFromUser();
 
-                            Console.WriteLine($"Enter the ID of the task Which the task {dependentTaskID} depends on:");
-                            DependensOnTaskID = Console.Read();
-
-                            dependency = new Dependency(0, dependentTaskID, DependensOnTaskID);
                             s_dalDependency!.Update(dependency);
                             Console.WriteLine($"Dependency {id} update successfully");
                         }
@@ -317,6 +309,57 @@
             }
         }
 
+        private static Dependency receivingDependencyDataFromUser()
+        {
+            int dependentTaskID, DependensOnTaskID;
+
+            Console.WriteLine("Enter the ID of the dependent task:");
+            dependentTaskID = Console.Read();
+
+            Console.WriteLine($"Enter the ID of the task Which the task {dependentTaskID} depends on:");
+            DependensOnTaskID = Console.Read();
+
+           return new Dependency(0, dependentTaskID, DependensOnTaskID);
+        }
+
+        private static Task receivingTaskDataFromUser()
+        {
+            string? nickName, description, finalProduct, remarks;
+            DateTime? scheduledDate, startDate, completeDate, deadlineDate;
+            TimeSpan? requiredEffortTime;
+            int? engineerId, complexity;
+
+            Console.WriteLine("Enter task nickName:");
+            nickName = Console.ReadLine();
+
+            Console.WriteLine("Enter task description:");
+            description = Console.ReadLine();
+
+            Console.WriteLine("Enter task scheduled date to start:");
+
+            Console.WriteLine("Enter task actual start date:");
+
+            Console.WriteLine("Enter task required effort time to complete:");
+
+            Console.WriteLine("Enter task complete date:");
+
+
+            Console.WriteLine("Enter task finalProduct:");
+            finalProduct = Console.ReadLine();
+
+            Console.WriteLine("Enter task remarks:");
+            remarks = Console.ReadLine();
+
+            Console.WriteLine("Enter the ID of the engineer responsible for carrying out the task:");
+            engineerId = Console.Read();
+
+            Console.WriteLine("Choose task complexity:" + "0 - Beginner\n" + "1 - AdvancedBeginner\n" + "2 - Intermediate\n" + "3 - Advanced\n" + "4 - Expert\n");
+            complexity = Console.Read();
+
+            Console.WriteLine("Enter task deadline date:");
+
+            return new Task(0, nickName, description, scheduledDate, startDate, requiredEffortTime, completeDate, finalProduct, remarks, engineerId, (EngineerExperience)complexity, deadlineDate);
+        }
     }
 
 }
