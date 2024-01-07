@@ -124,7 +124,7 @@ public static class Initialization
 
         for (int i = 0; i < 40;i++)
         {
-            if (tasksList != null )
+            if (tasksList != null)
             {
                 Task t;
                 bool flag = false;
@@ -134,7 +134,7 @@ public static class Initialization
                     t = tasksList[s_rand.Next(0, 20)];  //choose a Task from the list
                     foreach(Task task in tasksList)     //Checking the task against the other tasks on the list.  
                     {
-                        if (t.ScheduledDate > task.ScheduledDate)
+                        if (t.ScheduledDate > task.DeadlineDate)
                         {
                             flag = true;
                             break;            
@@ -147,10 +147,10 @@ public static class Initialization
                 DateTime ? dependentTaskScheduledDate = t.ScheduledDate;
 
                 //DependensOnTask
-                do   //If the scheduled task start date of the dependent task is before the task it depends on, repeat the loop
+                do   //If the scheduled task start date of the dependent task is before the deadline of the task it depends on, repeat the loop.
                 {
                     t = tasksList[s_rand.Next(0, 20)];
-                } while (dependentTaskScheduledDate <= t.ScheduledDate);
+                } while (dependentTaskScheduledDate <= t.DeadlineDate);
 
                 _dependensOnTaskID = t.ID;
 

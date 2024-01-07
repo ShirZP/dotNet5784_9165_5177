@@ -92,7 +92,7 @@
                 {
                     case 1:  //Create
 
-                        task = inputTask();   
+                        task = inputCreateTask();   
                         s_dalTask!.Create(task);  
                         break;
 
@@ -127,8 +127,7 @@
                         if (task != null)
                         {
                             Console.WriteLine(task);   //Before the update prints the task to update.
-                            task = inputTask();
-                            task = task with { ID = id };   //Keeps the original id.
+                            task = inputUpdateTask(task);
                         }
                         s_dalTask!.Update(task);
                         break;
@@ -172,34 +171,8 @@
                 switch (choice)
                 {
                     case 1:  //Create
-                        //input
-                        //ID
-                        Console.WriteLine("Enter engineer ID:");
-                        intString = Console.ReadLine()!;
-                        int.TryParse(intString, out id);
-
-                        //nameEngineer
-                        Console.WriteLine("Enter engineer full name:");
-                        nameEngineer = Console.ReadLine();
-
-                        //email
-                        Console.WriteLine("Enter engineer email:");
-                        email = Console.ReadLine();
-
-                        //level
-                        Console.WriteLine("Choose engineer level:" + "0 - Beginner\n" + "1 - AdvancedBeginner\n" + "2 - Intermediate\n" + "3 - Advanced\n" + "4 - Expert\n");
-                        intString = Console.ReadLine()!;
-                        int.TryParse(intString, out level);
-
-                        //cost
-                        Console.WriteLine("Enter engineer cost:");
-                        intString = Console.ReadLine()!;
-                        int.TryParse(intString, out cost);
-
-                        //create newEngineer
-                        newEngineer = new Engineer(id, nameEngineer, email, ((EngineerExperience)level), cost);
+                        newEngineer = inputCreateEngineer();
                         s_dalEngineer!.Create(newEngineer);
-
                         break;
 
                     case 2:  //Read
@@ -234,27 +207,7 @@
                         {
                             Console.WriteLine(engineer);   //Before the update prints the engineer to update.
 
-                            //input
-                            //nameEngineer
-                            Console.WriteLine("Enter engineer full name:");
-                            nameEngineer = Console.ReadLine();
-
-                            //email
-                            Console.WriteLine("Enter engineer email:");
-                            email = Console.ReadLine();
-
-                            //level
-                            Console.WriteLine("Choose engineer level:" + "0 - Beginner\n" + "1 - AdvancedBeginner\n" + "2 - Intermediate\n" + "3 - Advanced\n" + "4 - Expert\n");
-                            intString = Console.ReadLine()!;
-                            int.TryParse(intString, out level);
-
-                            //cost
-                            Console.WriteLine("Enter engineer cost:");
-                            intString = Console.ReadLine()!;
-                            int.TryParse(intString, out cost);
-
-                            //update newEngineer
-                            newEngineer = new Engineer(id, nameEngineer, email, ((EngineerExperience)level), cost);
+                            newEngineer = inputUpdateEngineer(engineer);
                             s_dalEngineer!.Update(newEngineer);
 
                             Console.WriteLine($"Engineer { id } update successfully");
@@ -306,7 +259,7 @@
                 switch (choice)
                 {
                     case 1:  //Create
-                        dependency = inputDependency();
+                        dependency = inputCreateDependency();
 
                         s_dalDependency!.Create(dependency);
                         break;
@@ -344,8 +297,7 @@
                         {
                             Console.WriteLine(dependency);   //Before the update prints the dependency to update.
 
-                            dependency = inputDependency();
-                            dependency = dependency with { ID = id };   //Keeps the original id.
+                            dependency = inputUpdateDependency(dependency);
 
                             s_dalDependency!.Update(dependency);
                             Console.WriteLine($"Dependency {id} update successfully");
@@ -384,7 +336,7 @@
         /// Input fields of Dependency.
         /// </summary>
         /// <returns>Object type Dependency</returns>
-        private static Dependency inputDependency()
+        private static Dependency inputCreateDependency()
         {
             int dependentTaskID, DependensOnTaskID;
             string intString;
@@ -403,10 +355,125 @@
         }
 
         /// <summary>
+        /// update fields of Dependency.
+        /// </summary>
+        /// <param name="originalDependency">dependency to update.</param>
+        /// <returns></returns>
+        private static Dependency inputUpdateDependency(Dependency originalDependency)
+        {
+            int dependentTaskID, DependensOnTaskID;
+            string intString;
+
+            //dependentTaskID
+            Console.WriteLine("Enter the ID of the dependent task:");
+            intString = Console.ReadLine()!;
+            if (intString == null || intString == "")
+                dependentTaskID = originalDependency.DependentTask;
+            else
+                int.TryParse(intString, out dependentTaskID);
+
+            //DependensOnTaskID
+            Console.WriteLine($"Enter the ID of the task Which the task {dependentTaskID} depends on:");
+            intString = Console.ReadLine()!;
+            if (intString == null || intString == "")
+                DependensOnTaskID = originalDependency.DependensOnTask;
+            else
+                int.TryParse(intString, out DependensOnTaskID);
+
+            return new Dependency(originalDependency.ID, dependentTaskID, DependensOnTaskID);
+        }
+
+        /// <summary>
+        /// Input fields of Engineer.
+        /// </summary>
+        /// <returns>Object type Engineer</returns>
+        private static Engineer inputCreateEngineer()
+        {
+            int id, level, cost;
+            string? intString;    //string to convert to int
+            string? nameEngineer, email;
+
+            //ID
+            Console.WriteLine("Enter engineer ID:");
+            intString = Console.ReadLine()!;
+            int.TryParse(intString, out id);
+
+            //nameEngineer
+            Console.WriteLine("Enter engineer full name:");
+            nameEngineer = Console.ReadLine();
+
+            //email
+            Console.WriteLine("Enter engineer email:");
+            email = Console.ReadLine();
+
+            //level
+            Console.WriteLine("Choose engineer level:" + "0 - Beginner\n" + "1 - AdvancedBeginner\n" + "2 - Intermediate\n" + "3 - Advanced\n" + "4 - Expert\n");
+            intString = Console.ReadLine()!;
+            int.TryParse(intString, out level);
+
+            //cost
+            Console.WriteLine("Enter engineer cost:");
+            intString = Console.ReadLine()!;
+            int.TryParse(intString, out cost);
+
+            //create newEngineer
+             return new Engineer(id, nameEngineer, email, ((EngineerExperience)level), cost);
+
+        }
+
+        /// <summary>
+        /// update fields of Engineer.
+        /// </summary>
+        /// <param name="originalEngineer">engineer to update</param>
+        /// <returns>Object type Engineer</returns>
+        private static Engineer inputUpdateEngineer(Engineer originalEngineer)
+        {
+            int? levelNum;
+            double? cost;
+            string? intString;    //string to convert to int
+            string? nameEngineer, email;
+
+            //nameEngineer
+            Console.WriteLine("Enter engineer full name:");
+            nameEngineer = Console.ReadLine();
+            if (nameEngineer == null || nameEngineer == "")
+                nameEngineer = originalEngineer.FullName;
+
+            //email
+            Console.WriteLine("Enter engineer email:");
+            email = Console.ReadLine();
+            if (email == null || email == "")
+                email = originalEngineer.Email;
+
+            //level
+            Console.WriteLine("Choose engineer level:" + "0 - Beginner\n" + "1 - AdvancedBeginner\n" + "2 - Intermediate\n" + "3 - Advanced\n" + "4 - Expert\n");
+            intString = Console.ReadLine()!;
+            DO.EngineerExperience? level;
+            if (intString == null || intString == "")
+                level = originalEngineer.Level;
+            else
+            {
+                levelNum = TryParseInt(intString);
+                level = (EngineerExperience)levelNum!;
+            }
+
+            //cost
+            Console.WriteLine("Enter engineer cost:");
+            intString = Console.ReadLine()!;
+            if (intString == null || intString == "")
+                cost = originalEngineer.Cost;
+            else
+                cost = TryParseInt(intString);
+
+            //update newEngineer
+            return new Engineer(originalEngineer.ID, nameEngineer, email, level, cost);
+        }
+
+        /// <summary>
         /// Input fields of Task.
         /// </summary>
         /// <returns>Object type Task</returns>
-        private static Task inputTask()
+        private static Task inputCreateTask()
         {
             string nickName, description;
             string? finalProduct, remarks;
@@ -467,6 +534,108 @@
             deadlineDate = TryParseDateTime(dateString);
 
             return new Task(0, nickName, description, scheduledDate, startDate, requiredEffortTime, completeDate, finalProduct, remarks, engineerId, (EngineerExperience)complexity, deadlineDate);
+        }
+
+        /// <summary>
+        /// update fields of Task.
+        /// </summary>
+        /// <param name="originalTask">task to update.</param>
+        /// <returns></returns>
+        private static Task inputUpdateTask(Task originalTask)
+        {
+            string nickName, description;
+            string? finalProduct, remarks;
+            DateTime? scheduledDate, startDate, completeDate, deadlineDate;
+            string? dateString, intString, timeString;
+            TimeSpan? requiredEffortTime;
+            int? engineerId, complexityNum;
+
+            //nickName
+            Console.WriteLine("Enter task nickName:");
+            nickName = Console.ReadLine()!;
+            if (nickName == null || nickName == "")
+                nickName = originalTask.NickName;
+
+            //description
+            Console.WriteLine("Enter task description:");
+            description = Console.ReadLine()!;
+            if (description == null || description == "")
+                description = originalTask.Description;
+
+            //scheduledDate
+            Console.WriteLine("Enter task scheduled date to start:");
+            dateString = Console.ReadLine();
+            if (dateString == null || dateString == "")
+                scheduledDate = originalTask.ScheduledDate;
+            else
+                scheduledDate = TryParseDateTime(dateString);
+
+            //startDate
+            Console.WriteLine("Enter task actual start date:");
+            dateString = Console.ReadLine();
+            if (dateString == null || dateString == "")
+                startDate = originalTask.StartDate;
+            else
+                startDate = TryParseDateTime(dateString);
+
+            //requiredEffortTime
+            Console.WriteLine("Enter task required effort time to complete:");
+            timeString = Console.ReadLine();
+            if (timeString == null || timeString == "")
+                requiredEffortTime = originalTask.RequiredEffortTime;
+            else
+                requiredEffortTime = TryParseTimeSpan(dateString);
+
+            //completeDate
+            Console.WriteLine("Enter task complete date:");
+            dateString = Console.ReadLine();
+            if (dateString == null || dateString == "")
+                completeDate = originalTask.CompleteDate;
+            else
+                completeDate = TryParseDateTime(dateString);
+
+            //finalProduct
+            Console.WriteLine("Enter task finalProduct:");
+            finalProduct = Console.ReadLine();
+            if (finalProduct == null || finalProduct == "")
+                finalProduct = originalTask.FinalProduct;
+
+            //remarks
+            Console.WriteLine("Enter task remarks:");
+            remarks = Console.ReadLine();
+            if (remarks == null || remarks == "")
+                remarks = originalTask.Remarks;
+            
+
+            //engineerId
+            Console.WriteLine("Enter the ID of the engineer responsible for carrying out the task:");
+            intString = Console.ReadLine();
+            if (intString == null || intString == "")
+                engineerId = originalTask.EngineerId;
+            else
+                engineerId = TryParseInt(intString);
+
+            //complexity
+            Console.WriteLine("Choose task complexity:" + "0 - Beginner\n" + "1 - AdvancedBeginner\n" + "2 - Intermediate\n" + "3 - Advanced\n" + "4 - Expert\n");
+            intString = Console.ReadLine();
+            DO.EngineerExperience? complexity;
+            if (intString == null || intString == "")
+                complexity = originalTask.Complexity;
+            else
+            {
+                complexityNum = TryParseInt(intString);
+                complexity = (EngineerExperience)complexityNum!;
+            }
+
+            //deadlineDate
+            Console.WriteLine("Enter task deadline date:");
+            dateString = Console.ReadLine();
+            if (dateString == null || dateString == "")
+                deadlineDate = originalTask.DeadlineDate;
+            else
+                deadlineDate = TryParseDateTime(dateString);
+
+            return new Task(originalTask.ID, nickName, description, scheduledDate, startDate, requiredEffortTime, completeDate, finalProduct, remarks, engineerId, complexity, deadlineDate);
         }
 
         #endregion
