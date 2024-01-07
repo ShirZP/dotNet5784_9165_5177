@@ -66,19 +66,22 @@ public class TaskImplementation : ITask
     /// </summary>
     /// <param name="task">The updated task</param>
     /// <exception cref="Exception">If the task you want to update does not exist in the list</exception>
-    public void Update(Task task)
+    public void Update(Task? task)
     {
-        int taskID = task.ID;
-        Task? oldTask = DataSource.Tasks.Find(t => t.ID == taskID);  //Search for the task to update in the list
-        if (oldTask != null)
-        { 
-            DataSource.Tasks.Remove(oldTask);
-            Task updateTask = task with { ID = taskID };
-            DataSource.Tasks.Add(updateTask);
-        }
-        else
+        if (task != null)
         {
-            throw new Exception($"An object of type Task with ID={task.ID} does not exist");
-        }    
+            int taskID = task.ID;
+            Task? oldTask = DataSource.Tasks.Find(t => t.ID == taskID);  //Search for the task to update in the list
+            if (oldTask != null)
+            {
+                DataSource.Tasks.Remove(oldTask);
+                Task updateTask = task with { ID = taskID };
+                DataSource.Tasks.Add(updateTask);
+            }
+            else
+            {
+                throw new Exception($"An object of type Task with ID={task.ID} does not exist");
+            }
+        }
     }
 }
