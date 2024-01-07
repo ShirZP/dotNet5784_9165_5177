@@ -18,7 +18,6 @@
             printMainMenu();
             choice = Console.Read();
 
-
             do
             {
                 try
