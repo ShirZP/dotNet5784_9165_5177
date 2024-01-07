@@ -336,7 +336,7 @@
             description = Console.ReadLine();
 
             Console.WriteLine("Enter task scheduled date to start:");
-
+            
             Console.WriteLine("Enter task actual start date:");
 
             Console.WriteLine("Enter task required effort time to complete:");
