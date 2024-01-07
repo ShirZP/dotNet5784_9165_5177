@@ -15,8 +15,10 @@
             Initialization.Do(s_dalTask, s_dalEngineer, s_dalDependency);
 
             int choice;
+            string? intString;  //string to convert to int
             printMainMenu();
-            choice = Console.Read();
+            intString = Console.ReadLine()!;
+            int.TryParse(intString, out choice);  
 
             do
             {
@@ -45,30 +47,44 @@
                 }
 
                 printMainMenu();
-                choice = Console.Read();
+                intString = Console.ReadLine()!;   //string to convert to int
+                int.TryParse(intString, out choice);
 
             } while (choice != 0);
             
         }
         
+        /// <summary>
+        /// Print main menu.
+        /// </summary>
         private static void printMainMenu()
         {
             Console.WriteLine("Select an entity of your choice:");
             Console.WriteLine("1 - Task\n" + "2 - Engineer\n" + "3 - Dependency\n" + "0 - Exit\n");
         }
 
+        /// <summary>
+        /// Print sub menu.
+        /// </summary>
+        /// <param name="entityName">The name of the entity to print its sub menu.</param>
         private static void printSubMenu(string entityName)
         {
             Console.WriteLine($"Select an action for the {entityName} entity:");
             Console.WriteLine("1 - Create\n" + "2 - Read\n" + "3 - ReadAll\n" + "4 - Update\n" + "5 - Delete\n" + "0 - Exit\n");
         }
 
+        #region  entities CRUD
+        /// <summary>
+        /// All the operation that we can do on task (CRUD).
+        /// </summary>
         private static void taskSubMenu()
         {
             int choice, id;
             Task? task;
             printSubMenu("Task");
-            choice = Console.Read();
+            string? intString;   //string to convert to int
+            intString = Console.ReadLine()!;
+            int.TryParse(intString, out choice);
 
             while (choice != 0)
             {
@@ -76,17 +92,18 @@
                 {
                     case 1:  //Create
 
-                        task = receivingTaskDataFromUser();
-                        s_dalTask!.Create(task);
+                        task = inputTask();   
+                        s_dalTask!.Create(task);  
                         break;
 
                     case 2:  //Read
                         Console.WriteLine("Enter Task ID to read:");
-                        id = Console.Read();
+                        intString = Console.ReadLine()!;
+                        int.TryParse(intString, out id);
                         task = s_dalTask!.Read(id);
                         if (task != null)
                         {
-                            Console.WriteLine(task);
+                            Console.WriteLine(task);  
                         }
                         else
                         {
@@ -103,13 +120,23 @@
                         break;
 
                     case 4: //Update
-                        task = receivingTaskDataFromUser();
+                        Console.WriteLine("Enter task ID to update:");
+                        intString = Console.ReadLine()!;
+                        int.TryParse(intString, out id);
+                        task = s_dalTask!.Read(id);
+                        if (task != null)
+                        {
+                            Console.WriteLine(task);   //Before the update prints the task to update.
+                            task = inputTask();
+                            task = task with { ID = id };   //Keeps the original id.
+                        }
                         s_dalTask!.Update(task);
                         break;
 
                     case 5:  //Delete
                         Console.WriteLine("Enter Task ID to delete:");
-                        id = Console.Read();
+                        intString = Console.ReadLine()!;
+                        int.TryParse(intString, out id);
                         s_dalTask!.Delete(id);
                         Console.WriteLine("Deleted successfully");
                         break;
@@ -121,38 +148,55 @@
                         break;
                 }
                 printSubMenu("Task");
-                choice = Console.Read();
+                intString = Console.ReadLine()!;
+                int.TryParse(intString, out choice);
             }
         }
 
+        /// <summary>
+        /// All the operation that we can do on engineer (CRUD).
+        /// </summary>
         private static void engineerSubMenu()
         {
             int choice, id, level, cost;
+            string? intString;    //string to convert to int
             string? nameEngineer, email;
             Engineer? engineer, newEngineer;
             printSubMenu("Engineer");
-            choice = Console.Read();
+            intString = Console.ReadLine()!;
+            int.TryParse(intString, out choice);
 
 
-            while(choice!=0) 
+            while (choice!=0) 
             {
                 switch (choice)
                 {
                     case 1:  //Create
+                        //input
+                        //ID
                         Console.WriteLine("Enter engineer ID:");
-                        id = Console.Read();
+                        intString = Console.ReadLine()!;
+                        int.TryParse(intString, out id);
 
+                        //nameEngineer
                         Console.WriteLine("Enter engineer full name:");
                         nameEngineer = Console.ReadLine();
 
+                        //email
                         Console.WriteLine("Enter engineer email:");
                         email = Console.ReadLine();
+
+                        //level
                         Console.WriteLine("Choose engineer level:" + "0 - Beginner\n" + "1 - AdvancedBeginner\n" + "2 - Intermediate\n" + "3 - Advanced\n" + "4 - Expert\n");
-                        level = Console.Read();
+                        intString = Console.ReadLine()!;
+                        int.TryParse(intString, out level);
 
+                        //cost
                         Console.WriteLine("Enter engineer cost:");
-                        cost = Console.Read();
+                        intString = Console.ReadLine()!;
+                        int.TryParse(intString, out cost);
 
+                        //create newEngineer
                         newEngineer = new Engineer(id, nameEngineer, email, ((EngineerExperience)level), cost);
                         s_dalEngineer!.Create(newEngineer);
 
@@ -160,7 +204,8 @@
 
                     case 2:  //Read
                         Console.WriteLine("Enter engineer ID:");
-                        id = Console.Read();
+                        intString = Console.ReadLine()!;
+                        int.TryParse(intString, out id);
                         engineer = s_dalEngineer!.Read(id);
                         if (engineer != null)
                         {
@@ -182,24 +227,33 @@
 
                     case 4:  //Update
                         Console.WriteLine("Enter engineer ID to update:");
-                        id = Console.Read();
+                        intString = Console.ReadLine()!;
+                        int.TryParse(intString, out id);
                         engineer = s_dalEngineer!.Read(id);
-                        if (engineer != null)
+                        if (engineer != null)  
                         {
-                            Console.WriteLine(engineer);
+                            Console.WriteLine(engineer);   //Before the update prints the engineer to update.
 
+                            //input
+                            //nameEngineer
                             Console.WriteLine("Enter engineer full name:");
                             nameEngineer = Console.ReadLine();
 
+                            //email
                             Console.WriteLine("Enter engineer email:");
                             email = Console.ReadLine();
 
+                            //level
                             Console.WriteLine("Choose engineer level:" + "0 - Beginner\n" + "1 - AdvancedBeginner\n" + "2 - Intermediate\n" + "3 - Advanced\n" + "4 - Expert\n");
-                            level = Console.Read();
+                            intString = Console.ReadLine()!;
+                            int.TryParse(intString, out level);
 
+                            //cost
                             Console.WriteLine("Enter engineer cost:");
-                            cost = Console.Read();
+                            intString = Console.ReadLine()!;
+                            int.TryParse(intString, out cost);
 
+                            //update newEngineer
                             newEngineer = new Engineer(id, nameEngineer, email, ((EngineerExperience)level), cost);
                             s_dalEngineer!.Update(newEngineer);
 
@@ -213,7 +267,8 @@
 
                     case 5:  //Delete
                         Console.WriteLine("Enter engineer ID to read:");
-                        id = Console.Read();
+                        intString = Console.ReadLine()!;
+                        int.TryParse(intString, out id);
                         s_dalEngineer!.Delete(id);
                         Console.WriteLine($"Engineer {id} deleted successfully");
                         break;
@@ -226,32 +281,40 @@
                 }
 
                 printSubMenu("Engineer");
-                choice = Console.Read();
+                intString = Console.ReadLine()!;
+                int.TryParse(intString, out choice);
             }
 
         }
 
+        /// <summary>
+        /// All the operation that we can do on dependency (CRUD).
+        /// </summary>
         private static void dependencySubMenu()
         {
             int choice;
             int id;
+            
             Dependency? dependency;
             printSubMenu("Dependency");
-            choice = Console.Read();
+            string? intString;   //string to convert to int
+            intString = Console.ReadLine()!;
+            int.TryParse(intString, out choice);
 
             while (choice != 0)
             {
                 switch (choice)
                 {
                     case 1:  //Create
-                        dependency = receivingDependencyDataFromUser();
+                        dependency = inputDependency();
 
                         s_dalDependency!.Create(dependency);
                         break;
 
                     case 2: //Read
                         Console.WriteLine("Enter Dependency ID to read:");
-                        id = Console.Read();
+                        intString = Console.ReadLine()!;
+                        int.TryParse(intString, out id);
                         dependency = s_dalDependency!.Read(id);
                         if (dependency != null)
                         {
@@ -273,14 +336,16 @@
 
                     case 4:  //Update
                         Console.WriteLine("Enter Dependency ID to Update:");
-                        id = Console.Read();
+                        intString = Console.ReadLine()!;
+                        int.TryParse(intString, out id);
 
                         dependency = s_dalDependency!.Read(id);
                         if (dependency != null)
                         {
-                            Console.WriteLine(dependency);
+                            Console.WriteLine(dependency);   //Before the update prints the dependency to update.
 
-                            dependency = receivingDependencyDataFromUser();
+                            dependency = inputDependency();
+                            dependency = dependency with { ID = id };   //Keeps the original id.
 
                             s_dalDependency!.Update(dependency);
                             Console.WriteLine($"Dependency {id} update successfully");
@@ -294,7 +359,8 @@
 
                     case 5:  //Delete
                         Console.WriteLine("Enter Dependency ID to delete:");
-                        id = Console.Read();
+                        intString = Console.ReadLine()!;
+                        int.TryParse(intString, out id);
                         s_dalDependency!.Delete(id);
                         Console.WriteLine($"Dependency {id} deleted successfully");
                         break;
@@ -306,60 +372,141 @@
                         break;
 
                 }
+                printSubMenu("Dependency");
+                intString = Console.ReadLine()!;
+                int.TryParse(intString, out choice);
             }
         }
+        #endregion
 
-        private static Dependency receivingDependencyDataFromUser()
+        #region  input methods
+        /// <summary>
+        /// Input fields of Dependency.
+        /// </summary>
+        /// <returns>Object type Dependency</returns>
+        private static Dependency inputDependency()
         {
             int dependentTaskID, DependensOnTaskID;
+            string intString;
 
+            //dependentTaskID
             Console.WriteLine("Enter the ID of the dependent task:");
-            dependentTaskID = Console.Read();
+            intString = Console.ReadLine()!;
+            int.TryParse(intString, out dependentTaskID);
 
+            //DependensOnTaskID
             Console.WriteLine($"Enter the ID of the task Which the task {dependentTaskID} depends on:");
-            DependensOnTaskID = Console.Read();
+            intString = Console.ReadLine()!;
+            int.TryParse(intString, out DependensOnTaskID);
 
-           return new Dependency(0, dependentTaskID, DependensOnTaskID);
+            return new Dependency(0, dependentTaskID, DependensOnTaskID);
         }
 
-        private static Task receivingTaskDataFromUser()
+        /// <summary>
+        /// Input fields of Task.
+        /// </summary>
+        /// <returns>Object type Task</returns>
+        private static Task inputTask()
         {
-            string? nickName, description, finalProduct, remarks;
+            string nickName, description;
+            string? finalProduct, remarks;
             DateTime? scheduledDate, startDate, completeDate, deadlineDate;
+            string? dateString, intString;
             TimeSpan? requiredEffortTime;
             int? engineerId, complexity;
 
+            //nickName
             Console.WriteLine("Enter task nickName:");
-            nickName = Console.ReadLine();
+            nickName = Console.ReadLine()!;
 
+            //description
             Console.WriteLine("Enter task description:");
-            description = Console.ReadLine();
+            description = Console.ReadLine()!;
 
+            //scheduledDate
             Console.WriteLine("Enter task scheduled date to start:");
+            dateString = Console.ReadLine();
+            scheduledDate = TryParseDateTime(dateString);
 
+            //startDate
             Console.WriteLine("Enter task actual start date:");
+            dateString = Console.ReadLine();
+            startDate = TryParseDateTime(dateString);
 
+            //requiredEffortTime
             Console.WriteLine("Enter task required effort time to complete:");
+            dateString = Console.ReadLine();
+            requiredEffortTime = TryParseTimeSpan(dateString);
 
+            //completeDate
             Console.WriteLine("Enter task complete date:");
+            dateString = Console.ReadLine();
+            completeDate = TryParseDateTime(dateString);
 
-
+            //finalProduct
             Console.WriteLine("Enter task finalProduct:");
             finalProduct = Console.ReadLine();
 
+            //remarks
             Console.WriteLine("Enter task remarks:");
             remarks = Console.ReadLine();
 
+            //engineerId
             Console.WriteLine("Enter the ID of the engineer responsible for carrying out the task:");
-            engineerId = Console.Read();
+            intString = Console.ReadLine();
+            engineerId = TryParseInt(intString);
 
+            //complexity
             Console.WriteLine("Choose task complexity:" + "0 - Beginner\n" + "1 - AdvancedBeginner\n" + "2 - Intermediate\n" + "3 - Advanced\n" + "4 - Expert\n");
-            complexity = Console.Read();
+            intString = Console.ReadLine();
+            complexity = TryParseInt(intString);
 
+            //deadlineDate
             Console.WriteLine("Enter task deadline date:");
+            dateString = Console.ReadLine();
+            deadlineDate = TryParseDateTime(dateString);
 
             return new Task(0, nickName, description, scheduledDate, startDate, requiredEffortTime, completeDate, finalProduct, remarks, engineerId, (EngineerExperience)complexity, deadlineDate);
         }
+
+        #endregion
+
+        #region   TryParse methods
+        /// <summary>
+        /// The function accepts a string and returns it in dateTime format if successful, otherwise it returns null.
+        /// </summary>
+        /// <param name="text">Sring to convert to dateTime.</param>
+        /// <returns></returns>
+        public static DateTime? TryParseDateTime(string? text)
+        {
+            DateTime date;
+            return DateTime.TryParse(text, out date) ? date : (DateTime?)null;
+        }
+
+        /// <summary>
+        /// The function accepts a string and returns it in timeSpan format if successful, otherwise it returns null.
+        /// </summary>
+        /// <param name="text">Sring to convert to timeSpan.</param>
+        /// <returns></returns>
+        public static TimeSpan? TryParseTimeSpan(string? text)
+        {
+            TimeSpan date;
+            return TimeSpan.TryParse(text, out date) ? date : (TimeSpan?)null;
+        }
+
+        /// <summary>
+        /// The function accepts a string and returns it in int format if successful, otherwise it returns null.
+        /// </summary>
+        /// <param name="text">Sring to convert to int.</param>
+        /// <returns></returns>
+        public static int? TryParseInt(string? text)
+        {
+            int num;
+            return int.TryParse(text, out num) ? num : (int?)null;
+        }
+
+        #endregion
+
     }
 
 }
