@@ -1,10 +1,14 @@
 ﻿namespace DalTest;
 using DalApi;
 using DO;
+using Microsoft.VisualBasic;
 using System;
+using System.Runtime.ConstrainedExecution;
+using System.Runtime.InteropServices;
 using System.Security.Cryptography;
 using System.Text;
 using System.Xml.Linq;
+using static System.Runtime.InteropServices.JavaScript.JSType;
 
 public static class Initialization
 {
@@ -22,56 +26,55 @@ public static class Initialization
     /// </summary>
     private static void createTasks()
     {
-
-        for (int i = 1; i <= 20; i++)
+        string[] tastsNickNames =
         {
+            "Algorithm development",
+            "Software design and testing",
+            "Hardware prototyping",
+            "Embedded systems programming",
+            "Cybersecurity implementation",
+            "Cloud computing optimization",
+            "Data analysis",
+            "VR/AR development",
+            "UX/UI improvement",
+            "Automation and robotics",
+            "Firmware development",
+            "Wireless technology integration",
+            "IoT device creation",
+            "Big data processing",
+            "Quality assurance",
+            "DevOps and CI/CD",
+            "Cyber-physical systems",
+            "Blockchain solutions",
+            "AI integration",
+            "Research and development"
+        };
+
+        
+        foreach (var taskNickName in tastsNickNames)
+        {
+            
             //NickName
-            string _nickName = $"Task number {i}";
+            string _nickName = taskNickName;
 
             //Description
-            string _description = $"Description {i}";
-
-            //ScheduledDate
-            DateTime start = DateTime.Now;
-            int dayRange = s_rand.Next(365);
-
-            DateTime _scheduledDate = start.AddDays(dayRange);
-
-            //DeadlineDate
-            DateTime _deadlineDate = _scheduledDate.AddDays(s_rand.Next(2, 30));
-
+            string _description = $"Description - {taskNickName}";
+            
             //RequiredEffortTime
-            int maxEffortTime = (_deadlineDate - _scheduledDate).Days;
-            TimeSpan _requiredEffortTime = TimeSpan.FromDays(s_rand.Next(1, maxEffortTime));
-
-            //StartDate
-            int daysFromNowToDeadLine = (_deadlineDate - start).Days;
-            DateTime _startDate = start.AddDays(s_rand.Next(daysFromNowToDeadLine));
-
+            TimeSpan _requiredEffortTime = TimeSpan.FromDays(s_rand.Next(1, 5));
+            
             //FinalProduct
-            string _finalProduct = $"FinalProduct {i}";
+            string _finalProduct = $"FinalProduct - {taskNickName}";
             
             //Remarks
-            string _remarks = $"Remarks {i}";
-
-            //EngineerId
-            int? _engineerID = null;
-            List<Engineer>? engineersList = s_dalEngineer!.ReadAll();
-            if (engineersList != null)
-            {
-                Engineer e = engineersList[i % 6];  //choose an engineer from the list
-
-                _engineerID = (i % 2) == 0 ? e.ID : null;
-            }
+            string _remarks = $"Remarks - {taskNickName}";
 
             //Complexity
             int randComplexity = s_rand.Next(0, 5);
             DO.EngineerExperience _complexity = ((EngineerExperience)randComplexity);
 
-            //IsMileStone
-            bool _isMileStone = (i % 9) == 0 ? true : false;
 
-            Task newTask = new(0, _nickName, _description, _scheduledDate, _startDate, _requiredEffortTime, null, _finalProduct, _remarks, _engineerID, _complexity, _deadlineDate, _isMileStone);
+            Task newTask = new(0, _nickName, _description, null, null, _requiredEffortTime, null, _finalProduct, _remarks, null, _complexity, null, null);
             s_dalTask!.Create(newTask);
         }
 
@@ -119,48 +122,45 @@ public static class Initialization
     {
         int _dependentTaskID;
         int _dependensOnTaskID;
+        Dependency newDependency;
+
         List<Task>? tasksList = s_dalTask!.ReadAll();
-
-
-        for (int i = 0; i < 40;i++)
+        if (tasksList != null)
         {
-            if (tasksList != null)
+            //19 dependencies
+            for (int i = 19; i > 0; i--)
             {
-                Task t;
-                bool flag = false;
-                //DependentTask               
-                do //The loop makes sure that the drawn task has at least one earlier task that it can depend on.
-                {                  
-                    t = tasksList[s_rand.Next(0, 20)];  //choose a Task from the list
-                    foreach(Task task in tasksList)     //Checking the task against the other tasks on the list.  
-                    {
-                        if (t.ScheduledDate > task.DeadlineDate)
-                        {
-                            flag = true;
-                            break;            
-                        }
-                    }
 
-                } while (!flag);
+                _dependentTaskID = tasksList[i].ID;
+                _dependensOnTaskID = tasksList[i - 1].ID;
 
-                _dependentTaskID = t.ID;
-                DateTime ? dependentTaskScheduledDate = t.ScheduledDate;
+                newDependency = new Dependency(0, _dependentTaskID, _dependensOnTaskID);
+                s_dalDependency!.Create(newDependency);
 
-                //DependensOnTask
-                do   //If the scheduled task start date of the dependent task is before the deadline of the task it depends on, repeat the loop.
-                {
-                    t = tasksList[s_rand.Next(0, 20)];
-                } while (dependentTaskScheduledDate <= t.DeadlineDate);
+            }
 
-                _dependensOnTaskID = t.ID;
+            //more 9 dependencies
+            for (int i = 19; i > 1; i -= 2)
+            {
+                _dependentTaskID = tasksList[i].ID;
+                _dependensOnTaskID = tasksList[i - 2].ID;
 
-                Dependency newDependency = new Dependency(0, _dependentTaskID, _dependensOnTaskID);
+                newDependency = new Dependency(0, _dependentTaskID, _dependensOnTaskID);
+                s_dalDependency!.Create(newDependency);
+            }
+
+            //more 13 dependencies
+            //Task number 14 depends on all the tasks before it (the dependency on 13 was already created in the first loop)
+            for (int i = 12; i >= 0; i--)
+            {
+                _dependentTaskID = tasksList[14].ID;
+                _dependensOnTaskID = tasksList[i].ID;
+
+                newDependency = new Dependency(0, _dependentTaskID, _dependensOnTaskID);
                 s_dalDependency!.Create(newDependency);
             }
 
         }
-
-
     }
 
     /// <summary>
