@@ -127,8 +127,8 @@
                         {
                             Console.WriteLine(task);   //Before the update prints the task to update.
                             task = inputUpdateTask(task);
-                        }
-                        s_dal!.Task.Update(task);
+                            s_dal!.Task.Update(task);
+                        }              
                         break;
 
                     case 5:  //Delete
@@ -156,9 +156,8 @@
         /// </summary>
         private static void engineerSubMenu()
         {
-            int choice, id, level, cost;
+            int choice, id;
             string? intString;    //string to convert to int
-            string? nameEngineer, email;
             Engineer? engineer, newEngineer;
             printSubMenu("Engineer");
             intString = Console.ReadLine()!;
