@@ -5,7 +5,7 @@ using System.Collections.Generic;
 using System.Threading.Tasks;
 
 
-public class DependencyImplementation : IDependency
+internal class DependencyImplementation : IDependency
 {
     /// <summary>
     /// The function adds the new dependency to the list of Dependencies with a unique ID for it.

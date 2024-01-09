@@ -6,6 +6,5 @@ public interface IDal
     IEngineer Engineer { get; }
     IDependency Dependency { get; }
 
-    //TODO: ICrud<T> Crud { get; } ???
 }
 

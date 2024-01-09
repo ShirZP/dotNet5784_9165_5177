@@ -5,7 +5,7 @@ using System.Collections.Generic;
 using System.Linq;
 
 
-public class TaskImplementation : ITask
+internal class TaskImplementation : ITask
 {
     /// <summary>
     /// The function adds the new task to the list of tasks with a unique ID for it.
