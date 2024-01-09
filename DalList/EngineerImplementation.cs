@@ -17,7 +17,7 @@ internal class EngineerImplementation : IEngineer
         Engineer? searchSameEngineer = DataSource.Engineers.Find(e => e.ID == engineer.ID);  //Checking if there is already an engineer with such an id in the list.
         if (searchSameEngineer != null) 
         {
-            throw new Exception($"An object of type Engineer with ID={engineer.ID} already exist");
+            throw new DalAlreadyExistsException($"An object of type Engineer with ID={engineer.ID} already exist");
         }
         else
         {
@@ -44,7 +44,7 @@ internal class EngineerImplementation : IEngineer
         }
         else
         {
-            throw new Exception($"An object of type Engineer with ID={engineer.ID} does not exist");
+            throw new DalDoesNotExistException($"An object of type Engineer with ID={id} does not exist");
         }
 
     }
@@ -87,7 +87,7 @@ internal class EngineerImplementation : IEngineer
         }
         else
         {
-            throw new Exception($"An object of type Engineer with ID={engineer.ID} does not exist");
+            throw new DalDoesNotExistException($"An object of type Engineer with ID={engineer.ID} does not exist");
         }
     }
 }

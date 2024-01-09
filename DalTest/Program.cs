@@ -11,7 +11,14 @@
 
         static void Main(string[] args)
         {
-            Initialization.Do(s_dal); //stage 2
+            try
+            {
+                Initialization.Do(s_dal); //stage 2
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine(ex);
+            }
 
             int choice;
             string? intString;  //string to convert to int
@@ -478,7 +485,8 @@
             DateTime? scheduledDate, startDate, completeDate, deadlineDate;
             string? dateString, intString;
             TimeSpan? requiredEffortTime;
-            int? engineerId, complexity;
+            int? engineerId, complexityNum;
+            DO.EngineerExperience? complexity;
 
             //nickName
             Console.WriteLine("Enter task nickName:");
@@ -524,14 +532,22 @@
             //complexity
             Console.WriteLine("Choose task complexity:" + "0 - Beginner\n" + "1 - AdvancedBeginner\n" + "2 - Intermediate\n" + "3 - Advanced\n" + "4 - Expert\n");
             intString = Console.ReadLine();
-            complexity = TryParseInt(intString);
+            if (intString != null)
+            {
+                complexityNum = TryParseInt(intString);
+                complexity = (EngineerExperience)complexityNum!;
+            }
+            else
+            {
+                complexity = null;
+            }
 
             //deadlineDate
             Console.WriteLine("Enter task deadline date:");
             dateString = Console.ReadLine();
             deadlineDate = TryParseDateTime(dateString);
 
-            return new Task(0, nickName, description, scheduledDate, startDate, requiredEffortTime, completeDate, finalProduct, remarks, engineerId, (EngineerExperience)complexity, deadlineDate);
+            return new Task(0, nickName, description, scheduledDate, startDate, requiredEffortTime, completeDate, finalProduct, remarks, engineerId, complexity, deadlineDate);
         }
 
         /// <summary>
