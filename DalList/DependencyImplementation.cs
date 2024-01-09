@@ -26,7 +26,7 @@ internal class DependencyImplementation : IDependency
     /// The function deletes the received dependency from the Dependencies list
     /// </summary>
     /// <param name="id">The ID of the dependency to delete</param>
-    /// <exception cref="Exception">If the dependncy does not exist in the Dependencies list</exception>
+    /// <exception cref="DalDoesNotExistException">If the dependncy does not exist in the Dependencies list</exception>
     public void Delete(int id)
     {
         Dependency? dependency = DataSource.Dependencies.Find(d => d.ID == id);
@@ -35,7 +35,7 @@ internal class DependencyImplementation : IDependency
             DataSource.Dependencies.Remove(dependency);
         }
         else
-            throw new Exception($"An object of type Dependency with ID={id} does Not exist");
+            throw new DalDoesNotExistException($"An object of type Dependency with ID={id} does Not exist");
     }
 
     /// <summary>
@@ -63,7 +63,7 @@ internal class DependencyImplementation : IDependency
     /// The function updates a dependency from the task list
     /// </summary>
     /// <param name="dependency">The updated dependency</param>
-    /// <exception cref="Exception">If the dependency you want to update does not exist in the list</exception>
+    /// <exception cref="DalDoesNotExistException">If the dependency you want to update does not exist in the list</exception>
     public void Update(Dependency dependency)
     {
         int dependencyID = dependency.ID;
@@ -76,7 +76,7 @@ internal class DependencyImplementation : IDependency
         }
         else
         {
-            throw new Exception($"An object of type Dependency with ID={dependency.ID} does Not exist");
+            throw new DalDoesNotExistException($"An object of type Dependency with ID={dependency.ID} does Not exist");
         }
     }
 }

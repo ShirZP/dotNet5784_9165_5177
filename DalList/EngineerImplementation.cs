@@ -11,7 +11,8 @@ internal class EngineerImplementation : IEngineer
     /// The function adds a new engineer to the list of engineers.
     /// </summary>
     /// <param name="engineer">New engineer to add to the engineersList</param>
-    /// <returns>The id of the new engineer</returns>
+    /// <returns></returns>
+    /// <exception cref="DalAlreadyExistsException">if the engineer is already exist in the engineers list</exception>
     public int Create(Engineer engineer)
     {
         Engineer? searchSameEngineer = DataSource.Engineers.Find(e => e.ID == engineer.ID);  //Checking if there is already an engineer with such an id in the list.
@@ -31,7 +32,7 @@ internal class EngineerImplementation : IEngineer
     /// The function change the status of the recieved engineer to unemployed.
     /// </summary>
     /// <param name="id">The ID of the engineer we want to delete(change to unemployed)</param>
-    /// <exception cref="Exception">If the engineer you want to delete does not exist in the list</exception>
+    /// <exception cref="DalDoesNotExistException">If the engineer you want to delete does not exist in the list</exception>
     public void Delete(int id)
     {
         Engineer? engineer = DataSource.Engineers.Find(e => e.ID == id);
@@ -74,7 +75,7 @@ internal class EngineerImplementation : IEngineer
     /// The function updates engineer details from the engineers list 
     /// </summary>
     /// <param name="engineer">The updated engineer</param>
-    /// <exception cref="Exception">If the engineer you want to update does not exist in the list</exception>
+    /// <exception cref="DalDoesNotExistException">If the engineer you want to update does not exist in the list</exception>
     public void Update(Engineer engineer)
     {
         int engineerID = engineer.ID;
