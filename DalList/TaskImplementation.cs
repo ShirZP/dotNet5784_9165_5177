@@ -26,7 +26,7 @@ internal class TaskImplementation : ITask
     /// The function deletes the recieved task from the tasks list
     /// </summary>
     /// <param name="id">The ID of the task to delete</param>
-    /// <exception cref="Exception">If the task does not exist in the tasks list</exception>
+    /// <exception cref="DalDoesNotExistException">If the task does not exist in the tasks list</exception>
     public void Delete(int id)
     {
         Task? task = DataSource.Tasks.Find(t => t.ID == id);
@@ -36,7 +36,7 @@ internal class TaskImplementation : ITask
         }
         else
         {
-            throw new Exception($"An object of type Task with ID={id} does not exist");
+            throw new DalDoesNotExistException($"An object of type Task with ID={id} does not exist");
         }
     }
 
@@ -65,7 +65,7 @@ internal class TaskImplementation : ITask
     /// The function updates a task from the task list
     /// </summary>
     /// <param name="task">The updated task</param>
-    /// <exception cref="Exception">If the task you want to update does not exist in the list</exception>
+    /// <exception cref="DalDoesNotExistException">If the task you want to update does not exist in the list</exception>
     public void Update(Task? task)
     {
         if (task != null)
@@ -80,7 +80,7 @@ internal class TaskImplementation : ITask
             }
             else
             {
-                throw new Exception($"An object of type Task with ID={task.ID} does not exist");
+                throw new DalDoesNotExistException($"An object of type Task with ID={task.ID} does not exist");
             }
         }
     }
