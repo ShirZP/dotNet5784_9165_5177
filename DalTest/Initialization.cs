@@ -15,9 +15,8 @@ public static class Initialization
     private const int MIN_ID = 200000000;
     private const int MAX_ID = 400000000;
 
-    private static ITask? s_dalTask; //stage 1
-    private static IEngineer? s_dalEngineer; //stage 1
-    private static IDependency? s_dalDependency; //stage 1
+    private static IDal? s_dal; //stage 2
+
 
     private static readonly Random s_rand = new();
 
@@ -75,7 +74,7 @@ public static class Initialization
 
 
             Task newTask = new(0, _nickName, _description, null, null, _requiredEffortTime, null, _finalProduct, _remarks, null, _complexity, null, null);
-            s_dalTask!.Create(newTask);
+            s_dal!.Task.Create(newTask);
         }
 
     }
@@ -97,7 +96,7 @@ public static class Initialization
             int _id;
             do
                 _id = s_rand.Next(MIN_ID, MAX_ID);
-            while (s_dalEngineer!.Read(_id) != null);
+            while (s_dal!.Engineer.Read(_id) != null);
 
             //email
             string _email = _name.Replace(" ", "") + "@gmail.com";
@@ -111,7 +110,7 @@ public static class Initialization
 
 
             Engineer newEngineer = new(_id, _name, _email, _level, _cost);
-            s_dalEngineer!.Create(newEngineer);
+            s_dal!.Engineer.Create(newEngineer);
         }
     }
 
@@ -124,7 +123,7 @@ public static class Initialization
         int _dependensOnTaskID;
         Dependency newDependency;
 
-        List<Task>? tasksList = s_dalTask!.ReadAll();
+        List<Task>? tasksList = s_dal!.Task.ReadAll();
         if (tasksList != null)
         {
             //19 dependencies
@@ -135,7 +134,7 @@ public static class Initialization
                 _dependensOnTaskID = tasksList[i - 1].ID;
 
                 newDependency = new Dependency(0, _dependentTaskID, _dependensOnTaskID);
-                s_dalDependency!.Create(newDependency);
+                s_dal!.Dependency.Create(newDependency);
 
             }
 
@@ -146,7 +145,7 @@ public static class Initialization
                 _dependensOnTaskID = tasksList[i - 2].ID;
 
                 newDependency = new Dependency(0, _dependentTaskID, _dependensOnTaskID);
-                s_dalDependency!.Create(newDependency);
+                s_dal!.Dependency.Create(newDependency);
             }
 
             //more 13 dependencies
@@ -157,7 +156,7 @@ public static class Initialization
                 _dependensOnTaskID = tasksList[i].ID;
 
                 newDependency = new Dependency(0, _dependentTaskID, _dependensOnTaskID);
-                s_dalDependency!.Create(newDependency);
+                s_dal!.Dependency.Create(newDependency);
             }
 
         }
@@ -170,12 +169,10 @@ public static class Initialization
     /// <param name="dalEngineer">An interface type to a task engineer</param>
     /// <param name="dalDependency">An interface type to a task dependency</param>
     /// <exception cref="NullReferenceException"></exception>
-    public static void Do(ITask? dalTask, IEngineer? dalEngineer, IDependency? dalDependency)
+    public static void Do(IDal? dal)
     {
-        s_dalTask = dalTask ?? throw new NullReferenceException("DALTASK can not be null!");
-        s_dalEngineer = dalEngineer ?? throw new NullReferenceException("DALENGINEER can not be null!");
-        s_dalDependency = dalDependency ?? throw new NullReferenceException("DALDEPENDENCY can not be null!");
-
+        s_dal = dal ?? throw new NullReferenceException("DAL object can not be null!"); //stage 2
+       
         createEngineers();
         createTasks();
         createDependencies();

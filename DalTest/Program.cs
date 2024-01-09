@@ -6,14 +6,12 @@
     
     internal class Program
     {
-        private static ITask? s_dalTask = new TaskImplementation(); //stage 1
-        private static IEngineer? s_dalEngineer = new EngineerImplementation(); //stage 1
-        private static IDependency? s_dalDependency = new DependencyImplementation(); //stage 1
+        static readonly IDal s_dal = new DalList(); //stage 2
+
 
         static void Main(string[] args)
         {
-            Initialization.Do(s_dalTask, s_dalEngineer, s_dalDependency);
-
+            Initialization.Do(s_dal); //stage 2
 
             int choice;
             string? intString;  //string to convert to int
@@ -93,15 +91,15 @@
                 {
                     case 1:  //Create
 
-                        task = inputCreateTask();   
-                        s_dalTask!.Create(task);  
+                        task = inputCreateTask();
+                        s_dal!.Task.Create(task);  
                         break;
 
                     case 2:  //Read
                         Console.WriteLine("Enter Task ID to read:");
                         intString = Console.ReadLine()!;
                         int.TryParse(intString, out id);
-                        task = s_dalTask!.Read(id);
+                        task = s_dal!.Task.Read(id);
                         if (task != null)
                         {
                             Console.WriteLine(task);  
@@ -113,7 +111,7 @@
                         break;
 
                     case 3:  //ReadAll
-                        List<Task> tasksList = s_dalTask!.ReadAll();
+                        List<Task> tasksList = s_dal!.Task.ReadAll();
                         foreach (Task t in tasksList)
                         {
                             Console.WriteLine(t);
@@ -124,20 +122,20 @@
                         Console.WriteLine("Enter task ID to update:");
                         intString = Console.ReadLine()!;
                         int.TryParse(intString, out id);
-                        task = s_dalTask!.Read(id);
+                        task = s_dal!.Task.Read(id);
                         if (task != null)
                         {
                             Console.WriteLine(task);   //Before the update prints the task to update.
                             task = inputUpdateTask(task);
                         }
-                        s_dalTask!.Update(task);
+                        s_dal!.Task.Update(task);
                         break;
 
                     case 5:  //Delete
                         Console.WriteLine("Enter Task ID to delete:");
                         intString = Console.ReadLine()!;
                         int.TryParse(intString, out id);
-                        s_dalTask!.Delete(id);
+                        s_dal!.Task.Delete(id);
                         Console.WriteLine("Deleted successfully");
                         break;
 
@@ -173,14 +171,14 @@
                 {
                     case 1:  //Create
                         newEngineer = inputCreateEngineer();
-                        s_dalEngineer!.Create(newEngineer);
+                        s_dal!.Engineer.Create(newEngineer);
                         break;
 
                     case 2:  //Read
                         Console.WriteLine("Enter engineer ID:");
                         intString = Console.ReadLine()!;
                         int.TryParse(intString, out id);
-                        engineer = s_dalEngineer!.Read(id);
+                        engineer = s_dal!.Engineer.Read(id);
                         if (engineer != null)
                         {
                             Console.WriteLine(engineer);
@@ -192,7 +190,7 @@
                         break; 
 
                     case 3:  //ReadAll
-                        List<Engineer> engineersList = s_dalEngineer!.ReadAll();
+                        List<Engineer> engineersList = s_dal!.Engineer.ReadAll();
                         foreach(var e in engineersList)
                         {
                             Console.WriteLine(e);    
@@ -203,13 +201,13 @@
                         Console.WriteLine("Enter engineer ID to update:");
                         intString = Console.ReadLine()!;
                         int.TryParse(intString, out id);
-                        engineer = s_dalEngineer!.Read(id);
+                        engineer = s_dal!.Engineer.Read(id);
                         if (engineer != null)  
                         {
                             Console.WriteLine(engineer);   //Before the update prints the engineer to update.
 
                             newEngineer = inputUpdateEngineer(engineer);
-                            s_dalEngineer!.Update(newEngineer);
+                            s_dal!.Engineer.Update(newEngineer);
 
                             Console.WriteLine($"Engineer { id } update successfully");
                         }
@@ -223,7 +221,7 @@
                         Console.WriteLine("Enter engineer ID to read:");
                         intString = Console.ReadLine()!;
                         int.TryParse(intString, out id);
-                        s_dalEngineer!.Delete(id);
+                        s_dal!.Engineer.Delete(id);
                         Console.WriteLine($"Engineer {id} deleted successfully");
                         break;
 
@@ -262,14 +260,14 @@
                     case 1:  //Create
                         dependency = inputCreateDependency();
 
-                        s_dalDependency!.Create(dependency);
+                        s_dal!.Dependency.Create(dependency);
                         break;
 
                     case 2: //Read
                         Console.WriteLine("Enter Dependency ID to read:");
                         intString = Console.ReadLine()!;
                         int.TryParse(intString, out id);
-                        dependency = s_dalDependency!.Read(id);
+                        dependency = s_dal!.Dependency.Read(id);
                         if (dependency != null)
                         {
                             Console.WriteLine(dependency);
@@ -281,7 +279,7 @@
                         break;
 
                     case 3:  //ReadAll
-                        List<Dependency> dependenciesList = s_dalDependency!.ReadAll();
+                        List<Dependency> dependenciesList = s_dal!.Dependency.ReadAll();
                         foreach (Dependency d in dependenciesList)
                         {
                             Console.WriteLine(d);
@@ -293,14 +291,14 @@
                         intString = Console.ReadLine()!;
                         int.TryParse(intString, out id);
 
-                        dependency = s_dalDependency!.Read(id);
+                        dependency = s_dal!.Dependency.Read(id);
                         if (dependency != null)
                         {
                             Console.WriteLine(dependency);   //Before the update prints the dependency to update.
 
                             dependency = inputUpdateDependency(dependency);
 
-                            s_dalDependency!.Update(dependency);
+                            s_dal!.Dependency.Update(dependency);
                             Console.WriteLine($"Dependency {id} update successfully");
                         }
                         else
@@ -314,7 +312,7 @@
                         Console.WriteLine("Enter Dependency ID to delete:");
                         intString = Console.ReadLine()!;
                         int.TryParse(intString, out id);
-                        s_dalDependency!.Delete(id);
+                        s_dal!.Dependency.Delete(id);
                         Console.WriteLine($"Dependency {id} deleted successfully");
                         break;
 
