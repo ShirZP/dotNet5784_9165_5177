@@ -97,7 +97,7 @@ public static class Initialization
             int _id;
             do
                 _id = s_rand.Next(MIN_ID, MAX_ID);
-            while (s_dal!.Engineer.Read(_id) != null);
+            while (s_dal!.Engineer.Read(item => item.ID == _id) != null);
 
             //email
             string _email = _name.Replace(" ", "") + "@gmail.com";

@@ -106,7 +106,7 @@
                         Console.WriteLine("Enter Task ID to read:");
                         intString = Console.ReadLine()!;
                         int.TryParse(intString, out id);
-                        task = s_dal!.Task.Read(id);
+                        task = s_dal!.Task.Read(item => item.ID == id);
                         if (task != null)
                         {
                             Console.WriteLine(task);  
@@ -118,8 +118,8 @@
                         break;
 
                     case 3:  //ReadAll
-                        List<Task> tasksList = s_dal!.Task.ReadAll();
-                        foreach (Task t in tasksList)
+                        IEnumerable<Task?> tasksList = s_dal!.Task.ReadAll();
+                        foreach (var t in tasksList)
                         {
                             Console.WriteLine(t);
                         }
@@ -129,7 +129,7 @@
                         Console.WriteLine("Enter task ID to update:");
                         intString = Console.ReadLine()!;
                         int.TryParse(intString, out id);
-                        task = s_dal!.Task.Read(id);
+                        task = s_dal!.Task.Read(item => item.ID == id);
                         if (task != null)
                         {
                             Console.WriteLine(task);   //Before the update prints the task to update.
@@ -184,7 +184,7 @@
                         Console.WriteLine("Enter engineer ID:");
                         intString = Console.ReadLine()!;
                         int.TryParse(intString, out id);
-                        engineer = s_dal!.Engineer.Read(id);
+                        engineer = s_dal!.Engineer.Read(item => item.ID == id);
                         if (engineer != null)
                         {
                             Console.WriteLine(engineer);
@@ -196,7 +196,7 @@
                         break; 
 
                     case 3:  //ReadAll
-                        List<Engineer> engineersList = s_dal!.Engineer.ReadAll();
+                        IEnumerable<Engineer?> engineersList = s_dal!.Engineer.ReadAll();
                         foreach(var e in engineersList)
                         {
                             Console.WriteLine(e);    
@@ -207,7 +207,7 @@
                         Console.WriteLine("Enter engineer ID to update:");
                         intString = Console.ReadLine()!;
                         int.TryParse(intString, out id);
-                        engineer = s_dal!.Engineer.Read(id);
+                        engineer = s_dal!.Engineer.Read(item => item.ID == id);
                         if (engineer != null)  
                         {
                             Console.WriteLine(engineer);   //Before the update prints the engineer to update.
@@ -273,7 +273,7 @@
                         Console.WriteLine("Enter Dependency ID to read:");
                         intString = Console.ReadLine()!;
                         int.TryParse(intString, out id);
-                        dependency = s_dal!.Dependency.Read(id);
+                        dependency = s_dal!.Dependency.Read(item => item.ID == id);
                         if (dependency != null)
                         {
                             Console.WriteLine(dependency);
@@ -285,8 +285,8 @@
                         break;
 
                     case 3:  //ReadAll
-                        List<Dependency> dependenciesList = s_dal!.Dependency.ReadAll();
-                        foreach (Dependency d in dependenciesList)
+                        IEnumerable<Dependency?> dependenciesList = s_dal!.Dependency.ReadAll();
+                        foreach (var d in dependenciesList)
                         {
                             Console.WriteLine(d);
                         }
@@ -297,7 +297,7 @@
                         intString = Console.ReadLine()!;
                         int.TryParse(intString, out id);
 
-                        dependency = s_dal!.Dependency.Read(id);
+                        dependency = s_dal!.Dependency.Read(item => item.ID == id);
                         if (dependency != null)
                         {
                             Console.WriteLine(dependency);   //Before the update prints the dependency to update.
