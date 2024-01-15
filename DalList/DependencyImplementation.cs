@@ -45,18 +45,16 @@ internal class DependencyImplementation : IDependency
     /// <returns>reference to the dependency with the requested ID</returns>
     public Dependency? Read(int id)
     {
-        Dependency? dependency = DataSource.Dependencies.Find(d => d.ID == id);
-
-        return dependency;
+        return DataSource.Dependencies.FirstOrDefault(item => item.ID == id);
     }
 
     /// <summary>
     /// The function returns a copy of the dependency list
     /// </summary>
     /// <returns>A copy of the dependency list</returns>
-    public List<Dependency> ReadAll()
+    public IEnumerable<Dependency?> ReadAll()
     {
-        return new List<Dependency>(DataSource.Dependencies);
+        return DataSource.Dependencies.Select(item => item);
     }
 
     /// <summary>

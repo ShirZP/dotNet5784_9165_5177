@@ -57,18 +57,16 @@ internal class EngineerImplementation : IEngineer
     /// <returns>reference to the engineer with the requested ID</returns>
     public Engineer? Read(int id)
     {
-        Engineer? engineer = DataSource.Engineers.Find(e => e.ID == id);
-
-        return engineer;
+        return DataSource.Engineers.FirstOrDefault(item => item.ID == id);
     }
 
     /// <summary>
     /// The function returns a copy of the engineer list
     /// </summary>
     /// <returns>A copy of the engineer list</returns>
-    public List<Engineer> ReadAll()
+    public IEnumerable<Engineer?> ReadAll()
     {
-        return new List<Engineer>(DataSource.Engineers);
+        return DataSource.Engineers.Select(item => item);
     }
 
     /// <summary>

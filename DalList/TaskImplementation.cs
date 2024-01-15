@@ -47,18 +47,16 @@ internal class TaskImplementation : ITask
     /// <returns>reference to the task with the requested ID</returns>
     public Task? Read(int id)
     {
-        Task? task = DataSource.Tasks.Find(t => t.ID == id);
-
-        return task; 
+        return DataSource.Tasks.FirstOrDefault(item => item.ID == id);
     }
 
     /// <summary>
     /// The function returns a copy of the task list
     /// </summary>
     /// <returns>A copy of the task list</returns>
-    public List<Task> ReadAll()
+    public IEnumerable<Task?> ReadAll()
     {
-        return new List<Task>(DataSource.Tasks);
+        return DataSource.Tasks.Select(item => item);
     }
 
     /// <summary>
