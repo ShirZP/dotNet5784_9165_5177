@@ -41,23 +41,27 @@ internal class TaskImplementation : ITask
     }
 
     /// <summary>
-    /// The function returns a reference to the task with the requested ID
+    /// The function returns a reference to the task with the requested filter
     /// </summary>
-    /// <param name="id">the task id that we want to find</param>
-    /// <returns>reference to the task with the requested ID</returns>
-    public Task? Read(int id)
+    /// <param name="filter">Delegate Func that recieves Task and returns bool</param>
+    /// <returns>reference to the task with the requested filter</returns>
+    public Task? Read(Func<Task, bool> filter)
     {
-        return DataSource.Tasks.FirstOrDefault(item => item.ID == id);
+        return DataSource.Tasks.FirstOrDefault(filter);
     }
 
     /// <summary>
-    /// The function returns a copy of the task list
+    /// The function returns a copy of the task list with filter
     /// </summary>
-    /// <returns>A copy of the task list</returns>
-    public IEnumerable<Task?> ReadAll()
+    /// <returns>A copy of the task list with filter</returns>
+    public IEnumerable<Task?> ReadAll(Func<Task?, bool>? filter = null) //stage 2
     {
-        return DataSource.Tasks.Select(item => item);
+        if (filter == null)
+            return DataSource.Tasks.Select(item => item);
+        else
+            return DataSource.Tasks.Where(filter);
     }
+
 
     /// <summary>
     /// The function updates a task from the task list
