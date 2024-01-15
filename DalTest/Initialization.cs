@@ -125,7 +125,7 @@ public static class Initialization
         int _dependensOnTaskID;
         Dependency newDependency;
 
-        IEnumerable<Task?> tasksList = s_dal!.Task.ReadAll().ToList<Task?>();
+        List<Task?> tasksList = s_dal!.Task.ReadAll().ToList<Task?>();
         if (tasksList != null)
         {
             //19 dependencies
