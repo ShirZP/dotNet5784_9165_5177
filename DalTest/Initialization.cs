@@ -4,6 +4,7 @@ using DO;
 using Microsoft.VisualBasic;
 using System;
 using System.Data.Common;
+using System.Linq;
 using System.Runtime.ConstrainedExecution;
 using System.Runtime.InteropServices;
 using System.Security.Cryptography;
@@ -124,7 +125,7 @@ public static class Initialization
         int _dependensOnTaskID;
         Dependency newDependency;
 
-        IEnumerable<Task?> tasksList = s_dal!.Task.ReadAll();
+        List<Task?> tasksList = s_dal!.Task.ReadAll().ToList<Task?>();
         if (tasksList != null)
         {
             //19 dependencies
