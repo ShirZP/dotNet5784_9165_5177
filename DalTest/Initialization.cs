@@ -3,6 +3,7 @@ using DalApi;
 using DO;
 using Microsoft.VisualBasic;
 using System;
+using System.Data.Common;
 using System.Runtime.ConstrainedExecution;
 using System.Runtime.InteropServices;
 using System.Security.Cryptography;
@@ -123,7 +124,7 @@ public static class Initialization
         int _dependensOnTaskID;
         Dependency newDependency;
 
-        List<Task>? tasksList = s_dal!.Task.ReadAll();
+        IEnumerable<Task?> tasksList = s_dal!.Task.ReadAll();
         if (tasksList != null)
         {
             //19 dependencies

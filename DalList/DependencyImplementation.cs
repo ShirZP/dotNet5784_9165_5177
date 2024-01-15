@@ -52,10 +52,14 @@ internal class DependencyImplementation : IDependency
     /// The function returns a copy of the dependency list
     /// </summary>
     /// <returns>A copy of the dependency list</returns>
-    public IEnumerable<Dependency?> ReadAll()
+    public IEnumerable<Dependency?> ReadAll(Func<Dependency?, bool>? filter = null) //stage 2
     {
-        return DataSource.Dependencies.Select(item => item);
+        if (filter == null)
+            return DataSource.Dependencies.Select(item => item);
+        else
+            return DataSource.Dependencies.Where(filter);
     }
+
 
     /// <summary>
     /// The function updates a dependency from the task list
