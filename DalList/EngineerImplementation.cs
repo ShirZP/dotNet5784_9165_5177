@@ -51,22 +51,25 @@ internal class EngineerImplementation : IEngineer
     }
 
     /// <summary>
-    /// The function returns a reference to the engineer with the requested ID
+    /// The function returns a reference to the engineer with the requested filter
     /// </summary>
-    /// <param name="id">the engineer id that we want to find</param>
-    /// <returns>reference to the engineer with the requested ID</returns>
-    public Engineer? Read(int id)
+    /// <param name="filter">delegate func that recieves Engineer and returns bool</param>
+    /// <returns>reference to the engineer with the requested filter</returns>
+    public Engineer? Read(Func<Engineer, bool> filter) //stage 2
     {
-        return DataSource.Engineers.FirstOrDefault(item => item.ID == id);
+        return DataSource.Engineers.FirstOrDefault(filter);
     }
 
     /// <summary>
-    /// The function returns a copy of the engineer list
+    /// The function returns a copy of the engineer list with filter
     /// </summary>
     /// <returns>A copy of the engineer list</returns>
-    public IEnumerable<Engineer?> ReadAll()
+    public IEnumerable<Engineer?> ReadAll(Func<Engineer?, bool>? filter = null) //stage 2
     {
-        return DataSource.Engineers.Select(item => item);
+        if (filter == null)
+            return DataSource.Engineers.Select(item => item);
+        else
+            return DataSource.Engineers.Where(filter);
     }
 
     /// <summary>

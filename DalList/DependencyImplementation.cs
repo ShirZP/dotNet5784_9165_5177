@@ -39,17 +39,17 @@ internal class DependencyImplementation : IDependency
     }
 
     /// <summary>
-    /// The function returns a reference to the dependency with the requested ID
+    /// The function returns a reference to the dependency with the requested filter
     /// </summary>
-    /// <param name="id">the dependency id that we want to find</param>
-    /// <returns>reference to the dependency with the requested ID</returns>
-    public Dependency? Read(int id)
+    /// <param name="filter">delegate func that recieves Dependency and returns bool</param>
+    /// <returns>reference to the dependency with the requested filter</returns>
+    public Dependency? Read(Func<Dependency, bool> filter) //stage 2
     {
-        return DataSource.Dependencies.FirstOrDefault(item => item.ID == id);
+        return DataSource.Dependencies.FirstOrDefault(filter);
     }
 
     /// <summary>
-    /// The function returns a copy of the dependency list
+    /// The function returns a copy of the dependency list with filter
     /// </summary>
     /// <returns>A copy of the dependency list</returns>
     public IEnumerable<Dependency?> ReadAll(Func<Dependency?, bool>? filter = null) //stage 2
