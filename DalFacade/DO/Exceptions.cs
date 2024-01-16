@@ -12,3 +12,11 @@ public class DalAlreadyExistsException : Exception  //אובייקט כבר קי
 {
     public DalAlreadyExistsException(string? message) : base(message) { }
 }
+
+
+[Serializable]
+public class DalXMLFileLoadCreateException : Exception  //לא מצליח לטעון קובץ xml 
+{
+    public DalXMLFileLoadCreateException(string? message) : base(message) { }
+}
+
