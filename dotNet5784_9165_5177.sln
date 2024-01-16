@@ -12,9 +12,11 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution 
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "DalFacade", "DalFacade\DalFacade.csproj", "{DB5859E6-6971-4164-B857-9FABBA90F565}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DalList", "DalList\DalList.csproj", "{20EB5757-E9BC-42C6-AD47-F05D5AB82A4C}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "DalList", "DalList\DalList.csproj", "{20EB5757-E9BC-42C6-AD47-F05D5AB82A4C}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DalTest", "DalTest\DalTest.csproj", "{5F576473-3EF4-4949-8E5D-C10C577E4895}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "DalTest", "DalTest\DalTest.csproj", "{5F576473-3EF4-4949-8E5D-C10C577E4895}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DalXml", "DalXml\DalXml.csproj", "{E08D83FE-FEDE-4226-A638-190C328EE4A2}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -38,6 +40,10 @@ Global
 		{5F576473-3EF4-4949-8E5D-C10C577E4895}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{5F576473-3EF4-4949-8E5D-C10C577E4895}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{5F576473-3EF4-4949-8E5D-C10C577E4895}.Release|Any CPU.Build.0 = Release|Any CPU
+		{E08D83FE-FEDE-4226-A638-190C328EE4A2}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{E08D83FE-FEDE-4226-A638-190C328EE4A2}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{E08D83FE-FEDE-4226-A638-190C328EE4A2}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{E08D83FE-FEDE-4226-A638-190C328EE4A2}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
