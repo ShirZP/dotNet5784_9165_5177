@@ -15,12 +15,12 @@ internal class TaskImplementation : ITask
     /// </summary>
     /// <param name="task">New task to add to the tasks xml</param>
     /// <returns>The new task uniqe id</returns>
-    public int Create(DO.Task task)
+    public int? Create(DO.Task task)
     {
         //Deserialize
         List<DO.Task> tasksList = XMLTools.LoadListFromXMLSerializer<DO.Task>(s_tasks_xml);
         
-        int newId = Config.NextTaskId;
+        int newId = XMLTools.GetAndIncreaseNextId("data-config","NextTaskId");//TODO: GetAndIncreaseNextId
         DO.Task taskWithNewID = task with { ID = newId };
         tasksList.Add(taskWithNewID);
 

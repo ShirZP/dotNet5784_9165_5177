@@ -13,7 +13,7 @@ internal class EngineerImplementation : IEngineer
     /// <param name="engineer">New engineer to add to the engineersList</param>
     /// <returns></returns>
     /// <exception cref="DalAlreadyExistsException">if the engineer is already exist in the engineers list</exception>
-    public int Create(Engineer engineer)
+    public int? Create(Engineer engineer)
     {
         Engineer? searchSameEngineer = DataSource.Engineers.Find(e => e.ID == engineer.ID);  //Checking if there is already an engineer with such an id in the list.
         if (searchSameEngineer != null) 
@@ -29,9 +29,9 @@ internal class EngineerImplementation : IEngineer
     }
 
     /// <summary>
-    /// The function change the status of the recieved engineer to unemployed.
+    /// The function delete the received engineer.
     /// </summary>
-    /// <param name="id">The ID of the engineer we want to delete(change to unemployed)</param>
+    /// <param name="id">The ID of the engineer we want to delete</param>
     /// <exception cref="DalDoesNotExistException">If the engineer you want to delete does not exist in the list</exception>
     public void Delete(int id)
     {
@@ -39,9 +39,7 @@ internal class EngineerImplementation : IEngineer
 
         if (engineer != null) 
         {
-            Engineer unemployedEngineer = engineer with { isEmployed = false};
             DataSource.Engineers.Remove(engineer);
-            DataSource.Engineers.Add(unemployedEngineer);
         }
         else
         {
@@ -79,7 +77,7 @@ internal class EngineerImplementation : IEngineer
     /// <exception cref="DalDoesNotExistException">If the engineer you want to update does not exist in the list</exception>
     public void Update(Engineer engineer)
     {
-        int engineerID = engineer.ID;
+        int? engineerID = engineer.ID;
         Engineer? oldEngineer = DataSource.Engineers.Find(e => e.ID == engineerID);  //Search for the engineer to update in the list.
         if (oldEngineer != null)
         {

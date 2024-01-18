@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <config>
 	
-	<NextCourseId>1008</NextCourseId>
-	<NextLinkId>41</NextLinkId>
+	<NextTaskId>1008</NextTaskId>
+	<NextDependencyId>41</NextDependencyId>
 	
 </config>

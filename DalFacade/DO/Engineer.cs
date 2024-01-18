@@ -10,7 +10,7 @@
 /// <param name="isEmployed">If the engineer is employed</param>
 public record Engineer
 (
-    int ID,
+    int? ID,
     string? FullName,
     string? Email,
     DO.EngineerExperience? Level,

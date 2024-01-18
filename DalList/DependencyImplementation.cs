@@ -12,7 +12,7 @@ internal class DependencyImplementation : IDependency
     /// </summary>
     /// <param name="dependency">New dependency to add to the DependenciesList</param>
     /// <returns>The new dependency uniqe id</returns>
-    public int Create(Dependency dependency)
+    public int? Create(Dependency dependency)
     {
         int newId = DataSource.Config.NextDependencyId;
 
