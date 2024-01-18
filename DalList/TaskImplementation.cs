@@ -51,9 +51,9 @@ internal class TaskImplementation : ITask
     }
 
     /// <summary>
-    /// The function returns a copy of the task list with filter
+    /// The function returns a copy of the tasks list with filter
     /// </summary>
-    /// <returns>A copy of the task list with filter</returns>
+    /// <returns>A copy of the tasks list with filter</returns>
     public IEnumerable<Task?> ReadAll(Func<Task?, bool>? filter = null) //stage 2
     {
         if (filter == null)
