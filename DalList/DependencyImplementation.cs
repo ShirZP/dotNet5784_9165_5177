@@ -62,7 +62,7 @@ internal class DependencyImplementation : IDependency
 
 
     /// <summary>
-    /// The function updates a dependency from the task list
+    /// The function updates a dependency from the dependencies list
     /// </summary>
     /// <param name="dependency">The updated dependency</param>
     /// <exception cref="DalDoesNotExistException">If the dependency you want to update does not exist in the list</exception>
