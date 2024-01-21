@@ -38,10 +38,8 @@
                             string? ans = Console.ReadLine() ?? throw new FormatException("Wrong input"); 
                             if (ans == "Y") //stage 3
                             {
-
                                 Initialization.Do(s_dal); //stage 2
-                            }
-                                
+                            }            
                             break;
                         case 0:
                             break;

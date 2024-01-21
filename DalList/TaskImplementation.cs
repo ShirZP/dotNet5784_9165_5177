@@ -86,4 +86,12 @@ internal class TaskImplementation : ITask
             }
         }
     }
+
+    /// <summary>
+    /// The function clears all the tasks from the list.
+    /// </summary>
+    public void Clear()
+    {
+        DataSource.Tasks.Clear();
+    }
 }

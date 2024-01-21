@@ -174,7 +174,11 @@ public static class Initialization
     public static void Do(IDal? dal)
     {
         s_dal = dal ?? throw new NullReferenceException("DAL object can not be null!"); //stage 2
-       
+
+        s_dal!.Task.Clear();
+        s_dal!.Engineer.Clear();
+        s_dal!.Dependency.Clear();
+
         createEngineers();
         createTasks();
         createDependencies();

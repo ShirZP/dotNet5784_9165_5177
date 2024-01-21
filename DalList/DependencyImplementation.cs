@@ -81,4 +81,12 @@ internal class DependencyImplementation : IDependency
             throw new DalDoesNotExistException($"An object of type Dependency with ID={dependency.ID} does Not exist");
         }
     }
+
+    /// <summary>
+    /// The function clears all the dependencies from the list.
+    /// </summary>
+    public void Clear()
+    {
+        DataSource.Dependencies.Clear();
+    }
 }

@@ -90,5 +90,13 @@ internal class EngineerImplementation : IEngineer
             throw new DalDoesNotExistException($"An object of type Engineer with ID={engineer.ID} does not exist");
         }
     }
+
+    /// <summary>
+    /// The function clears all the engineers from the list.
+    /// </summary>
+    public void Clear()
+    {
+        DataSource.Engineers.Clear();   
+    }
 }
 
