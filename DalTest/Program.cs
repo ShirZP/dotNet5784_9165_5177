@@ -6,20 +6,12 @@
     
     internal class Program
     {
-        static readonly IDal s_dal = new DalList(); //stage 2
+        //static readonly IDal s_dal = new DalList(); //stage 2
+        static readonly IDal s_dal = new DalXml(); //stage 3
 
 
         static void Main(string[] args)
         {
-            try
-            {
-                Initialization.Do(s_dal); //stage 2
-            }
-            catch (Exception ex)
-            {
-                Console.WriteLine(ex);
-            }
-
             int choice;
             string? intString;  //string to convert to int
             printMainMenu();
@@ -40,6 +32,16 @@
                             break;
                         case 3:
                             dependencySubMenu();
+                            break;
+                        case 4:
+                            Console.Write("Would you like to create Initial data? (Y/N)"); //stage 3
+                            string? ans = Console.ReadLine() ?? throw new FormatException("Wrong input"); 
+                            if (ans == "Y") //stage 3
+                            {
+
+                                Initialization.Do(s_dal); //stage 2
+                            }
+                                
                             break;
                         case 0:
                             break;
@@ -66,7 +68,7 @@
         private static void printMainMenu()
         {
             Console.WriteLine("Select an entity of your choice:");
-            Console.WriteLine("1 - Task\n" + "2 - Engineer\n" + "3 - Dependency\n" + "0 - Exit\n");
+            Console.WriteLine("1 - Task\n" + "2 - Engineer\n" + "3 - Dependency\n" + "4 - Reset data\n" + "0 - Exit\n");
         }
 
         /// <summary>
