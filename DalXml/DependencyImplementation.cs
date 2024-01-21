@@ -102,4 +102,16 @@ internal class DependencyImplementation : IDependency
             throw new DalDoesNotExistException($"An object of type Dependency with ID={dependency.ID} does Not exist");
         }
     }
+
+    /// <summary>
+    /// The function clears all the dependencies from the dependencies xml.
+    /// </summary>
+    public void Clear()
+    {
+        //Deserialize
+        List<Dependency> DependenciesList = XMLTools.LoadListFromXMLSerializer<Dependency>(s_dependencies_xml);
+        DependenciesList.Clear();
+        //Serialize
+        XMLTools.SaveListToXMLSerializer<Dependency>(DependenciesList, s_dependencies_xml);
+    }
 }

@@ -152,4 +152,15 @@ internal class EngineerImplementation : IEngineer
             isEmployed = (bool?)XEngineer.Element("isEmployed") ?? true
         };
     }
+
+    /// <summary>
+    /// The function clears all the engineers from the engineers xml.
+    /// </summary>
+    public void Clear()
+    {
+        XElement xEngineerRoot = XMLTools.LoadListFromXMLElement(s_engineers_xml);  //load the engineers xml to XElement
+        xEngineerRoot.RemoveAll();
+        XMLTools.SaveListToXMLElement(xEngineerRoot, s_engineers_xml);
+    }
+
 }
