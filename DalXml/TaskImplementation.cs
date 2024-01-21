@@ -110,4 +110,14 @@ internal class TaskImplementation : ITask
             }
         }
     }
+
+    /// <summary>
+    /// The function clears all the tasks from the tasks xml.
+    /// </summary>
+    public void Clear()
+    {
+        List<DO.Task> tasksList = XMLTools.LoadListFromXMLSerializer<DO.Task>(s_tasks_xml);
+        tasksList.Clear();
+        XMLTools.SaveListToXMLSerializer(tasksList, s_tasks_xml);   
+    }
 }
