@@ -22,25 +22,19 @@ internal class EngineerImplementation : IEngineer
     {
         XElement xEngineerRoot = XMLTools.LoadListFromXMLElement(s_engineers_xml);  //load the engineers xml to XElement
 
-        List<Engineer>? engineersList = getEngineersList(xEngineerRoot);  //convert the XElement to list
+        Engineer? e = Read(e => e.ID == engineer.ID); //Checking if there is already an engineer with such an id in the xml.
 
-        Engineer? searchSameEngineer = engineersList.Find(e => e.ID == engineer.ID);  //Checking if there is already an engineer with such an id in the list.
-        if (searchSameEngineer != null)
+        //List<Engineer>? engineersList = getEngineersList(xEngineerRoot);  //convert the XElement to list
+        //Engineer? searchSameEngineer = engineersList.Find(e => e.ID == engineer.ID);  //Checking if there is already an engineer with such an id in the list.
+        
+        if (e != default(Engineer?))
         {
             throw new DalAlreadyExistsException($"An object of type Engineer with ID={engineer.ID} already exist");
         }
         else
         {
-            //create a new engineer XElement
-            XElement id = new XElement("id", engineer.ID);
-            XElement fullName = new XElement("fullName", engineer.FullName);
-            XElement email = new XElement("email", engineer.Email);
-            XElement level = new XElement("level", engineer.Level);
-            XElement cost = new XElement("cost", engineer.Cost);
-            XElement isEmployed = new XElement("isEmployed", engineer.isEmployed);
-
             //add and save the new engineer XElement to the engineers xml file
-            xEngineerRoot.Add(new XElement("engineer", id, fullName, email, level, cost, isEmployed));
+            xEngineerRoot.Add(ToXElement(engineer));
             XMLTools.SaveListToXMLElement(xEngineerRoot, s_engineers_xml);
         }
         return engineer.ID;
@@ -53,24 +47,22 @@ internal class EngineerImplementation : IEngineer
     /// <exception cref="DalDoesNotExistException">If the engineer you want to delete does not exist in the xml</exception>
     public void Delete(int id)
     {
-        IEnumerable<Engineer?> xElement = XMLTools.LoadListFromXMLElement(s_engineers_xml).Elements().Select(e => getEngineer(e)).Where(eng => eng.ID == id);
+        XElement xEngineerRoot = XMLTools.LoadListFromXMLElement(s_engineers_xml);  //load the engineers xml to XElement
 
-        //XElement xEngineerRoot = XMLTools.LoadListFromXMLElement(s_engineers_xml);  //load the engineers xml to XElement
-        //XElement engineerElement;
-        //try
-        //{
-        //    //Retrieving the engineer to delete from the XElement list
-        //    engineerElement = (from e in xEngineerRoot.Elements()
-        //                       where XMLTools.ToIntNullable(e, "id") == id
-        //                       select e).FirstOrDefault()!;
+        //Retrieving the engineer to delete from the XElement list
+        XElement? XEngineer = (from e in xEngineerRoot.Elements()
+                               where XMLTools.ToIntNullable(e, "id") == id
+                               select e).FirstOrDefault()!;
 
-        //    engineerElement!.Remove(); //remove the requested engineer
-        //    XMLTools.SaveListToXMLElement(xEngineerRoot, s_engineers_xml);
-        //}
-        //catch
-        //{
-        //    throw new DalDoesNotExistException($"An object of type Engineer with ID={id} does not exist");
-        //}
+        if(XEngineer != default(XElement?))
+        {
+            XEngineer!.Remove(); //remove the requested engineer
+            XMLTools.SaveListToXMLElement(xEngineerRoot, s_engineers_xml);
+        }
+        else
+        {
+            throw new DalDoesNotExistException($"An object of type Engineer with ID={id} does not exist");
+        }
     }
 
     /// <summary>
@@ -99,46 +91,65 @@ internal class EngineerImplementation : IEngineer
         }
 
     }
-
-    public void Update(Engineer item)
+    /// <summary>
+    /// The function updates engineer details from the engineers xml 
+    /// </summary>
+    /// <param name="updateEngineer">The updated engineer</param>
+    /// <exception cref="DalDoesNotExistException">If the engineer you want to update does not exist in the xml</exception>
+    public void Update(Engineer updateEngineer)
     {
-        throw new NotImplementedException();
+        XElement xEngineerRoot = XMLTools.LoadListFromXMLElement(s_engineers_xml);  //load the engineers xml to XElement
+
+        //Retrieving the requested engineer for update.
+        XElement? XEngineer = (from e in xEngineerRoot.Elements()
+                               where (int)e.Element("id")! == updateEngineer.ID
+                               select e).FirstOrDefault();
+
+        if (XEngineer != default(XElement?))
+        {
+            XEngineer.Remove();
+            xEngineerRoot.Add(ToXElement(updateEngineer));
+            XMLTools.SaveListToXMLElement(xEngineerRoot, s_engineers_xml);
+        }
+        else
+        {
+            throw new DalDoesNotExistException($"An object of type Engineer with ID={updateEngineer.ID} does not exist");
+        }
     }
 
-    private List<Engineer>? getEngineersList(XElement xelement)
+    /// <summary>
+    /// The function receives an object of type Engineer and converts it to an object of type XElement and returns it.
+    /// </summary>
+    /// <param name="engineer">an object of type Engineer to convert</param>
+    /// <returns>object type XElement</returns>
+    private XElement ToXElement(Engineer engineer)
     {
-        List<Engineer>? engineers;
-        try
-        {
-            engineers = (from e in xelement.Elements()
-                        select new Engineer()
-                        {
-                            ID = XMLTools.ToIntNullable(e, "id"),
-                            FullName = e.Element("fullName").Value,
-                            Email = e.Element("email").Value,
-                            Level = XMLTools.ToEnumNullable<DO.EngineerExperience>(e, "level"),
-                            Cost = XMLTools.ToDoubleNullable(e, "cost"),
-                            isEmployed = Convert.ToBoolean(e.Element("isEmployed").Value)
-                        }).ToList<Engineer>();
-        }
-        catch
-        {
-            engineers = null;
-        }
-        return engineers;
+        //create a new engineer XElement
+        XElement id = new XElement("id", engineer.ID);
+        XElement fullName = new XElement("fullName", engineer.FullName);
+        XElement email = new XElement("email", engineer.Email);
+        XElement level = new XElement("level", engineer.Level);
+        XElement cost = new XElement("cost", engineer.Cost);
+        XElement isEmployed = new XElement("isEmployed", engineer.isEmployed);
+
+        return new XElement("engineer", id, fullName, email, level, cost, isEmployed);
     }
 
-    
-    static Engineer getEngineer(XElement e)
+    /// <summary>
+    /// The function receives an object of type XElement and converts it to an object of type Engineer and returns it.
+    /// </summary>
+    /// <param name="XEngineer">an object of type XElement to convert</param>
+    /// <returns>object type engineer</returns>
+    /// <exception cref="FormatException"></exception>
+    static Engineer getEngineer(XElement XEngineer)
     {
         return new Engineer()
         {
-            ID = e.ToIntNullable("id") ?? throw new FormatException("can' convert id"),
-            FullName = (string?)e.Element("fullName") ?? "",
-            Email = (string?)e.Element("email") ?? null,
-            Level = e.ToEnumNullable<DO.EngineerExperience>("level") ?? null,
-            isEmployed = (bool?)e.Element("isEmployed") ?? true
-
+            ID = XEngineer.ToIntNullable("id") ?? throw new FormatException("can' convert id"),
+            FullName = (string?)XEngineer.Element("fullName") ?? "",
+            Email = (string?)XEngineer.Element("email") ?? null,
+            Level = XEngineer.ToEnumNullable<DO.EngineerExperience>("level") ?? null,
+            isEmployed = (bool?)XEngineer.Element("isEmployed") ?? true
         };
     }
 }
