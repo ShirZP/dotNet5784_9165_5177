@@ -24,9 +24,6 @@ internal class EngineerImplementation : IEngineer
 
         Engineer? e = Read(e => e.ID == engineer.ID); //Checking if there is already an engineer with such an id in the xml.
 
-        //List<Engineer>? engineersList = getEngineersList(xEngineerRoot);  //convert the XElement to list
-        //Engineer? searchSameEngineer = engineersList.Find(e => e.ID == engineer.ID);  //Checking if there is already an engineer with such an id in the list.
-        
         if (e != default(Engineer?))
         {
             throw new DalAlreadyExistsException($"An object of type Engineer with ID={engineer.ID} already exist");
@@ -145,7 +142,7 @@ internal class EngineerImplementation : IEngineer
     {
         return new Engineer()
         {
-            ID = XEngineer.ToIntNullable("id") ?? throw new FormatException("can' convert id"),
+            ID = XEngineer.ToIntNullable("id") ?? throw new FormatException("can't convert id"),
             FullName = (string?)XEngineer.Element("fullName") ?? "",
             Email = (string?)XEngineer.Element("email") ?? null,
             Level = XEngineer.ToEnumNullable<DO.EngineerExperience>("level") ?? null,
