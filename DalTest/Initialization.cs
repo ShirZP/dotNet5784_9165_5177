@@ -173,7 +173,7 @@ public static class Initialization
     /// <exception cref="NullReferenceException"></exception>
     public static void Do()
     {
-        s_dal = DalApi.Factory.Get; //stage 4
+        //s_dal = DalApi.Factory.Get; //stage 4
 
         s_dal!.Task.Clear();
         s_dal!.Engineer.Clear();
