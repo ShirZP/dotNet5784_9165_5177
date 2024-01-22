@@ -7,7 +7,8 @@
     internal class Program
     {
         //static readonly IDal s_dal = new DalList(); //stage 2
-        static readonly IDal s_dal = new DalXml(); //stage 3
+        //static readonly IDal s_dal = new DalXml(); //stage 3
+        static readonly IDal s_dal = Factory.Get; //stage 4
 
 
         static void Main(string[] args)
@@ -38,7 +39,7 @@
                             string? ans = Console.ReadLine() ?? throw new FormatException("Wrong input"); 
                             if (ans == "Y") //stage 3
                             {
-                                Initialization.Do(s_dal); //stage 2
+                                Initialization.Do(); //stage 2
                             }            
                             break;
                         case 0:

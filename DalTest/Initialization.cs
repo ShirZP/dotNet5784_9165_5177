@@ -171,9 +171,9 @@ public static class Initialization
     /// <param name="dalEngineer">An interface type to a task engineer</param>
     /// <param name="dalDependency">An interface type to a task dependency</param>
     /// <exception cref="NullReferenceException"></exception>
-    public static void Do(IDal? dal)
+    public static void Do()
     {
-        s_dal = dal ?? throw new NullReferenceException("DAL object can not be null!"); //stage 2
+        s_dal = DalApi.Factory.Get; //stage 4
 
         s_dal!.Task.Clear();
         s_dal!.Engineer.Clear();
