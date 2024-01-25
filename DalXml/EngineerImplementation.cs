@@ -127,9 +127,8 @@ internal class EngineerImplementation : IEngineer
         XElement email = new XElement("email", engineer.Email);
         XElement level = new XElement("level", engineer.Level);
         XElement cost = new XElement("cost", engineer.Cost);
-        XElement isEmployed = new XElement("isEmployed", engineer.isEmployed);
-
-        return new XElement("engineer", id, fullName, email, level, cost, isEmployed);
+        
+        return new XElement("engineer", id, fullName, email, level, cost);
     }
 
     /// <summary>
@@ -145,8 +144,7 @@ internal class EngineerImplementation : IEngineer
             ID = XEngineer.ToIntNullable("id") ?? throw new FormatException("can't convert id"),
             FullName = (string?)XEngineer.Element("fullName") ?? "",
             Email = (string?)XEngineer.Element("email") ?? null,
-            Level = XEngineer.ToEnumNullable<DO.EngineerExperience>("level") ?? null,
-            isEmployed = (bool?)XEngineer.Element("isEmployed") ?? true
+            Level = XEngineer.ToEnumNullable<DO.EngineerExperience>("level") ?? null
         };
     }
 
