@@ -116,7 +116,7 @@
     <FinalProduct>FinalProduct - VR/AR development</FinalProduct>
     <Remarks>Remarks - VR/AR development</Remarks>
     <EngineerId xsi:nil="true" />
-    <Complexity>Intermediate</Complexity>
+    <Complexity>Beginner</Complexity>
     <DeadlineDate xsi:nil="true" />
     <IsMileStone xsi:nil="true" />
   </Task>
@@ -126,7 +126,7 @@
     <Description>Description - UX/UI improvement</Description>
     <ScheduledDate xsi:nil="true" />
     <StartDate xsi:nil="true" />
-    <RequiredEffortTime>P3D</RequiredEffortTime>
+    <RequiredEffortTime>P2D</RequiredEffortTime>
     <CompleteDate xsi:nil="true" />
     <FinalProduct>FinalProduct - UX/UI improvement</FinalProduct>
     <Remarks>Remarks - UX/UI improvement</Remarks>
@@ -141,7 +141,7 @@
     <Description>Description - Automation and robotics</Description>
     <ScheduledDate xsi:nil="true" />
     <StartDate xsi:nil="true" />
-    <RequiredEffortTime>P2D</RequiredEffortTime>
+    <RequiredEffortTime>P1D</RequiredEffortTime>
     <CompleteDate xsi:nil="true" />
     <FinalProduct>FinalProduct - Automation and robotics</FinalProduct>
     <Remarks>Remarks - Automation and robotics</Remarks>
@@ -176,7 +176,7 @@
     <FinalProduct>FinalProduct - Wireless technology integration</FinalProduct>
     <Remarks>Remarks - Wireless technology integration</Remarks>
     <EngineerId xsi:nil="true" />
-    <Complexity>Advanced</Complexity>
+    <Complexity>Intermediate</Complexity>
     <DeadlineDate xsi:nil="true" />
     <IsMileStone xsi:nil="true" />
   </Task>
@@ -231,7 +231,7 @@
     <Description>Description - DevOps and CI/CD</Description>
     <ScheduledDate xsi:nil="true" />
     <StartDate xsi:nil="true" />
-    <RequiredEffortTime>P4D</RequiredEffortTime>
+    <RequiredEffortTime>P1D</RequiredEffortTime>
     <CompleteDate xsi:nil="true" />
     <FinalProduct>FinalProduct - DevOps and CI/CD</FinalProduct>
     <Remarks>Remarks - DevOps and CI/CD</Remarks>
