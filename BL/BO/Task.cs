@@ -1,0 +1,98 @@
+﻿using DO;
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
+using static System.Runtime.InteropServices.JavaScript.JSType;
+
+namespace BO
+{
+    public class Task
+    {
+        /// <summary>
+        /// Personal unique ID for the task (automatic number)
+        /// </summary>
+        public int Id { get; init; }
+
+        /// <summary>
+        /// Nickname of the task
+        /// </summary>
+        public string NickName { get; set; }
+
+        /// <summary>
+        /// A description of what needs to be done in the task in order for it to be completed
+        /// </summary>
+        public string Description { get; set; }
+
+        /// <summary>
+        /// The status of the task
+        /// </summary>
+        public BO.Status Status { get; set; }
+
+        /// <summary>
+        /// A list of tasks that the current task depends on
+        /// </summary>
+        public List<TaskInList>? Dependencies { get; set; }
+
+        /// <summary>
+        /// Related milestone
+        /// </summary>
+        public MilestoneInTask? Milestone { get; set; }
+
+        /// <summary>
+        /// Task creation date - calculated property
+        /// </summary>
+        public DateTime CreateAtDate { get; init; }
+
+        /// <summary>
+        /// Desired date for the start of the task
+        /// </summary>
+        public DateTime? ScheduledDate { get; set; }
+
+        /// <summary>
+        /// Actual task start date
+        /// </summary>
+        public DateTime? StartDate { get; set; }
+
+        /// <summary>
+        /// Estimated date for task completion - calculated property
+        /// </summary>
+        public DateTime? ForecastDate { get; set; } //= new DateTime?(Math.Max(ScheduledDate.Ticks, StartDate.Ticks) + RequiredEffortTime);
+
+        /// <summary>
+        /// The latest possible date to Complete the task
+        /// </summary>
+        public DateTime? DeadlineDate { get; set; }
+
+        /// <summary>
+        /// Actual task completion date
+        /// </summary>
+        public DateTime? CompleteDate { get; set; }
+
+        /// <summary>
+        /// The time required to work on the task
+        /// </summary>
+        public TimeSpan? RequiredEffortTime { get; set; }
+
+        /// <summary>
+        /// The deliverables of the task
+        /// </summary>
+        public string? Deliverables { get; set; }
+
+        /// <summary>
+        /// Option to add remarks on the task
+        /// </summary>
+        public string? Remarks { get; set; }
+
+        /// <summary>
+        /// Engineer responsible for carrying out the task
+        /// </summary>
+        public EngineerInTask? AssignedEngineer { get; set; }
+
+        /// <summary>
+        /// The difficulty level defines the minimum engineer level that can work on it
+        /// </summary>
+        public DO.EngineerExperience? Complexity { get; set; }
+    }
+}
