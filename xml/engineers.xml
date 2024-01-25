@@ -1,51 +1,51 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <ArrayOfEngineer>
   <engineer>
-    <id>385950419</id>
+    <id>297684782</id>
     <fullName>Dani Levi</fullName>
     <email>DaniLevi@gmail.com</email>
-    <level>Beginner</level>
-    <cost>65</cost>
+    <level>AdvancedBeginner</level>
+    <cost>72</cost>
     <isEmployed>true</isEmployed>
   </engineer>
   <engineer>
-    <id>332826723</id>
+    <id>263748702</id>
     <fullName>Eli Amar</fullName>
     <email>EliAmar@gmail.com</email>
-    <level>AdvancedBeginner</level>
-    <cost>65</cost>
+    <level>Intermediate</level>
+    <cost>46</cost>
     <isEmployed>true</isEmployed>
   </engineer>
   <engineer>
-    <id>244712277</id>
+    <id>361767628</id>
     <fullName>Yair Cohen</fullName>
     <email>YairCohen@gmail.com</email>
-    <level>Intermediate</level>
-    <cost>66</cost>
+    <level>AdvancedBeginner</level>
+    <cost>48</cost>
     <isEmployed>true</isEmployed>
   </engineer>
   <engineer>
-    <id>321923268</id>
+    <id>308288753</id>
     <fullName>Ariela Levin</fullName>
     <email>ArielaLevin@gmail.com</email>
-    <level>Intermediate</level>
-    <cost>62</cost>
+    <level>Advanced</level>
+    <cost>32</cost>
     <isEmployed>true</isEmployed>
   </engineer>
   <engineer>
-    <id>357119838</id>
+    <id>312507563</id>
     <fullName>Dina Klein</fullName>
     <email>DinaKlein@gmail.com</email>
-    <level>Intermediate</level>
-    <cost>53</cost>
+    <level>Expert</level>
+    <cost>46</cost>
     <isEmployed>true</isEmployed>
   </engineer>
   <engineer>
-    <id>380902047</id>
+    <id>370493107</id>
     <fullName>Shira Israelof</fullName>
     <email>ShiraIsraelof@gmail.com</email>
-    <level>Intermediate</level>
-    <cost>77</cost>
+    <level>Advanced</level>
+    <cost>66</cost>
     <isEmployed>true</isEmployed>
   </engineer>
 </ArrayOfEngineer>
