@@ -1,7 +1,9 @@
 ﻿using DalApi;
 using DO;
+using System;
 using System.Data.Common;
 using System.Threading.Tasks;
+using System.Xml.Serialization;
 
 
 namespace Dal;
@@ -20,7 +22,7 @@ internal class TaskImplementation : ITask
         //Deserialize
         List<DO.Task> tasksList = XMLTools.LoadListFromXMLSerializer<DO.Task>(s_tasks_xml);
         
-        int newId = XMLTools.GetAndIncreaseNextId("data-config","NextTaskId");//TODO: GetAndIncreaseNextId
+        int newId = XMLTools.GetAndIncreaseNextId("data-config","NextTaskId");
         DO.Task taskWithNewID = task with { ID = newId };
         tasksList.Add(taskWithNewID);
 
