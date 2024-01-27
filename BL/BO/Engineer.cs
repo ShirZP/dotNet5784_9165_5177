@@ -20,7 +20,7 @@ public class Engineer
     /// <summary>
     /// The level of expertise of the engineer
     /// </summary>
-    public BO.EngineerExperience Level { get; set; }
+    public DO.EngineerExperience Level { get; set; }
 
     /// <summary>
     /// How much per hour does the engineer get
