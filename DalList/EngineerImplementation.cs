@@ -77,7 +77,7 @@ internal class EngineerImplementation : IEngineer
     /// <exception cref="DalDoesNotExistException">If the engineer you want to update does not exist in the list</exception>
     public void Update(Engineer engineer)
     {
-        int? engineerID = engineer.ID;
+        int engineerID = engineer.ID;
         Engineer? oldEngineer = DataSource.Engineers.Find(e => e.ID == engineerID);  //Search for the engineer to update in the list.
         if (oldEngineer != null)
         {
