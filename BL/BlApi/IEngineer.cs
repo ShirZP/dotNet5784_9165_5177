@@ -7,7 +7,7 @@ public interface IEngineer
 
     public BO.Engineer Read(int id); //Reads engineer by id
 
-    public void Create(BO.Engineer engineer); //Add new engineer
+    public int Create(BO.Engineer engineer); //Add new engineer
 
     public void Update(BO.Engineer UpdatedEngineer); //Updates engineer
 
