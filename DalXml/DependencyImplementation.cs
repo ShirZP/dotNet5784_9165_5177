@@ -12,7 +12,7 @@ internal class DependencyImplementation : IDependency
     /// </summary>
     /// <param name="dependency">New dependency to add to the dependencies xml</param>
     /// <returns>The new dependency uniqe id</returns>
-    public int? Create(Dependency dependency)
+    public int Create(Dependency dependency)
     {
         //Deserialize
         List<Dependency> DependenciesList = XMLTools.LoadListFromXMLSerializer<Dependency>(s_dependencies_xml); 

@@ -13,7 +13,7 @@ internal class EngineerImplementation : IEngineer
     /// <param name="engineer">New engineer to add to the engineersList</param>
     /// <returns></returns>
     /// <exception cref="DalAlreadyExistsException">if the engineer is already exist in the engineers list</exception>
-    public int? Create(Engineer engineer)
+    public int Create(Engineer engineer)
     {
         Engineer? searchSameEngineer = DataSource.Engineers.Find(e => e.ID == engineer.ID);  //Checking if there is already an engineer with such an id in the list.
         if (searchSameEngineer != null) 

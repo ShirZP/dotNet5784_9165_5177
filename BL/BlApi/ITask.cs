@@ -7,7 +7,7 @@ public interface ITask
 
     public BO.Task Read(int id); //Reads task by id
     
-    public void Create(BO.Task task); //Add new task
+    public int Create(BO.Task task); //Add new task
 
     public void Update(BO.Task UpdatedTask); //Updates task
 
