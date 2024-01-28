@@ -12,7 +12,7 @@ internal class TaskImplementation : ITask
     /// </summary>
     /// <param name="task">New task to add to the tasksList</param>
     /// <returns>The new task uniqe id</returns>
-    public int? Create(Task task)
+    public int Create(Task task)
     {
         int newId = DataSource.Config.NextTaskId;
 

@@ -18,7 +18,7 @@ internal class EngineerImplementation : IEngineer
     /// <param name="engineer">New engineer to add to the engineers xml</param>
     /// <returns></returns>
     /// <exception cref="DalAlreadyExistsException">if the engineer is already exist in the engineers xml</exception>
-    public int? Create(Engineer engineer)
+    public int Create(Engineer engineer)
     {
         XElement xEngineerRoot = XMLTools.LoadListFromXMLElement(s_engineers_xml);  //load the engineers xml to XElement
 

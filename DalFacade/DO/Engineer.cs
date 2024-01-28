@@ -9,7 +9,7 @@
 /// <param name="Cost">How much per hour does the engineer get</param>
 public record Engineer
 (
-    int? ID,
+    int ID,
     string? FullName,
     string? Email,
     DO.EngineerExperience? Level,
