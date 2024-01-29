@@ -2,6 +2,7 @@
 using BlApi;
 using BO;
 using System;
+using System.Collections;
 using System.Collections.Generic;
 
 internal class EngineerImplementation : IEngineer
@@ -57,9 +58,32 @@ internal class EngineerImplementation : IEngineer
         }
     }
 
+    /// <summary>
+    /// The function receives the ID of the engineer and deletes him if he exists and does not have a current task or tasks he has performed in the past
+    /// </summary>
+    /// <param name="id">id of engineer to delete</param>
+    /// <exception cref="BlCompleteOrActiveTasksException">if the engineer have a current task or tasks he has performed in the past</exception>
+    /// <exception cref="BlDoesNotExistException">if the engineer is not exists</exception>
     public void Delete(int id)
     {
-        throw new NotImplementedException();
+        //Retrieving all the tasks that the delete engineer is registered on
+        IEnumerable<DO.Task?>? tasks = _dal.Task.ReadAll(item => item.EngineerId == id);
+
+        //Checks whether there is a task from the engineer's task list that has been performed or is being performed
+        DO.Task? startedTask = (from task in tasks
+                                  where task.StartDate != null //לפי ההיגיון שלנו צריך (where task.complete == null)
+                                  select task).FirstOrDefault();
+        if (startedTask != null)
+            throw new BlCompleteOrActiveTasksException($"It is not possible to delete the engineer - {id} because he has already finished a task or is actively working on a task");
+
+        try
+        {
+            _dal.Engineer.Delete(id);
+        }
+        catch (DO.DalDoesNotExistException dalex)
+        {
+            throw new BlDoesNotExistException($"An object of type Engineer with ID={id} does not exist", dalex);
+        }
     }
 
     public BO.Engineer Read(int id)

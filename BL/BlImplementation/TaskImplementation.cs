@@ -44,9 +44,31 @@ internal class TaskImplementation : ITask
         return idTask;
 
     }
+
+    /// <summary>
+    /// The function gets a task ID and deletes it if it exists and no other tasks depend on it.
+    /// </summary>
+    /// <param name="id">id of the task to delete</param>
+    /// <exception cref="BlThereIsADependencyOnTheTaskException">there is other tasks that depend on the current task</exception>
+    /// <exception cref="BlDoesNotExistException">if the task is not exists</exception>
     public void Delete(int id)
     {
-        throw new NotImplementedException();
+        //Finding all dependencies on which the current task has a dependency
+        IEnumerable<DO.Dependency?>? dependencies = _dal.Dependency.ReadAll(item => item.DependensOnTask == id);
+
+        //TODO: אי אפשר למחוק משימות לאחר יצירת לו"ז הפרויקט.
+
+        if (dependencies != null)
+            throw new BlThereIsADependencyOnTheTaskException($"There are tasks that depend on the task - {id}");
+        try
+        {
+            _dal.Task.Delete(id);
+        }
+        catch (DO.DalDoesNotExistException dalex)
+        {
+            throw new BlDoesNotExistException($"An object of type Task with ID={id} does not exist", dalex);
+        }
+        
     }
 
     public BO.Task Read(int id)

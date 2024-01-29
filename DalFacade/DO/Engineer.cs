@@ -14,7 +14,6 @@ public record Engineer
     string? Email,
     DO.EngineerExperience? Level,
     double? Cost
-    //bool isEmployed = true
 )
 {
     public Engineer() : this(0, "", "", null, 0) { } //empty ctor for stage 3

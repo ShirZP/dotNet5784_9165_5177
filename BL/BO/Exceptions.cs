@@ -37,3 +37,17 @@ public class BlEmptyStringException : Exception  //בעיה עם מחרוזת ר
 {
     public BlEmptyStringException(string? message) : base(message) { }
 }
+
+[Serializable]
+public class BlCompleteOrActiveTasksException : Exception  //רשום למשימה נוכחית או שכבר ביצע משימות
+{
+    public BlCompleteOrActiveTasksException(string? message) : base(message) { }
+}
+
+
+[Serializable]
+public class BlThereIsADependencyOnTheTaskException : Exception  //רשום למשימה נוכחית או שכבר ביצע משימות
+{
+    public BlThereIsADependencyOnTheTaskException(string? message) : base(message) { }
+}
+
