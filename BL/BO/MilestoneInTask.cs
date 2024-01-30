@@ -11,4 +11,13 @@ public class MilestoneInTask
     /// Nickname of the milestone
     /// </summary>
     public string NickName { get; set; }
+
+    /// <summary>
+    /// MilestoneInTask Ctor with parameters.
+    /// </summary>
+    public MilestoneInTask(int iD, string nickName)
+    {
+        ID = iD;
+        NickName = nickName;
+    }   
 }

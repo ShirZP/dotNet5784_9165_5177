@@ -22,4 +22,14 @@ public class TaskInList
     /// </summary>
     public BO.Status Status { get; set; }
 
+    /// <summary>
+    /// TaskInList Ctor with parameters.
+    /// </summary>
+    public TaskInList(int id, string description, string nickName, Status status)
+    {
+        ID = id;
+        Description = description;
+        NickName = nickName;
+        Status = status;
+    }   
 }

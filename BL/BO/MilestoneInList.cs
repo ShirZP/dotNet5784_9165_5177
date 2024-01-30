@@ -26,4 +26,17 @@ public class MilestoneInList
     /// The percentage of completed assignments (of the assignments on which the milestone depends)
     /// </summary>
     public double? CompletionPercentage { get; set; }
+
+
+    /// <summary>
+    /// MilestoneInList Ctor with parameters.
+    /// </summary>
+    public MilestoneInList(int id, string nickName, string description, BO.Status status, double? completionPercentage) 
+    { 
+        ID = id;    
+        NickName = nickName;    
+        Description = description;  
+        Status = status;    
+        CompletionPercentage = completionPercentage;    
+    }    
 }
