@@ -11,4 +11,15 @@ public class EngineerInTask
     /// Name of the engineer
     /// </summary>
     public string Name { get; set; }
+
+    /// <summary>
+    /// EngineerInTask Ctor with parameters.
+    /// </summary>
+    public EngineerInTask(int id, string name)
+    {
+        ID = id;
+        Name = name;
+    }
 }
+
+
