@@ -102,9 +102,32 @@ internal class EngineerImplementation : IEngineer
         }
     }
 
+    /// <summary>
+    /// The function receives the ID of an engineer and returns it as an object of type BO.
+    /// </summary>
+    /// <param name="id">the ID of an engineer</param>
+    /// <returns></returns>
+    /// <exception cref="BlDoesNotExistException">if the engineer is not exists</exception>
     public BO.Engineer Read(int id)
     {
-        throw new NotImplementedException();
+        //Retrieving the engineer from the data layer
+        DO.Engineer? dalEngineer = _dal.Engineer.Read(item => item.ID == id);
+
+        if (dalEngineer == null)
+            throw new BlDoesNotExistException($"An object of type Engineer with ID={id} does not exist");
+
+        //Retrieving the task the engineer is working on
+        DO.Task? engineerTask = (from task in _dal.Task.ReadAll(item => item.EngineerId == id)
+                                        where task.StartDate != null && task.CompleteDate == null
+                                        select task).FirstOrDefault();
+
+        TaskInEngineer? taskInEngineer = null;
+
+        if (engineerTask != null)
+            taskInEngineer = new TaskInEngineer(engineerTask.ID, engineerTask.NickName);
+
+        //Creating a BO engineer and returning it
+        return new BO.Engineer(dalEngineer.ID, dalEngineer.FullName!, dalEngineer.Email!, dalEngineer.Level, dalEngineer.Cost, taskInEngineer);
     }
 
     public IEnumerable<BO.Engineer> ReadAll(Func<BO.Engineer, bool>? filter = null)

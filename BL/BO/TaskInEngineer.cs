@@ -11,4 +11,13 @@ public class TaskInEngineer
     /// Nickname of the task
     /// </summary>
     public string NickName { get; set; }
+
+    /// <summary>
+    /// TaskInEngineer Ctor with parameters.
+    /// </summary>
+    public TaskInEngineer(int id, string nickName)
+    {
+        ID = id;
+        NickName = nickName;
+    }
 }
