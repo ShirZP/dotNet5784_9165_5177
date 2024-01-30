@@ -4,6 +4,7 @@ using BO;
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using System.Security.Cryptography;
 
 internal class EngineerImplementation : IEngineer
 {
@@ -75,6 +76,21 @@ internal class EngineerImplementation : IEngineer
                                   select task).FirstOrDefault();
         if (startedTask != null)
             throw new BlCompleteOrActiveTasksException($"It is not possible to delete the engineer - {id} because he has already finished a task or is actively working on a task");
+
+
+        //Deleting the engineer from all the tasks he is registered on
+        if (tasks != null)
+        {
+            IEnumerable<DO.Task?> updatedTasks  = (from task in tasks
+                                                     let updateTask = task with { EngineerId = null }
+                                                     select updateTask).ToList();
+            //TODO: no foreach!?!? :(
+            foreach (DO.Task? task in updatedTasks)
+            {
+                if (task != null)
+                    _dal.Task.Update(task);
+            }
+        }
 
         try
         {
