@@ -1,12 +1,11 @@
 ﻿namespace BlImplementation;
 using BlApi;
-using DalApi;
 using System;
 using System.Collections;
 using System.Collections.Generic;
 using System.Security.Cryptography;
 
-internal class EngineerImplementation : BlApi.IEngineer
+internal class EngineerImplementation : IEngineer
 {
     private DalApi.IDal _dal = Factory.Get;
 
