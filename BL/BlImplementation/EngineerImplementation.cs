@@ -6,7 +6,7 @@ using System.Collections;
 using System.Collections.Generic;
 using System.Security.Cryptography;
 
-internal class EngineerImplementation : IEngineer
+internal class EngineerImplementation : BlApi.IEngineer
 {
     private DalApi.IDal _dal = Factory.Get;
 
