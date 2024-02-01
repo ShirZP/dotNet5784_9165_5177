@@ -82,8 +82,8 @@ internal class EngineerImplementation : IEngineer
         if (tasks != null)
         {
             IEnumerable<DO.Task?> updatedTasks  = (from task in tasks
-                                                     let updateTask = task with { EngineerId = null }
-                                                     select updateTask).ToList();
+                                                   let updateTask = task with { EngineerId = null }
+                                                   select updateTask).ToList();
             //TODO: no foreach!?!? :(
             foreach (DO.Task? task in updatedTasks)
             {
@@ -130,9 +130,13 @@ internal class EngineerImplementation : IEngineer
         return new BO.Engineer(dalEngineer.ID, dalEngineer.FullName!, dalEngineer.Email!, dalEngineer.Level, dalEngineer.Cost, taskInEngineer);
     }
 
-    public IEnumerable<BO.Engineer> ReadAll(Func<BO.Engineer, bool>? filter = null)
+    public IEnumerable<BO.Engineer> ReadAll(Func<DO.Engineer, bool>? filter = null)
     {
-        throw new NotImplementedException();
+        //TODO: סינון לפי מהנדס לא מוקצה
+
+        return (from engineer in _dal.Engineer.ReadAll(filter)
+                let blEngineer = Read(engineer.ID)
+                select blEngineer);
     }
 
     public void Update(BO.Engineer UpdatedEngineer)
