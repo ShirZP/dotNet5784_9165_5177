@@ -2,8 +2,7 @@
 
 public interface IEngineer
 {
-    //TODO: לשאול האם BO/DO בשליחה
-    public IEnumerable<BO.Engineer> ReadAll(Func<DO.Engineer, bool>? filter = null);  //Reads all engineers by filter
+    public IEnumerable<BO.Engineer> ReadAll(Func<BO.Engineer, bool>? filter = null);  //Reads all engineers by filter
 
     public BO.Engineer Read(int id); //Reads engineer by id
 

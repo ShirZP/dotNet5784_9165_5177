@@ -106,12 +106,22 @@ internal class EngineerImplementation : IEngineer
         return new BO.Engineer(dalEngineer.ID, dalEngineer.FullName!, dalEngineer.Email!, dalEngineer.Level, dalEngineer.Cost, taskInEngineer);
     }
 
-    public IEnumerable<BO.Engineer> ReadAll(Func<DO.Engineer, bool>? filter = null)
+    /// <summary>
+    /// The function recieved a filter and returns all engineers according to the filter
+    /// </summary>
+    /// <param name="filter">filter to read</param>
+    /// <returns>all engineers according to the filter</returns>
+    public IEnumerable<BO.Engineer> ReadAll(Func<BO.Engineer, bool>? filter = null)
     {
-        //TODO: סינון לפי מהנדס לא מוקצה
-
-        return (from engineer in _dal.Engineer.ReadAll(filter)
-                let blEngineer = Read(engineer.ID)
+        if(filter != null)
+        {
+            return (from DO.Engineer dalEngineer in _dal.Engineer.ReadAll()
+                    let blEngineer = Read(dalEngineer.ID)
+                    where filter(blEngineer)
+                    select blEngineer);
+        }
+        return (from DO.Engineer dalEngineer in _dal.Engineer.ReadAll()
+                let blEngineer = Read(dalEngineer.ID)
                 select blEngineer);
     }
 

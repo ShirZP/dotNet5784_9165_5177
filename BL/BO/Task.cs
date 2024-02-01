@@ -30,7 +30,7 @@ public class Task
     /// <summary>
     /// Related milestone
     /// </summary>
-    public MilestoneInTask? Milestone { get; set; }
+    //TODO: public MilestoneInTask? Milestone { get; set; } 
 
     /// <summary>
     /// Task creation date - calculated property
@@ -90,14 +90,16 @@ public class Task
     /// <summary>
     /// Task Ctor with parameters.
     /// </summary>
-    public Task(int id, string nickName, string description, BO.Status status, List<TaskInList>? dependencies, MilestoneInTask? milestone, DateTime createAtDate, DateTime? scheduledDate, DateTime? startDate, DateTime? forecastDate, DateTime? deadlineDate, DateTime? completeDate, TimeSpan? requiredEffortTime, string? deliverables, string? remarks, EngineerInTask? assignedEngineer, DO.EngineerExperience? complexity)
-    {
+    public Task(int id, string nickName, string description, BO.Status status, List<TaskInList>? dependencies, DateTime createAtDate, DateTime? scheduledDate, DateTime? startDate, DateTime? forecastDate, DateTime? deadlineDate, DateTime? completeDate, TimeSpan? requiredEffortTime, string? deliverables, string? remarks, EngineerInTask? assignedEngineer, DO.EngineerExperience? complexity)
+    {//MilestoneInTask? milestone
+
+
         ID = id;
         NickName = nickName;    
         Description = description;
         Status = status;    
         Dependencies = dependencies;    
-        Milestone = milestone;
+        //Milestone = milestone;
         CreateAtDate = createAtDate;
         ScheduledDate = scheduledDate;  
         StartDate = startDate;  

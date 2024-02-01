@@ -2,6 +2,7 @@
 using BlApi;
 using BO;
 using System;
+using System.Collections;
 using System.Collections.Generic;
 
 internal class TaskImplementation : ITask
@@ -26,8 +27,8 @@ internal class TaskImplementation : ITask
 
         //creat dal task
         int assignedEngineerID = task.AssignedEngineer!.ID;
-        bool isTaskMilestone = task.Milestone != null;
-        DO.Task doTask = new DO.Task(task.ID, task.NickName, task.Description, task.ScheduledDate, task.StartDate, task.RequiredEffortTime, task.CompleteDate, task.Deliverables, task.Remarks, assignedEngineerID, task.Complexity, task.DeadlineDate, isTaskMilestone);
+        //TODO: bool isTaskMilestone = task.Milestone != null;
+        DO.Task doTask = new DO.Task(task.ID, task.NickName, task.Description, task.ScheduledDate, task.StartDate, task.RequiredEffortTime, task.CompleteDate, task.Deliverables, task.Remarks, assignedEngineerID, task.Complexity, task.DeadlineDate);
 
         //Creating a list of DO.Dependency objects
         IEnumerable<DO.Dependency>? dalDependenciesList = from taskInList in task.Dependencies
@@ -71,9 +72,37 @@ internal class TaskImplementation : ITask
         
     }
 
+    /// <summary>
+    ///  The function receives the ID of a task and returns it as an object of type BO.
+    /// </summary>
+    /// <param name="id">the ID of a task</param>
+    /// <returns></returns>
+    /// <exception cref="BlDoesNotExistException">if the task is not exists</exception>
     public BO.Task Read(int id)
     {
-        throw new NotImplementedException();
+        DO.Task? dalTask = _dal.Task.Read(item => item.ID == id);
+
+        if(dalTask == null)
+        {
+            throw new BlDoesNotExistException($"An object of type Task with ID={id} does not exist");
+        }
+
+        return new BO.Task(dalTask.ID,
+                           dalTask.NickName,
+                           dalTask.Description,
+                           calculateStatus(dalTask),
+                           calculateDependencies(dalTask),
+                           dalTask.CreateAtDate,
+                           dalTask.ScheduledDate,
+                           dalTask.StartDate,
+                           calculateForecastDate(dalTask),
+                           dalTask.DeadlineDate,
+                           dalTask.CompleteDate,
+                           dalTask.RequiredEffortTime,
+                           dalTask.FinalProduct,
+                           dalTask.Remarks,
+                           getAssignedEngineer(dalTask),
+                           dalTask.Complexity);//TODO: maybe remove dalTask.DeadlineDate 
     }
 
     public IEnumerable<BO.TaskInList> ReadAll(Func<BO.Task, bool>? filter = null)
@@ -89,5 +118,67 @@ internal class TaskImplementation : ITask
     public void Update(BO.Task UpdatedTask)
     {
         throw new NotImplementedException();
+    }
+
+    /// <summary>
+    /// The function calculates the status of the DO task according to it's dates.
+    /// </summary>
+    /// <param name="dalTask">DO task object</param>
+    /// <returns></returns>
+    private BO.Status calculateStatus(DO.Task dalTask)
+    {
+        if(dalTask.CompleteDate != null)
+            return BO.Status.Complete;
+
+        if (dalTask.StartDate == null)
+            return BO.Status.New;
+
+        return Status.Active;
+    }
+
+    /// <summary>
+    /// The function calculates the Dependencies field of the DO task.
+    /// </summary>
+    /// <param name="dalTask">DO task object</param>
+    /// <returns></returns>
+    private List<TaskInList>? calculateDependencies(DO.Task dalTask)
+    {
+        return (from DO.Dependency dalDependency in _dal.Dependency.ReadAll(item => item.DependentTask == dalTask.ID)  //all the dependencies that the current task is the dependent task
+                let dependensOnTask = _dal.Task.Read(item => item.ID == dalDependency.DependensOnTask)  //Retrieving the task that the current task dependens on from the data layer
+                let taskInList = new TaskInList(dependensOnTask.ID, dependensOnTask.Description, dependensOnTask.NickName, calculateStatus(dependensOnTask))  //Convert the dependensOnTask to TaskInList
+                select taskInList).ToList();
+    }
+
+    /// <summary>
+    /// The function calculates the ForecastDate field of the DO task.
+    /// </summary>
+    /// <param name="dalTask">DO task object</param>
+    /// <returns></returns>
+    private DateTime? calculateForecastDate(DO.Task dalTask)
+    {
+        //The maximum of the scheduled start date and the actual start date + the required effort time of the task
+        DateTime? maxDate = (dalTask.StartDate >= dalTask.ScheduledDate) ? dalTask.StartDate : dalTask.ScheduledDate;
+
+        if (maxDate.HasValue && dalTask.RequiredEffortTime.HasValue)
+        {
+            return maxDate.Value + dalTask.RequiredEffortTime.Value;
+        }
+
+        return null;
+    }
+
+    /// <summary>
+    ///  The function returns the assigned engineer of the DO task
+    /// </summary>
+    /// <param name="dalTask">DO task object</param>
+    /// <returns></returns>
+    private EngineerInTask? getAssignedEngineer(DO.Task dalTask)
+    {
+        if (dalTask.EngineerId != null)
+        {
+            DO.Engineer dalEngineer = _dal.Engineer.Read(item => item.ID == dalTask.EngineerId)!;
+            return new EngineerInTask(dalEngineer.ID, dalEngineer.FullName);
+        }
+        return null;
     }
 }

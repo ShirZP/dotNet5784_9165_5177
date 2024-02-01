@@ -10,7 +10,7 @@
 public record Engineer
 (
     int ID,
-    string? FullName,
+    string FullName,
     string? Email,
     DO.EngineerExperience? Level,
     double? Cost

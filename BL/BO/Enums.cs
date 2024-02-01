@@ -4,7 +4,7 @@
 public enum Status
 {
     New,
-    InProcess,
+    Active,
     Complete
 }
 
