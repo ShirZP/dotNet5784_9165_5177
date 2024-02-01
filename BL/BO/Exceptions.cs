@@ -51,3 +51,10 @@ public class BlThereIsADependencyOnTheTaskException : Exception  //רשום למ
     public BlThereIsADependencyOnTheTaskException(string? message) : base(message) { }
 }
 
+
+[Serializable]
+public class BlEngineerNotAssignedToTaskException : Exception  //מהנדס לא מוקצה למשימה 
+{
+    public BlEngineerNotAssignedToTaskException(string? message) : base(message) { }
+}
+

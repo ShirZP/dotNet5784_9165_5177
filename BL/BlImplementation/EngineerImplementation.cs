@@ -1,6 +1,6 @@
 ﻿namespace BlImplementation;
 using BlApi;
-using BO;
+using DalApi;
 using System;
 using System.Collections;
 using System.Collections.Generic;
@@ -14,35 +14,13 @@ internal class EngineerImplementation : IEngineer
     ///The function recieves an object of type BO.Engineer, Checks the correctness of fields and adds the engineer to the data layer as DO.Engineer.
     /// </summary>
     /// <param name="engineer">An object of type BO.Engineer</param>
-    /// <exception cref="BlPositiveIntException">If the number is negative or equal to zero, throw an exception.</exception>
-    /// <exception cref="BlEmptyStringException">If the string is empty throw an exception.</exception>
     /// <exception cref="BlAlreadyExistsException">If the engineer already exists throw an exception from the data layer.</exception>
     public int Create(BO.Engineer engineer)
     {     
-        //TaskInEngineer //TODO: השדה הזה לא מוגדר בבנאי מתי צריך להוסיף אותו?
         try
         {
             //validation of the engineer's fields
-
-            if(engineer.ID <= 0)
-            {
-                throw new BlPositiveIntException("The engineer's ID number must be positive!");
-            }
-
-            if(engineer.FullName == null)
-            {
-                throw new BlEmptyStringException("The engineer's full name can't be empty!");
-            }
-
-            if (engineer.Cost <= 0)
-            {
-                throw new BlPositiveIntException("The engineer's salary must be positive!");
-            }
-
-            if(engineer.Email == null) 
-            {
-                throw new BlEmptyStringException("The engineer's email can't be empty!");
-            }
+            checkEngineerFields(engineer);
 
             //create dal engineer
             DO.Engineer doEngineer = new DO.Engineer(engineer.ID, engineer.FullName, engineer.Email, engineer.Level, engineer.Cost);
@@ -52,10 +30,9 @@ internal class EngineerImplementation : IEngineer
 
             return idEngineer;
         }
-
         catch (DO.DalAlreadyExistsException dalEx)
         {
-            throw new BlAlreadyExistsException($"An object of type Engineer with ID={engineer.ID} already exist", dalEx);
+            throw new BO.BlAlreadyExistsException($"An object of type Engineer with ID={engineer.ID} already exist", dalEx);
         }
     }
 
@@ -75,7 +52,7 @@ internal class EngineerImplementation : IEngineer
                                   where task.StartDate != null //לפי ההיגיון שלנו צריך (where task.complete == null)
                                   select task).FirstOrDefault();
         if (startedTask != null)
-            throw new BlCompleteOrActiveTasksException($"It is not possible to delete the engineer - {id} because he has already finished a task or is actively working on a task");
+            throw new BO.BlCompleteOrActiveTasksException($"It is not possible to delete the engineer - {id} because he has already finished a task or is actively working on a task");
 
 
         //Deleting the engineer from all the tasks he is registered on
@@ -98,7 +75,7 @@ internal class EngineerImplementation : IEngineer
         }
         catch (DO.DalDoesNotExistException dalex)
         {
-            throw new BlDoesNotExistException($"An object of type Engineer with ID={id} does not exist", dalex);
+            throw new BO.BlDoesNotExistException($"An object of type Engineer with ID={id} does not exist", dalex);
         }
     }
 
@@ -114,17 +91,17 @@ internal class EngineerImplementation : IEngineer
         DO.Engineer? dalEngineer = _dal.Engineer.Read(item => item.ID == id);
 
         if (dalEngineer == null)
-            throw new BlDoesNotExistException($"An object of type Engineer with ID={id} does not exist");
+            throw new BO.BlDoesNotExistException($"An object of type Engineer with ID={id} does not exist");
 
         //Retrieving the task the engineer is working on
         DO.Task? engineerTask = (from task in _dal.Task.ReadAll(item => item.EngineerId == id)
                                         where task.StartDate != null && task.CompleteDate == null
                                         select task).FirstOrDefault();
 
-        TaskInEngineer? taskInEngineer = null;
+        BO.TaskInEngineer? taskInEngineer = null;
 
         if (engineerTask != null)
-            taskInEngineer = new TaskInEngineer(engineerTask.ID, engineerTask.NickName);
+            taskInEngineer = new BO.TaskInEngineer(engineerTask.ID, engineerTask.NickName);
 
         //Creating a BO engineer and returning it
         return new BO.Engineer(dalEngineer.ID, dalEngineer.FullName!, dalEngineer.Email!, dalEngineer.Level, dalEngineer.Cost, taskInEngineer);
@@ -139,8 +116,74 @@ internal class EngineerImplementation : IEngineer
                 select blEngineer);
     }
 
-    public void Update(BO.Engineer UpdatedEngineer)
+    /// <summary>
+    /// The function receives BO updated engineer object and update the engineer in the data layer. 
+    /// </summary>
+    /// <param name="updatedEngineer">BO updated engineer object</param>
+    /// <exception cref="BlEngineerNotAssignedToTaskException">if the engineer is not assign to the task</exception>
+    /// <exception cref="BlDoesNotExistException">if the engineer is not exists</exception>
+    public void Update(BO.Engineer updatedEngineer)
     {
-        throw new NotImplementedException();
+        try
+        {
+            //validation of the engineer's fields
+            checkEngineerFields(updatedEngineer);
+
+            //checking the updating of the field engineerCurrentTask
+            if(updatedEngineer.EngineerCurrentTask != null)
+            {
+                int idTaskInEngineer = updatedEngineer.EngineerCurrentTask.ID;  //The current task ID of the engineer
+                DO.Task currentTaskEngineer = _dal.Task.Read(item => item.ID == idTaskInEngineer)!;
+                
+                //if the engineer doesn't assigned to the current task engineer
+                if(currentTaskEngineer.EngineerId != updatedEngineer.ID) 
+                {
+                    throw new BO.BlEngineerNotAssignedToTaskException($"Engineer - {updatedEngineer.ID} id not assigned to the task - {idTaskInEngineer}");
+                }
+
+                //if the start date is empty so the engineer start to wotk on the task now
+                if (currentTaskEngineer.StartDate == null)
+                {
+                    DO.Task updatedTask = currentTaskEngineer with { StartDate = DateTime.Now };
+                   _dal.Task.Update(updatedTask);
+                }
+            }
+
+            DO.Engineer doEngineer = new DO.Engineer(updatedEngineer.ID, updatedEngineer.FullName, updatedEngineer.Email, updatedEngineer.Level, updatedEngineer.Cost);
+            _dal.Engineer.Update(doEngineer);    
+        }
+        catch (DO.DalDoesNotExistException dalEx)
+        {
+            throw new BO.BlDoesNotExistException($"An object of type Engineer with ID={updatedEngineer.ID} does not exist", dalEx);
+        }
+    }
+
+    /// <summary>
+    /// The function recieves a BO engineer object and check the validations of it's fields.
+    /// </summary>
+    /// <param name="engineer">BO engineer object</param>
+    /// <exception cref="BlPositiveIntException">If the number is negative or equal to zero, throw an exception.</exception>
+    /// <exception cref="BlEmptyStringException">If the string is empty throw an exception.</exception>
+    private void checkEngineerFields(BO.Engineer engineer)
+    {
+        if (engineer.ID <= 0)
+        {
+            throw new BO.BlPositiveIntException("The engineer's ID number must be positive!");
+        }
+
+        if (engineer.FullName == null)
+        {
+            throw new BO.BlEmptyStringException("The engineer's full name can't be empty!");
+        }
+
+        if (engineer.Cost <= 0)
+        {
+            throw new BO.BlPositiveIntException("The engineer's salary must be positive!");
+        }
+
+        if (engineer.Email == null)
+        {
+            throw new BO.BlEmptyStringException("The engineer's email can't be empty!");
+        }
     }
 }
