@@ -76,7 +76,7 @@ internal class EngineerImplementation : IEngineer
     /// The function returns a copy of the engineer list with filter
     /// </summary>
     /// <returns>A copy of the engineer list</returns>
-    public IEnumerable<Engineer?> ReadAll(Func<Engineer?, bool>? filter = null)
+    public IEnumerable<Engineer> ReadAll(Func<Engineer, bool>? filter = null)
     {
         if (filter != null)
         {

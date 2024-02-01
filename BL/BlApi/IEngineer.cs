@@ -8,7 +8,7 @@ public interface IEngineer
 
     public int Create(BO.Engineer engineer); //Add new engineer
 
-    public void Update(BO.Engineer UpdatedEngineer); //Updates engineer
+    public void Update(BO.Engineer updatedEngineer); //Updates engineer
 
     public void Delete(int id);  //Deletes a engineer by its id
 }

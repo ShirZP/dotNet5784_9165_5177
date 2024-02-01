@@ -15,17 +15,12 @@ internal class TaskImplementation : ITask
     /// and adds to the data layer all the dependencies of the task
     /// </summary>
     /// <param name="task">An object of type BO.Task</param>
-    /// <exception cref="BlPositiveIntException">If the number is negative or equal to zero, throw an exception.</exception>
-    /// <exception cref="BlEmptyStringException">If the string is empty throw an exception.</exception>
     public int Create(BO.Task task)
     {
         //validation of the task's fields
-        if (task.ID <= 0)//TODO: למהההההההההההההההההה
-            throw new BlPositiveIntException("The task's ID number must be positive!");
-        if (task.NickName == null || task.NickName == "")
-            throw new BlEmptyStringException("The task's nick name cannot be empty!");
+        checkTaskFields(task);
 
-        //creat dal task
+        //create dal task
         int assignedEngineerID = task.AssignedEngineer!.ID;
         //TODO: bool isTaskMilestone = task.Milestone != null;
         DO.Task doTask = new DO.Task(task.ID, task.NickName, task.Description, task.ScheduledDate, task.StartDate, task.RequiredEffortTime, task.CompleteDate, task.Deliverables, task.Remarks, assignedEngineerID, task.Complexity, task.DeadlineDate);
@@ -43,7 +38,6 @@ internal class TaskImplementation : ITask
         //Add the dal task to the data layer
         int idTask = _dal.Task.Create(doTask);
         return idTask;
-
     }
 
     /// <summary>
@@ -105,9 +99,58 @@ internal class TaskImplementation : ITask
                            dalTask.Complexity);//TODO: maybe remove dalTask.DeadlineDate 
     }
 
+    /// <summary>
+    /// The function recieved a filter and returns all tasks according to the filter
+    /// </summary>
+    /// <param name="filter">filter to read</param>
+    /// <returns>all tasks according to the filter</returns>
     public IEnumerable<BO.TaskInList> ReadAll(Func<BO.Task, bool>? filter = null)
     {
-        throw new NotImplementedException();
+        if (filter != null)
+        {
+            return (from DO.Task dalTask in _dal.Task.ReadAll()
+                    let blTask = Read(dalTask.ID)
+                    where filter(blTask)
+                    let taskInList = new TaskInList(blTask.ID, blTask.Description, blTask.NickName, blTask.Status)
+                    select taskInList);
+        }
+        return (from DO.Task dalTask in _dal.Task.ReadAll()
+                let blTask = Read(dalTask.ID)
+                let taskInList = new TaskInList(blTask.ID, blTask.Description, blTask.NickName, blTask.Status)
+                select taskInList);
+    }
+
+    public void Update(BO.Task updatedTask)
+    {
+        //validation of the task's fields
+        checkTaskFields(updatedTask);
+
+
+
+
+        try
+        {
+            //Convert to DO task object
+            int? assignEngineerID = (updatedTask.AssignedEngineer != null) ? updatedTask.AssignedEngineer.ID : null;
+            DO.Task dalTask = new DO.Task(updatedTask.ID,
+                                          updatedTask.NickName,
+                                          updatedTask.Description,
+                                          updatedTask.ScheduledDate,
+                                          updatedTask.StartDate,
+                                          updatedTask.RequiredEffortTime,
+                                          updatedTask.CompleteDate,
+                                          updatedTask.Deliverables,
+                                          updatedTask.Remarks,
+                                          assignEngineerID,
+                                          updatedTask.Complexity);
+
+            _dal.Task.Update(dalTask);
+
+        }
+        catch (DO.DalDoesNotExistException dalEx)
+        {
+            throw new BO.BlDoesNotExistException($"An object of type Task with ID={updatedTask.ID} does not exist", dalEx);
+        }
     }
 
     public void ScheduledDateUpdate(int id)
@@ -115,10 +158,7 @@ internal class TaskImplementation : ITask
         throw new NotImplementedException();
     }
 
-    public void Update(BO.Task UpdatedTask)
-    {
-        throw new NotImplementedException();
-    }
+   
 
     /// <summary>
     /// The function calculates the status of the DO task according to it's dates.
@@ -180,5 +220,20 @@ internal class TaskImplementation : ITask
             return new EngineerInTask(dalEngineer.ID, dalEngineer.FullName);
         }
         return null;
+    }
+
+    /// <summary>
+    /// The function recieves a BO task object and check the validations of it's fields.
+    /// </summary>
+    /// <param name="task">BO task object</param>
+    /// <exception cref="BlPositiveIntException">If the number is negative or equal to zero, throw an exception.</exception>
+    /// <exception cref="BlEmptyStringException">If the string is empty throw an exception.</exception>
+    private void checkTaskFields(BO.Task task)
+    {
+        if (task.ID <= 0)//TODO: למהההההההההההההההההה
+            throw new BlPositiveIntException("The task's ID number must be positive!");
+
+        if (task.NickName == null || task.NickName == "")
+            throw new BlEmptyStringException("The task's nick name cannot be empty!");
     }
 }
