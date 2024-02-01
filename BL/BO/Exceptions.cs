@@ -58,3 +58,15 @@ public class BlEngineerNotAssignedToTaskException : Exception  //מהנדס לא
     public BlEngineerNotAssignedToTaskException(string? message) : base(message) { }
 }
 
+[Serializable]
+public class BlNullScheduledDateInDependensOnTaskException : Exception  //תאריך ההתחלה במתוכנן ריק במשימה שתלויים בה
+{
+    public BlNullScheduledDateInDependensOnTaskException(string? message) : base(message) { }
+}
+
+[Serializable]
+public class BlEarlyForecastDateInDependentTaskException : Exception  //תאריך ההתחלה של המשימה התלויה, קודם לתאריך הסיום המשוער של משימה קודמת
+{
+    public BlEarlyForecastDateInDependentTaskException(string? message) : base(message) { }
+}
+

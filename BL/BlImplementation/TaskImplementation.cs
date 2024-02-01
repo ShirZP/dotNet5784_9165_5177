@@ -23,7 +23,18 @@ internal class TaskImplementation : ITask
         //create dal task
         int assignedEngineerID = task.AssignedEngineer!.ID;
         //TODO: bool isTaskMilestone = task.Milestone != null;
-        DO.Task doTask = new DO.Task(task.ID, task.NickName, task.Description, task.ScheduledDate, task.StartDate, task.RequiredEffortTime, task.CompleteDate, task.Deliverables, task.Remarks, assignedEngineerID, task.Complexity, task.DeadlineDate);
+        DO.Task doTask = new DO.Task(task.ID,
+                                     task.NickName,
+                                     task.Description, 
+                                     task.ScheduledDate, 
+                                     task.StartDate, 
+                                     task.RequiredEffortTime, 
+                                     task.CompleteDate, 
+                                     task.Deliverables, 
+                                     task.Remarks, 
+                                     assignedEngineerID, 
+                                     task.Complexity, 
+                                     task.DeadlineDate);
 
         //Creating a list of DO.Dependency objects
         IEnumerable<DO.Dependency>? dalDependenciesList = from taskInList in task.Dependencies
@@ -120,13 +131,68 @@ internal class TaskImplementation : ITask
                 select taskInList);
     }
 
+    /// <summary>
+    /// The function receives BO updated task object and update the task in the data layer
+    /// </summary>
+    /// <param name="updatedTask">BO updated task object</param>
+    /// <exception cref="BO.BlDoesNotExistException">if the task is not exists</exception>
     public void Update(BO.Task updatedTask)
     {
         //validation of the task's fields
         checkTaskFields(updatedTask);
 
+        //Adding new dependencies in the data layer for each new task that added to the dependencies list in the updated task
 
+        //Grouping the list of tasks according to whether there is a dependency on the data layer
+        IEnumerable<IGrouping<bool, BO.TaskInList>> dalDependencies;
+        dalDependencies = (from taskInList in updatedTask.Dependencies
+                           let dalDependency = _dal.Dependency.Read(item => item.DependentTask == updatedTask.ID && item.DependensOnTask == taskInList.ID) //Retrieving the dependency on which the updatedTask depends on the task
+                           group taskInList by (dalDependency == null) into dalDep
+                           select dalDep);
 
+        //For the tasks (in updatedTask's dependencies list) that do not have dependencies in the data layer - we will create dependencies
+        var d = (from task in dalDependencies
+                 where task.Key == true
+                 from t in task
+                 let newDependency = new DO.Dependency(0, updatedTask.ID, t.ID)
+                 select _dal.Dependency.Create(newDependency)).ToList();
+
+        //Deleting all dependencies in the data layer that no longer appear in the updatedTask's dependencies list
+        BO.Task blOldTask = Read(updatedTask.ID);
+
+        if (updatedTask.Dependencies != null)
+        {
+            //if find dependency between task to updatedTask 
+            IEnumerable<IGrouping<bool, BO.TaskInList>> missingTasks;
+            missingTasks = (from task in blOldTask.Dependencies
+                            let t = updatedTask.Dependencies.FirstOrDefault(item => item.ID == task.ID)
+                            group task by (t == null) into dalDep
+                            select dalDep);
+
+            foreach(IGrouping<bool, BO.TaskInList> task in missingTasks)
+            {
+                switch (task.Key)
+                {
+                    case true:
+                        foreach (BO.TaskInList t in task)
+                        {
+                            DO.Dependency oldDependency = _dal.Dependency.Read(item => item.DependentTask == updatedTask.ID && item.DependensOnTask == t.ID)!;
+                            _dal.Dependency.Delete(oldDependency.ID);
+                        }
+                        break;
+                }
+            }
+
+            //TODO: remove the foreach
+        }
+        else if(updatedTask.Dependencies == null && blOldTask.Dependencies != null)
+        {
+            foreach (BO.TaskInList task in blOldTask.Dependencies)
+            {
+                DO.Dependency oldDependency = _dal.Dependency.Read(item => item.DependentTask == updatedTask.ID && item.DependensOnTask == task.ID)!;
+                _dal.Dependency.Delete(oldDependency.ID);
+            }
+        }
 
         try
         {
@@ -153,9 +219,28 @@ internal class TaskImplementation : ITask
         }
     }
 
-    public void ScheduledDateUpdate(int id)
+    public void ScheduledDateUpdate(int id, DateTime? newScheduledDate)
     {
-        throw new NotImplementedException();
+        if (newScheduledDate.HasValue)
+        {
+            BO.Task updateTask = Read(id);
+            BO.TaskInList? nullScheduledDateInTask = (from taskInList in updateTask.Dependencies
+                                                      where Read(taskInList.ID).ScheduledDate == null
+                                                      select taskInList).FirstOrDefault();
+            if (nullScheduledDateInTask != null)
+            {
+                throw new BlNullScheduledDateInDependensOnTaskException($"There is no scheduled start date on at least one of the tasks that the task - {id} - depends on");
+            }
+
+            BO.TaskInList? earlyForecastDateInTask = (from taskInList in updateTask.Dependencies
+                                                      where Read(taskInList.ID).ForecastDate > newScheduledDate
+                                                      select taskInList).FirstOrDefault();
+
+            if (earlyForecastDateInTask != null)
+            {
+                throw new BlEarlyForecastDateInDependentTaskException($"The scheduled start date of the depended task - {id} - is earlier than the forecast date of a previous task");
+            }
+        }
     }
 
    
@@ -235,5 +320,8 @@ internal class TaskImplementation : ITask
 
         if (task.NickName == null || task.NickName == "")
             throw new BlEmptyStringException("The task's nick name cannot be empty!");
+
+
+        ScheduledDateUpdate(task.ID, task.ScheduledDate);
     }
 }
