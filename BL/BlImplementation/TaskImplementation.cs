@@ -125,9 +125,6 @@ internal class TaskImplementation : ITask
         //validation of the task's fields
         checkTaskFields(updatedTask);
 
-
-
-
         try
         {
             //Convert to DO task object
@@ -158,8 +155,7 @@ internal class TaskImplementation : ITask
         throw new NotImplementedException();
     }
 
-   
-
+ 
     /// <summary>
     /// The function calculates the status of the DO task according to it's dates.
     /// </summary>
