@@ -122,13 +122,11 @@ internal class TaskImplementation : ITask
             return (from DO.Task dalTask in _dal.Task.ReadAll()
                     let blTask = Read(dalTask.ID)
                     where filter(blTask)
-                    let taskInList = new TaskInList(blTask.ID, blTask.Description, blTask.NickName, blTask.Status)
-                    select taskInList);
+                    select new TaskInList(blTask.ID, blTask.Description, blTask.NickName, blTask.Status));
         }
         return (from DO.Task dalTask in _dal.Task.ReadAll()
                 let blTask = Read(dalTask.ID)
-                let taskInList = new TaskInList(blTask.ID, blTask.Description, blTask.NickName, blTask.Status)
-                select taskInList);
+                select new TaskInList(blTask.ID, blTask.Description, blTask.NickName, blTask.Status));
     }
 
     /// <summary>
