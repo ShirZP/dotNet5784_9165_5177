@@ -25,7 +25,7 @@ public class Task
     /// <summary>
     /// A list of tasks that the current task depends on
     /// </summary>
-    public List<TaskInList>? Dependencies { get; set; }
+    public List<TaskInList> Dependencies { get; set; }
 
     /// <summary>
     /// Related milestone
@@ -90,7 +90,7 @@ public class Task
     /// <summary>
     /// Task Ctor with parameters.
     /// </summary>
-    public Task(int id, string nickName, string description, BO.Status status, List<TaskInList>? dependencies, DateTime createAtDate, DateTime? scheduledDate, DateTime? startDate, DateTime? forecastDate, DateTime? deadlineDate, DateTime? completeDate, TimeSpan? requiredEffortTime, string? deliverables, string? remarks, EngineerInTask? assignedEngineer, DO.EngineerExperience? complexity)
+    public Task(int id, string nickName, string description, BO.Status status, List<TaskInList> dependencies, DateTime createAtDate, DateTime? scheduledDate, DateTime? startDate, DateTime? forecastDate, DateTime? deadlineDate, DateTime? completeDate, TimeSpan? requiredEffortTime, string? deliverables, string? remarks, EngineerInTask? assignedEngineer, DO.EngineerExperience? complexity)
     {//MilestoneInTask? milestone
 
 

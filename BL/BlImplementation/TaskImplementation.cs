@@ -1,13 +1,14 @@
 ﻿namespace BlImplementation;
 using BlApi;
-using BO;
 using System;
+using BO;
 using System.Collections;
 using System.Collections.Generic;
+using System.Net.NetworkInformation;
 
 internal class TaskImplementation : ITask
 {
-    private DalApi.IDal _dal = Factory.Get;
+    private DalApi.IDal _dal = DalApi.Factory.Get;
 
     /// <summary>
     /// The function recieves an object of type BO.Task.
@@ -37,9 +38,7 @@ internal class TaskImplementation : ITask
                                      task.DeadlineDate);
 
         //Creating a list of DO.Dependency objects
-        IEnumerable<DO.Dependency>? dalDependenciesList = from taskInList in task.Dependencies
-                                                          where taskInList != null
-                                                          select new DO.Dependency(0, task.ID, taskInList.ID);
+        IEnumerable<DO.Dependency>? dalDependenciesList = task.Dependencies.Select(taskInList => new DO.Dependency(0, task.ID, taskInList.ID)).Where(taskInList =>  taskInList != null);
         
         //Adding the task's dependencies to the data layer
         (from dependency in dalDependenciesList

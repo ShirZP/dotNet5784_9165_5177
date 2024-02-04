@@ -3,11 +3,12 @@ using BlApi;
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations;
 using System.Security.Cryptography;
 
 internal class EngineerImplementation : IEngineer
 {
-    private DalApi.IDal _dal = Factory.Get;
+    private DalApi.IDal _dal = DalApi.Factory.Get;
 
     /// <summary>
     ///The function recieves an object of type BO.Engineer, Checks the correctness of fields and adds the engineer to the data layer as DO.Engineer.
@@ -44,12 +45,11 @@ internal class EngineerImplementation : IEngineer
     public void Delete(int id)
     {
         //Retrieving all the tasks that the delete engineer is registered on
-        IEnumerable<DO.Task?>? tasks = _dal.Task.ReadAll(item => item.EngineerId == id);
+        IEnumerable<DO.Task>? tasks = _dal.Task.ReadAll(item => item.EngineerId == id);
 
         //Checks whether there is a task from the engineer's task list that has been performed or is being performed
-        DO.Task? startedTask = (from task in tasks
-                                  where task.StartDate != null //לפי ההיגיון שלנו צריך (where task.complete == null)
-                                  select task).FirstOrDefault();
+        DO.Task? startedTask = tasks.Select(task => task).Where(task => task.StartDate != null).FirstOrDefault();
+
         if (startedTask != null)
             throw new BO.BlCompleteOrActiveTasksException($"It is not possible to delete the engineer - {id} because he has already finished a task or is actively working on a task");
 
@@ -93,9 +93,7 @@ internal class EngineerImplementation : IEngineer
             throw new BO.BlDoesNotExistException($"An object of type Engineer with ID={id} does not exist");
 
         //Retrieving the task the engineer is working on
-        DO.Task? engineerTask = (from task in _dal.Task.ReadAll(item => item.EngineerId == id)
-                                        where task.StartDate != null && task.CompleteDate == null
-                                        select task).FirstOrDefault();
+        DO.Task? engineerTask = _dal.Task.ReadAll(item => item.EngineerId == id).Select(task => task).Where(task => task.StartDate != null && task.CompleteDate == null).FirstOrDefault();
 
         BO.TaskInEngineer? taskInEngineer = null;
 
@@ -120,9 +118,8 @@ internal class EngineerImplementation : IEngineer
                     where filter(blEngineer)
                     select blEngineer);
         }
-        return (from DO.Engineer dalEngineer in _dal.Engineer.ReadAll()
-                let blEngineer = Read(dalEngineer.ID)
-                select blEngineer);
+
+        return _dal.Engineer.ReadAll().Select(dalEngineer => Read(dalEngineer.ID));       
     }
 
     /// <summary>
@@ -190,9 +187,6 @@ internal class EngineerImplementation : IEngineer
             throw new BO.BlPositiveIntException("The engineer's salary must be positive!");
         }
 
-        if (engineer.Email == null)
-        {
-            throw new BO.BlEmptyStringException("The engineer's email can't be empty!");
-        }
+        new EmailAddressAttribute().IsValid(engineer.Email);
     }
 }

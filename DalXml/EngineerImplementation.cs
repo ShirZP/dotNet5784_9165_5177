@@ -86,8 +86,8 @@ internal class EngineerImplementation : IEngineer
         {
             return XMLTools.LoadListFromXMLElement(s_engineers_xml).Elements().Select(e => getEngineer(e));
         }
-
     }
+
     /// <summary>
     /// The function updates engineer details from the engineers xml 
     /// </summary>
