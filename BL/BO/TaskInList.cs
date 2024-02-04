@@ -31,5 +31,7 @@ public class TaskInList
         Description = description;
         NickName = nickName;
         Status = status;
-    }   
+    }
+
+    public override string ToString() => Tools.ToStringProperty(this);
 }

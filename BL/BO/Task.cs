@@ -111,4 +111,6 @@ public class Task
         AssignedEngineer = assignedEngineer;    
         Complexity = complexity;    
     }
+
+    public override string ToString() => Tools.ToStringProperty(this);
 }

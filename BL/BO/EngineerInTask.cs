@@ -20,6 +20,8 @@ public class EngineerInTask
         ID = id;
         Name = name;
     }
+
+    public override string ToString() => Tools.ToStringProperty(this);
 }
 
 
