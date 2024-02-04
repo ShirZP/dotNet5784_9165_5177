@@ -44,5 +44,7 @@ public class Engineer
         Cost = cost;
         EngineerCurrentTask = engineerCurrentTask;
     }
-     
+
+
+    public override string ToString() => Tools.ToStringProperty(this);
 }

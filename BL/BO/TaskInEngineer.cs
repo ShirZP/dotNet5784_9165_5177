@@ -20,4 +20,6 @@ public class TaskInEngineer
         ID = id;
         NickName = nickName;
     }
+
+    public override string ToString() => Tools.ToStringProperty(this);
 }
