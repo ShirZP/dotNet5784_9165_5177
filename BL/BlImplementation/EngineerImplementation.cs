@@ -83,7 +83,7 @@ internal class EngineerImplementation : IEngineer
     /// </summary>
     /// <param name="id">the ID of an engineer</param>
     /// <returns></returns>
-    /// <exception cref="BlDoesNotExistException">if the engineer is not exists</exception>
+    /// <exception cref="BO.BlDoesNotExistException">if the engineer is not exists</exception>
     public BO.Engineer Read(int id)
     {
         //Retrieving the engineer from the data layer
@@ -129,8 +129,8 @@ internal class EngineerImplementation : IEngineer
     /// The function receives BO updated engineer object and update the engineer in the data layer. 
     /// </summary>
     /// <param name="updatedEngineer">BO updated engineer object</param>
-    /// <exception cref="BlEngineerNotAssignedToTaskException">if the engineer is not assign to the task</exception>
-    /// <exception cref="BlDoesNotExistException">if the engineer is not exists</exception>
+    /// <exception cref="BO.BlEngineerNotAssignedToTaskException">if the engineer is not assign to the task</exception>
+    /// <exception cref="BO.BlDoesNotExistException">if the engineer is not exists</exception>
     public void Update(BO.Engineer updatedEngineer)
     {
         try
