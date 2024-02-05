@@ -206,7 +206,7 @@ internal class EngineerImplementation : IEngineer
 
                 //Checking the engineer level compared to the task complexity
                 if (updatedEngineer.Level > blCurrentTaskEngineer.Complexity)
-                   throw new BlInappropriateLevelException($"The level of the engineer - {updatedEngineer.ID}, is not high enough for the level of the assigned task")
+                    throw new BlInappropriateLevelException($"The level of the engineer - {updatedEngineer.ID}, is not high enough for the level of the assigned task");
 
                 DO.Task updatedTask = currentTaskEngineer with { StartDate = DateTime.Now, EngineerId = updatedEngineer.ID };
                 _dal.Task.Update(updatedTask);
