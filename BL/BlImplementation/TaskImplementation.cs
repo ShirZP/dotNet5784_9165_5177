@@ -235,7 +235,7 @@ internal class TaskImplementation : ITask
 
             if (earlyForecastDateInTask != null)
             {
-                throw new BlEarlyForecastDateInDependentTaskException($"The scheduled start date of the depended task - {id} - is earlier than the forecast date of a previous task");
+                throw new BlDependentsTasksException($"The scheduled start date of the depended task - {id} - is earlier than the forecast date of a previous task");
             }
         }
     }
@@ -262,7 +262,7 @@ internal class TaskImplementation : ITask
     /// </summary>
     /// <param name="dalTask">DO task object</param>
     /// <returns></returns>
-    private List<TaskInList>? calculateDependencies(DO.Task dalTask)
+    private List<TaskInList> calculateDependencies(DO.Task dalTask)
     {
         return (from DO.Dependency dalDependency in _dal.Dependency.ReadAll(item => item.DependentTask == dalTask.ID)  //all the dependencies that the current task is the dependent task
                 let dependensOnTask = _dal.Task.Read(item => item.ID == dalDependency.DependensOnTask)  //Retrieving the task that the current task dependens on from the data layer

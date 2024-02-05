@@ -65,8 +65,14 @@ public class BlNullScheduledDateInDependensOnTaskException : Exception  //תאר
 }
 
 [Serializable]
-public class BlEarlyForecastDateInDependentTaskException : Exception  //תאריך ההתחלה של המשימה התלויה, קודם לתאריך הסיום המשוער של משימה קודמת
+public class BlDependentsTasksException : Exception //בעיה במשימות קודמות
 {
-    public BlEarlyForecastDateInDependentTaskException(string? message) : base(message) { }
+    public BlDependentsTasksException(string? message) : base(message) { }
+}
+
+[Serializable]
+public class BlInappropriateLevelException : Exception //רמה לא מתאימה
+{
+    public BlInappropriateLevelException(string? message) : base(message) { }
 }
 
