@@ -182,18 +182,25 @@ internal class EngineerImplementation : IEngineer
         checkEngineerCurrentTask(engineer);
     }
 
+
+    /// <summary>
+    /// The founction check the updating of the field engineerCurrentTask
+    /// </summary>
+    /// <param name="updatedEngineer"></param>
+    /// <exception cref="BO.BlEngineerNotAssignedToTaskException"></exception>
+    /// <exception cref="BO.BlDependentsTasksException"></exception>
+    /// <exception cref="BlInappropriateLevelException"></exception>
     private void checkEngineerCurrentTask(BO.Engineer updatedEngineer)
     {
-        //checking the updating of the field engineerCurrentTask
         if (updatedEngineer.EngineerCurrentTask != null)
         {
             int idTaskInEngineer = updatedEngineer.EngineerCurrentTask.ID;  //The current task ID of the engineer
             DO.Task currentTaskEngineer = _dal.Task.Read(item => item.ID == idTaskInEngineer)!;
 
-            //if the engineer doesn't assigned to the current task engineer
+            //if there is another engineer assigned to the current task engineer
             if (currentTaskEngineer.EngineerId != null && currentTaskEngineer.EngineerId != updatedEngineer.ID)
             {
-                throw new BO.BlEngineerNotAssignedToTaskException($"Engineer - {updatedEngineer.ID} id not assigned to the task - {idTaskInEngineer}");
+                throw new BO.BlEngineerNotAssignedToTaskException($"There is another engineer assigned to the task - {idTaskInEngineer}!");
             }
 
             //if the start date is empty so the engineer start to work on the task now
