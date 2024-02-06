@@ -1,5 +1,4 @@
 ﻿using DalApi;
-
 namespace BlImplementation;
 using BlApi;
 using BO;

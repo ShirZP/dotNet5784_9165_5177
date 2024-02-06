@@ -5,6 +5,7 @@ using BO;
 using System.Collections;
 using System.Collections.Generic;
 using System.Net.NetworkInformation;
+using static System.Runtime.InteropServices.JavaScript.JSType;
 
 internal class TaskImplementation : ITask
 {
@@ -317,7 +318,72 @@ internal class TaskImplementation : ITask
         if (task.NickName == null || task.NickName == "")
             throw new BlEmptyStringException("The task's nick name cannot be empty!");
 
+        if (task.Description == null || task.Description == "")
+            throw new BlEmptyStringException("The task's description cannot be empty!");
+
+        checkStatusField(task);
 
         ScheduledDateUpdate(task.ID, task.ScheduledDate);
+
+        if (task.RequiredEffortTime != null && task.RequiredEffortTime.Value.TotalMilliseconds <= 0)
+            throw new BlIntException($"Required effort time can't be 0 or below");
+
+        checkAssignedEngineerField(task);
+
+
+    }
+
+    /// <summary>
+    /// If the status is Active or Complete- the function checks whether there are previous tasks that have not been completed
+    /// </summary>
+    /// <param name="task">BO task object</param>
+    /// <exception cref="BO.BlDependentsTasksException">is a previous task for the task that has not been completed</exception>
+    private void checkStatusField(BO.Task task)
+    {
+        switch (task.Status)
+        {
+            case Status.Active:
+            case Status.Complete:
+                //Checking whether the previous tasks have been completed
+                TaskInList? notCompleteTask = (from taskInList in task.Dependencies
+                                               where taskInList.Status != BO.Status.Complete
+                                               select taskInList).FirstOrDefault();
+
+                if (notCompleteTask != null)
+                    throw new BO.BlDependentsTasksException($"There is a previous task for the task - {task.ID} - that has not been completed");
+                break;
+        }
+    }
+
+    /// <summary>
+    /// The function checks that the responsible engineer fields are correct
+    /// </summary>
+    /// <param name="task"></param>
+    /// <exception cref="BO.BlIntException"></exception>
+    /// <exception cref="BO.BlEmptyStringException"></exception>
+    private void checkAssignedEngineerField(BO.Task task)
+    {
+        if (task.AssignedEngineer != null)
+        {
+            int assignedEngineerID = task.AssignedEngineer.ID;
+            try
+            {
+                _dal.Engineer.Read(item => item.ID == assignedEngineerID);
+            }
+            catch(DO.DalDoesNotExistException dalEx)
+            {
+                throw new BlDoesNotExistException($"An engineer with ID={assignedEngineerID} does not exist", dalEx);
+            }
+
+            if (assignedEngineerID < 100000000 || assignedEngineerID > 999999999)
+            {
+                throw new BO.BlIntException("The engineer's ID number must be 9 digits!");
+            }
+
+            if (task.AssignedEngineer.Name == null && task.AssignedEngineer.Name == "")
+            {
+                throw new BO.BlEmptyStringException("The engineer's full name can't be empty!");
+            }
+        }
     }
 }

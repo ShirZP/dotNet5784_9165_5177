@@ -50,7 +50,7 @@ public class Task
     /// <summary>
     /// Estimated date for task completion - calculated property
     /// </summary>
-    public DateTime? ForecastDate { get; set; } //= new DateTime?(Math.Max(ScheduledDate.Ticks, StartDate.Ticks) + RequiredEffortTime);
+    public DateTime? ForecastDate { get; set; } 
 
     /// <summary>
     /// The latest possible date to Complete the task
