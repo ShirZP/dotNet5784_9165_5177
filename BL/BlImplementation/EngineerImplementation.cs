@@ -156,23 +156,28 @@ internal class EngineerImplementation : IEngineer
     /// <exception cref="BlEmptyStringException">If the string is empty throw an exception.</exception>
     private void checkEngineerFields(BO.Engineer engineer)
     {
-        if (engineer.ID <= 0)
+        if (engineer.ID < 100000000 || engineer.ID > 999999999)
         {
-            throw new BO.BlPositiveIntException("The engineer's ID number must be positive!");
+            throw new BO.BlIntException("The engineer's ID number must be 9 digits!");
         }
 
-        if (engineer.FullName == null)
+        if (engineer.FullName == null && engineer.FullName == "")
         {
             throw new BO.BlEmptyStringException("The engineer's full name can't be empty!");
         }
 
         if (engineer.Cost <= 0)
         {
-            throw new BO.BlPositiveIntException("The engineer's salary must be positive!");
+            throw new BO.BlIntException("The engineer's salary must be positive!");
         }
 
         //check email
         new EmailAddressAttribute().IsValid(engineer.Email);
+
+        if (engineer.Level == null)
+        {
+            throw new BO.BlEmptyEnumException("The engineer's level can't be empty!");
+        }
 
         checkEngineerCurrentTask(engineer);
     }

@@ -27,15 +27,21 @@ public class BlXMLFileLoadCreateException : Exception  //לא מצליח לטע�
 }
 
 [Serializable]
-public class BlPositiveIntException : Exception  //בעיה עם מספר חיובי
+public class BlIntException : Exception  //בעיה עם מספר
 {
-    public BlPositiveIntException(string? message) : base(message) { }
+    public BlIntException(string? message) : base(message) { }
 }
 
 [Serializable]
 public class BlEmptyStringException : Exception  //בעיה עם מחרוזת ריקה
 {
     public BlEmptyStringException(string? message) : base(message) { }
+}
+
+[Serializable]
+public class BlEmptyEnumException : Exception  //problem with empty enum 
+{
+    public BlEmptyEnumException(string? message) : base(message) { }
 }
 
 [Serializable]

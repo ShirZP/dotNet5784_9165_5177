@@ -311,8 +311,8 @@ internal class TaskImplementation : ITask
     /// <exception cref="BlEmptyStringException">If the string is empty throw an exception.</exception>
     private void checkTaskFields(BO.Task task)
     {
-        if (task.ID <= 0)//TODO: למהההההההההההההההההה
-            throw new BlPositiveIntException("The task's ID number must be positive!");
+        if (task.ID <= 0)
+            throw new BlIntException("The task's ID number must be positive!");
 
         if (task.NickName == null || task.NickName == "")
             throw new BlEmptyStringException("The task's nick name cannot be empty!");
