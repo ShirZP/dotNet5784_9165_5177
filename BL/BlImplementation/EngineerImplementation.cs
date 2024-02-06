@@ -143,8 +143,19 @@ internal class EngineerImplementation : IEngineer
         }
         catch (DO.DalDoesNotExistException dalEx)
         {
-            throw new BO.BlDoesNotExistException($"An object of type Engineer with ID={updatedEngineer.ID} does not exist", dalEx);
+            throw new BO.BlDoesNotExistException($"An object of type Engineer with ID - {updatedEngineer.ID} does not exist", dalEx);
         }
+    }
+
+    /// <summary>
+    /// The function returns a collection of Engineer objects sorted by FullName
+    /// </summary>
+    /// <returns>A collection of Engineer objects sorted by FullName</returns>
+    public IEnumerable<BO.Engineer> SortByName()
+    {
+        return from engineer in ReadAll()
+               orderby engineer.FullName
+               select engineer;
     }
 
     /// <summary>

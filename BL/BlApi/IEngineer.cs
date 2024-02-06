@@ -11,4 +11,6 @@ public interface IEngineer
     public void Update(BO.Engineer updatedEngineer); //Updates engineer
 
     public void Delete(int id);  //Deletes a engineer by its id
+
+    public IEnumerable<BO.Engineer> SortByName();
 }

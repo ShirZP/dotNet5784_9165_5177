@@ -386,4 +386,15 @@ internal class TaskImplementation : ITask
             }
         }
     }
+
+    /// <summary>
+    /// The function returns a collection of TaskInList objects sorted by ID
+    /// </summary>
+    /// <returns>A collection of TaskInList objects sorted by ID</returns>
+    public IEnumerable<BO.TaskInList> SortByID()
+    {
+        return from taskInList in ReadAll()
+               orderby taskInList.ID
+               select taskInList;
+    }
 }
