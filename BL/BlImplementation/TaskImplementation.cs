@@ -6,6 +6,7 @@ using System.Collections;
 using System.Collections.Generic;
 using System.Net.NetworkInformation;
 using static System.Runtime.InteropServices.JavaScript.JSType;
+using DO;
 
 internal class TaskImplementation : ITask
 {
@@ -241,11 +242,11 @@ internal class TaskImplementation : ITask
         }
     }
 
-    public void ScheduledDateUpdate(int id, DateTime? newScheduledDate, BO.ProjectStatus projectStatus)
+    private void checkScheduledDateField(int id, DateTime? newScheduledDate, BO.ProjectStatus projectStatus)
     {
         if (newScheduledDate.HasValue)
         {
-            if(projectStatus == BO.ProjectStatus.Planning)
+            if (projectStatus == BO.ProjectStatus.Planning)
             {
                 throw new BO.BlProjectStatusException("A scheduled task date cannot be edited when the project status is in planning!");
             }
@@ -279,6 +280,18 @@ internal class TaskImplementation : ITask
                 throw new BlDependentsTasksException($"The scheduled start date of the depended task - {id} - is earlier than the forecast date of a previous task");
             }
         }
+    }
+
+    public void ScheduledDateUpdate(int id, DateTime? newScheduledDate, BO.ProjectStatus projectStatus)
+    {
+        checkScheduledDateField(id, newScheduledDate, projectStatus);
+
+        BO.Task oldTask = Read(id);
+
+        BO.Task updatedTask = oldTask;
+        updatedTask.ScheduledDate = newScheduledDate;
+
+        Update(updatedTask);
     }
 
  
@@ -364,7 +377,7 @@ internal class TaskImplementation : ITask
 
         checkStatusField(task);
 
-        ScheduledDateUpdate(task.ID, task.ScheduledDate, projectStatus);
+        checkScheduledDateField(task.ID, task.ScheduledDate, projectStatus);
 
         checkRequiredEffortTimeField(task, projectStatus);
 

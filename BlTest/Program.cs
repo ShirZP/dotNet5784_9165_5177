@@ -476,7 +476,21 @@ internal class Program
 
 
         //Dependencies
-       
+        int idDependency;
+        List<TaskInList> dependenciesList = new List<TaskInList>();
+
+        Console.WriteLine("Insert dependencies ID, to stop enter 0");
+        intString = Console.ReadLine();
+        int.TryParse(intString, out idDependency);
+        while (idDependency != 0)
+        {
+            BO.Task task = s_bl.Task.Read(idDependency);
+            dependenciesList.Add(new TaskInList(task.ID, task.Description,task.NickName ,task.Status));
+
+            Console.WriteLine("Insert dependencies ID:");
+            intString = Console.ReadLine();
+            int.TryParse(intString, out idDependency);
+        }
 
         //scheduledDate
         Console.WriteLine("Enter task scheduled date to start:");
@@ -528,7 +542,18 @@ internal class Program
         }
         
 
-        return new BO.Task(originalTask.ID, nickName, description, taskStatus, dependency, scheduledDate, null, null, null, null, requiredEffortTime, deliverables, remarks, new BO.EngineerInTask(assignedEngineerID, assignedEngineerNickName), complexity);
+        return new BO.Task(originalTask.ID,
+                            nickName,
+                            description,
+                            taskStatus, 
+                            dependenciesList, 
+                            scheduledDate,
+                            null, null, null, null, 
+                            requiredEffortTime, 
+                            deliverables, 
+                            remarks, 
+                            new BO.EngineerInTask(assignedEngineerID, assignedEngineerNickName), 
+                            complexity);
     }
 
     #endregion
