@@ -241,7 +241,6 @@ internal class TaskImplementation : ITask
     {
         if (newScheduledDate.HasValue)
         {
-
             if(projectStatus == BO.ProjectStatus.Planning)
             {
                 throw new BO.BlProjectStatusException("A scheduled task date cannot be edited when the project status is in planning!");
@@ -253,7 +252,12 @@ internal class TaskImplementation : ITask
             {
                 throw new BO.BlProjectStatusException("A scheduled task date cannot be edited when the project status is in Execution!");
             }
-           
+
+            //If the task has no dependencies - checking whether the new scheduled date is after the project start date
+            if (!updateTask.Dependencies.Any())
+                if (newScheduledDate < _bl.GetProjectStartDate())
+                    throw new BO.BlscheduledDateException("A task's scheduled start date cannot be before the project's start date");
+
             BO.TaskInList? nullScheduledDateInTask = (from taskInList in updateTask.Dependencies
                                                       where Read(taskInList.ID).ScheduledDate == null
                                                       select taskInList).FirstOrDefault();
