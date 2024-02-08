@@ -34,6 +34,21 @@ static class XMLTools
         XMLTools.SaveListToXMLElement(root, data_config_xml);
         return nextId;
     }
+
+    public static DateTime? GetProjectDate(string data_config_xml, string elemName)
+    {
+        XElement root = XMLTools.LoadListFromXMLElement(data_config_xml);
+
+        return root.ToDateTimeNullable(elemName) ?? throw new FormatException($"can't convert date.  {data_config_xml}, {elemName}");
+    }
+
+    public static DO.ProjectStatus GetProjectStatus(string data_config_xml, string elemName)
+    {
+        XElement root = XMLTools.LoadListFromXMLElement(data_config_xml);
+
+        return root.ToEnumNullable<DO.ProjectStatus>(elemName) ?? throw new FormatException($"can't convert enum.  {data_config_xml}, {elemName}");
+    }
+
     #endregion
 
     #region SaveLoadWithXElement

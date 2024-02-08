@@ -8,6 +8,15 @@ public interface IDal
 
     DateTime? ProjectStartDate { get; set; }
     DateTime? ProjectEndDate { get; set; }
+    DO.ProjectStatus ProjectStatus { get; set; }
+
+    public DateTime? getProjectStartDate();
+    public DateTime? getProjectEndDate();
+    public DO.ProjectStatus getProjectStatus();
+
+    public void setProjectStartDate();
+    public void setProjectEndDate();
+    public void setProjectStatus();
 
 }
 

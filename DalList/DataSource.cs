@@ -4,7 +4,9 @@ internal static class DataSource
 {
     internal static class Config
     {
-        private static DateTime projectStartDate;
+        internal static DateTime? projectStartDate = null;
+        internal static DateTime? projectEndDate = null;
+        internal static DO.ProjectStatus projectStatus = DO.ProjectStatus.planning;
 
        //Unique ID number for a Task
        internal const int startTaskId = 1;
