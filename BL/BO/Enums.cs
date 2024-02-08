@@ -1,6 +1,11 @@
 ﻿namespace BO;
 
-
+public enum ProjectStatus
+{
+    planning,
+    BuildingSchedule,
+    Execution
+}
 public enum Status
 {
     New,

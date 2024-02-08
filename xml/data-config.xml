@@ -1,5 +1,8 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <config>
-  <NextTaskId>141</NextTaskId>
-  <NextDependencyId>288</NextDependencyId>
+	<ProjectStartDate></ProjectStartDate>
+	<ProjectEndDate></ProjectEndDate>
+	<ProjectStatus></ProjectStatus>
+	<NextTaskId>141</NextTaskId>
+	<NextDependencyId>288</NextDependencyId>
 </config>

@@ -4,8 +4,10 @@ internal static class DataSource
 {
     internal static class Config
     {
-        //Unique ID number for a Task
-        internal const int startTaskId = 1;
+        private static DateTime projectStartDate;
+
+       //Unique ID number for a Task
+       internal const int startTaskId = 1;
         private static int nextTaskId = startTaskId;
         internal static int NextTaskId { get => nextTaskId++; }
 
