@@ -1,4 +1,6 @@
-﻿namespace DalApi;
+﻿using System;
+
+namespace DalApi;
 
 public interface IDal
 {
@@ -14,9 +16,11 @@ public interface IDal
     public DateTime? getProjectEndDate();
     public DO.ProjectStatus getProjectStatus();
 
-    public void setProjectStartDate();
-    public void setProjectEndDate();
-    public void setProjectStatus();
+    public void setProjectStartDate(DateTime projectStartDate);
+    public void setProjectEndDate(DateTime projectEndDate);
+    public void initializeProjectStatus();
+    public void changeStatusToBuildingSchedule();
+    public void changeStatusToExecution();
 
 }
 
