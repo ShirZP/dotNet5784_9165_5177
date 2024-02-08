@@ -89,3 +89,9 @@ public class BlProjectStatusException : Exception  //בעיה בסטטוס הפ�
 }
 
 
+[Serializable]
+public class BlscheduledDateException : Exception  //בעיה בתאריך מתוכנן
+{
+    public BlscheduledDateException(string? message) : base(message) { }
+}
+
