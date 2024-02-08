@@ -24,7 +24,7 @@ internal class TaskImplementation : ITask
 
         //create dal task
         int assignedEngineerID = task.AssignedEngineer!.ID;
-        //TODO: bool isTaskMilestone = task.Milestone != null;
+
         DO.Task doTask = new DO.Task(task.ID,
                                      task.NickName,
                                      task.Description, 

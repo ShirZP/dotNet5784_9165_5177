@@ -166,6 +166,8 @@ internal class EngineerImplementation : IEngineer
     /// <exception cref="BlEmptyStringException">If the string is empty throw an exception.</exception>
     private void checkEngineerFields(BO.Engineer engineer)
     {
+        BO.ProjectStatus projectStatus = _bl.CalculateProjectStatus();
+
         if (engineer.ID < 100000000 || engineer.ID > 999999999)
         {
             throw new BO.BlIntException("The engineer's ID number must be 9 digits!");
@@ -189,7 +191,7 @@ internal class EngineerImplementation : IEngineer
             throw new BO.BlEmptyEnumException("The engineer's level can't be empty!");
         }
 
-        checkEngineerCurrentTask(engineer);
+        checkEngineerCurrentTask(engineer, projectStatus);
     }
 
 
@@ -200,10 +202,15 @@ internal class EngineerImplementation : IEngineer
     /// <exception cref="BO.BlEngineerNotAssignedToTaskException"></exception>
     /// <exception cref="BO.BlDependentsTasksException"></exception>
     /// <exception cref="BlInappropriateLevelException"></exception>
-    private void checkEngineerCurrentTask(BO.Engineer updatedEngineer)
+    private void checkEngineerCurrentTask(BO.Engineer updatedEngineer, BO.ProjectStatus projectStatus)
     {
         if (updatedEngineer.EngineerCurrentTask != null)
         {
+            if (projectStatus == BO.ProjectStatus.Planning)
+            {
+                throw new BO.BlProjectStatusException("A engineer current task cannot be edited when the project status is in planning!");
+            }
+
             int idTaskInEngineer = updatedEngineer.EngineerCurrentTask.ID;  //The current task ID of the engineer
             DO.Task currentTaskEngineer = _dal.Task.Read(item => item.ID == idTaskInEngineer)!;
 
