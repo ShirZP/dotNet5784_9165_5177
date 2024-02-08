@@ -196,7 +196,7 @@
                         break; 
 
                     case 3:  //ReadAll
-                        IEnumerable<Engineer?> engineersList = s_dal!.Engineer.ReadAll();
+                        IEnumerable<Engineer> engineersList = s_dal!.Engineer.ReadAll();
                         foreach(var e in engineersList)
                         {
                             Console.WriteLine(e);    
