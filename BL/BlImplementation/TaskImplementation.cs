@@ -211,6 +211,11 @@ internal class TaskImplementation : ITask
             }
         }
 
+        if(updatedTask.Status == BO.Status.Complete && updatedTask.CompleteDate == null)
+        {
+            updatedTask.CompleteDate = DateTime.Now;
+        }
+
         try
         {
             //Convert to DO task object
@@ -402,6 +407,7 @@ internal class TaskImplementation : ITask
 
                 if (notCompleteTask != null)
                     throw new BO.BlDependentsTasksException($"There is a previous task for the task - {task.ID} - that has not been completed");
+               
                 break;
         }
     }

@@ -3,6 +3,7 @@ using DalApi;
 using DalTest;
 using System.Collections.Generic;
 using System.Collections.Specialized;
+using static System.Runtime.InteropServices.JavaScript.JSType;
 
 namespace BlTest;
 
@@ -72,8 +73,8 @@ internal class Program
     /// </summary>
     private static void printTaskSubMenu()
     {
-        Console.WriteLine($"Select an action for the task:");
-        Console.WriteLine("1 - Create\n" + "2 - Read\n" + "3 - ReadAll\n" + "4 - Update\n" + "5 - Delete\n" + "6 - Update the scheduled date\n" + "0 - Exit\n");
+        Console.WriteLine($"Select an action for the task:");  
+        Console.WriteLine("1 - Create\n" + "2 - Read\n" + "3 - ReadAll\n" + "4 - Update\n" + "5 - Delete\n" + "6 - Update the scheduled date\n" + "7 - SortByID\n" + "0 - Exit\n");
     }
 
     /// <summary>
@@ -93,6 +94,8 @@ internal class Program
     private static void taskSubMenu()
     {
         int choice, id;
+        DateTime? newScheduledDate;
+        string st;
         BO.Task? task;
         printTaskSubMenu();
         string? intString;   //string to convert to int
@@ -151,10 +154,29 @@ internal class Program
                     Console.WriteLine("Enter Task ID to delete:");
                     intString = Console.ReadLine()!;
                     int.TryParse(intString, out id);
-                    s_dal!.Task.Delete(id);
+                    s_bl!.Task.Delete(id);
                     Console.WriteLine("Deleted successfully");
                     break;
 
+                case 6: //ScheduledDateUpdate
+                    Console.WriteLine("Enter Task ID to update scheduled date:");
+                    intString = Console.ReadLine()!;
+                    int.TryParse(intString, out id);
+
+                    Console.WriteLine("Enter date to update the scheduled date of the task:");
+                    st = Console.ReadLine()!;
+                    newScheduledDate = TryParseDateTime(st);
+                    s_bl.Task.ScheduledDateUpdate(id, newScheduledDate, s_bl.GetProjectStatus());
+                    break;
+
+                case 7: //SortByID
+                    IEnumerable<BO.TaskInList> tasksSortList = s_bl!.Task.SortByID();
+                    foreach (var e in tasksSortList)
+                    {
+                        Console.WriteLine(e);
+                    }
+                    break;
+                    
                 case 0:
                     break;
 
@@ -168,7 +190,7 @@ internal class Program
     }
 
     /// <summary>
-    /// All the operation that we can do on engineer (CRUD).
+    /// All the operation that we can do on engineer.
     /// </summary>
     private static void engineerSubMenu()
     {
@@ -240,7 +262,12 @@ internal class Program
                     Console.WriteLine($"Engineer {id} deleted successfully");
                     break;
 
-                case 6:
+                case 6: //SortByName
+                    IEnumerable<BO.Engineer?> engineersSortList = s_bl!.Engineer.SortByName();
+                    foreach (var e in engineersSortList)
+                    {
+                        Console.WriteLine(e);
+                    }
                     break;
 
                 case 0:
@@ -257,6 +284,7 @@ internal class Program
 
     }
 
+    #region input methods
 
     /// <summary>
     /// Input fields of Engineer.
@@ -303,7 +331,8 @@ internal class Program
     /// <returns>Object type Engineer</returns>
     private static BO.Engineer inputUpdateEngineer(BO.Engineer originalEngineer)
     {
-        int? levelNum, currentTaskID;
+        int currentTaskID;   //TODO: nullable
+        int? levelNum;
         double? cost;
         string? intString;    //string to convert to int
         string? nameEngineer, email, currentTaskNickName;
@@ -343,92 +372,15 @@ internal class Program
         //EngineerCurrentTask
         Console.WriteLine("Enter engineer current task ID:");
         intString = Console.ReadLine()!;
-        currentTaskID = TryParseInt(intString);
+        int.TryParse(intString, out currentTaskID);
+        //currentTaskID = TryParseInt(intString);
 
         Console.WriteLine("Enter engineer current task nick name:");
         currentTaskNickName = Console.ReadLine()!;
-        if (currentTaskNickName == null || currentTaskNickName == "")
-            currentTaskNickName = originalEngineer.EngineerCurrentTask.NickName;
-
 
 
         //update newEngineer
-        return new BO.Engineer(originalEngineer.ID, nameEngineer, email, level, cost);
-    }
-
-
-    /// <summary>
-    /// The function change the status of the project.
-    /// </summary>
-    /// <exception cref="FormatException">Wrong input</exception>
-    public static void changeProjectStatus()
-    {
-        Console.Write("Would you like to change the status of the project? (Y/N)");
-        string? ans = Console.ReadLine() ?? throw new FormatException("Wrong input");
-        if (ans == "Y")
-        {
-            BO.ProjectStatus currentProjectStatus = s_bl.GetProjectStatus();
-
-            BO.ProjectStatus calculateProjectStatus = s_bl.CalculateProjectStatus();
-
-            switch (currentProjectStatus)
-            {
-                case BO.ProjectStatus.Planning:
-
-                    Console.WriteLine("Enter a start date to the project");
-                    ans = Console.ReadLine() ?? throw new FormatException("Wrong input");
-
-                    //convert start date type string to DateTime type
-                    DateTime startDate;
-                    DateTime.TryParse(ans, out startDate);
-                    
-                    s_bl.SetProjectStartDate(startDate);
-
-                    Console.WriteLine("Do you want to enter a end date to the project");
-                    ans = Console.ReadLine() ?? throw new FormatException("Wrong input");
-                    if (ans == "Y")
-                    {
-                        Console.WriteLine("Enter a end date to the project");
-                        ans = Console.ReadLine() ?? throw new FormatException("Wrong input");
-
-                        //convert end date type string to DateTime type
-                        DateTime endDate;
-                        DateTime.TryParse(ans, out endDate);
-
-                        s_bl.SetProjectEndDate(endDate);
-                    }
-
-                    //change the status of the project from Planing to BuildingSchedule
-                    s_bl.changeStatusToBuildingSchedule();
-                    Console.WriteLine("The status of the project update to BuildingSchedule");
-
-                    break;
-
-                case BO.ProjectStatus.BuildingSchedule:
-
-                    if(calculateProjectStatus == BO.ProjectStatus.BuildingSchedule)
-                    {
-                        Console.WriteLine("can't change to the next stage - Execution stage!");
-                        break;
-                    }
-
-                    if (calculateProjectStatus == BO.ProjectStatus.Execution)
-                    {
-                        s_bl.changeStatusToExecution();
-                        Console.WriteLine("The status of the project update to Execution");
-                    }
-
-                    break;
-
-                case BO.ProjectStatus.Execution:
-
-                    Console.WriteLine("Can't change the status of the project!");
-
-                    break;
-
-            }
-        }
-      
+        return new BO.Engineer(originalEngineer.ID, nameEngineer, email, level, cost, new BO.TaskInEngineer(currentTaskID, currentTaskNickName));  
     }
 
     /// <summary>
@@ -482,6 +434,105 @@ internal class Program
         return new BO.Task(0, nickName, description, BO.Status.New, dependencies, null, null, null, null, null, requiredEffortTime, finalProduct, remarks, null, complexity);
     }
 
+    /// <summary>
+    /// update fields of Task.
+    /// </summary>
+    /// <param name="originalTask">task to update.</param>
+    /// <returns></returns>
+    private static BO.Task inputUpdateTask(BO.Task originalTask)
+    {
+        string nickName, description;
+        string? deliverables, remarks;
+        DateTime? scheduledDate;
+        string? dateString, intString, timeString;
+        TimeSpan? requiredEffortTime;
+        int? complexityNum, statusNum;
+        int assignedEngineerID;
+        string assignedEngineerNickName;
+
+        //nickName
+        Console.WriteLine("Enter task nickName:");
+        nickName = Console.ReadLine()!;
+        if (nickName == null || nickName == "")
+            nickName = originalTask.NickName;
+
+        //description
+        Console.WriteLine("Enter task description:");
+        description = Console.ReadLine()!;
+        if (description == null || description == "")
+            description = originalTask.Description;
+
+        //Status
+        Console.WriteLine("Choose task status:" + "0 - New\n" + "1 - Active\n" + "2 - Complete\n");
+        intString = Console.ReadLine();
+        BO.Status taskStatus;
+        if (intString == null || intString == "")
+            taskStatus = originalTask.Status;
+        else
+        {
+            statusNum = TryParseInt(intString);
+            taskStatus = (BO.Status)statusNum!;
+        }
+
+
+        //Dependencies
+       
+
+        //scheduledDate
+        Console.WriteLine("Enter task scheduled date to start:");
+        dateString = Console.ReadLine();
+        if (dateString == null || dateString == "")
+            scheduledDate = originalTask.ScheduledDate;
+        else
+            scheduledDate = TryParseDateTime(dateString);
+
+        //requiredEffortTime
+        Console.WriteLine("Enter task required effort time to complete:");
+        timeString = Console.ReadLine();
+        if (timeString == null || timeString == "")
+            requiredEffortTime = originalTask.RequiredEffortTime;
+        else
+            requiredEffortTime = TryParseTimeSpan(dateString);
+
+        //Deliverables
+        Console.WriteLine("Enter task deliverables:");
+        deliverables = Console.ReadLine();
+        if (deliverables == null || deliverables == "")
+            deliverables = originalTask.Deliverables;
+
+        //remarks
+        Console.WriteLine("Enter task remarks:");
+        remarks = Console.ReadLine();
+        if (remarks == null || remarks == "")
+            remarks = originalTask.Remarks;
+
+        //AssignedEngineer
+        Console.WriteLine("Enter the ID of the engineer responsible for carrying out the task:");
+        intString = Console.ReadLine()!;
+        int.TryParse(intString, out assignedEngineerID);
+
+        Console.WriteLine("Enter the nick name of the engineer responsible for carrying out the task:");
+        assignedEngineerNickName = Console.ReadLine()!;
+      
+
+        //complexity
+        Console.WriteLine("Choose task complexity:" + "0 - Beginner\n" + "1 - AdvancedBeginner\n" + "2 - Intermediate\n" + "3 - Advanced\n" + "4 - Expert\n");
+        intString = Console.ReadLine();
+        DO.EngineerExperience? complexity;
+        if (intString == null || intString == "")
+            complexity = originalTask.Complexity;
+        else
+        {
+            complexityNum = TryParseInt(intString);
+            complexity = (DO.EngineerExperience)complexityNum!;
+        }
+        
+
+        return new BO.Task(originalTask.ID, nickName, description, taskStatus, dependency, scheduledDate, null, null, null, null, requiredEffortTime, deliverables, remarks, new BO.EngineerInTask(assignedEngineerID, assignedEngineerNickName), complexity);
+    }
+
+    #endregion
+
     #region   TryParse methods
     /// <summary>
     /// The function accepts a string and returns it in dateTime format if successful, otherwise it returns null.
@@ -517,4 +568,79 @@ internal class Program
     }
 
     #endregion
+
+
+    /// <summary>
+    /// The function change the status of the project.
+    /// </summary>
+    /// <exception cref="FormatException">Wrong input</exception>
+    public static void changeProjectStatus()
+    {
+        Console.Write("Would you like to change the status of the project? (Y/N)");
+        string? ans = Console.ReadLine() ?? throw new FormatException("Wrong input");
+        if (ans == "Y")
+        {
+            BO.ProjectStatus currentProjectStatus = s_bl.GetProjectStatus();
+
+            BO.ProjectStatus calculateProjectStatus = s_bl.CalculateProjectStatus();
+
+            switch (currentProjectStatus)
+            {
+                case BO.ProjectStatus.Planning:
+
+                    Console.WriteLine("Enter a start date to the project");
+                    ans = Console.ReadLine() ?? throw new FormatException("Wrong input");
+
+                    //convert start date type string to DateTime type
+                    DateTime startDate;
+                    DateTime.TryParse(ans, out startDate);
+
+                    s_bl.SetProjectStartDate(startDate);
+
+                    Console.WriteLine("Do you want to enter a end date to the project");
+                    ans = Console.ReadLine() ?? throw new FormatException("Wrong input");
+                    if (ans == "Y")
+                    {
+                        Console.WriteLine("Enter a end date to the project");
+                        ans = Console.ReadLine() ?? throw new FormatException("Wrong input");
+
+                        //convert end date type string to DateTime type
+                        DateTime endDate;
+                        DateTime.TryParse(ans, out endDate);
+
+                        s_bl.SetProjectEndDate(endDate);
+                    }
+
+                    //change the status of the project from Planing to BuildingSchedule
+                    s_bl.changeStatusToBuildingSchedule();
+                    Console.WriteLine("The status of the project update to BuildingSchedule");
+
+                    break;
+
+                case BO.ProjectStatus.BuildingSchedule:
+
+                    if (calculateProjectStatus == BO.ProjectStatus.BuildingSchedule)
+                    {
+                        Console.WriteLine("can't change to the next stage - Execution stage!");
+                        break;
+                    }
+
+                    if (calculateProjectStatus == BO.ProjectStatus.Execution)
+                    {
+                        s_bl.changeStatusToExecution();
+                        Console.WriteLine("The status of the project update to Execution");
+                    }
+
+                    break;
+
+                case BO.ProjectStatus.Execution:
+
+                    Console.WriteLine("Can't change the status of the project!");
+
+                    break;
+
+            }
+        }
+
+    }
 }
