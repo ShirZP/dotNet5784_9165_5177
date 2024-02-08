@@ -188,7 +188,7 @@ internal class Program
                     Console.WriteLine("Enter engineer ID:");
                     intString = Console.ReadLine()!;
                     int.TryParse(intString, out id);
-                    engineer = s_dal!.Engineer.Read(item => item.ID == id);
+                    engineer = s_bl!.Engineer.Read(id);
                     if (engineer != null)
                     {
                         Console.WriteLine(engineer);
@@ -200,7 +200,7 @@ internal class Program
                     break;
 
                 case 3:  //ReadAll
-                    IEnumerable<Engineer?> engineersList = s_dal!.Engineer.ReadAll();
+                    IEnumerable<BO.Engineer?> engineersList = s_bl!.Engineer.ReadAll();
                     foreach (var e in engineersList)
                     {
                         Console.WriteLine(e);
@@ -211,13 +211,13 @@ internal class Program
                     Console.WriteLine("Enter engineer ID to update:");
                     intString = Console.ReadLine()!;
                     int.TryParse(intString, out id);
-                    engineer = s_dal!.Engineer.Read(item => item.ID == id);
+                    engineer = s_bl!.Engineer.Read(id);
                     if (engineer != null)
                     {
                         Console.WriteLine(engineer);   //Before the update prints the engineer to update.
 
                         newEngineer = inputUpdateEngineer(engineer);
-                        s_dal!.Engineer.Update(newEngineer);
+                        s_bl!.Engineer.Update(newEngineer);
 
                         Console.WriteLine($"Engineer {id} update successfully");
                     }
@@ -231,8 +231,11 @@ internal class Program
                     Console.WriteLine("Enter engineer ID to read:");
                     intString = Console.ReadLine()!;
                     int.TryParse(intString, out id);
-                    s_dal!.Engineer.Delete(id);
+                    s_bl!.Engineer.Delete(id);
                     Console.WriteLine($"Engineer {id} deleted successfully");
+                    break;
+
+                case 6:
                     break;
 
                 case 0:
@@ -242,7 +245,7 @@ internal class Program
                     break;
             }
 
-            printSubMenu("Engineer");
+            printEngineerSubMenu();
             intString = Console.ReadLine()!;
             int.TryParse(intString, out choice);
         }
@@ -256,7 +259,7 @@ internal class Program
     /// <returns>Object type Engineer</returns>
     private static BO.Engineer inputCreateEngineer()
     {
-        int id, level, cost, currentTaskId;
+        int id, level, cost;
         string? intString;    //string to convert to int
         string? nameEngineer, email;
 
@@ -283,18 +286,70 @@ internal class Program
         intString = Console.ReadLine()!;
         int.TryParse(intString, out cost);
 
-        //EngineerCurrentTask
-        Console.WriteLine("Enter engineer current task:");
-        Console.WriteLine("Enter current task ID:");
-        intString = Console.ReadLine()!;
-        int.TryParse(intString, out currentTaskId);
-
-
         //create newEngineer
-        return new BO.Engineer(id, nameEngineer, email, ((BO.EngineerExperience)level), cost, null);
+        return new BO.Engineer(id, nameEngineer, email, ((DO.EngineerExperience)level), cost, null);
 
     }
 
+    /// <summary>
+    /// update fields of Engineer.
+    /// </summary>
+    /// <param name="originalEngineer">engineer to update</param>
+    /// <returns>Object type Engineer</returns>
+    private static BO.Engineer inputUpdateEngineer(BO.Engineer originalEngineer)
+    {
+        int? levelNum, currentTaskID;
+        double? cost;
+        string? intString;    //string to convert to int
+        string? nameEngineer, email, currentTaskNickName;
+
+        //nameEngineer
+        Console.WriteLine("Enter engineer full name:");
+        nameEngineer = Console.ReadLine();
+        if (nameEngineer == null || nameEngineer == "")
+            nameEngineer = originalEngineer.FullName;
+
+        //email
+        Console.WriteLine("Enter engineer email:");
+        email = Console.ReadLine();
+        if (email == null || email == "")
+            email = originalEngineer.Email;
+
+        //level
+        Console.WriteLine("Choose engineer level:" + "0 - Beginner\n" + "1 - AdvancedBeginner\n" + "2 - Intermediate\n" + "3 - Advanced\n" + "4 - Expert\n");
+        intString = Console.ReadLine()!;
+        DO.EngineerExperience? level;
+        if (intString == null || intString == "")
+            level = originalEngineer.Level;
+        else
+        {
+            levelNum = TryParseInt(intString);
+            level = (DO.EngineerExperience)levelNum!;
+        }
+
+        //cost
+        Console.WriteLine("Enter engineer cost:");
+        intString = Console.ReadLine()!;
+        if (intString == null || intString == "")
+            cost = originalEngineer.Cost;
+        else
+            cost = TryParseInt(intString);
+
+        //EngineerCurrentTask
+        Console.WriteLine("Enter engineer current task ID:");
+        intString = Console.ReadLine()!;
+        currentTaskID = TryParseInt(intString);
+
+        Console.WriteLine("Enter engineer current task nick name:");
+        currentTaskNickName = Console.ReadLine()!;
+        if (currentTaskNickName == null || currentTaskNickName == "")
+            currentTaskNickName = originalEngineer.EngineerCurrentTask.NickName;
+
+
+
+        //update newEngineer
+        return new BO.Engineer(originalEngineer.ID, nameEngineer, email, level, cost);
+    }
 
 
     /// <summary>
