@@ -131,7 +131,7 @@
     <FinalProduct>FinalProduct - UX/UI improvement</FinalProduct>
     <Remarks>Remarks - UX/UI improvement</Remarks>
     <EngineerId xsi:nil="true" />
-    <Complexity>Advanced</Complexity>
+    <Complexity>Intermediate</Complexity>
     <DeadlineDate xsi:nil="true" />
     <IsMileStone xsi:nil="true" />
   </Task>
@@ -171,7 +171,7 @@
     <Description>Description - Wireless technology integration</Description>
     <ScheduledDate xsi:nil="true" />
     <StartDate xsi:nil="true" />
-    <RequiredEffortTime>P2D</RequiredEffortTime>
+    <RequiredEffortTime>P1D</RequiredEffortTime>
     <CompleteDate xsi:nil="true" />
     <FinalProduct>FinalProduct - Wireless technology integration</FinalProduct>
     <Remarks>Remarks - Wireless technology integration</Remarks>
@@ -231,7 +231,7 @@
     <Description>Description - DevOps and CI/CD</Description>
     <ScheduledDate xsi:nil="true" />
     <StartDate xsi:nil="true" />
-    <RequiredEffortTime>P1D</RequiredEffortTime>
+    <RequiredEffortTime>P4D</RequiredEffortTime>
     <CompleteDate xsi:nil="true" />
     <FinalProduct>FinalProduct - DevOps and CI/CD</FinalProduct>
     <Remarks>Remarks - DevOps and CI/CD</Remarks>
@@ -251,7 +251,7 @@
     <FinalProduct>FinalProduct - Cyber-physical systems</FinalProduct>
     <Remarks>Remarks - Cyber-physical systems</Remarks>
     <EngineerId xsi:nil="true" />
-    <Complexity>AdvancedBeginner</Complexity>
+    <Complexity>Beginner</Complexity>
     <DeadlineDate xsi:nil="true" />
     <IsMileStone xsi:nil="true" />
   </Task>
@@ -261,7 +261,7 @@
     <Description>Description - Blockchain solutions</Description>
     <ScheduledDate xsi:nil="true" />
     <StartDate xsi:nil="true" />
-    <RequiredEffortTime>P2D</RequiredEffortTime>
+    <RequiredEffortTime>P3D</RequiredEffortTime>
     <CompleteDate xsi:nil="true" />
     <FinalProduct>FinalProduct - Blockchain solutions</FinalProduct>
     <Remarks>Remarks - Blockchain solutions</Remarks>
@@ -299,5 +299,20 @@
     <Complexity>Intermediate</Complexity>
     <DeadlineDate xsi:nil="true" />
     <IsMileStone xsi:nil="true" />
+  </Task>
+  <Task>
+    <ID>500</ID>
+    <NickName>www</NickName>
+    <Description>eeee</Description>
+    <ScheduledDate xsi:nil="true" />
+    <StartDate xsi:nil="true" />
+    <RequiredEffortTime>P20D</RequiredEffortTime>
+    <CompleteDate xsi:nil="true" />
+    <FinalProduct>rrrr</FinalProduct>
+    <Remarks>tttt</Remarks>
+    <EngineerId xsi:nil="true" />
+    <Complexity>Beginner</Complexity>
+    <DeadlineDate xsi:nil="true" />
+    <IsMileStone>false</IsMileStone>
   </Task>
 </ArrayOfTask>

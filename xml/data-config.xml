@@ -1,8 +1,8 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <config>
-  <ProjectStartDate></ProjectStartDate>
-  <ProjectEndDate></ProjectEndDate>
-  <ProjectStatus>planning</ProjectStatus>
-  <NextTaskId>221</NextTaskId>
-  <NextDependencyId>412</NextDependencyId>
+  <ProjectStartDate>11/12/2024 00:00:00</ProjectStartDate>
+  <ProjectEndDate>11/12/2025 00:00:00</ProjectEndDate>
+  <ProjectStatus>BuildingSchedule</ProjectStatus>
+  <NextTaskId>501</NextTaskId>
+  <NextDependencyId>875</NextDependencyId>
 </config>

@@ -97,11 +97,11 @@ sealed internal class DalXml : IDal
     public void changeStatusToBuildingSchedule()
     {
         XElement root = XMLTools.LoadListFromXMLElement(Config.s_data_config_xml);
-        if(root.Element("status")!.Value == DO.ProjectStatus.Execution.ToString())
+        if(root.Element("ProjectStatus")!.Value == DO.ProjectStatus.Execution.ToString())
         {
             throw new DalChangProjectStatusException("can't change status from Execution to BuildingSchedule");
         }
-        root.Element("status")!.SetValue(DO.ProjectStatus.BuildingSchedule.ToString());
+        root.Element("ProjectStatus")!.SetValue(DO.ProjectStatus.BuildingSchedule.ToString());
         XMLTools.SaveListToXMLElement(root, Config.s_data_config_xml);
 
     }
