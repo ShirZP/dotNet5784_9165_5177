@@ -108,7 +108,6 @@ internal class TaskImplementation : ITask
                            dalTask.ScheduledDate,
                            dalTask.StartDate,
                            calculateForecastDate(dalTask),
-                           dalTask.DeadlineDate,
                            dalTask.CompleteDate,
                            dalTask.RequiredEffortTime,
                            dalTask.FinalProduct,

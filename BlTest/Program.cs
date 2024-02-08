@@ -1,5 +1,7 @@
-﻿using DalApi;
+﻿using BO;
+using DalApi;
 using DalTest;
+using System.Collections.Generic;
 using System.Collections.Specialized;
 
 namespace BlTest;
@@ -91,7 +93,7 @@ internal class Program
     private static void taskSubMenu()
     {
         int choice, id;
-        Task? task;
+        BO.Task? task;
         printTaskSubMenu();
         string? intString;   //string to convert to int
         intString = Console.ReadLine()!;
@@ -103,26 +105,25 @@ internal class Program
             {
                 case 1:  //Create
                     task = inputCreateTask();
-                    s_dal!.Task.Create(task);
+                    s_bl!.Task.Create(task);
                     break;
 
                 case 2:  //Read
                     Console.WriteLine("Enter Task ID to read:");
                     intString = Console.ReadLine()!;
                     int.TryParse(intString, out id);
-                    task = s_dal!.Task.Read(item => item.ID == id);
-                    if (task != null)
+                    try
                     {
-                        Console.WriteLine(task);
+                        task = s_bl!.Task.Read(id);
                     }
-                    else
+                    catch(Exception ex)
                     {
-                        Console.WriteLine($"The Task With ID = {id} does not exist");
+                        Console.WriteLine(ex);
                     }
                     break;
 
                 case 3:  //ReadAll
-                    IEnumerable<Task?> tasksList = s_dal!.Task.ReadAll();
+                    IEnumerable<TaskInList> tasksList = s_bl!.Task.ReadAll();
                     foreach (var t in tasksList)
                     {
                         Console.WriteLine(t);
@@ -133,12 +134,16 @@ internal class Program
                     Console.WriteLine("Enter task ID to update:");
                     intString = Console.ReadLine()!;
                     int.TryParse(intString, out id);
-                    task = s_dal!.Task.Read(item => item.ID == id);
-                    if (task != null)
+                    try
                     {
+                        task = s_bl!.Task.Read(id);
                         Console.WriteLine(task);   //Before the update prints the task to update.
                         task = inputUpdateTask(task);
-                        s_dal!.Task.Update(task);
+                        s_bl!.Task.Update(task);
+                    }
+                    catch (Exception ex)
+                    {
+                        Console.WriteLine(ex);
                     }
                     break;
 
@@ -425,4 +430,91 @@ internal class Program
         }
       
     }
+
+    /// <summary>
+    /// Input fields of Task.
+    /// </summary>
+    /// <returns>Object type Task</returns>
+    private static BO.Task inputCreateTask()
+    {
+        string nickName, description;
+        string? finalProduct, remarks;
+        string? dateString, intString;
+        TimeSpan? requiredEffortTime;
+        int? complexityNum;
+        DO.EngineerExperience? complexity;
+
+        //nickName
+        Console.WriteLine("Enter task nickName:");
+        nickName = Console.ReadLine()!;
+
+        //description
+        Console.WriteLine("Enter task description:");
+        description = Console.ReadLine()!;
+
+        //requiredEffortTime
+        Console.WriteLine("Enter task required effort time to complete:");
+        dateString = Console.ReadLine();
+        requiredEffortTime = TryParseTimeSpan(dateString);
+
+        //finalProduct
+        Console.WriteLine("Enter task finalProduct:");
+        finalProduct = Console.ReadLine();
+
+        //remarks
+        Console.WriteLine("Enter task remarks:");
+        remarks = Console.ReadLine();
+
+        //complexity
+        Console.WriteLine("Choose task complexity:" + "0 - Beginner\n" + "1 - AdvancedBeginner\n" + "2 - Intermediate\n" + "3 - Advanced\n" + "4 - Expert\n");
+        intString = Console.ReadLine();
+        if (intString != null)
+        {
+            complexityNum = TryParseInt(intString);
+            complexity = (DO.EngineerExperience)complexityNum!;
+        }
+        else
+        {
+            complexity = null;
+        }
+
+        List < TaskInList > dependencies = new List<TaskInList> ();
+        return new BO.Task(0, nickName, description, BO.Status.New, dependencies, null, null, null, null, null, requiredEffortTime, finalProduct, remarks, null, complexity);
+    }
+
+    #region   TryParse methods
+    /// <summary>
+    /// The function accepts a string and returns it in dateTime format if successful, otherwise it returns null.
+    /// </summary>
+    /// <param name="text">Sring to convert to dateTime.</param>
+    /// <returns></returns>
+    public static DateTime? TryParseDateTime(string? text)
+    {
+        DateTime date;
+        return DateTime.TryParse(text, out date) ? date : (DateTime?)null;
+    }
+
+    /// <summary>
+    /// The function accepts a string and returns it in timeSpan format if successful, otherwise it returns null.
+    /// </summary>
+    /// <param name="text">Sring to convert to timeSpan.</param>
+    /// <returns></returns>
+    public static TimeSpan? TryParseTimeSpan(string? text)
+    {
+        TimeSpan date;
+        return TimeSpan.TryParse(text, out date) ? date : (TimeSpan?)null;
+    }
+
+    /// <summary>
+    /// The function accepts a string and returns it in int format if successful, otherwise it returns null.
+    /// </summary>
+    /// <param name="text">Sring to convert to int.</param>
+    /// <returns></returns>
+    public static int? TryParseInt(string? text)
+    {
+        int num;
+        return int.TryParse(text, out num) ? num : (int?)null;
+    }
+
+    #endregion
 }
