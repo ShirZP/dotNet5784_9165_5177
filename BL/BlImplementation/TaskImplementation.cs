@@ -31,8 +31,6 @@ internal class TaskImplementation : ITask
         checkTaskFields(task, projectStatus);
 
         //create dal task
-        int assignedEngineerID = task.AssignedEngineer!.ID;
-
         DO.Task doTask = new DO.Task(task.ID,
                                      task.NickName,
                                      task.Description, 
@@ -42,7 +40,7 @@ internal class TaskImplementation : ITask
                                      task.CompleteDate, 
                                      task.Deliverables, 
                                      task.Remarks, 
-                                     assignedEngineerID, 
+                                     null, 
                                      task.Complexity, 
                                      task.DeadlineDate);
 
@@ -366,7 +364,7 @@ internal class TaskImplementation : ITask
     private void checkTaskFields(BO.Task task, BO.ProjectStatus projectStatus)
     {
 
-        if (task.ID <= 0)
+        if (task.ID < 0)
             throw new BlIntException("The task's ID number must be positive!");
 
         if (task.NickName == null || task.NickName == "")

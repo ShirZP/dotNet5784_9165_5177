@@ -307,7 +307,7 @@
             email = Console.ReadLine();
 
             //level
-            Console.WriteLine("Choose engineer level:" + "0 - Beginner\n" + "1 - AdvancedBeginner\n" + "2 - Intermediate\n" + "3 - Advanced\n" + "4 - Expert\n");
+            Console.WriteLine("Choose engineer level:\n" + "0 - Beginner\n" + "1 - AdvancedBeginner\n" + "2 - Intermediate\n" + "3 - Advanced\n" + "4 - Expert\n");
             intString = Console.ReadLine()!;
             int.TryParse(intString, out level);
 
@@ -415,7 +415,7 @@
             remarks = Console.ReadLine();
 
             //complexity
-            Console.WriteLine("Choose task complexity:" + "0 - Beginner\n" + "1 - AdvancedBeginner\n" + "2 - Intermediate\n" + "3 - Advanced\n" + "4 - Expert\n");
+            Console.WriteLine("Choose task complexity:\n" + "0 - Beginner\n" + "1 - AdvancedBeginner\n" + "2 - Intermediate\n" + "3 - Advanced\n" + "4 - Expert\n");
             intString = Console.ReadLine();
             if (intString != null)
             {
@@ -619,11 +619,11 @@
 
                         s_bl.SetProjectStartDate(startDate);
 
-                        Console.WriteLine("Do you want to enter a end date to the project");
+                        Console.WriteLine("Do you want to enter an end date to the project? (Y/N)");
                         ans = Console.ReadLine() ?? throw new FormatException("Wrong input");
                         if (ans == "Y")
                         {
-                            Console.WriteLine("Enter a end date to the project");
+                            Console.WriteLine("Enter an end date to the project:");
                             ans = Console.ReadLine() ?? throw new FormatException("Wrong input");
 
                             //convert end date type string to DateTime type
