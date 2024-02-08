@@ -20,7 +20,7 @@ internal class TaskImplementation : ITask
     /// <param name="task">An object of type BO.Task</param>
     public int Create(BO.Task task)
     {
-        BO.ProjectStatus projectStatus = _bl.CalculateProjectStatus();
+        BO.ProjectStatus projectStatus = _bl.GetProjectStatus();
         if(projectStatus == BO.ProjectStatus.Execution)
         {
             throw new BO.BlProjectStatusException("New tasks cannot be added during the execution stage!");
@@ -143,7 +143,7 @@ internal class TaskImplementation : ITask
     /// <exception cref="BO.BlDoesNotExistException">if the task is not exists</exception>
     public void Update(BO.Task updatedTask)
     {
-        BO.ProjectStatus projectStatus = _bl.CalculateProjectStatus();
+        BO.ProjectStatus projectStatus = _bl.GetProjectStatus();
 
         //validation of the task's fields
         checkTaskFields(updatedTask, projectStatus);
