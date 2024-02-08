@@ -58,7 +58,6 @@
                 int.TryParse(intString, out choice);
 
             } while (choice != 0);
-            
         }
         
         /// <summary>
