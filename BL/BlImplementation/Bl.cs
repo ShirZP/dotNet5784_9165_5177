@@ -30,5 +30,45 @@ internal class Bl : IBl
             //If there is a start date for the project and all the tasks also have a planned start date – the execution stage.
             return BO.ProjectStatus.Execution;
         }
-    }  
+    }
+
+    /// <summary>
+    /// The function returns thw project status from the data layer.
+    /// </summary>
+    public BO.ProjectStatus GetProjectStatus()
+    {
+        int numStatus = (int)_dal.getProjectStatus();
+
+        return (BO.ProjectStatus)numStatus;
+    }
+
+    public DateTime? GetProjectStartDate()
+    {
+        return _dal.getProjectStartDate();  
+    }
+
+    public void SetProjectStartDate(DateTime startDate)
+    {
+        _dal.setProjectStartDate(startDate);    
+    }
+
+    public DateTime? GetProjectEndDate()
+    {
+        return _dal.getProjectEndDate();
+    }
+
+    public void SetProjectEndDate(DateTime endDate)
+    {
+        _dal.setProjectEndDate(endDate);
+    }
+
+    public void changeStatusToBuildingSchedule()
+    {
+        _dal.changeStatusToBuildingSchedule();
+    }
+
+    public void changeStatusToExecution()
+    {
+        _dal.changeStatusToExecution();
+    }
 }

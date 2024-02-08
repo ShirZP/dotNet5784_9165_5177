@@ -166,7 +166,7 @@ internal class EngineerImplementation : IEngineer
     /// <exception cref="BlEmptyStringException">If the string is empty throw an exception.</exception>
     private void checkEngineerFields(BO.Engineer engineer)
     {
-        BO.ProjectStatus projectStatus = _bl.CalculateProjectStatus();
+        BO.ProjectStatus projectStatus = _bl.GetProjectStatus();
 
         if (engineer.ID < 100000000 || engineer.ID > 999999999)
         {
