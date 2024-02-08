@@ -10,7 +10,7 @@ internal class Bl : IBl
 
     public IEngineer Engineer => new EngineerImplementation();
 
-    public ProjectStatus CalculateProjectStatus()
+    public BO.ProjectStatus CalculateProjectStatus()
     {
         //If there is no start date for the project yet - the planning stage.
         if (_dal.getProjectStartDate() == null)

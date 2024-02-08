@@ -10,6 +10,7 @@ using static System.Runtime.InteropServices.JavaScript.JSType;
 internal class TaskImplementation : ITask
 {
     private DalApi.IDal _dal = DalApi.Factory.Get;
+    private BlApi.IBl _bl = BlApi.Factory.Get();
 
     /// <summary>
     /// The function recieves an object of type BO.Task.
@@ -19,8 +20,14 @@ internal class TaskImplementation : ITask
     /// <param name="task">An object of type BO.Task</param>
     public int Create(BO.Task task)
     {
+        BO.ProjectStatus projectStatus = _bl.CalculateProjectStatus();
+        if(projectStatus == BO.ProjectStatus.Execution)
+        {
+            throw new BO.BlProjectStatusException("New tasks cannot be added during the execution stage!");
+        }
+
         //validation of the task's fields
-        checkTaskFields(task);
+        checkTaskFields(task, projectStatus);
 
         //create dal task
         int assignedEngineerID = task.AssignedEngineer!.ID;
@@ -136,8 +143,10 @@ internal class TaskImplementation : ITask
     /// <exception cref="BO.BlDoesNotExistException">if the task is not exists</exception>
     public void Update(BO.Task updatedTask)
     {
+        BO.ProjectStatus projectStatus = _bl.CalculateProjectStatus();
+
         //validation of the task's fields
-        checkTaskFields(updatedTask);
+        checkTaskFields(updatedTask, projectStatus);
 
         //Adding new dependencies in the data layer for each new task that added to the dependencies list in the updated task
 
@@ -147,6 +156,18 @@ internal class TaskImplementation : ITask
                            let dalDependency = _dal.Dependency.Read(item => item.DependentTask == updatedTask.ID && item.DependensOnTask == taskInList.ID) //Retrieving the dependency on which the updatedTask depends on the task
                            group taskInList by (dalDependency == null) into dalDep
                            select dalDep);
+
+        if (projectStatus == BO.ProjectStatus.Execution)
+        {
+            BO.TaskInList? noDependencytask = (from taskInList in dalDependencies
+                                               where taskInList.Key == true
+                                               from task in taskInList
+                                               select task).FirstOrDefault();
+
+            if (noDependencytask != null)
+                throw new BO.BlProjectStatusException("New dependencies cannot be added during the execution stage!");
+        }
+    
 
         //For the tasks (in updatedTask's dependencies list) that do not have dependencies in the data layer - we will create dependencies
         var d = (from task in dalDependencies
@@ -217,11 +238,23 @@ internal class TaskImplementation : ITask
         }
     }
 
-    public void ScheduledDateUpdate(int id, DateTime? newScheduledDate)
+    public void ScheduledDateUpdate(int id, DateTime? newScheduledDate, BO.ProjectStatus projectStatus)
     {
         if (newScheduledDate.HasValue)
         {
+
+            if(projectStatus == BO.ProjectStatus.Planning)
+            {
+                throw new BO.BlProjectStatusException("A scheduled task date cannot be edited when the project status is in planning!");
+            }
+
             BO.Task updateTask = Read(id);
+
+            if (projectStatus == BO.ProjectStatus.Execution && updateTask.ScheduledDate != newScheduledDate)
+            {
+                throw new BO.BlProjectStatusException("A scheduled task date cannot be edited when the project status is in Execution!");
+            }
+           
             BO.TaskInList? nullScheduledDateInTask = (from taskInList in updateTask.Dependencies
                                                       where Read(taskInList.ID).ScheduledDate == null
                                                       select taskInList).FirstOrDefault();
@@ -310,8 +343,9 @@ internal class TaskImplementation : ITask
     /// <param name="task">BO task object</param>
     /// <exception cref="BlPositiveIntException">If the number is negative or equal to zero, throw an exception.</exception>
     /// <exception cref="BlEmptyStringException">If the string is empty throw an exception.</exception>
-    private void checkTaskFields(BO.Task task)
+    private void checkTaskFields(BO.Task task, BO.ProjectStatus projectStatus)
     {
+
         if (task.ID <= 0)
             throw new BlIntException("The task's ID number must be positive!");
 
@@ -323,13 +357,28 @@ internal class TaskImplementation : ITask
 
         checkStatusField(task);
 
-        ScheduledDateUpdate(task.ID, task.ScheduledDate);
+        ScheduledDateUpdate(task.ID, task.ScheduledDate, projectStatus);
 
-        if (task.RequiredEffortTime != null && task.RequiredEffortTime.Value.TotalMilliseconds <= 0)
-            throw new BlIntException($"Required effort time can't be 0 or below");
+        checkRequiredEffortTimeField(task, projectStatus);
 
-        checkAssignedEngineerField(task);
+        checkAssignedEngineerField(task, projectStatus);
+    }
 
+    private void checkRequiredEffortTimeField(BO.Task task, BO.ProjectStatus projectStatus)
+    {
+        if (task.RequiredEffortTime != null)
+        {
+            if (projectStatus == BO.ProjectStatus.Execution)
+            {
+                DO.Task? dalTask = _dal.Task.Read(item => item.ID == task.ID);
+
+                if (task.RequiredEffortTime != dalTask!.RequiredEffortTime)
+                    throw new BO.BlProjectStatusException("A required effort time cannot be edited when the project status is in Execution!");
+            }
+
+            if (task.RequiredEffortTime.Value.TotalMilliseconds <= 0)
+                throw new BlIntException($"Required effort time can't be 0 or below");
+        }
 
     }
 
@@ -361,10 +410,15 @@ internal class TaskImplementation : ITask
     /// <param name="task"></param>
     /// <exception cref="BO.BlIntException"></exception>
     /// <exception cref="BO.BlEmptyStringException"></exception>
-    private void checkAssignedEngineerField(BO.Task task)
+    private void checkAssignedEngineerField(BO.Task task, BO.ProjectStatus projectStatus)
     {
         if (task.AssignedEngineer != null)
         {
+            if (projectStatus == BO.ProjectStatus.Planning)
+            {
+                throw new BO.BlProjectStatusException("A asigned engineer field cannot be edited when the project status is in planning!");
+            }
+
             int assignedEngineerID = task.AssignedEngineer.ID;
             try
             {

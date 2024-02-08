@@ -82,3 +82,10 @@ public class BlInappropriateLevelException : Exception //רמה לא מתאימ�
     public BlInappropriateLevelException(string? message) : base(message) { }
 }
 
+[Serializable]
+public class BlProjectStatusException : Exception  //בעיה בסטטוס הפרויקט
+{
+    public BlProjectStatusException(string? message) : base(message) { }
+}
+
+
