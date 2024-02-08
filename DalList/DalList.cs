@@ -44,7 +44,7 @@ sealed internal class DalList : IDal
 
     public void initializeProjectStatus()
     {
-        DataSource.Config.projectStatus = DO.ProjectStatus.planning;
+        DataSource.Config.projectStatus = DO.ProjectStatus.Planning;
     }
 
     /// <summary>
@@ -67,7 +67,7 @@ sealed internal class DalList : IDal
     /// <exception cref="DalChangProjectStatusException">If you try to change from status planning to status Execution</exception>
     public void changeStatusToExecution()
     {
-        if (DataSource.Config.projectStatus == DO.ProjectStatus.planning)
+        if (DataSource.Config.projectStatus == DO.ProjectStatus.Planning)
         {
             throw new DalChangProjectStatusException("can't change status from planning to Execution");
         }

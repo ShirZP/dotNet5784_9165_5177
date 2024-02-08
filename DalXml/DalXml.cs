@@ -81,7 +81,7 @@ sealed internal class DalXml : IDal
         XElement root = XMLTools.LoadListFromXMLElement(Config.s_data_config_xml);
 
         //initialize status
-        root.Element("status")!.SetValue(DO.ProjectStatus.planning.ToString());
+        root.Element("status")!.SetValue(DO.ProjectStatus.Planning.ToString());
 
         //initialize project dates
         root.Element("ProjectStartDate")!.SetValue(null); //TODO: ???????NULL???????
@@ -113,7 +113,7 @@ sealed internal class DalXml : IDal
     public void changeStatusToExecution()
     {
         XElement root = XMLTools.LoadListFromXMLElement(Config.s_data_config_xml);
-        if (root.Element("status")!.Value == DO.ProjectStatus.planning.ToString())
+        if (root.Element("status")!.Value == DO.ProjectStatus.Planning.ToString())
         {
             throw new DalChangProjectStatusException("can't change status from planning to Execution");
         }

@@ -2,7 +2,7 @@
 
 public enum ProjectStatus
 {
-    planning,
+    Planning,
     BuildingSchedule,
     Execution
 }

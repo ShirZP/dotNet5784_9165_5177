@@ -6,7 +6,7 @@ internal static class DataSource
     {
         internal static DateTime? projectStartDate = null;
         internal static DateTime? projectEndDate = null;
-        internal static DO.ProjectStatus projectStatus = DO.ProjectStatus.planning;
+        internal static DO.ProjectStatus projectStatus = DO.ProjectStatus.Planning;
 
        //Unique ID number for a Task
        internal const int startTaskId = 1;
