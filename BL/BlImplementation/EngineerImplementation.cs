@@ -63,7 +63,7 @@ internal class EngineerImplementation : IEngineer
             IEnumerable<DO.Task?> updatedTasks = (from task in tasks
                                                   let updateTask = task with { EngineerId = null }
                                                   select updateTask).ToList();
-            //TODO: how to do without foreach 
+           
             foreach (DO.Task? task in updatedTasks)
             {
                 if (task != null)
@@ -193,7 +193,6 @@ internal class EngineerImplementation : IEngineer
 
         checkEngineerCurrentTask(engineer, projectStatus);
     }
-
 
     /// <summary>
     /// The founction check the updating of the field engineerCurrentTask

@@ -66,22 +66,22 @@ internal class TaskImplementation : ITask
     /// <exception cref="BlDoesNotExistException">if the task is not exists</exception>
     public void Delete(int id)
     {
-        //Finding all dependencies on which the current task has a dependency
-        IEnumerable<DO.Dependency?>? dependencies = _dal.Dependency.ReadAll(item => item.DependensOnTask == id);
-
-        //TODO: אי אפשר למחוק משימות לאחר יצירת לו"ז הפרויקט.
-
-        if (dependencies != null)
-            throw new BlThereIsADependencyOnTheTaskException($"There are tasks that depend on the task - {id}");
-        try
+        if (_bl.GetProjectStatus() != BO.ProjectStatus.Execution)
         {
-            _dal.Task.Delete(id);
-        }
-        catch (DO.DalDoesNotExistException dalex)
-        {
-            throw new BlDoesNotExistException($"An object of type Task with ID={id} does not exist", dalex);
-        }
-        
+            //Finding all dependencies on which the current task has a dependency
+            IEnumerable<DO.Dependency?>? dependencies = _dal.Dependency.ReadAll(item => item.DependensOnTask == id);
+
+            if (dependencies != null)
+                throw new BlThereIsADependencyOnTheTaskException($"There are tasks that depend on the task - {id}");
+            try
+            {
+                _dal.Task.Delete(id);
+            }
+            catch (DO.DalDoesNotExistException dalex)
+            {
+                throw new BlDoesNotExistException($"An object of type Task with ID={id} does not exist", dalex);
+            }
+        }             
     }
 
     /// <summary>
@@ -114,7 +114,7 @@ internal class TaskImplementation : ITask
                            dalTask.FinalProduct,
                            dalTask.Remarks,
                            getAssignedEngineer(dalTask),
-                           dalTask.Complexity);//TODO: maybe remove dalTask.DeadlineDate 
+                           dalTask.Complexity);
     }
 
     /// <summary>
@@ -202,7 +202,6 @@ internal class TaskImplementation : ITask
                 }
             }
 
-            //TODO: remove the foreach
         }
         else if(updatedTask.Dependencies == null && blOldTask.Dependencies != null)
         {

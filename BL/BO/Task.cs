@@ -26,12 +26,7 @@ public class Task
     /// A list of tasks that the current task depends on
     /// </summary>
     public List<TaskInList> Dependencies { get; set; }
-
-    /// <summary>
-    /// Related milestone
-    /// </summary>
-    //TODO: public MilestoneInTask? Milestone { get; set; } 
-
+   
     /// <summary>
     /// Task creation date - calculated property
     /// </summary>

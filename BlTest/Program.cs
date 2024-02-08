@@ -32,7 +32,7 @@ internal class Program
                         taskSubMenu();
                         break;
                     case 2:
-                        printEngineerSubMenu();
+                        engineerSubMenu();
                         break;
                     case 3:
                         changeProjectStatus();
@@ -79,8 +79,8 @@ internal class Program
     /// </summary>
     private static void printEngineerSubMenu()
     {
-        Console.WriteLine($"Select an action for the engineer:");
-        Console.WriteLine("1 - Create\n" + "2 - Read\n" + "3 - ReadAll\n" + "4 - Update\n" + "5 - Delete\n" + "0 - Exit\n");
+        Console.WriteLine($"Select an action for the engineer:"); 
+        Console.WriteLine("1 - Create\n" + "2 - Read\n" + "3 - ReadAll\n" + "4 - Update\n" + "5 - Delete\n" + "6 - SortByName\n" + "0 - Exit\n");
     }
 
 
@@ -161,6 +161,141 @@ internal class Program
             int.TryParse(intString, out choice);
         }
     }
+
+    /// <summary>
+    /// All the operation that we can do on engineer (CRUD).
+    /// </summary>
+    private static void engineerSubMenu()
+    {
+        int choice, id;
+        string? intString;    //string to convert to int
+        BO.Engineer? engineer, newEngineer;
+        printEngineerSubMenu();
+        intString = Console.ReadLine()!;
+        int.TryParse(intString, out choice);
+
+
+        while (choice != 0)
+        {
+            switch (choice)
+            {
+                case 1:  //Create
+                    newEngineer = inputCreateEngineer();
+                    s_bl!.Engineer.Create(newEngineer);
+                    break;
+
+                case 2:  //Read
+                    Console.WriteLine("Enter engineer ID:");
+                    intString = Console.ReadLine()!;
+                    int.TryParse(intString, out id);
+                    engineer = s_dal!.Engineer.Read(item => item.ID == id);
+                    if (engineer != null)
+                    {
+                        Console.WriteLine(engineer);
+                    }
+                    else
+                    {
+                        Console.WriteLine($"The engineer with ID = {id} does not exist");
+                    }
+                    break;
+
+                case 3:  //ReadAll
+                    IEnumerable<Engineer?> engineersList = s_dal!.Engineer.ReadAll();
+                    foreach (var e in engineersList)
+                    {
+                        Console.WriteLine(e);
+                    }
+                    break;
+
+                case 4:  //Update
+                    Console.WriteLine("Enter engineer ID to update:");
+                    intString = Console.ReadLine()!;
+                    int.TryParse(intString, out id);
+                    engineer = s_dal!.Engineer.Read(item => item.ID == id);
+                    if (engineer != null)
+                    {
+                        Console.WriteLine(engineer);   //Before the update prints the engineer to update.
+
+                        newEngineer = inputUpdateEngineer(engineer);
+                        s_dal!.Engineer.Update(newEngineer);
+
+                        Console.WriteLine($"Engineer {id} update successfully");
+                    }
+                    else
+                    {
+                        Console.WriteLine($"The engineer with ID = {id} does not exist");
+                    }
+                    break;
+
+                case 5:  //Delete
+                    Console.WriteLine("Enter engineer ID to read:");
+                    intString = Console.ReadLine()!;
+                    int.TryParse(intString, out id);
+                    s_dal!.Engineer.Delete(id);
+                    Console.WriteLine($"Engineer {id} deleted successfully");
+                    break;
+
+                case 0:
+                    break;
+
+                default:
+                    break;
+            }
+
+            printSubMenu("Engineer");
+            intString = Console.ReadLine()!;
+            int.TryParse(intString, out choice);
+        }
+
+    }
+
+
+    /// <summary>
+    /// Input fields of Engineer.
+    /// </summary>
+    /// <returns>Object type Engineer</returns>
+    private static BO.Engineer inputCreateEngineer()
+    {
+        int id, level, cost, currentTaskId;
+        string? intString;    //string to convert to int
+        string? nameEngineer, email;
+
+        //ID
+        Console.WriteLine("Enter engineer ID:");
+        intString = Console.ReadLine()!;
+        int.TryParse(intString, out id);
+
+        //nameEngineer
+        Console.WriteLine("Enter engineer full name:");
+        nameEngineer = Console.ReadLine();
+
+        //email
+        Console.WriteLine("Enter engineer email:");
+        email = Console.ReadLine();
+
+        //level
+        Console.WriteLine("Choose engineer level:" + "0 - Beginner\n" + "1 - AdvancedBeginner\n" + "2 - Intermediate\n" + "3 - Advanced\n" + "4 - Expert\n");
+        intString = Console.ReadLine()!;
+        int.TryParse(intString, out level);
+
+        //cost
+        Console.WriteLine("Enter engineer cost:");
+        intString = Console.ReadLine()!;
+        int.TryParse(intString, out cost);
+
+        //EngineerCurrentTask
+        Console.WriteLine("Enter engineer current task:");
+        Console.WriteLine("Enter current task ID:");
+        intString = Console.ReadLine()!;
+        int.TryParse(intString, out currentTaskId);
+
+
+        //create newEngineer
+        return new BO.Engineer(id, nameEngineer, email, ((BO.EngineerExperience)level), cost, null);
+
+    }
+
+
 
     /// <summary>
     /// The function change the status of the project.
