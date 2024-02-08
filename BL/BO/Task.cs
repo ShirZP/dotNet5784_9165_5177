@@ -85,17 +85,13 @@ public class Task
     /// <summary>
     /// Task Ctor with parameters.
     /// </summary>
-    public Task(int id, string nickName, string description, BO.Status status, List<TaskInList> dependencies, DateTime createAtDate, DateTime? scheduledDate, DateTime? startDate, DateTime? forecastDate, DateTime? deadlineDate, DateTime? completeDate, TimeSpan? requiredEffortTime, string? deliverables, string? remarks, EngineerInTask? assignedEngineer, DO.EngineerExperience? complexity)
-    {//MilestoneInTask? milestone
-
-
+    public Task(int id, string nickName, string description, BO.Status status, List<TaskInList> dependencies, DateTime? scheduledDate, DateTime? startDate, DateTime? forecastDate, DateTime? deadlineDate, DateTime? completeDate, TimeSpan? requiredEffortTime, string? deliverables, string? remarks, EngineerInTask? assignedEngineer, DO.EngineerExperience? complexity)
+    {
         ID = id;
         NickName = nickName;    
         Description = description;
         Status = status;    
         Dependencies = dependencies;    
-        //Milestone = milestone;
-        CreateAtDate = createAtDate;
         ScheduledDate = scheduledDate;  
         StartDate = startDate;  
         ForecastDate = forecastDate;    
