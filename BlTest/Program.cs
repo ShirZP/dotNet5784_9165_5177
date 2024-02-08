@@ -17,6 +17,7 @@
                 s_bl.initializeProjectStatus();
             }
 
+
             int choice;
             string? intString;  //string to convert to int
             printMainMenu();
