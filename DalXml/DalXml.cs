@@ -81,11 +81,11 @@ sealed internal class DalXml : IDal
         XElement root = XMLTools.LoadListFromXMLElement(Config.s_data_config_xml);
 
         //initialize status
-        root.Element("status")!.SetValue(DO.ProjectStatus.Planning.ToString());
+        root.Element("ProjectStatus")!.SetValue(DO.ProjectStatus.Planning.ToString());
 
         //initialize project dates
-        root.Element("ProjectStartDate")!.SetValue(null); //TODO: ???????NULL???????
-        root.Element("ProjectEndDate")!.SetValue(null);
+        root.Element("ProjectStartDate")!.SetValue("");
+        root.Element("ProjectEndDate")!.SetValue("");
 
         XMLTools.SaveListToXMLElement(root, Config.s_data_config_xml);
     }

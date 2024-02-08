@@ -45,6 +45,8 @@ sealed internal class DalList : IDal
     public void initializeProjectStatus()
     {
         DataSource.Config.projectStatus = DO.ProjectStatus.Planning;
+        DataSource.Config.projectStartDate = null;
+        DataSource.Config.projectEndDate = null;
     }
 
     /// <summary>

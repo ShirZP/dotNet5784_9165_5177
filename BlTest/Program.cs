@@ -14,6 +14,7 @@
             if (ans == "Y")
             {
                 DalTest.Initialization.Do();
+                s_bl.initializeProjectStatus();
             }
 
             int choice;

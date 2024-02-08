@@ -71,4 +71,9 @@ internal class Bl : IBl
     {
         _dal.changeStatusToExecution();
     }
+
+    public void initializeProjectStatus()
+    {
+        _dal.initializeProjectStatus();
+    }
 }

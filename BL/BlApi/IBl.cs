@@ -12,4 +12,5 @@ public interface IBl
     public DateTime? GetProjectEndDate();
     public void changeStatusToBuildingSchedule();
     public void changeStatusToExecution();
+    public void initializeProjectStatus();
 }
