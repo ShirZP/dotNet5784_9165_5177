@@ -12,7 +12,7 @@ public interface ITask
 
     public void Delete(int id);  //Deletes a task by its id
 
-    public void ScheduledDateUpdate(int id, DateTime? newScheduledDate);  //Update a task's scheduled start date
+    public void ScheduledDateUpdate(int id, DateTime? newScheduledDate, BO.ProjectStatus projectStatus);  //Update a task's scheduled start date
 
     public IEnumerable<BO.TaskInList> SortByID();
 }
