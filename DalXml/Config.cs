@@ -1,7 +1,7 @@
 ﻿namespace Dal;
 internal static class Config
 {
-    static string s_data_config_xml = "data-config";
+    internal static string s_data_config_xml = "data-config";
 
     internal static DateTime? ProjectStartDate { get => XMLTools.GetProjectDate(s_data_config_xml, "ProjectStartDate");}
     internal static DateTime? ProjectEndDate { get => XMLTools.GetProjectDate(s_data_config_xml, "ProjectEndDate");}

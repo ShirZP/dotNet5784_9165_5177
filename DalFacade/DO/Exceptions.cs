@@ -20,3 +20,9 @@ public class DalXMLFileLoadCreateException : Exception  //לא מצליח לטע
     public DalXMLFileLoadCreateException(string? message) : base(message) { }
 }
 
+[Serializable]
+public class DalChangProjectStatusException : Exception  //בעיה בשינוי סטטוס הפרויקט
+{
+    public DalChangProjectStatusException(string? message) : base(message) { }
+}
+
