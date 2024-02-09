@@ -117,6 +117,7 @@
                         try
                         {
                             task = s_bl!.Task.Read(id);
+                            Console.WriteLine(task);
                         }
                         catch (Exception ex)
                         {
@@ -430,7 +431,7 @@
             }
 
             List<TaskInList> dependencies = new List<TaskInList>();
-            return new BO.Task(0, nickName, description, BO.Status.New, dependencies, null, null, null, null, null, requiredEffortTime, finalProduct, remarks, null, complexity);
+            return new BO.Task(0, nickName, description, BO.Status.New, dependencies, null, null, null, null, requiredEffortTime, finalProduct, remarks, null, complexity);
         }
 
         /// <summary>
@@ -462,7 +463,7 @@
                 description = originalTask.Description;
 
             //Status
-            Console.WriteLine("Choose task status:" + "0 - New\n" + "1 - Active\n" + "2 - Complete\n");
+            Console.WriteLine("Choose task status:\n" + "0 - New\n" + "1 - Active\n" + "2 - Complete\n");
             intString = Console.ReadLine();
             BO.Status taskStatus;
             if (intString == null || intString == "")
@@ -472,7 +473,6 @@
                 statusNum = TryParseInt(intString);
                 taskStatus = (BO.Status)statusNum!;
             }
-
 
             //Dependencies
             int idDependency;
@@ -505,7 +505,7 @@
             if (timeString == null || timeString == "")
                 requiredEffortTime = originalTask.RequiredEffortTime;
             else
-                requiredEffortTime = TryParseTimeSpan(dateString);
+                requiredEffortTime = TryParseTimeSpan(timeString);
 
             //Deliverables
             Console.WriteLine("Enter task deliverables:");
@@ -522,14 +522,26 @@
             //AssignedEngineer
             Console.WriteLine("Enter the ID of the engineer responsible for carrying out the task:");
             intString = Console.ReadLine()!;
-            int.TryParse(intString, out assignedEngineerID);
 
-            Console.WriteLine("Enter the nick name of the engineer responsible for carrying out the task:");
-            assignedEngineerNickName = Console.ReadLine()!;
-
+            BO.EngineerInTask? assignedEngineer;
+            if (intString == null || intString == "")
+            {
+                if (originalTask.AssignedEngineer != null)
+                    assignedEngineer = originalTask.AssignedEngineer;
+                else
+                {
+                    assignedEngineer = null;
+                }
+            }
+            else
+            {
+                int.TryParse(intString, out assignedEngineerID);
+                BO.Engineer engineer = s_bl.Engineer.Read(assignedEngineerID);
+                assignedEngineer = new BO.EngineerInTask(engineer.ID, engineer.FullName);
+            }
 
             //complexity
-            Console.WriteLine("Choose task complexity:" + "0 - Beginner\n" + "1 - AdvancedBeginner\n" + "2 - Intermediate\n" + "3 - Advanced\n" + "4 - Expert\n");
+            Console.WriteLine("Choose task complexity:\n" + "0 - Beginner\n" + "1 - AdvancedBeginner\n" + "2 - Intermediate\n" + "3 - Advanced\n" + "4 - Expert\n");
             intString = Console.ReadLine();
             DO.EngineerExperience? complexity;
             if (intString == null || intString == "")
@@ -547,11 +559,11 @@
                                 taskStatus,
                                 dependenciesList,
                                 scheduledDate,
-                                null, null, null, null,
+                                null, null, null,
                                 requiredEffortTime,
                                 deliverables,
                                 remarks,
-                                new BO.EngineerInTask(assignedEngineerID, assignedEngineerNickName),
+                                assignedEngineer,
                                 complexity);
         }
 

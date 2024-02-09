@@ -33,16 +33,15 @@ internal class TaskImplementation : ITask
         //create dal task
         DO.Task doTask = new DO.Task(task.ID,
                                      task.NickName,
-                                     task.Description, 
-                                     task.ScheduledDate, 
-                                     task.StartDate, 
-                                     task.RequiredEffortTime, 
-                                     task.CompleteDate, 
-                                     task.Deliverables, 
-                                     task.Remarks, 
-                                     null, 
-                                     task.Complexity, 
-                                     task.DeadlineDate);
+                                     task.Description,
+                                     task.ScheduledDate,
+                                     task.StartDate,
+                                     task.RequiredEffortTime,
+                                     task.CompleteDate,
+                                     task.Deliverables,
+                                     task.Remarks,
+                                     null,
+                                     task.Complexity);
 
         //Creating a list of DO.Dependency objects
         IEnumerable<DO.Dependency>? dalDependenciesList = task.Dependencies.Select(taskInList => new DO.Dependency(0, task.ID, taskInList.ID)).Where(taskInList =>  taskInList != null);
@@ -67,10 +66,10 @@ internal class TaskImplementation : ITask
     {
         if (_bl.GetProjectStatus() != BO.ProjectStatus.Execution)
         {
-            //Finding all dependencies on which the current task has a dependency
-            IEnumerable<DO.Dependency?>? dependencies = _dal.Dependency.ReadAll(item => item.DependensOnTask == id);
+            //Finding all dependencies on which they depends on current task
+            IEnumerable<DO.Dependency>? dependencies = _dal.Dependency.ReadAll(item => item.DependensOnTask == id);
 
-            if (dependencies != null)
+            if (dependencies.Any())
                 throw new BlThereIsADependencyOnTheTaskException($"There are tasks that depend on the task - {id}");
             try
             {
@@ -103,7 +102,6 @@ internal class TaskImplementation : ITask
                            dalTask.Description,
                            calculateStatus(dalTask),
                            calculateDependencies(dalTask),
-                           dalTask.CreateAtDate,
                            dalTask.ScheduledDate,
                            dalTask.StartDate,
                            calculateForecastDate(dalTask),
@@ -363,7 +361,6 @@ internal class TaskImplementation : ITask
     /// <exception cref="BlEmptyStringException">If the string is empty throw an exception.</exception>
     private void checkTaskFields(BO.Task task, BO.ProjectStatus projectStatus)
     {
-
         if (task.ID < 0)
             throw new BlIntException("The task's ID number must be positive!");
 

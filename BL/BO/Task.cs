@@ -48,11 +48,6 @@ public class Task
     public DateTime? ForecastDate { get; set; } 
 
     /// <summary>
-    /// The latest possible date to Complete the task
-    /// </summary>
-    public DateTime? DeadlineDate { get; set; }
-
-    /// <summary>
     /// Actual task completion date
     /// </summary>
     public DateTime? CompleteDate { get; set; }
@@ -85,7 +80,7 @@ public class Task
     /// <summary>
     /// Task Ctor with parameters.
     /// </summary>
-    public Task(int id, string nickName, string description, BO.Status status, List<TaskInList> dependencies, DateTime? scheduledDate, DateTime? startDate, DateTime? forecastDate, DateTime? deadlineDate, DateTime? completeDate, TimeSpan? requiredEffortTime, string? deliverables, string? remarks, EngineerInTask? assignedEngineer, DO.EngineerExperience? complexity)
+    public Task(int id, string nickName, string description, BO.Status status, List<TaskInList> dependencies, DateTime? scheduledDate, DateTime? startDate, DateTime? forecastDate, DateTime? completeDate, TimeSpan? requiredEffortTime, string? deliverables, string? remarks, EngineerInTask? assignedEngineer, DO.EngineerExperience? complexity)
     {
         ID = id;
         NickName = nickName;    
@@ -95,7 +90,6 @@ public class Task
         ScheduledDate = scheduledDate;  
         StartDate = startDate;  
         ForecastDate = forecastDate;    
-        DeadlineDate = deadlineDate;    
         RequiredEffortTime = requiredEffortTime;    
         Deliverables = deliverables;    
         Remarks = remarks;  
