@@ -175,7 +175,7 @@ internal class EngineerImplementation : IEngineer
 
         if (engineer.FullName == null && engineer.FullName == "")
         {
-            throw new BO.BlEmptyStringException("The engineer's full name can't be empty!");
+            throw new BO.BlStringException("The engineer's full name can't be empty!");
         }
 
         if (engineer.Cost <= 0)
@@ -184,7 +184,10 @@ internal class EngineerImplementation : IEngineer
         }
 
         //check email
-        new EmailAddressAttribute().IsValid(engineer.Email);
+        if(!new EmailAddressAttribute().IsValid(engineer.Email))
+        {
+            throw new BlStringException("The engineer's email is not valid!");
+        }
 
         if (engineer.Level == null)
         {
