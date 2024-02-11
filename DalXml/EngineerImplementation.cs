@@ -144,7 +144,8 @@ internal class EngineerImplementation : IEngineer
             ID = XEngineer.ToIntNullable("id") ?? throw new FormatException("can't convert id"),
             FullName = (string?)XEngineer.Element("fullName") ?? "",
             Email = (string?)XEngineer.Element("email") ?? null,
-            Level = XEngineer.ToEnumNullable<DO.EngineerExperience>("level") ?? null
+            Level = XEngineer.ToEnumNullable<DO.EngineerExperience>("level") ?? null,
+            Cost = XEngineer.ToIntNullable("cost") ?? throw new FormatException("can't convert cost")
         };
     }
 

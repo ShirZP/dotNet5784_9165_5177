@@ -106,6 +106,12 @@
                 switch (choice)
                 {
                     case 1:  //Create
+                        if(s_bl.GetProjectStatus() == BO.ProjectStatus.Execution)
+                        {
+                            Console.WriteLine("It is not possible to create new tasks during the execution stage!");
+                            break;
+                        }
+
                         task = inputCreateTask();
                         s_bl!.Task.Create(task);
                         break;
@@ -207,6 +213,11 @@
                 switch (choice)
                 {
                     case 1:  //Create
+                        if (s_bl.GetProjectStatus() == BO.ProjectStatus.Execution)
+                        {
+                            Console.WriteLine("It is not possible to create new engineer during the execution stage!");
+                            break;
+                        }
                         newEngineer = inputCreateEngineer();
                         s_bl!.Engineer.Create(newEngineer);
                         break;
@@ -255,7 +266,7 @@
                         break;
 
                     case 5:  //Delete
-                        Console.WriteLine("Enter engineer ID to read:");
+                        Console.WriteLine("Enter engineer ID to delete:");
                         intString = Console.ReadLine()!;
                         int.TryParse(intString, out id);
                         s_bl!.Engineer.Delete(id);
@@ -331,7 +342,7 @@
         /// <returns>Object type Engineer</returns>
         private static BO.Engineer inputUpdateEngineer(BO.Engineer originalEngineer)
         {
-            int currentTaskID;   //TODO: nullable
+            int currentTaskID; 
             int? levelNum;
             double? cost;
             string? intString;    //string to convert to int
@@ -350,7 +361,7 @@
                 email = originalEngineer.Email;
 
             //level
-            Console.WriteLine("Choose engineer level:" + "0 - Beginner\n" + "1 - AdvancedBeginner\n" + "2 - Intermediate\n" + "3 - Advanced\n" + "4 - Expert\n");
+            Console.WriteLine("Choose engineer level:\n" + "0 - Beginner\n" + "1 - AdvancedBeginner\n" + "2 - Intermediate\n" + "3 - Advanced\n" + "4 - Expert\n");
             intString = Console.ReadLine()!;
             DO.EngineerExperience? level;
             if (intString == null || intString == "")
@@ -372,15 +383,27 @@
             //EngineerCurrentTask
             Console.WriteLine("Enter engineer current task ID:");
             intString = Console.ReadLine()!;
-            int.TryParse(intString, out currentTaskID);
-            //currentTaskID = TryParseInt(intString);
+            BO.TaskInEngineer? assignedTask;
 
-            Console.WriteLine("Enter engineer current task nick name:");
-            currentTaskNickName = Console.ReadLine()!;
+            if (intString == null || intString == "")
+            {
+                if (originalEngineer.EngineerCurrentTask != null)
+                    assignedTask = originalEngineer.EngineerCurrentTask;
+                else
+                {
+                    assignedTask = null;
+                }
+            }
+            else
+            {
+                int.TryParse(intString, out currentTaskID);
+                BO.Task task = s_bl.Task.Read(currentTaskID);
+                assignedTask = new BO.TaskInEngineer(task.ID, task.NickName);
+            }
 
 
             //update newEngineer
-            return new BO.Engineer(originalEngineer.ID, nameEngineer, email, level, cost, new BO.TaskInEngineer(currentTaskID, currentTaskNickName));
+            return new BO.Engineer(originalEngineer.ID, nameEngineer, email, level, cost, assignedTask);
         }
 
         /// <summary>
@@ -480,6 +503,12 @@
 
             Console.WriteLine("Insert dependencies ID, to stop enter 0");
             intString = Console.ReadLine();
+
+            if(intString == null || intString == "")
+            {
+                dependenciesList = originalTask.Dependencies;
+            }
+
             int.TryParse(intString, out idDependency);
             while (idDependency != 0)
             {

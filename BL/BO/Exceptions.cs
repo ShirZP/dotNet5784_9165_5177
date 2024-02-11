@@ -33,10 +33,11 @@ public class BlIntException : Exception  //בעיה עם מספר
 }
 
 [Serializable]
-public class BlEmptyStringException : Exception  //בעיה עם מחרוזת ריקה
+public class BlStringException : Exception  //בעיה עם מחרוזת
 {
-    public BlEmptyStringException(string? message) : base(message) { }
+    public BlStringException(string? message) : base(message) { }
 }
+
 
 [Serializable]
 public class BlEmptyEnumException : Exception  //problem with empty enum 

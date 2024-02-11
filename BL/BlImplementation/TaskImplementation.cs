@@ -365,12 +365,12 @@ internal class TaskImplementation : ITask
             throw new BlIntException("The task's ID number must be positive!");
 
         if (task.NickName == null || task.NickName == "")
-            throw new BlEmptyStringException("The task's nick name cannot be empty!");
+            throw new BlStringException("The task's nick name cannot be empty!");
 
         if (task.Description == null || task.Description == "")
-            throw new BlEmptyStringException("The task's description cannot be empty!");
+            throw new BlStringException("The task's description cannot be empty!");
 
-        checkStatusField(task);
+        checkStatusField(task, projectStatus);
 
         checkScheduledDateField(task.ID, task.ScheduledDate, projectStatus);
 
@@ -402,12 +402,29 @@ internal class TaskImplementation : ITask
     /// </summary>
     /// <param name="task">BO task object</param>
     /// <exception cref="BO.BlDependentsTasksException">is a previous task for the task that has not been completed</exception>
-    private void checkStatusField(BO.Task task)
+    private void checkStatusField(BO.Task task, BO.ProjectStatus projectStatus)
     {
+        if(projectStatus == BO.ProjectStatus.Planning && task.Status != Status.New)
+        {
+            throw new BO.BlProjectStatusException("A task status field cannot be edited when the project status is in planning!");
+        }
+
         switch (task.Status)
         {
             case Status.Active:
             case Status.Complete:
+
+                if (projectStatus == BO.ProjectStatus.Execution && task.AssignedEngineer == null)
+                {
+                    throw new BO.BlEngineerNotAssignedToTaskException("A task cannot be in active or complete status if no engineer is assigned to the task");
+                }
+
+                BO.Engineer assignedEngineer = _bl.Engineer.Read(task.AssignedEngineer!.ID);
+                if(assignedEngineer.EngineerCurrentTask == null || assignedEngineer.EngineerCurrentTask.ID != task.ID)
+                {
+                    throw new BO.BlEngineerNotAssignedToTaskException("A task status cannot be changed to active or completed when it is not the engineer's current task");
+                }
+
                 //Checking whether the previous tasks have been completed
                 TaskInList? notCompleteTask = (from taskInList in task.Dependencies
                                                where taskInList.Status != BO.Status.Complete
@@ -452,7 +469,7 @@ internal class TaskImplementation : ITask
 
             if (task.AssignedEngineer.Name == null && task.AssignedEngineer.Name == "")
             {
-                throw new BO.BlEmptyStringException("The engineer's full name can't be empty!");
+                throw new BO.BlStringException("The engineer's full name can't be empty!");
             }
         }
     }
