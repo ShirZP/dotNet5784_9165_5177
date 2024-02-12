@@ -17,8 +17,7 @@ public static class Initialization
     private const int MIN_ID = 200000000;
     private const int MAX_ID = 400000000;
 
-    private static IDal? s_dal; //stage 2
-
+    private static IDal? s_dal = Factory.Get; //stage 4
 
     private static readonly Random s_rand = new();
 
@@ -173,14 +172,17 @@ public static class Initialization
     /// <exception cref="NullReferenceException"></exception>
     public static void Do()
     {
-        s_dal = Factory.Get; //stage 4
-
-        s_dal!.Task.Clear();
-        s_dal!.Engineer.Clear();
-        s_dal!.Dependency.Clear();
+        DoTReset();
 
         createEngineers();
         createTasks();
         createDependencies();
+    }
+
+    public static void DoTReset()
+    {
+        s_dal!.Task.Clear();
+        s_dal!.Engineer.Clear();
+        s_dal!.Dependency.Clear();
     }
 }
