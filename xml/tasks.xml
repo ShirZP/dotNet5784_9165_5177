@@ -1,18 +1,303 @@
 <?xml version="1.0" encoding="utf-8"?>
 <ArrayOfTask xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
   <Task>
-    <ID>761</ID>
+    <ID>801</ID>
     <NickName>Algorithm development</NickName>
     <Description>Description - Algorithm development</Description>
-    <ScheduledDate>2024-02-12T00:00:00</ScheduledDate>
+    <ScheduledDate xsi:nil="true" />
     <StartDate xsi:nil="true" />
     <RequiredEffortTime>P1D</RequiredEffortTime>
     <CompleteDate xsi:nil="true" />
     <FinalProduct>FinalProduct - Algorithm development</FinalProduct>
     <Remarks>Remarks - Algorithm development</Remarks>
     <EngineerId xsi:nil="true" />
+    <Complexity>Intermediate</Complexity>
+    <DeadlineDate xsi:nil="true" />
+    <IsMileStone xsi:nil="true" />
+  </Task>
+  <Task>
+    <ID>802</ID>
+    <NickName>Software design and testing</NickName>
+    <Description>Description - Software design and testing</Description>
+    <ScheduledDate xsi:nil="true" />
+    <StartDate xsi:nil="true" />
+    <RequiredEffortTime>P2D</RequiredEffortTime>
+    <CompleteDate xsi:nil="true" />
+    <FinalProduct>FinalProduct - Software design and testing</FinalProduct>
+    <Remarks>Remarks - Software design and testing</Remarks>
+    <EngineerId xsi:nil="true" />
     <Complexity>Expert</Complexity>
     <DeadlineDate xsi:nil="true" />
-    <IsMileStone>false</IsMileStone>
+    <IsMileStone xsi:nil="true" />
+  </Task>
+  <Task>
+    <ID>803</ID>
+    <NickName>Hardware prototyping</NickName>
+    <Description>Description - Hardware prototyping</Description>
+    <ScheduledDate xsi:nil="true" />
+    <StartDate xsi:nil="true" />
+    <RequiredEffortTime>P3D</RequiredEffortTime>
+    <CompleteDate xsi:nil="true" />
+    <FinalProduct>FinalProduct - Hardware prototyping</FinalProduct>
+    <Remarks>Remarks - Hardware prototyping</Remarks>
+    <EngineerId xsi:nil="true" />
+    <Complexity>Beginner</Complexity>
+    <DeadlineDate xsi:nil="true" />
+    <IsMileStone xsi:nil="true" />
+  </Task>
+  <Task>
+    <ID>804</ID>
+    <NickName>Embedded systems programming</NickName>
+    <Description>Description - Embedded systems programming</Description>
+    <ScheduledDate xsi:nil="true" />
+    <StartDate xsi:nil="true" />
+    <RequiredEffortTime>P4D</RequiredEffortTime>
+    <CompleteDate xsi:nil="true" />
+    <FinalProduct>FinalProduct - Embedded systems programming</FinalProduct>
+    <Remarks>Remarks - Embedded systems programming</Remarks>
+    <EngineerId xsi:nil="true" />
+    <Complexity>AdvancedBeginner</Complexity>
+    <DeadlineDate xsi:nil="true" />
+    <IsMileStone xsi:nil="true" />
+  </Task>
+  <Task>
+    <ID>805</ID>
+    <NickName>Cybersecurity implementation</NickName>
+    <Description>Description - Cybersecurity implementation</Description>
+    <ScheduledDate xsi:nil="true" />
+    <StartDate xsi:nil="true" />
+    <RequiredEffortTime>P4D</RequiredEffortTime>
+    <CompleteDate xsi:nil="true" />
+    <FinalProduct>FinalProduct - Cybersecurity implementation</FinalProduct>
+    <Remarks>Remarks - Cybersecurity implementation</Remarks>
+    <EngineerId xsi:nil="true" />
+    <Complexity>AdvancedBeginner</Complexity>
+    <DeadlineDate xsi:nil="true" />
+    <IsMileStone xsi:nil="true" />
+  </Task>
+  <Task>
+    <ID>806</ID>
+    <NickName>Cloud computing optimization</NickName>
+    <Description>Description - Cloud computing optimization</Description>
+    <ScheduledDate xsi:nil="true" />
+    <StartDate xsi:nil="true" />
+    <RequiredEffortTime>P2D</RequiredEffortTime>
+    <CompleteDate xsi:nil="true" />
+    <FinalProduct>FinalProduct - Cloud computing optimization</FinalProduct>
+    <Remarks>Remarks - Cloud computing optimization</Remarks>
+    <EngineerId xsi:nil="true" />
+    <Complexity>Intermediate</Complexity>
+    <DeadlineDate xsi:nil="true" />
+    <IsMileStone xsi:nil="true" />
+  </Task>
+  <Task>
+    <ID>807</ID>
+    <NickName>Data analysis</NickName>
+    <Description>Description - Data analysis</Description>
+    <ScheduledDate xsi:nil="true" />
+    <StartDate xsi:nil="true" />
+    <RequiredEffortTime>P2D</RequiredEffortTime>
+    <CompleteDate xsi:nil="true" />
+    <FinalProduct>FinalProduct - Data analysis</FinalProduct>
+    <Remarks>Remarks - Data analysis</Remarks>
+    <EngineerId xsi:nil="true" />
+    <Complexity>Advanced</Complexity>
+    <DeadlineDate xsi:nil="true" />
+    <IsMileStone xsi:nil="true" />
+  </Task>
+  <Task>
+    <ID>808</ID>
+    <NickName>VR/AR development</NickName>
+    <Description>Description - VR/AR development</Description>
+    <ScheduledDate xsi:nil="true" />
+    <StartDate xsi:nil="true" />
+    <RequiredEffortTime>P3D</RequiredEffortTime>
+    <CompleteDate xsi:nil="true" />
+    <FinalProduct>FinalProduct - VR/AR development</FinalProduct>
+    <Remarks>Remarks - VR/AR development</Remarks>
+    <EngineerId xsi:nil="true" />
+    <Complexity>AdvancedBeginner</Complexity>
+    <DeadlineDate xsi:nil="true" />
+    <IsMileStone xsi:nil="true" />
+  </Task>
+  <Task>
+    <ID>809</ID>
+    <NickName>UX/UI improvement</NickName>
+    <Description>Description - UX/UI improvement</Description>
+    <ScheduledDate xsi:nil="true" />
+    <StartDate xsi:nil="true" />
+    <RequiredEffortTime>P4D</RequiredEffortTime>
+    <CompleteDate xsi:nil="true" />
+    <FinalProduct>FinalProduct - UX/UI improvement</FinalProduct>
+    <Remarks>Remarks - UX/UI improvement</Remarks>
+    <EngineerId xsi:nil="true" />
+    <Complexity>Advanced</Complexity>
+    <DeadlineDate xsi:nil="true" />
+    <IsMileStone xsi:nil="true" />
+  </Task>
+  <Task>
+    <ID>810</ID>
+    <NickName>Automation and robotics</NickName>
+    <Description>Description - Automation and robotics</Description>
+    <ScheduledDate xsi:nil="true" />
+    <StartDate xsi:nil="true" />
+    <RequiredEffortTime>P3D</RequiredEffortTime>
+    <CompleteDate xsi:nil="true" />
+    <FinalProduct>FinalProduct - Automation and robotics</FinalProduct>
+    <Remarks>Remarks - Automation and robotics</Remarks>
+    <EngineerId xsi:nil="true" />
+    <Complexity>AdvancedBeginner</Complexity>
+    <DeadlineDate xsi:nil="true" />
+    <IsMileStone xsi:nil="true" />
+  </Task>
+  <Task>
+    <ID>811</ID>
+    <NickName>Firmware development</NickName>
+    <Description>Description - Firmware development</Description>
+    <ScheduledDate xsi:nil="true" />
+    <StartDate xsi:nil="true" />
+    <RequiredEffortTime>P3D</RequiredEffortTime>
+    <CompleteDate xsi:nil="true" />
+    <FinalProduct>FinalProduct - Firmware development</FinalProduct>
+    <Remarks>Remarks - Firmware development</Remarks>
+    <EngineerId xsi:nil="true" />
+    <Complexity>Beginner</Complexity>
+    <DeadlineDate xsi:nil="true" />
+    <IsMileStone xsi:nil="true" />
+  </Task>
+  <Task>
+    <ID>812</ID>
+    <NickName>Wireless technology integration</NickName>
+    <Description>Description - Wireless technology integration</Description>
+    <ScheduledDate xsi:nil="true" />
+    <StartDate xsi:nil="true" />
+    <RequiredEffortTime>P2D</RequiredEffortTime>
+    <CompleteDate xsi:nil="true" />
+    <FinalProduct>FinalProduct - Wireless technology integration</FinalProduct>
+    <Remarks>Remarks - Wireless technology integration</Remarks>
+    <EngineerId xsi:nil="true" />
+    <Complexity>Intermediate</Complexity>
+    <DeadlineDate xsi:nil="true" />
+    <IsMileStone xsi:nil="true" />
+  </Task>
+  <Task>
+    <ID>813</ID>
+    <NickName>IoT device creation</NickName>
+    <Description>Description - IoT device creation</Description>
+    <ScheduledDate xsi:nil="true" />
+    <StartDate xsi:nil="true" />
+    <RequiredEffortTime>P1D</RequiredEffortTime>
+    <CompleteDate xsi:nil="true" />
+    <FinalProduct>FinalProduct - IoT device creation</FinalProduct>
+    <Remarks>Remarks - IoT device creation</Remarks>
+    <EngineerId xsi:nil="true" />
+    <Complexity>Advanced</Complexity>
+    <DeadlineDate xsi:nil="true" />
+    <IsMileStone xsi:nil="true" />
+  </Task>
+  <Task>
+    <ID>814</ID>
+    <NickName>Big data processing</NickName>
+    <Description>Description - Big data processing</Description>
+    <ScheduledDate xsi:nil="true" />
+    <StartDate xsi:nil="true" />
+    <RequiredEffortTime>P1D</RequiredEffortTime>
+    <CompleteDate xsi:nil="true" />
+    <FinalProduct>FinalProduct - Big data processing</FinalProduct>
+    <Remarks>Remarks - Big data processing</Remarks>
+    <EngineerId xsi:nil="true" />
+    <Complexity>AdvancedBeginner</Complexity>
+    <DeadlineDate xsi:nil="true" />
+    <IsMileStone xsi:nil="true" />
+  </Task>
+  <Task>
+    <ID>815</ID>
+    <NickName>Quality assurance</NickName>
+    <Description>Description - Quality assurance</Description>
+    <ScheduledDate xsi:nil="true" />
+    <StartDate xsi:nil="true" />
+    <RequiredEffortTime>P4D</RequiredEffortTime>
+    <CompleteDate xsi:nil="true" />
+    <FinalProduct>FinalProduct - Quality assurance</FinalProduct>
+    <Remarks>Remarks - Quality assurance</Remarks>
+    <EngineerId xsi:nil="true" />
+    <Complexity>AdvancedBeginner</Complexity>
+    <DeadlineDate xsi:nil="true" />
+    <IsMileStone xsi:nil="true" />
+  </Task>
+  <Task>
+    <ID>816</ID>
+    <NickName>DevOps and CI/CD</NickName>
+    <Description>Description - DevOps and CI/CD</Description>
+    <ScheduledDate xsi:nil="true" />
+    <StartDate xsi:nil="true" />
+    <RequiredEffortTime>P3D</RequiredEffortTime>
+    <CompleteDate xsi:nil="true" />
+    <FinalProduct>FinalProduct - DevOps and CI/CD</FinalProduct>
+    <Remarks>Remarks - DevOps and CI/CD</Remarks>
+    <EngineerId xsi:nil="true" />
+    <Complexity>Expert</Complexity>
+    <DeadlineDate xsi:nil="true" />
+    <IsMileStone xsi:nil="true" />
+  </Task>
+  <Task>
+    <ID>817</ID>
+    <NickName>Cyber-physical systems</NickName>
+    <Description>Description - Cyber-physical systems</Description>
+    <ScheduledDate xsi:nil="true" />
+    <StartDate xsi:nil="true" />
+    <RequiredEffortTime>P1D</RequiredEffortTime>
+    <CompleteDate xsi:nil="true" />
+    <FinalProduct>FinalProduct - Cyber-physical systems</FinalProduct>
+    <Remarks>Remarks - Cyber-physical systems</Remarks>
+    <EngineerId xsi:nil="true" />
+    <Complexity>Expert</Complexity>
+    <DeadlineDate xsi:nil="true" />
+    <IsMileStone xsi:nil="true" />
+  </Task>
+  <Task>
+    <ID>818</ID>
+    <NickName>Blockchain solutions</NickName>
+    <Description>Description - Blockchain solutions</Description>
+    <ScheduledDate xsi:nil="true" />
+    <StartDate xsi:nil="true" />
+    <RequiredEffortTime>P2D</RequiredEffortTime>
+    <CompleteDate xsi:nil="true" />
+    <FinalProduct>FinalProduct - Blockchain solutions</FinalProduct>
+    <Remarks>Remarks - Blockchain solutions</Remarks>
+    <EngineerId xsi:nil="true" />
+    <Complexity>Advanced</Complexity>
+    <DeadlineDate xsi:nil="true" />
+    <IsMileStone xsi:nil="true" />
+  </Task>
+  <Task>
+    <ID>819</ID>
+    <NickName>AI integration</NickName>
+    <Description>Description - AI integration</Description>
+    <ScheduledDate xsi:nil="true" />
+    <StartDate xsi:nil="true" />
+    <RequiredEffortTime>P1D</RequiredEffortTime>
+    <CompleteDate xsi:nil="true" />
+    <FinalProduct>FinalProduct - AI integration</FinalProduct>
+    <Remarks>Remarks - AI integration</Remarks>
+    <EngineerId xsi:nil="true" />
+    <Complexity>Expert</Complexity>
+    <DeadlineDate xsi:nil="true" />
+    <IsMileStone xsi:nil="true" />
+  </Task>
+  <Task>
+    <ID>820</ID>
+    <NickName>Research and development</NickName>
+    <Description>Description - Research and development</Description>
+    <ScheduledDate xsi:nil="true" />
+    <StartDate xsi:nil="true" />
+    <RequiredEffortTime>P4D</RequiredEffortTime>
+    <CompleteDate xsi:nil="true" />
+    <FinalProduct>FinalProduct - Research and development</FinalProduct>
+    <Remarks>Remarks - Research and development</Remarks>
+    <EngineerId xsi:nil="true" />
+    <Complexity>Advanced</Complexity>
+    <DeadlineDate xsi:nil="true" />
+    <IsMileStone xsi:nil="true" />
   </Task>
 </ArrayOfTask>
