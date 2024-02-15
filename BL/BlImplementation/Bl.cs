@@ -76,4 +76,14 @@ internal class Bl : IBl
     {
         _dal.initializeProjectStatus();
     }
+
+    public void initializationDB()
+    {
+        DalTest.Initialization.Do();
+    }
+
+    public void resetDB()
+    {
+        DalTest.Initialization.DoReset();
+    }
 }

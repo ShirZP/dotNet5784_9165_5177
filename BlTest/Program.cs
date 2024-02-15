@@ -13,7 +13,7 @@
             string? ans = Console.ReadLine() ?? throw new FormatException("Wrong input");
             if (ans == "Y")
             {
-                DalTest.Initialization.Do();
+                s_bl.initializationDB();
                 s_bl.initializeProjectStatus();
             }
 

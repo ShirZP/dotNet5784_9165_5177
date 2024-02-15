@@ -17,6 +17,8 @@ namespace PL
     /// </summary>
     public partial class MainWindow : Window
     {
+        static readonly BlApi.IBl s_bl = BlApi.Factory.Get();
+
         public MainWindow()
         {
             InitializeComponent();
@@ -27,7 +29,7 @@ namespace PL
             new EngineerListWindow().Show();
         }
 
-        private void BtnInialization_Click(object sender, RoutedEventArgs e)
+        private void BtnInitialization_Click(object sender, RoutedEventArgs e)
         {
             // Showing a MessageBox with Yes and No buttons and a question
             MessageBoxResult result = MessageBox.Show("Do you want to proceed initialization?", "Initialization Confirmation", MessageBoxButton.YesNo, MessageBoxImage.Question);
@@ -36,7 +38,20 @@ namespace PL
             if (result == MessageBoxResult.Yes)
             {
                 // Initial the DB
-                DalTest.Initialization.Do();
+                s_bl.initializationDB();
+            }
+        }
+
+        private void BtnReset_Click(object sender, RoutedEventArgs e)
+        {
+            // Showing a MessageBox with Yes and No buttons and a question
+            MessageBoxResult result = MessageBox.Show("Do you want to proceed reset data?", "Reset Data Confirmation", MessageBoxButton.YesNo, MessageBoxImage.Question);
+
+            // Code to execute if the user clicks Yes
+            if (result == MessageBoxResult.Yes)
+            {
+                // Initial the DB
+                s_bl.resetDB();
             }
         }
     }

@@ -172,14 +172,14 @@ public static class Initialization
     /// <exception cref="NullReferenceException"></exception>
     public static void Do()
     {
-        DoTReset();
+        DoReset();
 
         createEngineers();
         createTasks();
         createDependencies();
     }
 
-    public static void DoTReset()
+    public static void DoReset()
     {
         s_dal!.Task.Clear();
         s_dal!.Engineer.Clear();

@@ -4,6 +4,9 @@ public interface IBl
 {
     public ITask Task { get; }
     public IEngineer Engineer { get; }
+    public void initializationDB();
+    public void resetDB();
+
     public BO.ProjectStatus CalculateProjectStatus();
     public BO.ProjectStatus GetProjectStatus();
     public void SetProjectStartDate(DateTime startDate);    
