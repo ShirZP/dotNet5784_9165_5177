@@ -159,7 +159,7 @@ internal class EngineerImplementation : IEngineer
     }
 
     /// <summary>
-    /// The function recieves a BO engineer object and check the validations of it's fields.
+    /// The function receives a BO engineer object and check the validations of it's fields.
     /// </summary>
     /// <param name="engineer">BO engineer object</param>
     /// <exception cref="BlPositiveIntException">If the number is negative or equal to zero, throw an exception.</exception>
@@ -173,7 +173,7 @@ internal class EngineerImplementation : IEngineer
             throw new BO.BlIntException("The engineer's ID number must be 9 digits!");
         }
 
-        if (engineer.FullName == null && engineer.FullName == "")
+        if (engineer.FullName == null || engineer.FullName == "")
         {
             throw new BO.BlStringException("The engineer's full name can't be empty!");
         }
@@ -193,7 +193,7 @@ internal class EngineerImplementation : IEngineer
     }
 
     /// <summary>
-    /// The founction check the updating of the field engineerCurrentTask
+    /// The function check the updating of the field engineerCurrentTask
     /// </summary>
     /// <param name="updatedEngineer"></param>
     /// <exception cref="BO.BlEngineerNotAssignedToTaskException"></exception>

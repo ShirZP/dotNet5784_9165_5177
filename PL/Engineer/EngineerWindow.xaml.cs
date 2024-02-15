@@ -51,10 +51,39 @@ namespace PL.Engineer
                 }
                 catch(BO.BlDoesNotExistException ex)
                 { 
-                    MessageBox.Show(ex.Message, "ERROR", MessageBoxButton.OK, MessageBoxImage.Error);
+                    MessageBox.Show(ex.Message, "ERROR :(", MessageBoxButton.OK, MessageBoxImage.Error);
                 }
             }
             
+        }
+
+        private void BtnAddOrUpdate_Click(object sender, RoutedEventArgs e)
+        {
+            Button? button = sender as Button;
+            if (button != null)
+            {
+                try
+                {
+                    MessageBoxResult messageBoxResult;
+
+                    if(button.Content.ToString() == "Add")
+                    {
+                        s_bl.Engineer.Create(CurrentEngineer);
+                        messageBoxResult = MessageBox.Show($"Engineer {CurrentEngineer.ID} added Successfully!", "Happy Message :)", MessageBoxButton.OK, MessageBoxImage.Information);
+                    }
+                    else
+                    {
+                        s_bl.Engineer.Update(CurrentEngineer);
+                        messageBoxResult = MessageBox.Show($"Engineer {CurrentEngineer.ID} updated Successfully!", "Happy Message :)", MessageBoxButton.OK, MessageBoxImage.Information);
+                    }
+
+                    this.Close();
+                }
+                catch(Exception ex)
+                {
+                    MessageBox.Show(ex.Message, "ERROR", MessageBoxButton.OK, MessageBoxImage.Error);
+                }
+            }
         }
     }
 }

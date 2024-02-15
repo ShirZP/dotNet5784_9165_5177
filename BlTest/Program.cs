@@ -357,7 +357,7 @@
             string? intString;    //string to convert to int
             string? nameEngineer, email, currentTaskNickName;
 
-            //nameEngineer
+            //EngineerName
             Console.WriteLine("Enter engineer full name:");
             nameEngineer = Console.ReadLine();
             if (nameEngineer == null || nameEngineer == "")

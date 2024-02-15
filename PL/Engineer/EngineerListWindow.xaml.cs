@@ -46,5 +46,21 @@ namespace PL.Engineer
             EngineerList = (Experience == BO.EngineerExperience.All) ? s_bl?.Engineer.ReadAll()! : s_bl?.Engineer.ReadAll(item => item.Level == Experience)!;
 
         }
+
+        private void BtnAddNewEngineer_Click(object sender, RoutedEventArgs e)
+        {
+            new EngineerWindow().ShowDialog();
+            EngineerList = s_bl?.Engineer.ReadAll()!;
+        }
+
+        private void ListViewUpdateEngineer_MouseDoubleClick(object sender, MouseButtonEventArgs e)
+        {
+            BO.Engineer? engineer = (sender as ListView)?.SelectedItem as BO.Engineer;
+            if (engineer != null)
+            {
+                new EngineerWindow(engineer.ID).ShowDialog();
+                EngineerList = s_bl?.Engineer.ReadAll()!;
+            }
+        }
     }
 }

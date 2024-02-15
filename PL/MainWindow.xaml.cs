@@ -39,6 +39,7 @@ namespace PL
             {
                 // Initial the DB
                 s_bl.initializationDB();
+                MessageBoxResult messageBoxResult = MessageBox.Show("Initialization done successfully!", "Happy Message :)", MessageBoxButton.OK, MessageBoxImage.Information);
             }
         }
 
@@ -52,6 +53,7 @@ namespace PL
             {
                 // Initial the DB
                 s_bl.resetDB();
+                MessageBoxResult messageBoxResult = MessageBox.Show("Reset DB done successfully!", "Happy Message :)", MessageBoxButton.OK, MessageBoxImage.Information);
             }
         }
     }

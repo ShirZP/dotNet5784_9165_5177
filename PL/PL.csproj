@@ -14,7 +14,17 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <None Remove="EngineerPic.jpeg" />
+    <None Remove="marble.jpg" />
+  </ItemGroup>
+
+  <ItemGroup>
     <ProjectReference Include="..\BL\BL.csproj" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Resource Include="EngineerPic.jpeg" />
+    <Resource Include="marble.jpg" />
   </ItemGroup>
 
 </Project>

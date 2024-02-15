@@ -25,7 +25,7 @@
             <ComboBox ItemsSource="{Binding Source={StaticResource ExperienceCollectionKey}}"  SelectedValue="{Binding Path=Experience, Mode=TwoWay}"
                       Grid.Column="1" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" Background="{DynamicResource {x:Static SystemColors.GradientActiveCaptionBrushKey}}" SelectionChanged="cbExperienceSelector_SelectionChanged"/>
         </Grid>
-        <ListView Grid.Row="1" Foreground="#FF110606" ItemsSource="{Binding Path=EngineerList}">
+        <ListView Grid.Row="1" Foreground="#FF110606" ItemsSource="{Binding Path=EngineerList}" MouseDoubleClick="ListViewUpdateEngineer_MouseDoubleClick">
             <ListView.Background>
                 <LinearGradientBrush EndPoint="0.5,1" StartPoint="0.5,0">
                     <GradientStop Color="White"/>
@@ -38,6 +38,6 @@
                 </GridView>
             </ListView.View>
         </ListView>
-        <Button Content="Add" Grid.Row="2" HorizontalAlignment="Right" Height="50" Width="150" Foreground="{DynamicResource {x:Static SystemColors.ActiveCaptionTextBrushKey}}" Background="{DynamicResource {x:Static SystemColors.ActiveCaptionBrushKey}}"/>
+        <Button Content="Add" Grid.Row="2" HorizontalAlignment="Right" Height="50" Width="150" Foreground="{DynamicResource {x:Static SystemColors.ActiveCaptionTextBrushKey}}" Background="{DynamicResource {x:Static SystemColors.ActiveCaptionBrushKey}}" Click="BtnAddNewEngineer_Click"/>
     </Grid>
 </Window>
