@@ -8,15 +8,12 @@
         Title="MainWindow" Height="450" Width="800">
     <Grid>
         <Grid.Background>
-            <LinearGradientBrush EndPoint="0.5,1" StartPoint="0.5,0">
-                <GradientStop Color="White"/>
-                <GradientStop Color="#FF97DAEB" Offset="1"/>
-            </LinearGradientBrush>
+            <ImageBrush ImageSource="/backgrounde.jpg"/>
         </Grid.Background>
         <!--Go to the list of engineers-->
-        <Button Content="Handle Engineers" HorizontalAlignment="Left" Margin="124,161,0,0" VerticalAlignment="Top" Click="BtnEngineerList_Click" RenderTransformOrigin="0.5,0.5" Background="{DynamicResource {x:Static SystemColors.ActiveCaptionBrushKey}}" Height="85" Width="154"/>
-        <Button Content="Init DB" HorizontalAlignment="Left" Margin="550,161,0,0" VerticalAlignment="Top" Click="BtnInitialization_Click" Background="{DynamicResource {x:Static SystemColors.ActiveCaptionBrushKey}}" Height="85" Width="154"/>
-        <Button Content="Reset DB" HorizontalAlignment="Left" Margin="400,161,0,0" VerticalAlignment="Top" Click="BtnReset_Click" Background="{DynamicResource {x:Static SystemColors.ActiveCaptionBrushKey}}" Height="85" Width="150"/>
+        <Button Content="Handle Engineers" HorizontalAlignment="Left" Margin="124,161,0,0" VerticalAlignment="Top" Click="BtnEngineerList_Click" RenderTransformOrigin="0.5,0.5" Background="#FFD78484" Height="85" Width="154"/>
+        <Button Content="Init DB" HorizontalAlignment="Left" Margin="550,161,0,0" VerticalAlignment="Top" Click="BtnInitialization_Click" Height="85" Width="154" Background="#FFD78484"/>
+        <Button Content="Reset DB" HorizontalAlignment="Left" Margin="400,161,0,0" VerticalAlignment="Top" Click="BtnReset_Click" Background="#FFD78484" Height="85" Width="150"/>
 
     </Grid>
 </Window>

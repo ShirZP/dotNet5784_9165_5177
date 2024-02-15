@@ -14,6 +14,8 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <None Remove="backgrounde.jpg" />
+    <None Remove="code.jpg" />
     <None Remove="EngineerPic.jpeg" />
     <None Remove="marble.jpg" />
   </ItemGroup>
@@ -23,8 +25,8 @@
   </ItemGroup>
 
   <ItemGroup>
-    <Resource Include="EngineerPic.jpeg" />
-    <Resource Include="marble.jpg" />
+    <Resource Include="backgrounde.jpg" />
+    <Resource Include="code.jpg" />
   </ItemGroup>
 
 </Project>
