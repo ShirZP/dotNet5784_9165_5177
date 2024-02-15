@@ -7,7 +7,7 @@
         mc:Ignorable="d"
         Title="EngineerListWindow" Height="640" Width="800">
     <!--Extrnal Grid-->
-    <Grid>
+    <Grid Background="{DynamicResource {x:Static SystemColors.GradientActiveCaptionBrushKey}}">
         <Grid.RowDefinitions>
             <RowDefinition Height="40*"/>
             <RowDefinition Height="500*"/>
@@ -21,15 +21,21 @@
             </Grid.ColumnDefinitions>
             <!--Engineer grid filter options-->
             <Label Grid.Column="0" Content="Label" HorizontalAlignment="Left" Margin="85,0,0,0" VerticalAlignment="Center"/>
-            <ComboBox Grid.Column="1" HorizontalAlignment="Stretch" VerticalAlignment="Stretch"/>
+            <ComboBox Grid.Column="1" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" Background="{DynamicResource {x:Static SystemColors.GradientActiveCaptionBrushKey}}"/>
         </Grid>
-        <ListView Grid.Row="1">
+        <ListView Grid.Row="1" Foreground="White">
+            <ListView.Background>
+                <LinearGradientBrush EndPoint="0.5,1" StartPoint="0.5,0">
+                    <GradientStop Color="White"/>
+                    <GradientStop Color="#FF97DAEB" Offset="1"/>
+                </LinearGradientBrush>
+            </ListView.Background>
             <ListView.View>
                 <GridView>
                     <GridViewColumn/>
                 </GridView>
             </ListView.View>
         </ListView>
-        <Button Content="Add" Grid.Row="2" HorizontalAlignment="Right" Height="50" Width="150"/>
+        <Button Content="Add" Grid.Row="2" HorizontalAlignment="Right" Height="50" Width="150" Foreground="{DynamicResource {x:Static SystemColors.ActiveCaptionTextBrushKey}}" Background="{DynamicResource {x:Static SystemColors.ActiveCaptionBrushKey}}"/>
     </Grid>
 </Window>

@@ -7,9 +7,16 @@
         mc:Ignorable="d"
         Title="MainWindow" Height="450" Width="800">
     <Grid>
+        <Grid.Background>
+            <LinearGradientBrush EndPoint="0.5,1" StartPoint="0.5,0">
+                <GradientStop Color="White" Offset="0"/>
+                <GradientStop Color="#FFA6ECFF" Offset="1"/>
+                <GradientStop Color="#FEEFFBFE" Offset="1"/>
+            </LinearGradientBrush>
+        </Grid.Background>
         <!--Go to the list of engineers-->
-        <Button Content="Handle Engineers" HorizontalAlignment="Left" Margin="124,185,0,0" VerticalAlignment="Top" Click="BtnEngineerList_Click"/>
-        <Button Content="Init DB" HorizontalAlignment="Right" Margin="0,185,124,0" VerticalAlignment="Top" Click="BtnInialization_Click"/>
+        <Button Content="Handle Engineers" HorizontalAlignment="Left" Margin="124,185,0,0" VerticalAlignment="Top" Click="BtnEngineerList_Click" RenderTransformOrigin="0.5,0.5" Background="{DynamicResource {x:Static SystemColors.ActiveCaptionBrushKey}}"/>
+        <Button Content="Init DB" HorizontalAlignment="Right" Margin="0,185,124,0" VerticalAlignment="Top" Click="BtnInialization_Click" Background="{DynamicResource {x:Static SystemColors.ActiveCaptionBrushKey}}"/>
 
     </Grid>
 </Window>
