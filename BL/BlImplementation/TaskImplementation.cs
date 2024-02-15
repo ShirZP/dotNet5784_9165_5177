@@ -41,7 +41,7 @@ internal class TaskImplementation : ITask
                                      task.Deliverables,
                                      task.Remarks,
                                      null,
-                                     task.Complexity);
+                                     (DO.EngineerExperience)task.Complexity);
 
         //Creating a list of DO.Dependency objects
         IEnumerable<DO.Dependency>? dalDependenciesList = task.Dependencies.Select(taskInList => new DO.Dependency(0, task.ID, taskInList.ID)).Where(taskInList =>  taskInList != null);
@@ -97,6 +97,15 @@ internal class TaskImplementation : ITask
             throw new BlDoesNotExistException($"An object of type Task with ID={id} does not exist");
         }
 
+        DO.EngineerExperience? dalExperience = dalTask.Complexity;
+        BO.EngineerExperience blExperience;
+
+        if (dalExperience == null)
+            blExperience = BO.EngineerExperience.Beginner;
+        else
+            blExperience = (BO.EngineerExperience)dalExperience;
+
+
         return new BO.Task(dalTask.ID,
                            dalTask.NickName,
                            dalTask.Description,
@@ -110,7 +119,7 @@ internal class TaskImplementation : ITask
                            dalTask.FinalProduct,
                            dalTask.Remarks,
                            getAssignedEngineer(dalTask),
-                           dalTask.Complexity);
+                           blExperience);
     }
 
     /// <summary>
@@ -227,7 +236,7 @@ internal class TaskImplementation : ITask
                                           updatedTask.Deliverables,
                                           updatedTask.Remarks,
                                           assignEngineerID,
-                                          updatedTask.Complexity);
+                                          (DO.EngineerExperience)updatedTask.Complexity);
 
             _dal.Task.Update(dalTask);
 

@@ -75,12 +75,12 @@ public class Task
     /// <summary>
     /// The difficulty level defines the minimum engineer level that can work on it
     /// </summary>
-    public DO.EngineerExperience? Complexity { get; set; }
+    public BO.EngineerExperience Complexity { get; set; }
 
     /// <summary>
     /// Task Ctor with parameters.
     /// </summary>
-    public Task(int id, string nickName, string description, BO.Status status, List<TaskInList> dependencies, DateTime? scheduledDate, DateTime? startDate, DateTime? forecastDate, DateTime? completeDate, TimeSpan? requiredEffortTime, string? deliverables, string? remarks, EngineerInTask? assignedEngineer, DO.EngineerExperience? complexity)
+    public Task(int id, string nickName, string description, BO.Status status, List<TaskInList> dependencies, DateTime? scheduledDate, DateTime? startDate, DateTime? forecastDate, DateTime? completeDate, TimeSpan? requiredEffortTime, string? deliverables, string? remarks, EngineerInTask? assignedEngineer, BO.EngineerExperience complexity)
     {
         ID = id;
         NickName = nickName;    

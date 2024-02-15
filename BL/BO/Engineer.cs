@@ -20,7 +20,7 @@ public class Engineer
     /// <summary>
     /// The level of expertise of the engineer
     /// </summary>
-    public DO.EngineerExperience? Level { get; set; }
+    public BO.EngineerExperience Level { get; set; }
 
     /// <summary>
     /// How much per hour does the engineer get
@@ -35,7 +35,7 @@ public class Engineer
     /// <summary>
     /// Engineer Ctor with parameters.
     /// </summary>
-    public Engineer(int id, string fullName, string email, DO.EngineerExperience? level, double? cost, TaskInEngineer? engineerCurrentTask)
+    public Engineer(int id, string fullName, string email, BO.EngineerExperience level, double? cost, TaskInEngineer? engineerCurrentTask)
     {
         ID = id;
         FullName = fullName;

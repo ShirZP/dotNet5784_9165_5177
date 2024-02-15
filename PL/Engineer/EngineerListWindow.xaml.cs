@@ -26,6 +26,9 @@ namespace PL.Engineer
                                                                                            typeof(IEnumerable<BO.Engineer>),
                                                                                            typeof(EngineerListWindow),
                                                                                            new PropertyMetadata(null));
+        public BO.EngineerExperience Experience { get; set; } = BO.EngineerExperience.All;
+
+
         public IEnumerable<BO.Engineer> EngineerList
         {
             get { return (IEnumerable<BO.Engineer>)GetValue(EngineerListProperty); }
@@ -36,6 +39,12 @@ namespace PL.Engineer
         {
             InitializeComponent();
             EngineerList = s_bl?.Engineer.ReadAll()!;
+        }
+
+        private void cbExperienceSelector_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        {
+            EngineerList = (Experience == BO.EngineerExperience.All) ? s_bl?.Engineer.ReadAll()! : s_bl?.Engineer.ReadAll(item => item.Level == Experience)!;
+
         }
     }
 }

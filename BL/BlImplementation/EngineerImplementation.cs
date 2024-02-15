@@ -26,7 +26,7 @@ internal class EngineerImplementation : IEngineer
             checkEngineerFields(engineer);
 
             //create dal engineer
-            DO.Engineer doEngineer = new DO.Engineer(engineer.ID, engineer.FullName, engineer.Email, engineer.Level, engineer.Cost);
+            DO.Engineer doEngineer = new DO.Engineer(engineer.ID, engineer.FullName, engineer.Email, (DO.EngineerExperience)engineer.Level, engineer.Cost);
 
             //add the dal engineer to data layer
             int idEngineer = _dal.Engineer.Create(doEngineer);
@@ -104,7 +104,7 @@ internal class EngineerImplementation : IEngineer
             taskInEngineer = new BO.TaskInEngineer(engineerTask.ID, engineerTask.NickName);
 
         //Creating a BO engineer and returning it
-        return new BO.Engineer(dalEngineer.ID, dalEngineer.FullName!, dalEngineer.Email!, dalEngineer.Level, dalEngineer.Cost, taskInEngineer);
+        return new BO.Engineer(dalEngineer.ID, dalEngineer.FullName!, dalEngineer.Email!, (BO.EngineerExperience)dalEngineer.Level, dalEngineer.Cost, taskInEngineer);
     }
 
     /// <summary>
@@ -138,7 +138,7 @@ internal class EngineerImplementation : IEngineer
             //validation of the engineer's fields
             checkEngineerFields(updatedEngineer);
 
-            DO.Engineer doEngineer = new DO.Engineer(updatedEngineer.ID, updatedEngineer.FullName, updatedEngineer.Email, updatedEngineer.Level, updatedEngineer.Cost);
+            DO.Engineer doEngineer = new DO.Engineer(updatedEngineer.ID, updatedEngineer.FullName, updatedEngineer.Email, (DO.EngineerExperience)updatedEngineer.Level, updatedEngineer.Cost);
             _dal.Engineer.Update(doEngineer);
         }
         catch (DO.DalDoesNotExistException dalEx)
@@ -187,11 +187,6 @@ internal class EngineerImplementation : IEngineer
         if(!new EmailAddressAttribute().IsValid(engineer.Email))
         {
             throw new BlStringException("The engineer's email is not valid!");
-        }
-
-        if (engineer.Level == null)
-        {
-            throw new BO.BlEmptyEnumException("The engineer's level can't be empty!");
         }
 
         checkEngineerCurrentTask(engineer, projectStatus);

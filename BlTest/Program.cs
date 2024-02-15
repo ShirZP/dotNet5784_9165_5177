@@ -303,9 +303,11 @@
         /// <returns>Object type Engineer</returns>
         private static BO.Engineer inputCreateEngineer()
         {
-            int id, level, cost;
+            int id, cost;
             string? intString;    //string to convert to int
             string? nameEngineer, email;
+            BO.EngineerExperience level;
+            int? levelInt;
 
             //ID
             Console.WriteLine("Enter engineer ID:");
@@ -322,8 +324,15 @@
 
             //level
             Console.WriteLine("Choose engineer level:\n" + "0 - Beginner\n" + "1 - AdvancedBeginner\n" + "2 - Intermediate\n" + "3 - Advanced\n" + "4 - Expert\n");
-            intString = Console.ReadLine()!;
-            int.TryParse(intString, out level);
+            if (intString != null)
+            {
+                levelInt = TryParseInt(intString);
+                level = (BO.EngineerExperience)levelInt!;
+            }
+            else
+            {
+                level = BO.EngineerExperience.Beginner;
+            }
 
             //cost
             Console.WriteLine("Enter engineer cost:");
@@ -331,7 +340,7 @@
             int.TryParse(intString, out cost);
 
             //create newEngineer
-            return new BO.Engineer(id, nameEngineer, email, ((DO.EngineerExperience)level), cost, null);
+            return new BO.Engineer(id, nameEngineer, email, level, cost, null);
 
         }
 
@@ -363,13 +372,13 @@
             //level
             Console.WriteLine("Choose engineer level:\n" + "0 - Beginner\n" + "1 - AdvancedBeginner\n" + "2 - Intermediate\n" + "3 - Advanced\n" + "4 - Expert\n");
             intString = Console.ReadLine()!;
-            DO.EngineerExperience? level;
+            BO.EngineerExperience level;
             if (intString == null || intString == "")
                 level = originalEngineer.Level;
             else
             {
                 levelNum = TryParseInt(intString);
-                level = (DO.EngineerExperience)levelNum!;
+                level = (BO.EngineerExperience)levelNum!;
             }
 
             //cost
@@ -417,7 +426,7 @@
             string? dateString, intString;
             TimeSpan? requiredEffortTime;
             int? complexityNum;
-            DO.EngineerExperience? complexity;
+            BO.EngineerExperience complexity;
 
             //nickName
             Console.WriteLine("Enter task nickName:");
@@ -446,11 +455,11 @@
             if (intString != null)
             {
                 complexityNum = TryParseInt(intString);
-                complexity = (DO.EngineerExperience)complexityNum!;
+                complexity = (BO.EngineerExperience)complexityNum!;
             }
             else
             {
-                complexity = null;
+                complexity = BO.EngineerExperience.Beginner;
             }
 
             List<TaskInList> dependencies = new List<TaskInList>();
@@ -572,13 +581,13 @@
             //complexity
             Console.WriteLine("Choose task complexity:\n" + "0 - Beginner\n" + "1 - AdvancedBeginner\n" + "2 - Intermediate\n" + "3 - Advanced\n" + "4 - Expert\n");
             intString = Console.ReadLine();
-            DO.EngineerExperience? complexity;
+            BO.EngineerExperience complexity;
             if (intString == null || intString == "")
                 complexity = originalTask.Complexity;
             else
             {
                 complexityNum = TryParseInt(intString);
-                complexity = (DO.EngineerExperience)complexityNum!;
+                complexity = (BO.EngineerExperience)complexityNum!;
             }
 
 

@@ -12,10 +12,10 @@ public record Engineer
     int ID,
     string FullName,
     string? Email,
-    DO.EngineerExperience? Level,
+    DO.EngineerExperience Level,
     double? Cost
 )
 {
-    public Engineer() : this(0, "", "", null, 0) { } //empty ctor for stage 3
+    public Engineer() : this(0, "", "", DO.EngineerExperience.Beginner, 0) { } //empty ctor for stage 3
 
 }

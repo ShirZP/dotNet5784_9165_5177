@@ -453,7 +453,7 @@
             //level
             Console.WriteLine("Choose engineer level:" + "0 - Beginner\n" + "1 - AdvancedBeginner\n" + "2 - Intermediate\n" + "3 - Advanced\n" + "4 - Expert\n");
             intString = Console.ReadLine()!;
-            DO.EngineerExperience? level;
+            DO.EngineerExperience level;
             if (intString == null || intString == "")
                 level = originalEngineer.Level;
             else
