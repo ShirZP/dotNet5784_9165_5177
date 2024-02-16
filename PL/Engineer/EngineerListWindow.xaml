@@ -4,7 +4,7 @@
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:PL.Engineer"
-        DataContext="{Binding RelativeSource={RelativeSource Mode=Self}}"
+        DataContext="{Binding RelativeSource={RelativeSource Mode=Self}}" Activated="RefreshWindow_Activated"
         mc:Ignorable="d"
         Title="EngineerListWindow" Height="640" Width="800">
     <!--Extrnal Grid-->
@@ -21,9 +21,9 @@
                 <ColumnDefinition Width="*"/>
             </Grid.ColumnDefinitions>
             <!--Engineer grid filter options-->
-            <Label Grid.Column="0" Content="Select Engineer Experience:" HorizontalAlignment="Left" Margin="85,0,0,0" VerticalAlignment="Center"/>
+            <Label Grid.Column="0" Content="Select Engineer Experience:" HorizontalAlignment="Left" Margin="85,0,0,0" VerticalAlignment="Center" FontSize="18" FontWeight="Bold"/>
             <ComboBox ItemsSource="{Binding Source={StaticResource ExperienceCollectionKey}}"  SelectedValue="{Binding Path=Experience, Mode=TwoWay}"
-                      Grid.Column="1" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" Background="{DynamicResource {x:Static SystemColors.GradientActiveCaptionBrushKey}}" SelectionChanged="cbExperienceSelector_SelectionChanged"/>
+                      Grid.Column="1" VerticalAlignment="Stretch" Background="{DynamicResource {x:Static SystemColors.GradientActiveCaptionBrushKey}}" SelectionChanged="cbExperienceSelector_SelectionChanged" FontSize="18"/>
         </Grid>
         <ListView Grid.Row="1" Foreground="#FF110606" ItemsSource="{Binding Path=EngineerList}" MouseDoubleClick="ListViewUpdateEngineer_MouseDoubleClick">
             <ListView.Background>
@@ -38,6 +38,6 @@
                 </GridView>
             </ListView.View>
         </ListView>
-        <Button Content="Add" Grid.Row="2" HorizontalAlignment="Right" Height="50" Width="150" Foreground="{DynamicResource {x:Static SystemColors.ActiveCaptionTextBrushKey}}" Background="#FF99B4D1" Click="BtnAddNewEngineer_Click"/>
+        <Button Content="Add" Grid.Row="2" HorizontalAlignment="Right" Height="50" Width="150" Foreground="{DynamicResource {x:Static SystemColors.ActiveCaptionTextBrushKey}}" Background="#FF99B4D1" Click="BtnAddNewEngineer_Click" FontSize="24" FontWeight="Bold"/>
     </Grid>
 </Window>

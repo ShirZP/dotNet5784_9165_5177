@@ -33,6 +33,6 @@
                  Visibility="{Binding ID, Mode=OneTime, Converter={StaticResource ConvertIdToVisibilityKey}}"
                  HorizontalAlignment="Left"  Margin="200,306,0,0" VerticalAlignment="Top" Width="150"/>
 
-        <Button Content="{Binding ID, Mode=OneTime, Converter={StaticResource ConverIdToContentKey}}" HorizontalAlignment="Left" Margin="315,350,0,0" VerticalAlignment="Top" Height="25" Width="77" Click="BtnAddOrUpdate_Click" Background="#FF99B4D1"/>
+        <Button Content="{Binding ID, Mode=OneTime, Converter={StaticResource ConverIdToContentKey}}" HorizontalAlignment="Left" Margin="315,350,0,0" VerticalAlignment="Top" Height="25" Width="77" Click="BtnAddOrUpdate_Click" Background="#FF99B4D1" FontWeight="Bold"/>
     </Grid>
 </Window>

@@ -38,7 +38,6 @@ namespace PL.Engineer
         public EngineerListWindow()
         {
             InitializeComponent();
-            EngineerList = s_bl?.Engineer.ReadAll()!;
         }
 
         private void cbExperienceSelector_SelectionChanged(object sender, SelectionChangedEventArgs e)
@@ -50,7 +49,6 @@ namespace PL.Engineer
         private void BtnAddNewEngineer_Click(object sender, RoutedEventArgs e)
         {
             new EngineerWindow().ShowDialog();
-            EngineerList = s_bl?.Engineer.ReadAll()!;
         }
 
         private void ListViewUpdateEngineer_MouseDoubleClick(object sender, MouseButtonEventArgs e)
@@ -59,8 +57,12 @@ namespace PL.Engineer
             if (engineer != null)
             {
                 new EngineerWindow(engineer.ID).ShowDialog();
-                EngineerList = s_bl?.Engineer.ReadAll()!;
             }
+        }
+
+        private void RefreshWindow_Activated(object sender, EventArgs e)
+        {
+            EngineerList = s_bl?.Engineer.ReadAll()!;
         }
     }
 }
