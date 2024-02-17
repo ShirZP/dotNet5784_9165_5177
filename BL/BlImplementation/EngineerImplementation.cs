@@ -108,7 +108,7 @@ internal class EngineerImplementation : IEngineer
     }
 
     /// <summary>
-    /// The function recieved a filter and returns all engineers according to the filter
+    /// The function received a filter and returns all engineers according to the filter
     /// </summary>
     /// <param name="filter">filter to read</param>
     /// <returns>all engineers according to the filter</returns>
@@ -231,7 +231,7 @@ internal class EngineerImplementation : IEngineer
                     throw new BO.BlDependentsTasksException($"There is a previous task for the task - {idTaskInEngineer} - that has not been completed");
 
                 //Checking the engineer level compared to the task complexity
-                if (updatedEngineer.Level > blCurrentTaskEngineer.Complexity)
+                if (updatedEngineer.Level < blCurrentTaskEngineer.Complexity)
                     throw new BlInappropriateLevelException($"The level of the engineer - {updatedEngineer.ID}, is not high enough for the level of the assigned task");
 
                 DO.Task updatedTask = currentTaskEngineer with { StartDate = DateTime.Now, EngineerId = updatedEngineer.ID };

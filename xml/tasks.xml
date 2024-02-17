@@ -1,21 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <ArrayOfTask xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
   <Task>
-    <ID>1001</ID>
-    <NickName>Algorithm development</NickName>
-    <Description>Description - Algorithm development</Description>
-    <ScheduledDate xsi:nil="true" />
-    <StartDate xsi:nil="true" />
-    <RequiredEffortTime>P4D</RequiredEffortTime>
-    <CompleteDate xsi:nil="true" />
-    <FinalProduct>FinalProduct - Algorithm development</FinalProduct>
-    <Remarks>Remarks - Algorithm development</Remarks>
-    <EngineerId xsi:nil="true" />
-    <Complexity>Beginner</Complexity>
-    <DeadlineDate xsi:nil="true" />
-    <IsMileStone xsi:nil="true" />
-  </Task>
-  <Task>
     <ID>1002</ID>
     <NickName>Software design and testing</NickName>
     <Description>Description - Software design and testing</Description>
@@ -25,7 +10,7 @@
     <CompleteDate xsi:nil="true" />
     <FinalProduct>FinalProduct - Software design and testing</FinalProduct>
     <Remarks>Remarks - Software design and testing</Remarks>
-    <EngineerId xsi:nil="true" />
+    <EngineerId>363737764</EngineerId>
     <Complexity>AdvancedBeginner</Complexity>
     <DeadlineDate xsi:nil="true" />
     <IsMileStone xsi:nil="true" />
@@ -40,7 +25,7 @@
     <CompleteDate xsi:nil="true" />
     <FinalProduct>FinalProduct - Hardware prototyping</FinalProduct>
     <Remarks>Remarks - Hardware prototyping</Remarks>
-    <EngineerId xsi:nil="true" />
+    <EngineerId>363737764</EngineerId>
     <Complexity>AdvancedBeginner</Complexity>
     <DeadlineDate xsi:nil="true" />
     <IsMileStone xsi:nil="true" />
@@ -55,7 +40,7 @@
     <CompleteDate xsi:nil="true" />
     <FinalProduct>FinalProduct - Embedded systems programming</FinalProduct>
     <Remarks>Remarks - Embedded systems programming</Remarks>
-    <EngineerId xsi:nil="true" />
+    <EngineerId>363737764</EngineerId>
     <Complexity>Expert</Complexity>
     <DeadlineDate xsi:nil="true" />
     <IsMileStone xsi:nil="true" />
@@ -299,5 +284,20 @@
     <Complexity>Beginner</Complexity>
     <DeadlineDate xsi:nil="true" />
     <IsMileStone xsi:nil="true" />
+  </Task>
+  <Task>
+    <ID>1001</ID>
+    <NickName>Algorithm development</NickName>
+    <Description>Description - Algorithm development</Description>
+    <ScheduledDate xsi:nil="true" />
+    <StartDate>2024-02-18T00:13:56.4819971+02:00</StartDate>
+    <RequiredEffortTime>P4D</RequiredEffortTime>
+    <CompleteDate xsi:nil="true" />
+    <FinalProduct>FinalProduct - Algorithm development</FinalProduct>
+    <Remarks>Remarks - Algorithm development</Remarks>
+    <EngineerId>363737764</EngineerId>
+    <Complexity>Beginner</Complexity>
+    <DeadlineDate xsi:nil="true" />
+    <IsMileStone>false</IsMileStone>
   </Task>
 </ArrayOfTask>
