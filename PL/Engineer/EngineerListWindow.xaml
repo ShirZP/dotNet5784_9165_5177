@@ -25,7 +25,7 @@
             <ComboBox ItemsSource="{Binding Source={StaticResource ExperienceCollectionKey}}"  SelectedValue="{Binding Path=Experience, Mode=TwoWay}"
                       Grid.Column="1" VerticalAlignment="Stretch" Background="{DynamicResource {x:Static SystemColors.GradientActiveCaptionBrushKey}}" SelectionChanged="cbExperienceSelector_SelectionChanged" FontSize="18"/>
         </Grid>
-        <ListView Grid.Row="1" Foreground="#FF110606" ItemsSource="{Binding Path=EngineerList}" MouseDoubleClick="ListViewUpdateEngineer_MouseDoubleClick">
+        <ListView Grid.Row="1" ItemsSource="{Binding Path=EngineerList}" MouseDoubleClick="ListViewUpdateEngineer_MouseDoubleClick">
             <ListView.Background>
                 <LinearGradientBrush EndPoint="0.5,1" StartPoint="0.5,0">
                     <GradientStop Color="White"/>

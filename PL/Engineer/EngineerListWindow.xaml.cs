@@ -75,6 +75,7 @@ namespace PL.Engineer
         private void RefreshWindow_Activated(object sender, EventArgs e)
         {
             EngineerList = s_bl?.Engineer.ReadAll()!;
+
         }
     }
 }
