@@ -40,17 +40,26 @@ namespace PL.Engineer
             InitializeComponent();
         }
 
+        /// <summary>
+        /// Combo box ExperienceSelector to engineer.
+        /// </summary>
         private void cbExperienceSelector_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
             EngineerList = (Experience == BO.EngineerExperience.All) ? s_bl?.Engineer.ReadAll()! : s_bl?.Engineer.ReadAll(item => item.Level == Experience)!;
 
         }
 
+        /// <summary>
+        /// Click on Button AddNewEngineer open the EngineerWindow.
+        /// </summary>
         private void BtnAddNewEngineer_Click(object sender, RoutedEventArgs e)
         {
             new EngineerWindow().ShowDialog();
         }
 
+        /// <summary>
+        /// Double click on engineer in the list open the EngineerWindow to update the engineer details.
+        /// </summary>
         private void ListViewUpdateEngineer_MouseDoubleClick(object sender, MouseButtonEventArgs e)
         {
             BO.Engineer? engineer = (sender as ListView)?.SelectedItem as BO.Engineer;
@@ -60,6 +69,9 @@ namespace PL.Engineer
             }
         }
 
+        /// <summary>
+        /// Refresh the EngineerListWindow
+        /// </summary>
         private void RefreshWindow_Activated(object sender, EventArgs e)
         {
             EngineerList = s_bl?.Engineer.ReadAll()!;

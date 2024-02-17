@@ -24,11 +24,15 @@ namespace PL
             InitializeComponent();
         }
 
+        /// <summary>
+        /// Click on button Handle Engineers opens the EngineerListWindow.
+        /// </summary>
         private void BtnEngineerList_Click(object sender, RoutedEventArgs e)
         {
             new EngineerListWindow().Show();
         }
 
+        //Click on button Init DB - initial the data base.
         private void BtnInitialization_Click(object sender, RoutedEventArgs e)
         {
             // Showing a MessageBox with Yes and No buttons and a question
@@ -43,6 +47,9 @@ namespace PL
             }
         }
 
+        /// <summary>
+        /// Click on button Reset DB - reset the data base.
+        /// </summary>
         private void BtnReset_Click(object sender, RoutedEventArgs e)
         {
             // Showing a MessageBox with Yes and No buttons and a question
