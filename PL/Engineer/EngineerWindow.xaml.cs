@@ -55,7 +55,7 @@ namespace PL.Engineer
         }
 
         //The name selected in the ComboBox of EngineerCurrentTask
-        private string _selectedTaskName;
+        private string _selectedTaskName = "None";
         public string SelectedTaskName
         {
             get => _selectedTaskName;
@@ -65,6 +65,7 @@ namespace PL.Engineer
                 UpdateCurrentEngineerCurrentTask(_selectedTaskName);
             }
         }
+
         /// <summary>
         /// Updating the EngineerCurrentTask field of the engineer according to the name of the task
         /// </summary>
@@ -112,7 +113,7 @@ namespace PL.Engineer
                 SelectedTaskName = CurrentEngineer.EngineerCurrentTask.NickName;
 
             }
-            else { SelectedTaskName = "None"; }
+            
             this.DataContext = this;
         }
 
