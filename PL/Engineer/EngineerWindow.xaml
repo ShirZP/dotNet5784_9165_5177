@@ -21,17 +21,17 @@
         <Label Content="Current Task:" Visibility="{Binding CurrentEngineer.ID, Mode=OneTime, Converter={StaticResource ConvertIdToVisibilityKey}}" HorizontalAlignment="Left" Margin="50,306,0,0" VerticalAlignment="Top" Height="28" Width="90"/>
         <TextBox Text="{Binding CurrentEngineer.ID, Mode=TwoWay, NotifyOnValidationError=true,  ValidatesOnExceptions=true}"
                  IsEnabled="{Binding CurrentEngineer.ID, Mode=OneTime, Converter={StaticResource ConvertIdToIsEnabledKey}}"
-                 HorizontalAlignment="Left" Margin="200,56,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="150"/>
-        <TextBox Text="{Binding CurrentEngineer.FullName, Mode=TwoWay, NotifyOnValidationError=true,  ValidatesOnExceptions=true}" HorizontalAlignment="Left" Margin="200,106,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="150"/>
-        <TextBox Text="{Binding CurrentEngineer.Email, Mode=TwoWay, NotifyOnValidationError=true,  ValidatesOnExceptions=true}" HorizontalAlignment="Left" Margin="200,156,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="150"/>
+                 HorizontalAlignment="Left" Margin="163,56,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="217"/>
+        <TextBox Text="{Binding CurrentEngineer.FullName, Mode=TwoWay, NotifyOnValidationError=true,  ValidatesOnExceptions=true}" HorizontalAlignment="Left" Margin="163,106,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="217"/>
+        <TextBox Text="{Binding CurrentEngineer.Email, Mode=TwoWay, NotifyOnValidationError=true,  ValidatesOnExceptions=true}" HorizontalAlignment="Left" Margin="163,156,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="217"/>
         <ComboBox ItemsSource="{Binding Source={StaticResource EngineerExperienceCollectionKey}}" 
                   SelectedValue="{Binding CurrentEngineer.Level, Mode=TwoWay, NotifyOnValidationError=true, 
-                  ValidatesOnExceptions=true}" HorizontalAlignment="Left" Margin="200,206,0,0" VerticalAlignment="Top" Width="150"/>
-        <TextBox Text="{Binding CurrentEngineer.Cost, Mode=TwoWay, NotifyOnValidationError=true,  ValidatesOnExceptions=true}" HorizontalAlignment="Left" Margin="200,256,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="150"/>
+                  ValidatesOnExceptions=true}" HorizontalAlignment="Left" Margin="163,206,0,0" VerticalAlignment="Top" Width="217"/>
+        <TextBox Text="{Binding CurrentEngineer.Cost, Mode=TwoWay, NotifyOnValidationError=true,  ValidatesOnExceptions=true}" HorizontalAlignment="Left" Margin="163,256,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="217"/>
 
         <ComboBox ItemsSource="{Binding engineerTasksName}" SelectedItem="{Binding SelectedTaskName, Mode=TwoWay}"
                   Visibility="{Binding CurrentEngineer.ID, Mode=OneTime, Converter={StaticResource ConvertIdToVisibilityKey}}" 
-                  HorizontalAlignment="Left" Margin="200,304,0,0" VerticalAlignment="Top" Width="150"/>
+                  HorizontalAlignment="Left" Margin="163,304,0,0" VerticalAlignment="Top" Width="217"/>
 
         <Button Content="{Binding CurrentEngineer.ID, Mode=OneTime, Converter={StaticResource ConverIdToContentKey}}" HorizontalAlignment="Left" Margin="315,350,0,0" VerticalAlignment="Top" Height="25" Width="77" Click="BtnAddOrUpdate_Click" Background="#FF99B4D1" FontWeight="Bold"/>
     </Grid>
