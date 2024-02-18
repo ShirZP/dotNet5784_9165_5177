@@ -18,7 +18,7 @@
         <Label Content="Email:" HorizontalAlignment="Left" Margin="50,156,0,0" VerticalAlignment="Top" Height="25" Width="65"/>
         <Label Content="Engineer Level:" HorizontalAlignment="Left" Margin="50,206,0,0" VerticalAlignment="Top" Height="28" Width="90"/>
         <Label Content="Hourly Cost:" HorizontalAlignment="Left" Margin="50,256,0,0" VerticalAlignment="Top" Height="28" Width="75"/>
-        <Label Content="Current Task:" Visibility="{Binding ID, Mode=OneTime, Converter={StaticResource ConvertIdToVisibilityKey}}" HorizontalAlignment="Left" Margin="50,306,0,0" VerticalAlignment="Top" Height="28" Width="90"/>
+        <Label Content="Current Task:" Visibility="{Binding CurrentEngineer.ID, Mode=OneTime, Converter={StaticResource ConvertIdToVisibilityKey}}" HorizontalAlignment="Left" Margin="50,306,0,0" VerticalAlignment="Top" Height="28" Width="90"/>
         <TextBox Text="{Binding CurrentEngineer.ID, Mode=TwoWay, NotifyOnValidationError=true,  ValidatesOnExceptions=true}"
                  IsEnabled="{Binding CurrentEngineer.ID, Mode=OneTime, Converter={StaticResource ConvertIdToIsEnabledKey}}"
                  HorizontalAlignment="Left" Margin="200,56,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="150"/>
@@ -30,7 +30,8 @@
         <TextBox Text="{Binding CurrentEngineer.Cost, Mode=TwoWay, NotifyOnValidationError=true,  ValidatesOnExceptions=true}" HorizontalAlignment="Left" Margin="200,256,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="150"/>
 
         <ComboBox ItemsSource="{Binding engineerTasksName}" SelectedItem="{Binding SelectedTaskName, Mode=TwoWay}"
-                HorizontalAlignment="Left" Margin="200,304,0,0" VerticalAlignment="Top" Width="150"/>
+                  Visibility="{Binding CurrentEngineer.ID, Mode=OneTime, Converter={StaticResource ConvertIdToVisibilityKey}}" 
+                  HorizontalAlignment="Left" Margin="200,304,0,0" VerticalAlignment="Top" Width="150"/>
 
         <Button Content="{Binding CurrentEngineer.ID, Mode=OneTime, Converter={StaticResource ConverIdToContentKey}}" HorizontalAlignment="Left" Margin="315,350,0,0" VerticalAlignment="Top" Height="25" Width="77" Click="BtnAddOrUpdate_Click" Background="#FF99B4D1" FontWeight="Bold"/>
     </Grid>

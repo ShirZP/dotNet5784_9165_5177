@@ -46,13 +46,3 @@ class ConvertIdToVisibility : IValueConverter
     }
 }
 
-//TODO: תיבת בחירה למשימה נוכחית של מהנדס
-//internal class EngineerTasksCollection : IEnumerable
-//{
-//    static readonly BlApi.IBl s_bl = BlApi.Factory.Get();
-
-//    static readonly IEnumerable<BO.TaskInList> s_t = (s_bl.Task.ReadAll(item=> item.AssignedEngineer.ID == (?)  as IEnumerable<BO.EngineerExperience>)!;
-
-//    public IEnumerator GetEnumerator() => s_t.GetEnumerator();
-//}
-
