@@ -4,7 +4,8 @@
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:PL.Engineer"
-        DataContext="{Binding RelativeSource={RelativeSource Mode=Self}}" Activated="RefreshWindow_Activated"
+        DataContext="{Binding RelativeSource={RelativeSource Mode=Self}}" 
+        Activated="RefreshWindow_Activated"
         mc:Ignorable="d"
         Title="EngineerListWindow" Height="640" Width="800">
     <!--Extrnal Grid-->
