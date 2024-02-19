@@ -32,11 +32,6 @@
                     <GradientStop Color="#FF97DAEB" Offset="1"/>
                 </LinearGradientBrush>
             </ListView.Background>
-            <ListView.View>
-                <GridView>
-                    <GridViewColumn/>
-                </GridView>
-            </ListView.View>
         </ListView>
         <Button Content="Add" Grid.Row="2" HorizontalAlignment="Right" Height="50" Width="150" Foreground="{DynamicResource {x:Static SystemColors.ActiveCaptionTextBrushKey}}" Background="#FF99B4D1" Click="BtnAddNewEngineer_Click" FontSize="24" FontWeight="Bold"/>
     </Grid>
