@@ -74,7 +74,7 @@ namespace PL.Engineer
         /// </summary>
         private void RefreshWindow_Activated(object sender, EventArgs e)
         {
-            EngineerList = s_bl?.Engineer.ReadAll()!;
+            EngineerList = (Experience == BO.EngineerExperience.All) ? s_bl?.Engineer.ReadAll()! : s_bl?.Engineer.ReadAll(item => item.Level == Experience)!;
 
         }
     }
