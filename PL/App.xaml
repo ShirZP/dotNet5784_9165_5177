@@ -9,7 +9,13 @@
         <local:ConvertIdToContent x:Key="ConverIdToContentKey"/>
         <local:ConvertIdToIsEnabled x:Key="ConvertIdToIsEnabledKey"/>
         <local:ConvertIdToVisibility x:Key="ConvertIdToVisibilityKey"/>
-        <Style TargetType="Button" x:Key ="ButtonRound">
+
+        <LinearGradientBrush EndPoint="0.5,1" StartPoint="0.5,0" x:Key ="BackgroundKey">
+            <GradientStop Color="White"/>
+            <GradientStop Color="#FF97DAEB" Offset="1"/>
+        </LinearGradientBrush>
+
+        <Style TargetType="Button" x:Key ="ButtonRoundKey">
             <Setter Property="Template">
                 <Setter.Value>
                     <ControlTemplate TargetType="Button">
@@ -24,5 +30,6 @@
                 </Setter.Value>
             </Setter>
         </Style>
+        
     </Application.Resources>
 </Application>

@@ -26,14 +26,8 @@
             <ComboBox ItemsSource="{Binding Source={StaticResource ExperienceCollectionKey}}"  SelectedValue="{Binding Path=Experience, Mode=TwoWay}"
                       Grid.Column="1" VerticalAlignment="Stretch" Background="{DynamicResource {x:Static SystemColors.GradientActiveCaptionBrushKey}}" SelectionChanged="cbExperienceSelector_SelectionChanged" FontSize="18"/>
         </Grid>
-        <ListView Grid.Row="1" ItemsSource="{Binding Path=EngineerList}" MouseDoubleClick="ListViewUpdateEngineer_MouseDoubleClick">
-            <ListView.Background>
-                <LinearGradientBrush EndPoint="0.5,1" StartPoint="0.5,0">
-                    <GradientStop Color="White"/>
-                    <GradientStop Color="#FF97DAEB" Offset="1"/>
-                </LinearGradientBrush>
-            </ListView.Background>
-        </ListView>
-        <Button Content="Add" Grid.Row="2" HorizontalAlignment="Right" Height="50" Width="150" Foreground="{DynamicResource {x:Static SystemColors.ActiveCaptionTextBrushKey}}" Background="#FF99B4D1" Click="BtnAddNewEngineer_Click" FontSize="24" FontWeight="Bold" Style="{StaticResource ButtonRound}"/>
+        <ListView Grid.Row="1" ItemsSource="{Binding Path=EngineerList}" MouseDoubleClick="ListViewUpdateEngineer_MouseDoubleClick" Background="{StaticResource BackgroundKey}"/>
+
+        <Button Content="Add" Grid.Row="2" HorizontalAlignment="Right" Height="50" Width="150" Foreground="{DynamicResource {x:Static SystemColors.ActiveCaptionTextBrushKey}}" Background="#FF99B4D1" Click="BtnAddNewEngineer_Click" FontSize="24" FontWeight="Bold" Style="{StaticResource ButtonRoundKey}"/>
     </Grid>
 </Window>
