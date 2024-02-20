@@ -123,7 +123,7 @@ internal class TaskImplementation : ITask
     }
 
     /// <summary>
-    /// The function recieved a filter and returns all tasks according to the filter
+    /// The function received a filter and returns all tasks as taskInList according to the filter
     /// </summary>
     /// <param name="filter">filter to read</param>
     /// <returns>all tasks according to the filter</returns>
@@ -139,6 +139,25 @@ internal class TaskImplementation : ITask
         return (from DO.Task dalTask in _dal.Task.ReadAll()
                 let blTask = Read(dalTask.ID)
                 select new TaskInList(blTask.ID, blTask.Description, blTask.NickName, blTask.Status));
+    }
+
+    /// <summary>
+    /// The function received a filter and returns all tasks as Task according to the filter
+    /// </summary>
+    /// <param name="filter">filter to read</param>
+    /// <returns>all tasks according to the filter</returns>
+    public IEnumerable<BO.Task> ReadAllFullTasksDetails(Func<BO.Task, bool>? filter = null)
+    {
+        if (filter != null)
+        {
+            return (from DO.Task dalTask in _dal.Task.ReadAll()
+                    let blTask = Read(dalTask.ID)
+                    where filter(blTask)
+                    select blTask);
+        }
+        return (from DO.Task dalTask in _dal.Task.ReadAll()
+                let blTask = Read(dalTask.ID)
+                select blTask);
     }
 
     /// <summary>
