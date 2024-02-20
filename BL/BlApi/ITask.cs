@@ -4,6 +4,8 @@ public interface ITask
 {
     public IEnumerable<BO.TaskInList> ReadAll(Func<BO.Task, bool>? filter = null); //Reads all tasks by filter 
 
+    public IEnumerable<BO.Task> ReadAllFullTasksDetails(Func<BO.Task, bool>? filter = null); //Reads all tasks by filter 
+
     public BO.Task Read(int id); //Reads task by id
     
     public int Create(BO.Task task); //Add new task
