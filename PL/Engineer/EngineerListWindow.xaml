@@ -34,6 +34,6 @@
                 </LinearGradientBrush>
             </ListView.Background>
         </ListView>
-        <Button Content="Add" Grid.Row="2" HorizontalAlignment="Right" Height="50" Width="150" Foreground="{DynamicResource {x:Static SystemColors.ActiveCaptionTextBrushKey}}" Background="#FF99B4D1" Click="BtnAddNewEngineer_Click" FontSize="24" FontWeight="Bold"/>
+        <Button Content="Add" Grid.Row="2" HorizontalAlignment="Right" Height="50" Width="150" Foreground="{DynamicResource {x:Static SystemColors.ActiveCaptionTextBrushKey}}" Background="#FF99B4D1" Click="BtnAddNewEngineer_Click" FontSize="24" FontWeight="Bold" Style="{StaticResource ButtonRound}"/>
     </Grid>
 </Window>
