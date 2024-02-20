@@ -1,6 +1,6 @@
 ﻿namespace BO;
 
-public class Engineer
+public class TaskInList
 {
     /// <summary>
     /// The engineer's unique personal identity card (as in a national identity card)

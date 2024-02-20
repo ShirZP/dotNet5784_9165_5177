@@ -4,9 +4,35 @@
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:PL.Task"
+        DataContext="{Binding RelativeSource={RelativeSource Mode=Self}}" 
+        Activated="RefreshWindow_Activated"
         mc:Ignorable="d"
         Title="TaskTableWindow" Height="640" Width="800">
     <Grid Background="{StaticResource BackgroundKey}">
-        
+        <Grid.RowDefinitions>
+            <RowDefinition Height="40"/>
+            <RowDefinition Height="40"/>
+            <RowDefinition Height="Auto"/>
+        </Grid.RowDefinitions>
+        <!--Internal, Upper Grid-->
+        <Grid HorizontalAlignment="Stretch" Height="auto" Grid.Row="1" VerticalAlignment="Stretch" Width="auto">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="*"/>
+                <ColumnDefinition Width="*"/>
+            </Grid.ColumnDefinitions>
+            <!--Engineer grid filter options-->
+            <Label Grid.Column="0" Content="Select Task level:" HorizontalAlignment="Left" Margin="85,0,0,0" VerticalAlignment="Center" FontSize="18" FontWeight="Bold"/>
+            <ComboBox Grid.Column="1" VerticalAlignment="Stretch" Background="{DynamicResource {x:Static SystemColors.GradientActiveCaptionBrushKey}}" FontSize="18"/>
+        </Grid>
+        <DataGrid AutoGenerateColumns="False" Grid.Row="2" ItemsSource="{Binding Path=TasksList}" Margin="0,0,0,61" Width="Auto" Height ="460">
+            <DataGrid.Columns>
+                <DataGridTextColumn Header="ID" Binding="{Binding ID}" />
+                <DataGridTextColumn Header="Name" Binding="{Binding Name}" />
+                <DataGridTextColumn Header="Description" Binding="{Binding Description}" />
+                <DataGridTextColumn Header="Status" Binding="{Binding Status}" />
+            </DataGrid.Columns>
+        </DataGrid>
+
+        <Button Content="Add" Grid.Row="2" HorizontalAlignment="Right" Height="50" Width="150" Foreground="{DynamicResource {x:Static SystemColors.ActiveCaptionTextBrushKey}}" Background="#FF99B4D1" FontSize="24" FontWeight="Bold" Style="{StaticResource ButtonRoundKey}" Margin="0,484,10,-13"/>
     </Grid>
 </Window>

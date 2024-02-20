@@ -46,7 +46,6 @@ namespace PL.Engineer
         private void cbExperienceSelector_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
             EngineerList = (Experience == BO.EngineerExperience.All) ? s_bl?.Engineer.ReadAll()! : s_bl?.Engineer.ReadAll(item => item.Level == Experience)!;
-
         }
 
         /// <summary>
@@ -75,7 +74,6 @@ namespace PL.Engineer
         private void RefreshWindow_Activated(object sender, EventArgs e)
         {
             EngineerList = (Experience == BO.EngineerExperience.All) ? s_bl?.Engineer.ReadAll()! : s_bl?.Engineer.ReadAll(item => item.Level == Experience)!;
-
         }
     }
 }
