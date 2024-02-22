@@ -24,13 +24,13 @@ namespace PL.Task
 
         public static readonly DependencyProperty TasksListProperty = DependencyProperty.Register(
                                                                                            "TasksList",
-                                                                                           typeof(IEnumerable<BO.TaskInList>),
+                                                                                           typeof(IEnumerable<BO.Task>),
                                                                                            typeof(TaskTableWindow),
                                                                                            new PropertyMetadata(null));
 
-        public IEnumerable<BO.TaskInList> TasksList
+        public IEnumerable<BO.Task> TasksList
         {
-            get { return (IEnumerable<BO.TaskInList>)GetValue(TasksListProperty); }
+            get { return (IEnumerable<BO.Task>)GetValue(TasksListProperty); }
             set { SetValue(TasksListProperty, value); }
         }
 
@@ -45,7 +45,7 @@ namespace PL.Task
         /// </summary>
         private void RefreshWindow_Activated(object sender, EventArgs e)
         {
-            TasksList = s_bl?.Task.ReadAll()!;
+            TasksList = s_bl?.Task.ReadAllFullTasksDetails()!;
         }
     }
 }

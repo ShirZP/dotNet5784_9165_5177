@@ -27,9 +27,11 @@
         <DataGrid AutoGenerateColumns="False" Grid.Row="2" ItemsSource="{Binding Path=TasksList}" Margin="0,0,0,61" Width="Auto" Height ="460">
             <DataGrid.Columns>
                 <DataGridTextColumn Header="ID" Binding="{Binding ID}" />
-                <DataGridTextColumn Header="Name" Binding="{Binding Name}" />
-                <DataGridTextColumn Header="Description" Binding="{Binding Description}" />
+                <DataGridTextColumn Header="Name" Binding="{Binding NickName}" />
                 <DataGridTextColumn Header="Status" Binding="{Binding Status}" />
+                <DataGridTextColumn Header="Assigned Engineer" Binding="{Binding AssignedEngineer}" />
+                <DataGridTextColumn Header="Complexity" Binding="{Binding Complexity}" />
+                <DataGridTextColumn Header="Dependencies" Binding="{Binding Dependencies}" />
             </DataGrid.Columns>
         </DataGrid>
 

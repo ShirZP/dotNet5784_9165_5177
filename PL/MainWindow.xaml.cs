@@ -1,4 +1,5 @@
 ﻿using PL.Engineer;
+using PL.Task;
 using System.Text;
 using System.Windows;
 using System.Windows.Controls;
@@ -62,6 +63,11 @@ namespace PL
                 s_bl.resetDB();
                 MessageBoxResult messageBoxResult = MessageBox.Show("Reset DB done successfully!", "Happy Message :)", MessageBoxButton.OK, MessageBoxImage.Information);
             }
+        }
+
+        private void BtnTaskTable_Click(object sender, RoutedEventArgs e)
+        {
+            new TaskTableWindow().Show();
         }
     }
 }
