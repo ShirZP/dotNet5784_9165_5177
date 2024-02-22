@@ -1,4 +1,5 @@
-﻿using PL.Engineer;
+﻿using BO;
+using PL.Engineer;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -23,10 +24,16 @@ namespace PL.Task
         static readonly BlApi.IBl s_bl = BlApi.Factory.Get();
 
         public static readonly DependencyProperty TaskProperty = DependencyProperty.Register(
-                                                                                        "CurrentTask",
-                                                                                        typeof(BO.Task),
-                                                                                        typeof(TaskWindow),
-                                                                                        new PropertyMetadata(null));
+                                                                                    "CurrentTask",
+                                                                                     typeof(BO.Task),
+                                                                                     typeof(TaskWindow),
+                                                                                     new PropertyMetadata(null));
+
+        public static readonly DependencyProperty daysEffortTimeOptionsProperty = DependencyProperty.Register(
+                                                                                   "daysEffortTimeOptions",
+                                                                                   typeof(List<TimeSpan>),
+                                                                                   typeof(TaskWindow),
+                                                                                   new PropertyMetadata(null));
 
 
         public BO.Task CurrentTask
@@ -35,10 +42,64 @@ namespace PL.Task
             set { SetValue(TaskProperty, value); }
         }
 
+        
 
-        public List<TimeSpan> daysEffortTimeOptions = new List<TimeSpan>();
+        public List<TimeSpan> daysEffortTimeOptions
+        {
+            get { return (List<TimeSpan>)GetValue(daysEffortTimeOptionsProperty); }
+            set { SetValue(daysEffortTimeOptionsProperty, value); }
+        }
+        public TimeSpan daysEffortTime;
 
 
+
+        public static readonly DependencyProperty AssignedEngineerProperty = DependencyProperty.Register(
+                                                                                                "AssignedEngineer",
+                                                                                                typeof(IEnumerable<string>),
+                                                                                                typeof(EngineerWindow),
+                                                                                                new PropertyMetadata(null));
+
+
+        //The list of all the engineers
+        private IEnumerable<BO.Engineer> assignedEngineer = new List<BO.Engineer>();
+
+        //The list of all the names of the engineers
+        public List<string> AssignedEngineer
+        {
+            get { return (List<string>)GetValue(AssignedEngineerProperty); }
+            set { SetValue(AssignedEngineerProperty, value); }
+        }
+
+        //The name selected in the ComboBox of Assigned Engineer
+        private string _selectedEngineerName = "None";
+        public string SelectedEngineerName
+        {
+            get => _selectedEngineerName;
+            set
+            {
+                _selectedEngineerName = value;
+                UpdateCurrentEngineerCurrentTask(_selectedEngineerName);
+            }
+        }
+
+        /// <summary>
+        /// Updating the EngineerCurrentTask field of the engineer according to the name of the task
+        /// </summary>
+        /// <param name="selectedTaskName">The name selected in the ComboBox of EngineerCurrentTask</param>
+        private void UpdateCurrentEngineerCurrentTask(string selectedEngineerName)
+        {
+            if (CurrentTask != null && !string.IsNullOrEmpty(selectedEngineerName) && selectedEngineerName != "None")
+            {
+                BO.Engineer? engineerInTask = (from t in assignedEngineer
+                                                     where t.FullName == selectedEngineerName
+                                                     select t).FirstOrDefault();
+                if (engineerInTask != null)
+                {
+                    BO.EngineerInTask engineerInTaskObj = new EngineerInTask(engineerInTask.ID, engineerInTask.FullName);
+                    CurrentTask.AssignedEngineer = engineerInTaskObj;
+                }
+            }
+        }
 
 
         public TaskWindow(int id = 0)
@@ -64,14 +125,26 @@ namespace PL.Task
             }
 
 
+            daysEffortTimeOptions = new List<TimeSpan>();
             // Populate the list with TimeSpan values for each day
             for (int day = 1; day <= 30; day++)
             {
                 TimeSpan dayTimeSpan = TimeSpan.FromDays(day);
                 daysEffortTimeOptions.Add(dayTimeSpan);
             }
+           
+            LoadAllEngineers();
 
             this.DataContext = this;
+        }
+
+        private void LoadAllEngineers()
+        {
+            assignedEngineer = s_bl.Engineer.ReadAll();
+
+            AssignedEngineer = (from engineer in assignedEngineer
+                                select engineer.FullName).ToList();
+            AssignedEngineer.Add("None");
         }
 
 
@@ -84,7 +157,36 @@ namespace PL.Task
             }
         }
 
+        private void Button_Click(object sender, RoutedEventArgs e)
+        {
+            listBoxPopup.IsOpen = !listBoxPopup.IsOpen; // Toggle popup visibility
+        }
+
+        // Call this method when you want to add the selected items to the DataGrid.
+        private void AddSelectedItemsToDataGrid()
+        {
+            foreach (ListBoxItem item in listBox.SelectedItems)
+            {
+                var newItem = new ItemModel { Value = item.Content.ToString() };
+                dataGrid.Items.Add(newItem);
+            }
+
+            listBoxPopup.IsOpen = false; // Close the popup after selection
+        }
+
+        // Example trigger for adding items, such as double-click on the ListBox.
+        private void listBox_MouseDoubleClick(object sender, System.Windows.Input.MouseButtonEventArgs e)
+        {
+            AddSelectedItemsToDataGrid();
+        }
     }
+
+    public class ItemModel
+{
+    public string Value { get; set; }
+
+    // Add more properties as needed
+}
 
 
 

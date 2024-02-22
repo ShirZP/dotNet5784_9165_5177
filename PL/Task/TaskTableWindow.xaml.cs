@@ -69,5 +69,10 @@ namespace PL.Task
             //    }
             //}
         }
+
+        private void BtnAdd_Click(object sender, RoutedEventArgs e)
+        {
+            new TaskWindow().ShowDialog();
+        }
     }
 }
