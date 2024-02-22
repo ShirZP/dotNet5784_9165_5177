@@ -9,6 +9,10 @@
         <local:ConvertIdToContent x:Key="ConverIdToContentKey"/>
         <local:ConvertIdToIsEnabled x:Key="ConvertIdToIsEnabledKey"/>
         <local:ConvertIdToVisibility x:Key="ConvertIdToVisibilityKey"/>
+        <local:ConvertTaskInListIEnumerableToBool x:Key="ConvertTaskInListIEnumerableToBoolKey"/>
+        <local:TaskFieldsToFilterCollection x:Key="TaskFieldsToFilterCollectionKey"/>
+        <local:TaskStatusCollection x:Key="TaskStatusCollectionKey"/>
+        
 
         <!--Background-->
         <LinearGradientBrush EndPoint="0.5,1" StartPoint="0.5,0" x:Key ="BackgroundKey">

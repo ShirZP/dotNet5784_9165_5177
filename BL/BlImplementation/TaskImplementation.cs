@@ -44,7 +44,7 @@ internal class TaskImplementation : ITask
                                      (DO.EngineerExperience)task.Complexity);
 
         //Creating a list of DO.Dependency objects
-        IEnumerable<DO.Dependency>? dalDependenciesList = task.Dependencies.Select(taskInList => new DO.Dependency(0, task.ID, taskInList.ID)).Where(taskInList =>  taskInList != null);
+        IEnumerable<DO.Dependency>? dalDependenciesList = task.Dependencies.Select(taskInList => new DO.Dependency(0, task.ID, taskInList.ID));
         
         //Adding the task's dependencies to the data layer
         (from dependency in dalDependenciesList
