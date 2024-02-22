@@ -1,5 +1,5 @@
-﻿using PL.Engineer;
-using System;
+﻿using System;
+using PL;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -23,16 +23,19 @@ namespace PL.Task
         static readonly BlApi.IBl s_bl = BlApi.Factory.Get();
 
         public static readonly DependencyProperty TasksListProperty = DependencyProperty.Register(
-                                                                                           "TasksList",
-                                                                                           typeof(IEnumerable<BO.Task>),
-                                                                                           typeof(TaskTableWindow),
-                                                                                           new PropertyMetadata(null));
+                                                                                         "TasksList",
+                                                                                         typeof(IEnumerable<BO.Task>),
+                                                                                         typeof(TaskTableWindow),
+                                                                                         new PropertyMetadata(null));
 
         public IEnumerable<BO.Task> TasksList
         {
             get { return (IEnumerable<BO.Task>)GetValue(TasksListProperty); }
             set { SetValue(TasksListProperty, value); }
         }
+
+
+        public TaskFieldsToFilter Category { get; set; } = TaskFieldsToFilter.All;
 
 
         public TaskTableWindow()
@@ -46,6 +49,25 @@ namespace PL.Task
         private void RefreshWindow_Activated(object sender, EventArgs e)
         {
             TasksList = s_bl?.Task.ReadAllFullTasksDetails()!;
+        }
+
+        private void PenButton_Click(object sender, RoutedEventArgs e)
+        {
+            //BO.Task? task = (sender as DataGrid)?.SelectedItem as BO.Task;
+            //if (task != null)
+            //{
+                new TaskWindow().Show();
+            //}
+
+            //private void cbFilterSelector_SelectionChanged(object sender, SelectionChangedEventArgs e)
+            //{
+            //    if (Category == TaskFieldsToFilter.All)
+            //        TasksList = s_bl?.Task.ReadAllFullTasksDetails()!;
+            //    else if (Category == TaskFieldsToFilter.Status)
+            //    {
+
+            //    }
+            //}
         }
     }
 }

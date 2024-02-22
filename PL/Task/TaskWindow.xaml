@@ -5,8 +5,43 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:PL.Task"
         mc:Ignorable="d"
-        Title="TaskWindow" Height="640" Width="800">
+        Title="TaskWindow" Height="700" Width="450">
     <Grid Background="{StaticResource BackgroundKey}">
-        
+        <Label Content="ID:" HorizontalAlignment="Left" Margin="50,56,0,0" VerticalAlignment="Top" Height="25" Width="110"/>
+        <Label Content="Name:" HorizontalAlignment="Left" Margin="50,86,0,0" VerticalAlignment="Top" Height="25" Width="110"/>
+        <Label Content="Description:" HorizontalAlignment="Left" Margin="50,116,0,0" VerticalAlignment="Top" Height="25" Width="110"/>
+        <Label Content="Status:" HorizontalAlignment="Left" Margin="50,174,0,0" VerticalAlignment="Top" Height="28" Width="110"/>
+        <Label Content="Complexity:" HorizontalAlignment="Left" Margin="50,204,0,0" VerticalAlignment="Top" Height="28" Width="110"/>
+        <Label Content="Scheduled Date:" HorizontalAlignment="Left" Margin="50,234,0,0" VerticalAlignment="Top" Height="28" Width="110"/>
+        <Label Content="Start Date:" HorizontalAlignment="Left" Margin="50,264,0,0" VerticalAlignment="Top" Height="28" Width="110"/>
+        <Label Content="Forecast Date:" HorizontalAlignment="Left" Margin="50,294,0,0" VerticalAlignment="Top" Height="28" Width="110"/>
+        <Label Content="Complete Date:" HorizontalAlignment="Left" Margin="50,324,0,0" VerticalAlignment="Top" Height="28" Width="110"/>
+        <Label Content="Required Effort Time:" HorizontalAlignment="Left" Margin="50,354,0,0" VerticalAlignment="Top" Height="28" Width="130"/>
+        <Label Content="Deliverables:" HorizontalAlignment="Left" Margin="50,384,0,0" VerticalAlignment="Top" Height="28" Width="110"/>
+        <Label Content="Remarks:" HorizontalAlignment="Left" Margin="50,414,0,0" VerticalAlignment="Top" Height="28" Width="110"/>
+        <Label Content="Assigned Engineer:" HorizontalAlignment="Left" Margin="50,444,0,0" VerticalAlignment="Top" Height="28" Width="110"/>
+
+        <!-- ID -->
+        <TextBox Text="{Binding CurrentTask.ID, Mode=TwoWay, NotifyOnValidationError=true,  ValidatesOnExceptions=true}" IsEnabled="False"
+                 HorizontalAlignment="Left" Margin="163,56,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="217"/>
+        <!-- Name -->
+        <TextBox Text="{Binding CurrentTask.NickName, Mode=TwoWay, NotifyOnValidationError=true,  ValidatesOnExceptions=true}"
+         HorizontalAlignment="Left" Margin="163,86,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="217"/>
+        <!-- Description -->
+        <TextBox Text="{Binding CurrentTask.Description, Mode=TwoWay, NotifyOnValidationError=true,  ValidatesOnExceptions=true}"
+                 HorizontalAlignment="Left" Margin="163,116,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="217"
+                 HorizontalScrollBarVisibility="Disabled"
+                 VerticalScrollBarVisibility="Auto"
+                 AcceptsReturn="True" Height="44"/>
+        <!-- Status -->
+        <ComboBox ItemsSource="{Binding Source={StaticResource TaskStatusCollectionKey}}" 
+                  SelectedValue="{Binding CurrentTask.Status, Mode=TwoWay, NotifyOnValidationError=true, ValidatesOnExceptions=true}" 
+                  HorizontalAlignment="Left" Margin="163,174,0,0" VerticalAlignment="Top" Height="20" Width="217"/>
+        <!-- Complexity -->
+        <ComboBox ItemsSource="{Binding Source={StaticResource EngineerExperienceCollectionKey}}" 
+                  SelectedValue="{Binding CurrentTask.Status, Mode=TwoWay, NotifyOnValidationError=true, ValidatesOnExceptions=true}" 
+                  HorizontalAlignment="Left" Margin="163,204,0,0" VerticalAlignment="Top" Height="20" Width="217"/>
+
+        <Button Content="" HorizontalAlignment="Left" Margin="348,636,0,0" VerticalAlignment="Top" Height="25" Width="77" Background="#FF99B4D1" FontWeight="Bold" Style="{StaticResource ButtonRoundKey}"/>
     </Grid>
 </Window>

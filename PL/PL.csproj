@@ -14,10 +14,10 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <None Remove="backgrounde.jpg" />
     <None Remove="code.jpg" />
     <None Remove="EngineerPic.jpeg" />
     <None Remove="marble.jpg" />
+    <None Remove="Task\penIcon.png" />
   </ItemGroup>
 
   <ItemGroup>
@@ -25,8 +25,9 @@
   </ItemGroup>
 
   <ItemGroup>
-    <Resource Include="backgrounde.jpg" />
-    <Resource Include="code.jpg" />
+    <Resource Include="images\background.jpg" />
+    <Resource Include="images\code.jpg" />
+    <Resource Include="Task\penIcon.png" />
   </ItemGroup>
 
 </Project>
