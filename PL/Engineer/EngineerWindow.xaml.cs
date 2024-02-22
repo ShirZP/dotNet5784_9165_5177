@@ -90,7 +90,7 @@ namespace PL.Engineer
         {
             InitializeComponent();
 
-            //According to the id we will update CurrentEngineer. If id ==0 - an empty engineer will be opened to be added. Otherwise we will pull out the engineer and open a window for updating
+            //According to the id we will update CurrentEngineer. If id == 0 - an empty engineer will be opened to be added. Otherwise we will pull out the engineer and open a window for updating
             if (id == 0)
             {
                 CurrentEngineer = new BO.Engineer(0, "", "", BO.EngineerExperience.Beginner, null, null);

@@ -47,5 +47,6 @@ namespace PL.Task
         {
             TasksList = s_bl?.Task.ReadAllFullTasksDetails()!;
         }
+
     }
 }
