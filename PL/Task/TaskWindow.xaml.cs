@@ -28,7 +28,7 @@ namespace PL.Task
                                                                                         typeof(TaskWindow),
                                                                                         new PropertyMetadata(null));
 
-       
+
         public BO.Task CurrentTask
         {
             get { return (BO.Task)GetValue(TaskProperty); }
@@ -38,10 +38,10 @@ namespace PL.Task
 
         public List<TimeSpan> daysEffortTimeOptions = new List<TimeSpan>();
 
-        
 
 
-    public TaskWindow(int id = 0)
+
+        public TaskWindow(int id = 0)
         {
             InitializeComponent();
 
@@ -63,7 +63,7 @@ namespace PL.Task
                 }
             }
 
-            
+
             // Populate the list with TimeSpan values for each day
             for (int day = 1; day <= 30; day++)
             {
@@ -84,7 +84,7 @@ namespace PL.Task
             }
         }
 
-
+    }
 
 
 
