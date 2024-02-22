@@ -28,21 +28,27 @@ namespace PL.Task
                                                                                         typeof(TaskWindow),
                                                                                         new PropertyMetadata(null));
 
-
+       
         public BO.Task CurrentTask
         {
             get { return (BO.Task)GetValue(TaskProperty); }
             set { SetValue(TaskProperty, value); }
         }
 
-        public TaskWindow(int id = 0)
+
+        public List<TimeSpan> daysEffortTimeOptions = new List<TimeSpan>();
+
+        
+
+
+    public TaskWindow(int id = 0)
         {
             InitializeComponent();
 
             //According to the id we will update CurrentEngineer. If id ==0 - an empty engineer will be opened to be added. Otherwise we will pull out the engineer and open a window for updating
             if (id == 0)
             {
-                IEnumerable<BO.TaskInList> dependencies = new List<BO.TaskInList>();
+                List<BO.TaskInList> dependencies = new List<BO.TaskInList>();
                 CurrentTask = new BO.Task(0, "", "", BO.Status.New, dependencies, null, null, null, null, null, null, null, null, BO.EngineerExperience.Beginner);
             }
             else
@@ -57,7 +63,82 @@ namespace PL.Task
                 }
             }
 
+            
+            // Populate the list with TimeSpan values for each day
+            for (int day = 1; day <= 30; day++)
+            {
+                TimeSpan dayTimeSpan = TimeSpan.FromDays(day);
+                daysEffortTimeOptions.Add(dayTimeSpan);
+            }
+
             this.DataContext = this;
         }
-    }
+
+
+        private void DatePicker_Loaded(object sender, RoutedEventArgs e)
+        {
+            if (sender is DatePicker datePicker)
+            {
+                datePicker.DisplayDateStart = s_bl.GetProjectStartDate();
+                datePicker.DisplayDateEnd = s_bl.GetProjectEndDate();
+            }
+        }
+
+
+
+
+
+
+
+
+
+
+
+    //    private void DatePicker_LostFocus(object sender, RoutedEventArgs e)
+    //    {
+    //        if (sender is DatePicker datePicker)
+    //        {
+    //            // Validate the entered date
+    //            if (!IsValidDate(datePicker.Text))
+    //            {
+    //                // Display error message
+    //                FindTextBlock().Text = "Invalid date. Please enter a valid date.";
+    //            }
+    //            else
+    //            {
+    //                // Clear error message if the date is valid
+    //                FindTextBlock().Text = string.Empty;
+    //            }
+    //        }
+    //    }
+
+    //    private bool IsValidDate(string input)
+    //    {
+    //        DateTime enteredDate;
+
+    //        if(!DateTime.TryParse(input, out enteredDate))
+    //        {
+    //            return false;
+    //        }
+            
+    //        DateTime? startDate = s_bl.GetProjectStartDate();
+    //        DateTime? endDate = s_bl.GetProjectEndDate();
+
+    //        // Check if the entered date is within the allowed range
+    //       return (enteredDate < startDate || enteredDate > endDate) ?  true :  false;
+
+    //    }
+
+    //    private TextBlock FindTextBlock()
+    //    {
+    //        foreach (UIElement child in ((Grid)Content).Children)
+    //        {
+    //            if (child is TextBlock textBlock)
+    //            {
+    //                return textBlock;
+    //            }
+    //        }
+    //        return null;
+    //    }
+    //}
 }

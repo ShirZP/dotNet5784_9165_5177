@@ -1,7 +1,7 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <config>
-  <ProjectStartDate></ProjectStartDate>
-  <ProjectEndDate></ProjectEndDate>
+  <ProjectStartDate>01/01/2024</ProjectStartDate>
+  <ProjectEndDate>10/10/2025</ProjectEndDate>
   <ProjectStatus>Planning</ProjectStatus>
   <NextTaskId>1</NextTaskId>
   <NextDependencyId>1</NextDependencyId>

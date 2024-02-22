@@ -16,32 +16,58 @@
         <Label Content="Start Date:" HorizontalAlignment="Left" Margin="50,264,0,0" VerticalAlignment="Top" Height="28" Width="110"/>
         <Label Content="Forecast Date:" HorizontalAlignment="Left" Margin="50,294,0,0" VerticalAlignment="Top" Height="28" Width="110"/>
         <Label Content="Complete Date:" HorizontalAlignment="Left" Margin="50,324,0,0" VerticalAlignment="Top" Height="28" Width="110"/>
-        <Label Content="Required Effort Time:" HorizontalAlignment="Left" Margin="50,354,0,0" VerticalAlignment="Top" Height="28" Width="130"/>
+        <Label Content="Required Days Effort:" HorizontalAlignment="Left" Margin="50,354,0,0" VerticalAlignment="Top" Height="28" Width="120"/>
         <Label Content="Deliverables:" HorizontalAlignment="Left" Margin="50,384,0,0" VerticalAlignment="Top" Height="28" Width="110"/>
-        <Label Content="Remarks:" HorizontalAlignment="Left" Margin="50,414,0,0" VerticalAlignment="Top" Height="28" Width="110"/>
-        <Label Content="Assigned Engineer:" HorizontalAlignment="Left" Margin="50,444,0,0" VerticalAlignment="Top" Height="28" Width="110"/>
+        <Label Content="Remarks:" HorizontalAlignment="Left" Margin="50,440,0,0" VerticalAlignment="Top" Height="28" Width="110"/>
+        <Label Content="Assigned Engineer:" HorizontalAlignment="Left" Margin="50,498,0,0" VerticalAlignment="Top" Height="28" Width="110"/>
 
         <!-- ID -->
         <TextBox Text="{Binding CurrentTask.ID, Mode=TwoWay, NotifyOnValidationError=true,  ValidatesOnExceptions=true}" IsEnabled="False"
-                 HorizontalAlignment="Left" Margin="163,56,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="217"/>
+                 HorizontalAlignment="Left" Margin="177,56,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="217"/>
         <!-- Name -->
         <TextBox Text="{Binding CurrentTask.NickName, Mode=TwoWay, NotifyOnValidationError=true,  ValidatesOnExceptions=true}"
-         HorizontalAlignment="Left" Margin="163,86,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="217"/>
+         HorizontalAlignment="Left" Margin="177,86,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="217"/>
         <!-- Description -->
         <TextBox Text="{Binding CurrentTask.Description, Mode=TwoWay, NotifyOnValidationError=true,  ValidatesOnExceptions=true}"
-                 HorizontalAlignment="Left" Margin="163,116,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="217"
+                 HorizontalAlignment="Left" Margin="177,116,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="217"
                  HorizontalScrollBarVisibility="Disabled"
                  VerticalScrollBarVisibility="Auto"
                  AcceptsReturn="True" Height="44"/>
         <!-- Status -->
         <ComboBox ItemsSource="{Binding Source={StaticResource TaskStatusCollectionKey}}" 
                   SelectedValue="{Binding CurrentTask.Status, Mode=TwoWay, NotifyOnValidationError=true, ValidatesOnExceptions=true}" 
-                  HorizontalAlignment="Left" Margin="163,174,0,0" VerticalAlignment="Top" Height="20" Width="217"/>
+                  HorizontalAlignment="Left" Margin="177,174,0,0" VerticalAlignment="Top" Height="20" Width="217"/>
         <!-- Complexity -->
         <ComboBox ItemsSource="{Binding Source={StaticResource EngineerExperienceCollectionKey}}" 
                   SelectedValue="{Binding CurrentTask.Status, Mode=TwoWay, NotifyOnValidationError=true, ValidatesOnExceptions=true}" 
-                  HorizontalAlignment="Left" Margin="163,204,0,0" VerticalAlignment="Top" Height="20" Width="217"/>
+                  HorizontalAlignment="Left" Margin="177,204,0,0" VerticalAlignment="Top" Height="20" Width="217"/>
 
         <Button Content="" HorizontalAlignment="Left" Margin="348,636,0,0" VerticalAlignment="Top" Height="25" Width="77" Background="#FF99B4D1" FontWeight="Bold" Style="{StaticResource ButtonRoundKey}"/>
+        <DatePicker HorizontalAlignment="Left" Margin="177,234,0,0" VerticalAlignment="Top" Width ="217" Loaded="DatePicker_Loaded" />
+        <DatePicker HorizontalAlignment="Left" Margin="177,264,0,0" VerticalAlignment="Top" Width ="217" Loaded="DatePicker_Loaded" />
+        <DatePicker HorizontalAlignment="Left" Margin="177,294,0,0" VerticalAlignment="Top" Width ="217" Loaded="DatePicker_Loaded" />
+        <DatePicker HorizontalAlignment="Left" Margin="177,324,0,0" VerticalAlignment="Top" Width ="217" Loaded="DatePicker_Loaded" />
+        <!--LostFocus="DatePicker_LostFocus"-->
+        <!-- <TextBlock Foreground="Red" VerticalAlignment="Bottom" Margin="163,244,0,5"/> -->
+
+        <!-- Required Effort Time -->
+        <ComboBox ItemsSource="{Binding Source={StaticResource TaskStatusCollectionKey}}" 
+          SelectedValue="{Binding CurrentTask.Status, Mode=TwoWay, NotifyOnValidationError=true, ValidatesOnExceptions=true}" 
+          HorizontalAlignment="Left" Margin="177,354,0,0" VerticalAlignment="Top" Height="20" Width="217"/>
+
+        <!-- Deliverables -->
+        <TextBox Text="{Binding CurrentTask.Deliverables, Mode=TwoWay, NotifyOnValidationError=true,  ValidatesOnExceptions=true}"
+         HorizontalAlignment="Left" Margin="177,384,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="217"
+         HorizontalScrollBarVisibility="Disabled"
+         VerticalScrollBarVisibility="Auto"
+         AcceptsReturn="True" Height="44"/>
+
+        <!-- Remarks -->
+        <TextBox Text="{Binding CurrentTask.Remarks, Mode=TwoWay, NotifyOnValidationError=true,  ValidatesOnExceptions=true}"
+         HorizontalAlignment="Left" Margin="177,440,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="217"
+         HorizontalScrollBarVisibility="Disabled"
+         VerticalScrollBarVisibility="Auto"
+         AcceptsReturn="True" Height="44"/>
+
     </Grid>
 </Window>

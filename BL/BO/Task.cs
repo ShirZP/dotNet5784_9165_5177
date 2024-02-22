@@ -25,7 +25,7 @@ public class Task
     /// <summary>
     /// A list of tasks that the current task depends on
     /// </summary>
-    public IEnumerable<TaskInList> Dependencies { get; set; }
+    public List<TaskInList> Dependencies { get; set; }
    
     /// <summary>
     /// Task creation date - calculated property
@@ -80,7 +80,7 @@ public class Task
     /// <summary>
     /// Task Ctor with parameters.
     /// </summary>
-    public Task(int id, string nickName, string description, BO.Status status, IEnumerable<TaskInList> dependencies, DateTime? scheduledDate, DateTime? startDate, DateTime? forecastDate, DateTime? completeDate, TimeSpan? requiredEffortTime, string? deliverables, string? remarks, EngineerInTask? assignedEngineer, BO.EngineerExperience complexity)
+    public Task(int id, string nickName, string description, BO.Status status, List<TaskInList> dependencies, DateTime? scheduledDate, DateTime? startDate, DateTime? forecastDate, DateTime? completeDate, TimeSpan? requiredEffortTime, string? deliverables, string? remarks, EngineerInTask? assignedEngineer, BO.EngineerExperience complexity)
     {
         ID = id;
         NickName = nickName;    
