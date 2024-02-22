@@ -157,6 +157,45 @@ namespace PL.Task
             }
         }
 
+
+        private void BtnAddOrUpdate_Click(object sender, RoutedEventArgs e)
+        {
+            Button? button = sender as Button;
+            if (button != null)
+            {
+                try
+                {
+                    MessageBoxResult messageBoxResult;
+
+                    if (button.Content.ToString() == "Add")
+                    {
+                        int id = s_bl.Task.Create(CurrentTask);
+                        messageBoxResult = MessageBox.Show($"Task {id} added Successfully!", "Happy Message :)", MessageBoxButton.OK, MessageBoxImage.Information);
+                    }
+                    else
+                    {
+                        s_bl.Task.Update(CurrentTask);
+                        messageBoxResult = MessageBox.Show($"Task {CurrentTask.ID} updated Successfully!", "Happy Message :)", MessageBoxButton.OK, MessageBoxImage.Information);
+                    }
+
+                    this.Close();
+                }
+                catch (Exception ex)
+                {
+                    MessageBox.Show(ex.Message, "ERROR", MessageBoxButton.OK, MessageBoxImage.Error);
+                }
+            }
+        }
+
+
+
+
+
+
+
+
+
+
         private void Button_Click(object sender, RoutedEventArgs e)
         {
             listBoxPopup.IsOpen = !listBoxPopup.IsOpen; // Toggle popup visibility

@@ -7,6 +7,7 @@ using System.Collections.Generic;
 using System.Net.NetworkInformation;
 using static System.Runtime.InteropServices.JavaScript.JSType;
 using DO;
+using System.Threading.Tasks;
 
 internal class TaskImplementation : ITask
 {
@@ -14,7 +15,7 @@ internal class TaskImplementation : ITask
     private BlApi.IBl _bl = BlApi.Factory.Get();
 
     /// <summary>
-    /// The function recieves an object of type BO.Task.
+    /// The function receives an object of type BO.Task.
     /// Checks the correctness of fields and adds the task to the data layer as DO.Task
     /// and adds to the data layer all the dependencies of the task
     /// </summary>
@@ -511,5 +512,73 @@ internal class TaskImplementation : ITask
         return from taskInList in ReadAll()
                orderby taskInList.ID
                select taskInList;
+    }
+
+    public void autoScheduledDate(BO.Task task)
+    {
+        if (task.ScheduledDate != null) return;
+
+        DateTime? scheduledDateAuto;
+        DateTime? pStartDate = _bl.GetProjectStartDate();
+        DateTime projectStartDate;
+
+        if (pStartDate.HasValue)
+        {
+            projectStartDate = pStartDate.Value;
+
+            //If there are no dependencies then the Scheduled date is equal to the project start date plus a day
+            if (!task.Dependencies.Any())
+            {
+                scheduledDateAuto = projectStartDate.AddDays(1);
+            }
+            else
+            {
+
+                //All Dependencies that do not have a Scheduled Date
+                IEnumerable<BO.Task>? nullScheduledDateDependencies = (from Dependency in task.Dependencies
+                                                                       let t = Read(Dependency.ID)
+                                                                       where t.ScheduledDate == null
+                                                                       select t).ToList();
+
+                foreach (BO.Task t in nullScheduledDateDependencies)
+                {
+                    autoScheduledDate(t);
+                }
+
+                //from here all the dependencies have Forecast Date
+
+                //Finding the latest Forecast Date among the Dependencies
+                DateTime? maxDate = Read(task.Dependencies.First().ID).ForecastDate;
+                DateTime? tempDate;
+                foreach (BO.TaskInList t in task.Dependencies)
+                {
+                    tempDate = Read(t.ID).ForecastDate;
+                    if (tempDate > maxDate) maxDate = tempDate;
+                }
+
+                scheduledDateAuto = maxDate?.AddDays(1);
+            }
+
+            DO.Task updateTask = new DO.Task(task.ID,
+                                             task.NickName,
+                                             task.Description,
+                                             scheduledDateAuto,
+                                             task.StartDate,
+                                             task.RequiredEffortTime,
+                                             task.CompleteDate,
+                                             task.Deliverables,
+                                             task.Remarks,
+                                             task.AssignedEngineer is not null ? task.AssignedEngineer.ID : 0,
+                                             (DO.EngineerExperience)task.Complexity);
+            try
+            {
+                _dal.Task.Update(updateTask);
+            }
+            catch(DO.DalDoesNotExistException ex)
+            {
+                throw new BO.BlDoesNotExistException($"An object of type Task with ID = {updateTask.ID} does not exist", ex);
+            }
+        }
+
     }
 }

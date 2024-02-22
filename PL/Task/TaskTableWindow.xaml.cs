@@ -53,26 +53,41 @@ namespace PL.Task
 
         private void PenButton_Click(object sender, RoutedEventArgs e)
         {
-            //BO.Task? task = (sender as DataGrid)?.SelectedItem as BO.Task;
-            //if (task != null)
-            //{
-                new TaskWindow().Show();
-            //}
+            var button = sender as Button;
+            BO.Task? task = button!.DataContext as BO.Task;
+            if (task != null)
+            {
+                new TaskWindow(task.ID).ShowDialog();
+            }
 
-            //private void cbFilterSelector_SelectionChanged(object sender, SelectionChangedEventArgs e)
-            //{
-            //    if (Category == TaskFieldsToFilter.All)
-            //        TasksList = s_bl?.Task.ReadAllFullTasksDetails()!;
-            //    else if (Category == TaskFieldsToFilter.Status)
-            //    {
 
-            //    }
-            //}
         }
 
         private void BtnAdd_Click(object sender, RoutedEventArgs e)
         {
             new TaskWindow().ShowDialog();
         }
+
+        private void DataGrid_MouseDoubleClick(object sender, MouseButtonEventArgs e)
+        {
+            BO.Task? task = (sender as DataGrid)?.SelectedItem as BO.Task;
+            if (task != null)
+            {
+                new TaskWindow(task.ID).Show();
+            }
+        }
+
+
+
+
+        //private void cbFilterSelector_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        //{
+        //    if (Category == TaskFieldsToFilter.All)
+        //        TasksList = s_bl?.Task.ReadAllFullTasksDetails()!;
+        //    else if (Category == TaskFieldsToFilter.Status)
+        //    {
+
+        //    }
+        //}
     }
 }

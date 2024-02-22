@@ -14,7 +14,6 @@
 /// <param name="EngineerId">ID number of the engineer responsible for carrying out the task.</param>
 /// <param name="Complexity">The difficulty level defines the minimum engineer level that can work on it.</param>
 /// <param name="DeadlineDate">The latest possible date on which the task is finished will not cause the project to fail, so that the entire sequence of tasks that depend on it will be completed before the deadline of the entire project.</param>
-/// <param name="IsMileStone">Does the task depend on other tasks before and after it.</param>
 public record Task
 (
     int ID,

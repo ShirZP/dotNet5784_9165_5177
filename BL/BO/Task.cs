@@ -90,11 +90,12 @@ public class Task
         ScheduledDate = scheduledDate;  
         StartDate = startDate;  
         ForecastDate = forecastDate;    
-        RequiredEffortTime = requiredEffortTime;    
+        RequiredEffortTime = (requiredEffortTime == null) ? TimeSpan.FromDays(3) : requiredEffortTime;
         Deliverables = deliverables;    
         Remarks = remarks;  
         AssignedEngineer = assignedEngineer;    
-        Complexity = complexity;    
+        Complexity = complexity;
+
     }
 
     public override string ToString() => Tools.ToStringProperty(this);
