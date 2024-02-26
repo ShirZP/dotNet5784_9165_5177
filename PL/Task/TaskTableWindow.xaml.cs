@@ -12,6 +12,7 @@ using System.Windows.Input;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Shapes;
+using System.Collections;
 
 namespace PL.Task
 {
@@ -74,6 +75,51 @@ namespace PL.Task
             if (task != null)
             {
                 new TaskWindow(task.ID).Show();
+            }
+        }
+
+        private void filterChange_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        {
+            if (sender is ComboBox FirstComboBox)
+            {
+                if(SubcategoryFilter_CB != null)
+                     SubcategoryFilter_CB.Items.Clear();
+
+                    string selectedContent = FirstComboBox.SelectedValue.ToString();
+
+                    // Temporarily store the enum values
+                    Array? enumValues = null;
+
+                    switch (selectedContent)
+                    {
+                        case "Status":
+                            enumValues = Enum.GetValues(typeof(BO.Status));
+                            break;
+
+                        case "AssignedEngineer":
+                            enumValues = (from engineer in s_bl.Engineer.ReadAll()
+                                          select engineer.FullName).ToArray();
+                            break;
+
+                        case "Complexity":
+                            enumValues = Enum.GetValues(typeof(BO.EngineerExperience));
+                            break;
+
+                        case "All":
+
+                            break;
+                    }
+
+                    // Populate the SecondComboBox with the enum values
+                    if (enumValues != null)
+                    {
+                        foreach (var value in enumValues)
+                        {
+                            SubcategoryFilter_CB.Items.Add(new ComboBoxItem { Content = value.ToString() });
+                        }
+                    }
+                
+
             }
         }
 

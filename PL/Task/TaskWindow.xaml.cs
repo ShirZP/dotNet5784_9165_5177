@@ -7,6 +7,7 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Controls;
+using System.Windows.Controls.Primitives;
 using System.Windows.Data;
 using System.Windows.Documents;
 using System.Windows.Input;
@@ -42,7 +43,7 @@ namespace PL.Task
             set { SetValue(TaskProperty, value); }
         }
 
-        
+
 
         public List<TimeSpan> daysEffortTimeOptions
         {
@@ -91,8 +92,8 @@ namespace PL.Task
             if (CurrentTask != null && !string.IsNullOrEmpty(selectedEngineerName) && selectedEngineerName != "None")
             {
                 BO.Engineer? engineerInTask = (from t in assignedEngineer
-                                                     where t.FullName == selectedEngineerName
-                                                     select t).FirstOrDefault();
+                                               where t.FullName == selectedEngineerName
+                                               select t).FirstOrDefault();
                 if (engineerInTask != null)
                 {
                     BO.EngineerInTask engineerInTaskObj = new EngineerInTask(engineerInTask.ID, engineerInTask.FullName);
@@ -105,6 +106,7 @@ namespace PL.Task
         public TaskWindow(int id = 0)
         {
             InitializeComponent();
+            InitializePopup();
 
             //According to the id we will update CurrentEngineer. If id ==0 - an empty engineer will be opened to be added. Otherwise we will pull out the engineer and open a window for updating
             if (id == 0)
@@ -132,7 +134,7 @@ namespace PL.Task
                 TimeSpan dayTimeSpan = TimeSpan.FromDays(day);
                 daysEffortTimeOptions.Add(dayTimeSpan);
             }
-           
+
             LoadAllEngineers();
 
             this.DataContext = this;
@@ -188,98 +190,38 @@ namespace PL.Task
         }
 
 
-
-
-
-
-
-
-
-
-        private void Button_Click(object sender, RoutedEventArgs e)
+        private Popup popup;
+        private void InitializePopup()
         {
-            listBoxPopup.IsOpen = !listBoxPopup.IsOpen; // Toggle popup visibility
-        }
-
-        // Call this method when you want to add the selected items to the DataGrid.
-        private void AddSelectedItemsToDataGrid()
-        {
-            foreach (ListBoxItem item in listBox.SelectedItems)
+            popup = new Popup
             {
-                var newItem = new ItemModel { Value = item.Content.ToString() };
-                dataGrid.Items.Add(newItem);
-            }
-
-            listBoxPopup.IsOpen = false; // Close the popup after selection
+                Width = 200,
+                Height = 100,
+                Placement = PlacementMode.Bottom,
+                // This Popup should not have a visible border or background in this example.
+                // You can customize the Popup's appearance by modifying its Child.
+                Child = new TextBlock
+                {
+                    Text = "Hello, I'm a Popup!",
+                    Background = Brushes.White,
+                    Padding = new Thickness(10)
+                }
+            };
         }
 
-        // Example trigger for adding items, such as double-click on the ListBox.
-        private void listBox_MouseDoubleClick(object sender, System.Windows.Input.MouseButtonEventArgs e)
+        private void BtnListBoxPopup_Click(object sender, RoutedEventArgs e)
         {
-            AddSelectedItemsToDataGrid();
+            if (popup.IsOpen)
+            {
+                popup.IsOpen = false;
+            }
+            else
+            {
+                // Set the placement target of the popup to the button that was clicked.
+                popup.PlacementTarget = sender as UIElement;
+                popup.IsOpen = true;
+            }
         }
+
     }
-
-    public class ItemModel
-{
-    public string Value { get; set; }
-
-    // Add more properties as needed
-}
-
-
-
-
-
-
-
-
-
-    //    private void DatePicker_LostFocus(object sender, RoutedEventArgs e)
-    //    {
-    //        if (sender is DatePicker datePicker)
-    //        {
-    //            // Validate the entered date
-    //            if (!IsValidDate(datePicker.Text))
-    //            {
-    //                // Display error message
-    //                FindTextBlock().Text = "Invalid date. Please enter a valid date.";
-    //            }
-    //            else
-    //            {
-    //                // Clear error message if the date is valid
-    //                FindTextBlock().Text = string.Empty;
-    //            }
-    //        }
-    //    }
-
-    //    private bool IsValidDate(string input)
-    //    {
-    //        DateTime enteredDate;
-
-    //        if(!DateTime.TryParse(input, out enteredDate))
-    //        {
-    //            return false;
-    //        }
-            
-    //        DateTime? startDate = s_bl.GetProjectStartDate();
-    //        DateTime? endDate = s_bl.GetProjectEndDate();
-
-    //        // Check if the entered date is within the allowed range
-    //       return (enteredDate < startDate || enteredDate > endDate) ?  true :  false;
-
-    //    }
-
-    //    private TextBlock FindTextBlock()
-    //    {
-    //        foreach (UIElement child in ((Grid)Content).Children)
-    //        {
-    //            if (child is TextBlock textBlock)
-    //            {
-    //                return textBlock;
-    //            }
-    //        }
-    //        return null;
-    //    }
-    //}
 }

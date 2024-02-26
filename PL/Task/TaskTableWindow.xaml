@@ -24,19 +24,19 @@
             </Grid.ColumnDefinitions>
             <!--Task Table grid filter options-->
             <Label Grid.Column="0" Content="Filter By:" HorizontalAlignment="Left" Margin="85,0,0,0" VerticalAlignment="Center" FontSize="18" FontWeight="Bold"/>
-            <ComboBox Grid.Column="1" ItemsSource="{Binding Source={StaticResource TaskFieldsToFilterCollectionKey}}"  SelectedValue="{Binding Path=Category, Mode=TwoWay}" VerticalAlignment="Stretch" Background="{DynamicResource {x:Static SystemColors.GradientActiveCaptionBrushKey}}" FontSize="18"/>
+            <ComboBox Grid.Column="1" ItemsSource="{Binding Source={StaticResource TaskFieldsToFilterCollectionKey}}"  SelectedValue="{Binding Path=Category, Mode=TwoWay}" SelectionChanged="filterChange_SelectionChanged" VerticalAlignment="Stretch" Background="{DynamicResource {x:Static SystemColors.GradientActiveCaptionBrushKey}}" FontSize="18"/>
             <Label Grid.Column="2" Content="Subcategory:" HorizontalAlignment="Left" Margin="52,0,0,0" VerticalAlignment="Center" FontSize="18" FontWeight="Bold"/>
-            <ComboBox Grid.Column="3" VerticalAlignment="Stretch" Background="{DynamicResource {x:Static SystemColors.GradientActiveCaptionBrushKey}}" FontSize="18"/>
+            <ComboBox x:Name="SubcategoryFilter_CB" Grid.Column="3" VerticalAlignment="Stretch" Background="{DynamicResource {x:Static SystemColors.GradientActiveCaptionBrushKey}}" FontSize="18"/>
         </Grid>
         <DataGrid AutoGenerateColumns="False" Grid.Row="2" ItemsSource="{Binding Path=TasksList}" Margin="0,0,0,61" Width="Auto" Height ="460" MouseDoubleClick="DataGrid_MouseDoubleClick">
             <DataGrid.Columns>
-                <DataGridTextColumn Header="ID" Binding="{Binding ID}" />
-                <DataGridTextColumn Header="Name" Binding="{Binding NickName}" />
-                <DataGridTextColumn Header="Status" Binding="{Binding Status}" />
-                <DataGridTextColumn Header="Assigned Engineer" Binding="{Binding AssignedEngineer.Name}" />
-                <DataGridTextColumn Header="Complexity" Binding="{Binding Complexity}" />
-                
-                <DataGridTemplateColumn Header="Dependencies">
+                <DataGridTextColumn Header="ID" Binding="{Binding ID}"/>
+                <DataGridTextColumn Header="Name" Binding="{Binding NickName}" Width="2*" />
+                <DataGridTextColumn Header="Status" Binding="{Binding Status}"/>
+                <DataGridTextColumn Header="Assigned Engineer" Binding="{Binding AssignedEngineer.Name}" Width="*" />
+                <DataGridTextColumn Header="Complexity" Binding="{Binding Complexity}" Width="*"/>
+
+                <DataGridTemplateColumn Header="Dependencies" Width="*">
                     <DataGridTemplateColumn.CellTemplate>
                         <DataTemplate>
                             <CheckBox IsChecked="{Binding Dependencies, Converter={StaticResource ConvertTaskInListIEnumerableToBoolKey}}" IsEnabled="False"/>
