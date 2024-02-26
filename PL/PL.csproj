@@ -27,6 +27,7 @@
   <ItemGroup>
     <Resource Include="images\background.jpg" />
     <Resource Include="images\code.jpg" />
+    <Resource Include="images\penIcon.png" />
     <Resource Include="Task\penIcon.png" />
   </ItemGroup>
 
