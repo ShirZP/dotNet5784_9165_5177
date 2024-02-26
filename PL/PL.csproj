@@ -16,6 +16,7 @@
   <ItemGroup>
     <None Remove="code.jpg" />
     <None Remove="EngineerPic.jpeg" />
+    <None Remove="IconImage.png" />
     <None Remove="marble.jpg" />
     <None Remove="Task\penIcon.png" />
   </ItemGroup>
@@ -25,6 +26,7 @@
   </ItemGroup>
 
   <ItemGroup>
+    <Resource Include="IconImage.png" />
     <Resource Include="images\background.jpg" />
     <Resource Include="images\code.jpg" />
     <Resource Include="Task\penIcon.png" />
