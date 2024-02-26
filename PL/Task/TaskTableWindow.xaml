@@ -24,9 +24,9 @@
             </Grid.ColumnDefinitions>
             <!--Task Table grid filter options-->
             <Label Grid.Column="0" Content="Filter By:" HorizontalAlignment="Left" Margin="85,0,0,0" VerticalAlignment="Center" FontSize="18" FontWeight="Bold"/>
-            <ComboBox Grid.Column="1" ItemsSource="{Binding Source={StaticResource TaskFieldsToFilterCollectionKey}}"  SelectedValue="{Binding Path=Category, Mode=TwoWay}" SelectionChanged="filterChange_SelectionChanged" VerticalAlignment="Stretch" Background="{DynamicResource {x:Static SystemColors.GradientActiveCaptionBrushKey}}" FontSize="18"/>
+            <ComboBox x:Name="MainCategoryFilter_CB" Grid.Column="1" ItemsSource="{Binding Source={StaticResource TaskFieldsToFilterCollectionKey}}"  SelectedValue="{Binding Path=Category, Mode=TwoWay}" SelectionChanged="filterChange_SelectionChanged" VerticalAlignment="Stretch" Background="{DynamicResource {x:Static SystemColors.GradientActiveCaptionBrushKey}}" FontSize="18"/>
             <Label Grid.Column="2" Content="Subcategory:" HorizontalAlignment="Left" Margin="52,0,0,0" VerticalAlignment="Center" FontSize="18" FontWeight="Bold"/>
-            <ComboBox x:Name="SubcategoryFilter_CB" Grid.Column="3" VerticalAlignment="Stretch" Background="{DynamicResource {x:Static SystemColors.GradientActiveCaptionBrushKey}}" FontSize="18"/>
+            <ComboBox x:Name="SubcategoryFilter_CB" SelectionChanged="filterTable_SelectionChanged"  Grid.Column="3" VerticalAlignment="Stretch" Background="{DynamicResource {x:Static SystemColors.GradientActiveCaptionBrushKey}}" FontSize="18"/>
         </Grid>
         <DataGrid AutoGenerateColumns="False" Grid.Row="2" ItemsSource="{Binding Path=TasksList}" Margin="0,0,0,61" Width="Auto" Height ="460" MouseDoubleClick="DataGrid_MouseDoubleClick">
             <DataGrid.Columns>

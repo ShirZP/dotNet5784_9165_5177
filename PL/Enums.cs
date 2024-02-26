@@ -42,4 +42,12 @@ public enum TaskFieldsToFilter
     All
 }
 
+public enum TaskStatusFilter
+{
+    New,
+    Active,
+    Complete,
+    All
+}
+
 #endregion

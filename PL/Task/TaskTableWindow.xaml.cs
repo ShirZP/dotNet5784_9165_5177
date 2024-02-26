@@ -35,6 +35,7 @@ namespace PL.Task
             set { SetValue(TasksListProperty, value); }
         }
 
+        //public Type Experience { get; set; } = Type;
 
         public TaskFieldsToFilter Category { get; set; } = TaskFieldsToFilter.All;
 
@@ -80,50 +81,93 @@ namespace PL.Task
 
         private void filterChange_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
-            if (sender is ComboBox FirstComboBox)
+            
+            if(SubcategoryFilter_CB != null)
+                SubcategoryFilter_CB.Items.Clear();
+
+            string selectedContent = MainCategoryFilter_CB.SelectedValue.ToString();
+
+            // Temporarily store the values
+            Array? values = null;
+
+            switch (selectedContent)
             {
-                if(SubcategoryFilter_CB != null)
-                     SubcategoryFilter_CB.Items.Clear();
+                case "Status":
+                    values = Enum.GetValues(typeof(TaskStatusFilter));
+                    break;
 
-                    string selectedContent = FirstComboBox.SelectedValue.ToString();
+                case "AssignedEngineer":
+                    values = (from engineer in s_bl.Engineer.ReadAll()
+                                    select engineer.FullName).ToArray();
 
-                    // Temporarily store the enum values
-                    Array? enumValues = null;
+                    values = addNewItemToArray(values, "All");
+                    break;
 
-                    switch (selectedContent)
-                    {
-                        case "Status":
-                            enumValues = Enum.GetValues(typeof(BO.Status));
-                            break;
+                case "Complexity":
+                    values = Enum.GetValues(typeof(BO.EngineerExperience));
+                    break;
 
-                        case "AssignedEngineer":
-                            enumValues = (from engineer in s_bl.Engineer.ReadAll()
-                                          select engineer.FullName).ToArray();
-                            break;
-
-                        case "Complexity":
-                            enumValues = Enum.GetValues(typeof(BO.EngineerExperience));
-                            break;
-
-                        case "All":
-
-                            break;
-                    }
-
-                    // Populate the SecondComboBox with the enum values
-                    if (enumValues != null)
-                    {
-                        foreach (var value in enumValues)
-                        {
-                            SubcategoryFilter_CB.Items.Add(new ComboBoxItem { Content = value.ToString() });
-                        }
-                    }
-                
-
+                case "All":
+                    break;
             }
+
+            // Populate the SecondComboBox with the enum values
+            if (values != null)
+            {
+                foreach (var value in values)
+                {
+                    SubcategoryFilter_CB.Items.Add(new ComboBoxItem { Content = value.ToString() });
+                }
+
+                SubcategoryFilter_CB.SelectedIndex = values.Length - 1;
+            }
+                          
         }
 
+        private Array addNewItemToArray(Array arr, string item)
+        {
+            string[] newArr = new string[arr.Length + 1];
 
+            // Copy values from the original array to the new array
+            for (int i = 0; i < arr.Length; i++)
+            {
+                newArr[i] = (String)arr.GetValue(i);
+            }
+
+            // Add the new value to the end of the new array
+            newArr[newArr.Length - 1] = item;
+
+            return newArr;
+        }
+
+        private void filterTable_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        {
+            string subFieldFilter = (SubcategoryFilter_CB.SelectedValue as ComboBoxItem)?.Content?.ToString();
+
+            if (subFieldFilter == "All")
+            {
+                TasksList = s_bl?.Task.ReadAllFullTasksDetails();
+            }
+            else 
+            {
+
+                switch (Category)
+                {
+                    case TaskFieldsToFilter.Status:
+                        TasksList = s_bl?.Task.ReadAllFullTasksDetails(item => item.Status == (BO.Status)Enum.Parse(typeof(BO.Status), subFieldFilter))!;
+                        break;
+
+                    case TaskFieldsToFilter.AssignedEngineer:
+                        TasksList = s_bl?.Task.ReadAllFullTasksDetails(item => item.AssignedEngineer != null && item.AssignedEngineer.Name == subFieldFilter)!;
+                        break;
+
+                    case TaskFieldsToFilter.Complexity:
+                        TasksList = s_bl?.Task.ReadAllFullTasksDetails(item => item.Complexity == (BO.EngineerExperience)Enum.Parse(typeof(BO.EngineerExperience), subFieldFilter))!;
+                        break;
+
+                }
+            }
+        }
 
 
         //private void cbFilterSelector_SelectionChanged(object sender, SelectionChangedEventArgs e)
