@@ -35,14 +35,13 @@ namespace PL.Task
             set { SetValue(TasksListProperty, value); }
         }
 
-        //public Type Experience { get; set; } = Type;
-
         public TaskFieldsToFilter Category { get; set; } = TaskFieldsToFilter.All;
 
 
         public TaskTableWindow()
         {
             InitializeComponent();
+            SubcategoryFilter_CB.IsEnabled = false;
         }
 
         /// <summary>
@@ -93,10 +92,12 @@ namespace PL.Task
             switch (selectedContent)
             {
                 case "Status":
+                    SubcategoryFilter_CB.IsEnabled = true;
                     values = Enum.GetValues(typeof(TaskStatusFilter));
                     break;
 
                 case "AssignedEngineer":
+                    SubcategoryFilter_CB.IsEnabled = true;
                     values = (from engineer in s_bl.Engineer.ReadAll()
                                     select engineer.FullName).ToArray();
 
@@ -104,10 +105,13 @@ namespace PL.Task
                     break;
 
                 case "Complexity":
+                    SubcategoryFilter_CB.IsEnabled = true;
                     values = Enum.GetValues(typeof(BO.EngineerExperience));
                     break;
 
                 case "All":
+                    if (SubcategoryFilter_CB != null)
+                        SubcategoryFilter_CB.IsEnabled = false;
                     break;
             }
 
@@ -144,27 +148,30 @@ namespace PL.Task
         {
             string subFieldFilter = (SubcategoryFilter_CB.SelectedValue as ComboBoxItem)?.Content?.ToString();
 
-            if (subFieldFilter == "All")
+            if (subFieldFilter != null)
             {
-                TasksList = s_bl?.Task.ReadAllFullTasksDetails();
-            }
-            else 
-            {
-
-                switch (Category)
+                if (subFieldFilter == "All")
                 {
-                    case TaskFieldsToFilter.Status:
-                        TasksList = s_bl?.Task.ReadAllFullTasksDetails(item => item.Status == (BO.Status)Enum.Parse(typeof(BO.Status), subFieldFilter))!;
-                        break;
+                    TasksList = s_bl?.Task.ReadAllFullTasksDetails();
+                }
+                else
+                {
 
-                    case TaskFieldsToFilter.AssignedEngineer:
-                        TasksList = s_bl?.Task.ReadAllFullTasksDetails(item => item.AssignedEngineer != null && item.AssignedEngineer.Name == subFieldFilter)!;
-                        break;
+                    switch (Category)
+                    {
+                        case TaskFieldsToFilter.Status:
+                            TasksList = s_bl?.Task.ReadAllFullTasksDetails(item => item.Status == (BO.Status)Enum.Parse(typeof(BO.Status), subFieldFilter))!;
+                            break;
 
-                    case TaskFieldsToFilter.Complexity:
-                        TasksList = s_bl?.Task.ReadAllFullTasksDetails(item => item.Complexity == (BO.EngineerExperience)Enum.Parse(typeof(BO.EngineerExperience), subFieldFilter))!;
-                        break;
+                        case TaskFieldsToFilter.AssignedEngineer:
+                            TasksList = s_bl?.Task.ReadAllFullTasksDetails(item => item.AssignedEngineer != null && item.AssignedEngineer.Name == subFieldFilter)!;
+                            break;
 
+                        case TaskFieldsToFilter.Complexity:
+                            TasksList = s_bl?.Task.ReadAllFullTasksDetails(item => item.Complexity == (BO.EngineerExperience)Enum.Parse(typeof(BO.EngineerExperience), subFieldFilter))!;
+                            break;
+
+                    }
                 }
             }
         }

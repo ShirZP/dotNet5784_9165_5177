@@ -121,21 +121,6 @@
     <IsMileStone xsi:nil="true" />
   </Task>
   <Task>
-    <ID>11</ID>
-    <NickName>UX/UI improvement</NickName>
-    <Description>Description - UX/UI improvement</Description>
-    <ScheduledDate xsi:nil="true" />
-    <StartDate xsi:nil="true" />
-    <RequiredEffortTime>P2D</RequiredEffortTime>
-    <CompleteDate xsi:nil="true" />
-    <FinalProduct>FinalProduct - UX/UI improvement</FinalProduct>
-    <Remarks>Remarks - UX/UI improvement</Remarks>
-    <EngineerId xsi:nil="true" />
-    <Complexity>Intermediate</Complexity>
-    <DeadlineDate xsi:nil="true" />
-    <IsMileStone xsi:nil="true" />
-  </Task>
-  <Task>
     <ID>12</ID>
     <NickName>Automation and robotics</NickName>
     <Description>Description - Automation and robotics</Description>
@@ -299,5 +284,20 @@
     <Complexity>Intermediate</Complexity>
     <DeadlineDate xsi:nil="true" />
     <IsMileStone xsi:nil="true" />
+  </Task>
+  <Task>
+    <ID>11</ID>
+    <NickName>UX/UI improvement</NickName>
+    <Description>Description - UX/UI improvement</Description>
+    <ScheduledDate xsi:nil="true" />
+    <StartDate xsi:nil="true" />
+    <RequiredEffortTime>P2D</RequiredEffortTime>
+    <CompleteDate xsi:nil="true" />
+    <FinalProduct>FinalProduct - UX/UI improvement</FinalProduct>
+    <Remarks>Remarks - UX/UI improvement</Remarks>
+    <EngineerId xsi:nil="true" />
+    <Complexity>Beginner</Complexity>
+    <DeadlineDate xsi:nil="true" />
+    <IsMileStone>false</IsMileStone>
   </Task>
 </ArrayOfTask>

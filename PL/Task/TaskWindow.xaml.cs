@@ -1,7 +1,9 @@
 ﻿using BO;
 using PL.Engineer;
 using System;
+using System.Collections;
 using System.Collections.Generic;
+using System.ComponentModel;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -24,6 +26,12 @@ namespace PL.Task
     {
         static readonly BlApi.IBl s_bl = BlApi.Factory.Get();
 
+        public static readonly DependencyProperty ProjectStatusProperty = DependencyProperty.Register(
+                                                                                   "ProjectStatus",
+                                                                                    typeof(BO.ProjectStatus),
+                                                                                    typeof(TaskWindow),
+                                                                                    new PropertyMetadata(null));
+
         public static readonly DependencyProperty TaskProperty = DependencyProperty.Register(
                                                                                     "CurrentTask",
                                                                                      typeof(BO.Task),
@@ -36,6 +44,30 @@ namespace PL.Task
                                                                                    typeof(TaskWindow),
                                                                                    new PropertyMetadata(null));
 
+        public static readonly DependencyProperty AssignedEngineerProperty = DependencyProperty.Register(
+                                                                             "AssignedEngineer",
+                                                                             typeof(IEnumerable<string>),
+                                                                             typeof(TaskWindow),
+                                                                             new PropertyMetadata(null));
+
+        public static readonly DependencyProperty SelectedDependenciesProperty = DependencyProperty.Register(
+                                                                                  "SelectedDependencies",
+                                                                                  typeof(IList),
+                                                                                  typeof(TaskWindow),
+                                                                                  new PropertyMetadata(default(IList)));
+
+        public BO.ProjectStatus ProjectStatus
+        {
+            get { return (BO.ProjectStatus)GetValue(ProjectStatusProperty); }
+            set { SetValue(ProjectStatusProperty, value); }
+        }
+
+        public IList SelectedDependencies
+        {
+            get { return (IList)GetValue(SelectedDependenciesProperty); }
+            set { SetValue(SelectedDependenciesProperty, value); }
+        }
+        public IEnumerable<BO.TaskInList> DependenciesInList { get; set; }
 
         public BO.Task CurrentTask
         {
@@ -43,22 +75,12 @@ namespace PL.Task
             set { SetValue(TaskProperty, value); }
         }
 
-
-
         public List<TimeSpan> daysEffortTimeOptions
         {
             get { return (List<TimeSpan>)GetValue(daysEffortTimeOptionsProperty); }
             set { SetValue(daysEffortTimeOptionsProperty, value); }
         }
         public TimeSpan daysEffortTime;
-
-
-
-        public static readonly DependencyProperty AssignedEngineerProperty = DependencyProperty.Register(
-                                                                                                "AssignedEngineer",
-                                                                                                typeof(IEnumerable<string>),
-                                                                                                typeof(EngineerWindow),
-                                                                                                new PropertyMetadata(null));
 
 
         //The list of all the engineers
@@ -106,7 +128,7 @@ namespace PL.Task
         public TaskWindow(int id = 0)
         {
             InitializeComponent();
-            InitializePopup();
+            ProjectStatus = s_bl.GetProjectStatus();
 
             //According to the id we will update CurrentEngineer. If id ==0 - an empty engineer will be opened to be added. Otherwise we will pull out the engineer and open a window for updating
             if (id == 0)
@@ -137,6 +159,8 @@ namespace PL.Task
 
             LoadAllEngineers();
 
+            LoadDependenciesLists();
+
             this.DataContext = this;
         }
 
@@ -148,7 +172,13 @@ namespace PL.Task
                                 select engineer.FullName).ToList();
             AssignedEngineer.Add("None");
         }
+        private void LoadDependenciesLists()
+        {
+            SelectedDependencies = (from dependency in CurrentTask.Dependencies
+                                    select dependency).ToList();
 
+            DependenciesInList = s_bl.Task.ReadAll().ToList();
+        }
 
         private void DatePicker_Loaded(object sender, RoutedEventArgs e)
         {
@@ -190,38 +220,23 @@ namespace PL.Task
         }
 
 
-        private Popup popup;
-        private void InitializePopup()
-        {
-            popup = new Popup
-            {
-                Width = 200,
-                Height = 100,
-                Placement = PlacementMode.Bottom,
-                // This Popup should not have a visible border or background in this example.
-                // You can customize the Popup's appearance by modifying its Child.
-                Child = new TextBlock
-                {
-                    Text = "Hello, I'm a Popup!",
-                    Background = Brushes.White,
-                    Padding = new Thickness(10)
-                }
-            };
-        }
-
         private void BtnListBoxPopup_Click(object sender, RoutedEventArgs e)
         {
-            if (popup.IsOpen)
+            if (dependenciesPopup.IsOpen)
             {
-                popup.IsOpen = false;
+                dependenciesPopup.IsOpen = false;
             }
             else
             {
                 // Set the placement target of the popup to the button that was clicked.
-                popup.PlacementTarget = sender as UIElement;
-                popup.IsOpen = true;
+                dependenciesPopup.PlacementTarget = sender as UIElement;
+                dependenciesPopup.IsOpen = true;
             }
         }
 
+        private void LBDependencies_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        {
+            SelectedDependencies = ((ListBox)sender).SelectedItems;
+        }
     }
 }

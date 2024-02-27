@@ -9,6 +9,7 @@
         <local:ConvertIdToContent x:Key="ConverIdToContentKey"/>
         <local:ConvertIdToIsEnabled x:Key="ConvertIdToIsEnabledKey"/>
         <local:ConvertIdToVisibility x:Key="ConvertIdToVisibilityKey"/>
+        <local:ConvertProjectStatusToVisibility x:Key="ConvertProjectStatusToVisibilityKey"/>
         <local:ConvertTaskInListIEnumerableToBool x:Key="ConvertTaskInListIEnumerableToBoolKey"/>
         <local:TaskFieldsToFilterCollection x:Key="TaskFieldsToFilterCollectionKey"/>
         <local:TaskStatusCollection x:Key="TaskStatusCollectionKey"/>
