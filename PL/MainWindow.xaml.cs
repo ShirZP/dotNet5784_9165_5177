@@ -1,5 +1,6 @@
 ﻿using PL.Engineer;
 using PL.Task;
+using PL.Users;
 using System.Text;
 using System.Windows;
 using System.Windows.Controls;
@@ -69,5 +70,12 @@ namespace PL
         {
             new TaskTableWindow().Show();
         }
+
+        private void BtnTLogIn_Click(object sender, RoutedEventArgs e)
+        {
+            new LogInWindow().Show();
+        }
+
+        
     }
 }
