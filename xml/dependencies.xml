@@ -136,11 +136,6 @@
     <DependensOnTask>6</DependensOnTask>
   </Dependency>
   <Dependency>
-    <ID>28</ID>
-    <DependentTask>6</DependentTask>
-    <DependensOnTask>4</DependensOnTask>
-  </Dependency>
-  <Dependency>
     <ID>29</ID>
     <DependentTask>17</DependentTask>
     <DependensOnTask>15</DependensOnTask>

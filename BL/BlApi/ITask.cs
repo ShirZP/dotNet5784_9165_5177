@@ -19,5 +19,7 @@ public interface ITask
     public void autoScheduledDate(BO.Task task);
 
     public IEnumerable<BO.TaskInList> SortByID();
+
+    public List<BO.TaskInList> PotentialDependencies(int currentTaskID);
 }
 

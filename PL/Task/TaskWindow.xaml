@@ -3,9 +3,11 @@
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-        xmlns:local="clr-namespace:PL.Task"
+        xmlns:local="clr-namespace:PL"
         mc:Ignorable="d"
-        Title="TaskWindow" Height="700" Width="850">
+        Title="TaskWindow" Height="700" Width="850"
+        Icon="{StaticResource AppIcon}">
+    
     <Grid Background="{StaticResource BackgroundKey}">
         <TextBlock Text="Task Details:" HorizontalAlignment="Left" Height="39" Margin="50,10,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="329"/>
 
@@ -14,14 +16,14 @@
         <Label Content="Description:" HorizontalAlignment="Left" Margin="50,136,0,0" VerticalAlignment="Top" Height="25" Width="110"/>
         <Label Content="Status:" HorizontalAlignment="Left" Margin="50,194,0,0" VerticalAlignment="Top" Height="28" Width="110"/>
         <Label Content="Complexity:" HorizontalAlignment="Left" Margin="50,230,0,0" VerticalAlignment="Top" Height="28" Width="110"/>
-        <Label Content="Scheduled Date:" Visibility="{Binding ProjectStatus, Mode=OneTime, Converter={StaticResource ConvertProjectStatusToVisibilityKey}}"  HorizontalAlignment="Left" Margin="440,158,0,0" VerticalAlignment="Top" Height="28" Width="110"/>
-        <Label Content="Start Date:" Visibility="{Binding ProjectStatus, Mode=OneTime, Converter={StaticResource ConvertProjectStatusToVisibilityKey}}"  HorizontalAlignment="Left" Margin="441,193,0,0" VerticalAlignment="Top" Height="28" Width="110"/>
-        <Label Content="Forecast Date:" Visibility="{Binding ProjectStatus, Mode=OneTime, Converter={StaticResource ConvertProjectStatusToVisibilityKey}}"  HorizontalAlignment="Left" Margin="441,223,0,0" VerticalAlignment="Top" Height="28" Width="110"/>
-        <Label Content="Complete Date:" Visibility="{Binding ProjectStatus, Mode=OneTime, Converter={StaticResource ConvertProjectStatusToVisibilityKey}}"  HorizontalAlignment="Left" Margin="441,253,0,0" VerticalAlignment="Top" Height="28" Width="110"/>
+        <Label Content="Scheduled Date:" Visibility="{Binding Path=(local:SharedDependencyProperties.ProjectStatus), Mode=OneTime, Converter={StaticResource ConvertProjectStatusNotPlanningToVisibleKey}}"  HorizontalAlignment="Left" Margin="440,158,0,0" VerticalAlignment="Top" Height="28" Width="110"/>
+        <Label Content="Start Date:" Visibility="{Binding Path=(local:SharedDependencyProperties.ProjectStatus), Mode=OneTime, Converter={StaticResource ConvertProjectStatusNotPlanningToVisibleKey}}"  HorizontalAlignment="Left" Margin="441,193,0,0" VerticalAlignment="Top" Height="28" Width="110"/>
+        <Label Content="Forecast Date:" Visibility="{Binding Path=(local:SharedDependencyProperties.ProjectStatus), Mode=OneTime, Converter={StaticResource ConvertProjectStatusNotPlanningToVisibleKey}}"  HorizontalAlignment="Left" Margin="441,223,0,0" VerticalAlignment="Top" Height="28" Width="110"/>
+        <Label Content="Complete Date:" Visibility="{Binding Path=(local:SharedDependencyProperties.ProjectStatus), Mode=OneTime, Converter={StaticResource ConvertProjectStatusNotPlanningToVisibleKey}}"  HorizontalAlignment="Left" Margin="441,253,0,0" VerticalAlignment="Top" Height="28" Width="110"/>
         <Label Content="Required Days Effort:" HorizontalAlignment="Left" Margin="440,76,0,0" VerticalAlignment="Top" Height="28" Width="120"/>
         <Label Content="Deliverables:" HorizontalAlignment="Left" Margin="440,104,0,0" VerticalAlignment="Top" Height="28" Width="110"/>
         <Label Content="Remarks:" HorizontalAlignment="Left" Margin="50,264,0,0" VerticalAlignment="Top" Height="28" Width="110"/>
-        <Label Content="Assigned Engineer:" Visibility="{Binding ProjectStatus, Mode=OneTime, Converter={StaticResource ConvertProjectStatusToVisibilityKey}}"  HorizontalAlignment="Left" Margin="439,286,0,0" VerticalAlignment="Top" Height="28" Width="110"/>
+        <Label Content="Assigned Engineer:" Visibility="{Binding Path=(local:SharedDependencyProperties.ProjectStatus), Mode=OneTime, Converter={StaticResource ConvertProjectStatusNotPlanningToVisibleKey}}"  HorizontalAlignment="Left" Margin="439,286,0,0" VerticalAlignment="Top" Height="28" Width="110"/>
 
         <!-- ID -->
         <TextBox Text="{Binding CurrentTask.ID, Mode=TwoWay, NotifyOnValidationError=true,  ValidatesOnExceptions=true}" IsEnabled="False"
@@ -39,6 +41,7 @@
         <!-- Status -->
         <ComboBox ItemsSource="{Binding Source={StaticResource TaskStatusCollectionKey}}" 
                   SelectedValue="{Binding CurrentTask.Status, Mode=TwoWay, NotifyOnValidationError=true, ValidatesOnExceptions=true}" 
+                  IsEnabled="{Binding Path=(local:SharedDependencyProperties.ProjectStatus), Mode=OneTime, Converter={StaticResource ConvertProjectStatusNotPlanningToEnabledKey}}" 
                   HorizontalAlignment="Left" Margin="177,194,0,0" VerticalAlignment="Top" Height="25" Width="217"/>
         <!-- Complexity -->
         <ComboBox ItemsSource="{Binding Source={StaticResource EngineerExperienceCollectionKey}}" 
@@ -46,17 +49,18 @@
                   HorizontalAlignment="Left" Margin="177,230,0,0" VerticalAlignment="Top" Height="25" Width="217"/>
 
         <!-- Scheduled Date -->
-        <DatePicker SelectedDate="{Binding CurrentTask.StartDate}" IsEnabled="False" Visibility="{Binding ProjectStatus, Mode=OneTime, Converter={StaticResource ConvertProjectStatusToVisibilityKey}}" HorizontalAlignment="Left" Margin="567,158,0,0" VerticalAlignment="Top" Width ="217" Loaded="DatePicker_Loaded" />
+        <DatePicker SelectedDate="{Binding CurrentTask.StartDate}" IsEnabled="False" Visibility="{Binding Path=(local:SharedDependencyProperties.ProjectStatus), Mode=OneTime, Converter={StaticResource ConvertProjectStatusNotPlanningToVisibleKey}}" HorizontalAlignment="Left" Margin="567,158,0,0" VerticalAlignment="Top" Width ="217" Loaded="DatePicker_Loaded" />
         <!-- Start Date -->
-        <DatePicker SelectedDate="{Binding CurrentTask.StartDate}" IsEnabled="False" Visibility="{Binding ProjectStatus, Mode=OneTime, Converter={StaticResource ConvertProjectStatusToVisibilityKey}}" Margin="568,193,0,0" VerticalAlignment="Top" HorizontalAlignment="Left" Width ="217" Loaded="DatePicker_Loaded" />
+        <DatePicker SelectedDate="{Binding CurrentTask.StartDate}" IsEnabled="False" Visibility="{Binding Path=(local:SharedDependencyProperties.ProjectStatus), Mode=OneTime, Converter={StaticResource ConvertProjectStatusNotPlanningToVisibleKey}}" Margin="568,193,0,0" VerticalAlignment="Top" HorizontalAlignment="Left" Width ="217" Loaded="DatePicker_Loaded" />
         <!-- Forecast Date -->
-        <DatePicker SelectedDate="{Binding CurrentTask.ForecastDate}" HorizontalAlignment="Left" IsEnabled="False" Visibility="{Binding ProjectStatus, Mode=OneTime, Converter={StaticResource ConvertProjectStatusToVisibilityKey}}" Margin="568,223,0,0" VerticalAlignment="Top" Width ="217" Loaded="DatePicker_Loaded" />
+        <DatePicker SelectedDate="{Binding CurrentTask.ForecastDate}" HorizontalAlignment="Left" IsEnabled="False" Visibility="{Binding Path=(local:SharedDependencyProperties.ProjectStatus), Mode=OneTime, Converter={StaticResource ConvertProjectStatusNotPlanningToVisibleKey}}" Margin="568,223,0,0" VerticalAlignment="Top" Width ="217" Loaded="DatePicker_Loaded" />
         <!-- Complete Date -->
-        <DatePicker SelectedDate="{Binding CurrentTask.CompleteDate}" HorizontalAlignment="Left" IsEnabled="False" Visibility="{Binding ProjectStatus, Mode=OneTime, Converter={StaticResource ConvertProjectStatusToVisibilityKey}}" Margin="568,253,0,0" VerticalAlignment="Top" Width ="217" Loaded="DatePicker_Loaded" />
+        <DatePicker SelectedDate="{Binding CurrentTask.CompleteDate}" HorizontalAlignment="Left" IsEnabled="False" Visibility="{Binding Path=(local:SharedDependencyProperties.ProjectStatus), Mode=OneTime, Converter={StaticResource ConvertProjectStatusNotPlanningToVisibleKey}}" Margin="568,253,0,0" VerticalAlignment="Top" Width ="217" Loaded="DatePicker_Loaded" />
 
         <!-- Required Effort Time -->
         <ComboBox ItemsSource="{Binding daysEffortTimeOptions}"
                   SelectedValue="{Binding CurrentTask.RequiredEffortTime, Mode=TwoWay, NotifyOnValidationError=true, ValidatesOnExceptions=true}" 
+                  IsEnabled="{Binding Path=(local:SharedDependencyProperties.ProjectStatus), Mode=OneTime, Converter={StaticResource ConvertProjectStatusPlanningToEnabledKey}}" 
                   HorizontalAlignment="Left" Margin="567,76,0,0" VerticalAlignment="Top" Height="20" Width="217"/>
 
         <!-- Deliverables -->
@@ -75,7 +79,7 @@
 
         <!-- Assigned Engineer -->
         <ComboBox ItemsSource="{Binding AssignedEngineer}" SelectedItem="{Binding SelectedEngineerName, Mode=TwoWay}"
-                  Visibility="{Binding ProjectStatus, Mode=OneTime, Converter={StaticResource ConvertProjectStatusToVisibilityKey}}" 
+                  Visibility="{Binding Path=(local:SharedDependencyProperties.ProjectStatus), Mode=OneTime, Converter={StaticResource ConvertProjectStatusNotPlanningToVisibleKey}}" 
                   HorizontalAlignment="Left" Margin="569,286,0,0" VerticalAlignment="Top" Width="217"/>
         <!-- Dependencies -->
         <Expander HorizontalAlignment="Left"  Header="Depends On Previous Tasks" Margin="53,330,0,0" VerticalAlignment="Top" Height="260" Width="745" IsExpanded="False">
@@ -93,7 +97,11 @@
                     </DataGrid.Columns>
                 </DataGrid>
 
-                <Button Content="+" Click="BtnListBoxPopup_Click" Width="24" Height="25" Style="{StaticResource ButtonRoundKey}" HorizontalAlignment="Left" VerticalAlignment="Center" Margin="332,0,0,0"/>
+                <Button Content="+" 
+                        Click="BtnListBoxPopup_Click" 
+                        Visibility="{Binding Path=(local:SharedDependencyProperties.ProjectStatus), Mode=OneTime, Converter={StaticResource ConvertProjectStatusPlanningToVisibleKey}}" 
+                        Width="24" Height="25" 
+                        Style="{StaticResource ButtonRoundKey}" HorizontalAlignment="Left" VerticalAlignment="Center" Margin="332,0,0,0"/>
                 <Popup x:Name="dependenciesPopup" Width = "345" Height="235" StaysOpen="False" AllowsTransparency="True" Placement="Bottom" OpacityMask="White">
                     <ListBox x:Name="listBox" ItemsSource="{Binding DependenciesInList}" SelectionChanged="LBDependencies_SelectionChanged" SelectionMode="Multiple">
 

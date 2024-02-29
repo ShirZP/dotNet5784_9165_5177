@@ -1,4 +1,6 @@
-﻿namespace BO;
+﻿using System.Xml.Linq;
+
+namespace BO;
 
 public class Task
 {
@@ -99,4 +101,5 @@ public class Task
     }
 
     public override string ToString() => Tools.ToStringProperty(this);
+
 }

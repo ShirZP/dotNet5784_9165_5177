@@ -6,8 +6,8 @@ using System.Collections;
 using System.Collections.Generic;
 using System.Net.NetworkInformation;
 using static System.Runtime.InteropServices.JavaScript.JSType;
-using DO;
 using System.Threading.Tasks;
+using System.Xml.Linq;
 
 internal class TaskImplementation : ITask
 {
@@ -438,10 +438,16 @@ internal class TaskImplementation : ITask
             throw new BO.BlProjectStatusException("A task status field cannot be edited when the project status is in planning!");
         }
 
+        BO.Task originTask = Read(task.ID);
+
         switch (task.Status)
         {
             case Status.Active:
             case Status.Complete:
+
+                if (originTask.Status > task.Status)
+                    throw new BO.BlStatusException($"A task status cannot be changed from \"{originTask.Status}\" to \"{task.Status}\"!");
+
 
                 if (projectStatus == BO.ProjectStatus.Execution && task.AssignedEngineer == null)
                 {
@@ -478,7 +484,7 @@ internal class TaskImplementation : ITask
         {
             if (projectStatus == BO.ProjectStatus.Planning)
             {
-                throw new BO.BlProjectStatusException("A asigned engineer field cannot be edited when the project status is in planning!");
+                throw new BO.BlProjectStatusException("A assigned engineer field cannot be edited when the project status is in planning!");
             }
 
             int assignedEngineerID = task.AssignedEngineer.ID;
@@ -580,5 +586,36 @@ internal class TaskImplementation : ITask
             }
         }
 
+    }
+
+    /// <summary>
+    /// The function accepts a task and returns a list of possible dependent tasks to the user so that no chain dependencies are created.
+    /// </summary>
+    /// <returns>potential dependencies</returns>
+    public List<TaskInList> PotentialDependencies(int currentTaskID)
+    {
+        IEnumerable<TaskInList> allTasks = ReadAll(item => item.ID != currentTaskID);
+
+        List<TaskInList> potentialDependencies = (from task in allTasks
+                                 where ChainDependencyTest(task, currentTaskID)
+                                 select task).ToList();
+
+        return potentialDependencies;
+    }
+
+    /// <summary>
+    /// A recursive function that receives a task and the ID of the task to check. Returns true if the task to be tested does not appear as one of the dependencies of the current task.
+    /// </summary>
+    private bool ChainDependencyTest(BO.TaskInList task, int requestedTaskID)
+    {
+        foreach (BO.TaskInList dependency in Read(task.ID).Dependencies)
+        {
+            if (dependency.ID == requestedTaskID)
+                return false;
+            else
+                return ChainDependencyTest(dependency, requestedTaskID);
+
+        }
+        return true;
     }
 }

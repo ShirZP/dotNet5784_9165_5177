@@ -37,11 +37,10 @@ namespace PL.Users
             WindowState = WindowState.Minimized;    
         }
 
-        //private void BtnClose_Click(object sender, RoutedEventArgs e)
-        //{
-        //    //Application.Current.Shutdown();
-            
-        //}
+        private void BtnClose_Click(object sender, RoutedEventArgs e)
+        {
+            Application.Current.Shutdown();
+        }
 
         private void BtnLogIn_Click(object sender, RoutedEventArgs e)
         {

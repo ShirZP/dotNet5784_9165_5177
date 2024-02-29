@@ -34,4 +34,20 @@ public class TaskInList
     }
 
     public override string ToString() => Tools.ToStringProperty(this);
+
+    #region override Equals functions
+    public override bool Equals(object? obj)
+    {
+        if (obj is TaskInList task)
+            return ID == task.ID;
+
+        return false;
+
+    }
+
+    public override int GetHashCode()
+    {
+        return ID.GetHashCode();
+    }
+    #endregion
 }

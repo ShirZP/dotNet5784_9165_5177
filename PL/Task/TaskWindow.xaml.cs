@@ -26,12 +26,7 @@ namespace PL.Task
     {
         static readonly BlApi.IBl s_bl = BlApi.Factory.Get();
 
-        public static readonly DependencyProperty ProjectStatusProperty = DependencyProperty.Register(
-                                                                                   "ProjectStatus",
-                                                                                    typeof(BO.ProjectStatus),
-                                                                                    typeof(TaskWindow),
-                                                                                    new PropertyMetadata(null));
-
+        
         public static readonly DependencyProperty TaskProperty = DependencyProperty.Register(
                                                                                     "CurrentTask",
                                                                                      typeof(BO.Task),
@@ -56,18 +51,13 @@ namespace PL.Task
                                                                                   typeof(TaskWindow),
                                                                                   new PropertyMetadata(default(IList)));
 
-        public BO.ProjectStatus ProjectStatus
-        {
-            get { return (BO.ProjectStatus)GetValue(ProjectStatusProperty); }
-            set { SetValue(ProjectStatusProperty, value); }
-        }
 
         public IList SelectedDependencies
         {
             get { return (IList)GetValue(SelectedDependenciesProperty); }
             set { SetValue(SelectedDependenciesProperty, value); }
         }
-        public IEnumerable<BO.TaskInList> DependenciesInList { get; set; }
+        public IList<BO.TaskInList> DependenciesInList { get; set; }
 
         public BO.Task CurrentTask
         {
@@ -128,7 +118,7 @@ namespace PL.Task
         public TaskWindow(int id = 0)
         {
             InitializeComponent();
-            ProjectStatus = s_bl.GetProjectStatus();
+            SharedDependencyProperties.SetProjectStatus(this, s_bl.GetProjectStatus());
 
             //According to the id we will update CurrentEngineer. If id ==0 - an empty engineer will be opened to be added. Otherwise we will pull out the engineer and open a window for updating
             if (id == 0)
@@ -177,7 +167,15 @@ namespace PL.Task
             SelectedDependencies = (from dependency in CurrentTask.Dependencies
                                     select dependency).ToList();
 
-            DependenciesInList = s_bl.Task.ReadAll().ToList();
+            DependenciesInList = s_bl.Task.PotentialDependencies(CurrentTask.ID).ToList();
+
+            foreach (var task in SelectedDependencies)
+            {
+                if (DependenciesInList.Contains(task))
+                {
+                    listBox.SelectedItems.Add(task);
+                }
+            }
         }
 
         private void DatePicker_Loaded(object sender, RoutedEventArgs e)
@@ -206,6 +204,11 @@ namespace PL.Task
                     }
                     else
                     {
+                        CurrentTask.Dependencies.Clear();
+                        foreach (var item in SelectedDependencies)
+                        {
+                            CurrentTask.Dependencies.Add((BO.TaskInList)item);
+                        }
                         s_bl.Task.Update(CurrentTask);
                         messageBoxResult = MessageBox.Show($"Task {CurrentTask.ID} updated Successfully!", "Happy Message :)", MessageBoxButton.OK, MessageBoxImage.Information);
                     }

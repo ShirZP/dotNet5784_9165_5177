@@ -41,7 +41,9 @@ namespace PL.Task
         public TaskTableWindow()
         {
             InitializeComponent();
+            SharedDependencyProperties.SetProjectStatus(this, s_bl.GetProjectStatus());
             SubcategoryFilter_CB.IsEnabled = false;
+            this.DataContext = this;
         }
 
         /// <summary>

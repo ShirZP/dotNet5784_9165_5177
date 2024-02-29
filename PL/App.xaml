@@ -9,12 +9,33 @@
         <local:ConvertIdToContent x:Key="ConverIdToContentKey"/>
         <local:ConvertIdToIsEnabled x:Key="ConvertIdToIsEnabledKey"/>
         <local:ConvertIdToVisibility x:Key="ConvertIdToVisibilityKey"/>
-        <local:ConvertProjectStatusToVisibility x:Key="ConvertProjectStatusToVisibilityKey"/>
+        <local:ConvertProjectStatusNotPlanningToVisible x:Key="ConvertProjectStatusNotPlanningToVisibleKey"/>
+        <local:ConvertProjectStatusPlanningToVisible x:Key="ConvertProjectStatusPlanningToVisibleKey"/>
+        <local:ConvertProjectStatusPlanningToEnabled x:Key="ConvertProjectStatusPlanningToEnabledKey"/>
+        <local:ConvertProjectStatusNotPlanningToEnabled x:Key="ConvertProjectStatusNotPlanningToEnabledKey"/>
         <local:ConvertTaskInListIEnumerableToBool x:Key="ConvertTaskInListIEnumerableToBoolKey"/>
         <local:TaskFieldsToFilterCollection x:Key="TaskFieldsToFilterCollectionKey"/>
         <local:TaskStatusCollection x:Key="TaskStatusCollectionKey"/>
         
+        <!-- window icon -->
+        <BitmapImage x:Key="AppIcon" UriSource="/IconImage.png"/>
 
+        <!-- window Background -->
+        <BitmapImage x:Key=" windowBackground" UriSource="/images/background.jpg"/>
+        
+        <!-- Border Brush -->
+        <LinearGradientBrush x:Key="BorderBrushKey" StartPoint="0,0" EndPoint="1,1">
+            <GradientStop Color="#462AD8" Offset="0"/>
+            <GradientStop Color="#DA34AE" Offset="0.75"/>
+            <GradientStop Color="#8A16C1" Offset="1"/>
+        </LinearGradientBrush>
+
+        <!-- Background  -->
+        <LinearGradientBrush x:Key="BackgroundBrushKey" StartPoint="0,1" EndPoint="1,0">
+            <GradientStop Color="#060531" Offset="0"/>
+            <GradientStop Color="#1B1448" Offset="0.75"/>
+        </LinearGradientBrush>
+        
         <!--Background-->
         <LinearGradientBrush EndPoint="0.5,1" StartPoint="0.5,0" x:Key ="BackgroundKey">
             <GradientStop Color="White"/>
@@ -37,6 +58,8 @@
                 </Setter.Value>
             </Setter>
         </Style>
+
+
         
     </Application.Resources>
 </Application>

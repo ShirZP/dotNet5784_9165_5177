@@ -3,11 +3,12 @@
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-        xmlns:local="clr-namespace:PL.Task"
-        DataContext="{Binding RelativeSource={RelativeSource Mode=Self}}" 
+        xmlns:local="clr-namespace:PL"
         Activated="RefreshWindow_Activated"
         mc:Ignorable="d"
-        Title="TaskTableWindow" Height="660" Width="800">
+        Title="TaskTableWindow" Height="660" Width="800"
+        Icon="{StaticResource AppIcon}">
+    
     <Grid Background="{StaticResource BackgroundKey}">
         <Grid.RowDefinitions>
             <RowDefinition Height="40"/>
@@ -45,7 +46,6 @@
                 </DataGridTemplateColumn>
                 
                 
-                <!-- לא עובד להחיצה על האייקון כי ההטריגר של האירוע זה לא כל השורה אלה רק הכפתור-->
                 <DataGridTemplateColumn Header="">
                     <DataGridTemplateColumn.CellTemplate>
                         <DataTemplate>
@@ -60,6 +60,12 @@
             </DataGrid.Columns>
         </DataGrid>
 
-        <Button Content="Add" Grid.Row="2" HorizontalAlignment="Right" Height="50" Width="150" Foreground="{DynamicResource {x:Static SystemColors.ActiveCaptionTextBrushKey}}" Background="#FF99B4D1" FontSize="24" FontWeight="Bold" Style="{StaticResource ButtonRoundKey}" Margin="0,484,10,-13" Click="BtnAdd_Click"/>
+        <Button Content="Add" 
+                Visibility="{Binding Path=(local:SharedDependencyProperties.ProjectStatus), Mode=OneTime, Converter={StaticResource ConvertProjectStatusPlanningToVisibleKey}}"
+                Grid.Row="2" 
+                HorizontalAlignment="Right" 
+                Height="50" Width="150" 
+                Foreground="{DynamicResource {x:Static SystemColors.ActiveCaptionTextBrushKey}}" 
+                Background="#FF99B4D1" FontSize="24" FontWeight="Bold" Style="{StaticResource ButtonRoundKey}" Margin="0,484,10,-13" Click="BtnAdd_Click"/>
     </Grid>
 </Window>

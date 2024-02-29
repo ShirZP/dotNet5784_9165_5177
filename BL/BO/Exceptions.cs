@@ -96,3 +96,9 @@ public class BlscheduledDateException : Exception  //בעיה בתאריך מת�
     public BlscheduledDateException(string? message) : base(message) { }
 }
 
+[Serializable]
+public class BlStatusException : Exception  //בעיה בסטטוס
+{
+    public BlStatusException(string? message) : base(message) { }
+}
+

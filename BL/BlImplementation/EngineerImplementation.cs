@@ -2,11 +2,13 @@
 namespace BlImplementation;
 using BlApi;
 using BO;
+using DO;
 using System;
 using System.Collections;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.Security.Cryptography;
+using System.Threading.Tasks;
 
 internal class EngineerImplementation : IEngineer
 {
@@ -189,7 +191,20 @@ internal class EngineerImplementation : IEngineer
             throw new BlStringException("The engineer's email is not valid!");
         }
 
+        checkEngineerLevel(engineer);
+
         checkEngineerCurrentTask(engineer, projectStatus);
+    }
+
+    /// <summary>
+    /// The function throw an error if the engineer level is updated to a lower level than it was.
+    /// </summary>
+    private void checkEngineerLevel(BO.Engineer updatedEngineer)
+    {
+        BO.Engineer originEngineer = Read(updatedEngineer.ID);
+
+        if(originEngineer.Level > updatedEngineer.Level)
+            throw new BO.BlInappropriateLevelException($"A engineer level cannot be changed from \"{originEngineer.Level}\" to \"{updatedEngineer.Level}\"!");
     }
 
     /// <summary>

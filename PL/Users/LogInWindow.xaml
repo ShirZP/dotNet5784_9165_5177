@@ -6,6 +6,7 @@
         xmlns:local="clr-namespace:PL.Users"
         mc:Ignorable="d"
         Title="LogInWindow" Height="550" Width="800"
+        Icon="{StaticResource AppIcon}"
         WindowStyle="None"
         ResizeMode ="NoResize"
         WindowStartupLocation="CenterScreen"

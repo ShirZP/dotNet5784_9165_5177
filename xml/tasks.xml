@@ -46,21 +46,6 @@
     <IsMileStone xsi:nil="true" />
   </Task>
   <Task>
-    <ID>6</ID>
-    <NickName>Embedded systems programming</NickName>
-    <Description>Description - Embedded systems programming</Description>
-    <ScheduledDate xsi:nil="true" />
-    <StartDate xsi:nil="true" />
-    <RequiredEffortTime>P3D</RequiredEffortTime>
-    <CompleteDate xsi:nil="true" />
-    <FinalProduct>FinalProduct - Embedded systems programming</FinalProduct>
-    <Remarks>Remarks - Embedded systems programming</Remarks>
-    <EngineerId xsi:nil="true" />
-    <Complexity>AdvancedBeginner</Complexity>
-    <DeadlineDate xsi:nil="true" />
-    <IsMileStone xsi:nil="true" />
-  </Task>
-  <Task>
     <ID>7</ID>
     <NickName>Cybersecurity implementation</NickName>
     <Description>Description - Cybersecurity implementation</Description>
@@ -147,21 +132,6 @@
     <Remarks>Remarks - Firmware development</Remarks>
     <EngineerId xsi:nil="true" />
     <Complexity>AdvancedBeginner</Complexity>
-    <DeadlineDate xsi:nil="true" />
-    <IsMileStone xsi:nil="true" />
-  </Task>
-  <Task>
-    <ID>14</ID>
-    <NickName>Wireless technology integration</NickName>
-    <Description>Description - Wireless technology integration</Description>
-    <ScheduledDate xsi:nil="true" />
-    <StartDate xsi:nil="true" />
-    <RequiredEffortTime>P4D</RequiredEffortTime>
-    <CompleteDate xsi:nil="true" />
-    <FinalProduct>FinalProduct - Wireless technology integration</FinalProduct>
-    <Remarks>Remarks - Wireless technology integration</Remarks>
-    <EngineerId xsi:nil="true" />
-    <Complexity>Advanced</Complexity>
     <DeadlineDate xsi:nil="true" />
     <IsMileStone xsi:nil="true" />
   </Task>
@@ -295,6 +265,36 @@
     <CompleteDate xsi:nil="true" />
     <FinalProduct>FinalProduct - UX/UI improvement</FinalProduct>
     <Remarks>Remarks - UX/UI improvement</Remarks>
+    <EngineerId xsi:nil="true" />
+    <Complexity>Beginner</Complexity>
+    <DeadlineDate xsi:nil="true" />
+    <IsMileStone>false</IsMileStone>
+  </Task>
+  <Task>
+    <ID>6</ID>
+    <NickName>Embedded systems programming</NickName>
+    <Description>Description - Embedded systems programming</Description>
+    <ScheduledDate xsi:nil="true" />
+    <StartDate xsi:nil="true" />
+    <RequiredEffortTime>P3D</RequiredEffortTime>
+    <CompleteDate xsi:nil="true" />
+    <FinalProduct>FinalProduct - Embedded systems programming</FinalProduct>
+    <Remarks>Remarks - Embedded systems programming</Remarks>
+    <EngineerId xsi:nil="true" />
+    <Complexity>AdvancedBeginner</Complexity>
+    <DeadlineDate xsi:nil="true" />
+    <IsMileStone>false</IsMileStone>
+  </Task>
+  <Task>
+    <ID>14</ID>
+    <NickName>Wireless technology integration</NickName>
+    <Description>Description - Wireless technology integration</Description>
+    <ScheduledDate xsi:nil="true" />
+    <StartDate xsi:nil="true" />
+    <RequiredEffortTime>P4D</RequiredEffortTime>
+    <CompleteDate xsi:nil="true" />
+    <FinalProduct>FinalProduct - Wireless technology integration</FinalProduct>
+    <Remarks>Remarks - Wireless technology integration</Remarks>
     <EngineerId xsi:nil="true" />
     <Complexity>Beginner</Complexity>
     <DeadlineDate xsi:nil="true" />
