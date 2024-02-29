@@ -6,6 +6,7 @@ namespace BlImplementation;
 internal class Bl : IBl
 {
     private DalApi.IDal _dal = DalApi.Factory.Get;
+    public IUser User => new UserImplementation();
     public ITask Task => new TaskImplementation(this);
 
     public IEngineer Engineer => new EngineerImplementation(this);

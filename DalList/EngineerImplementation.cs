@@ -51,7 +51,7 @@ internal class EngineerImplementation : IEngineer
     /// <summary>
     /// The function returns a reference to the engineer with the requested filter
     /// </summary>
-    /// <param name="filter">delegate func that recieves Engineer and returns bool</param>
+    /// <param name="filter">delegate func that receives Engineer and returns bool</param>
     /// <returns>reference to the engineer with the requested filter</returns>
     public Engineer? Read(Func<Engineer, bool> filter) //stage 2
     {

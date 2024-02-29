@@ -4,6 +4,7 @@
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:PL.Users"
+        DataContext="{Binding RelativeSource={RelativeSource Mode=Self}}" 
         mc:Ignorable="d"
         Title="LogInWindow" Height="550" Width="800"
         Icon="{StaticResource AppIcon}"
@@ -127,7 +128,8 @@
                                FontFamily="Montserrant"
                                Margin="0,35,0,0"/>
 
-                    <TextBox FontSize="13"
+                    <TextBox Text="{Binding UserLogIn.UserName, Mode=TwoWay, NotifyOnValidationError=true, ValidatesOnExceptions=true}"
+                             FontSize="13"
                              FontWeight="Medium"
                              FontFamily="Montserrant"
                              Background ="Transparent"
@@ -153,18 +155,19 @@
                                FontFamily="Montserrant"
                                Margin="0,30,0,0"/>
 
-                    <PasswordBox FontSize="13"
-                             FontWeight="Medium"
-                             FontFamily="Montserrant"
-                             Background ="Transparent"
-                             Foreground="White"
-                             CaretBrush="LightGray"
-                             BorderBrush="DarkGray"
-                             BorderThickness="0,0,0,1"
-                             Height="28"
-                             VerticalAlignment="Bottom"
-                             Margin="0,5,0,0"
-                             Padding="20,0,0,0">
+                    <PasswordBox PasswordChar="{Binding UserLogIn.Password, Mode=TwoWay, NotifyOnValidationError=true, ValidatesOnExceptions=true}"
+                                 FontSize="13"
+                                 FontWeight="Medium"
+                                 FontFamily="Montserrant"
+                                 Background ="Transparent"
+                                 Foreground="White"
+                                 CaretBrush="LightGray"
+                                 BorderBrush="DarkGray"
+                                 BorderThickness="0,0,0,1"
+                                 Height="28"
+                                 VerticalAlignment="Bottom"
+                                 Margin="0,5,0,0"
+                                 Padding="20,0,0,0">
                         <!--Password.Background>-->
                         <!-- <ImageBrush ImageSource="/Users/UserNameImage.jpg"-->
                         <!--Stretch="None"-->

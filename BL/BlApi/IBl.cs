@@ -4,9 +4,10 @@ namespace BlApi;
 
 public interface IBl
 {
-
+    public IUser User { get; }
     public ITask Task { get; }
     public IEngineer Engineer { get; }
+
     public void initializationDB();
     public void resetDB();
 

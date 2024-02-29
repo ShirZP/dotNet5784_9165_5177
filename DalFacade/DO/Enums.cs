@@ -15,3 +15,9 @@ public enum EngineerExperience
     Advanced,
     Expert
 }
+
+public enum UserPermissions
+{
+    Engineer,
+    Manager
+}

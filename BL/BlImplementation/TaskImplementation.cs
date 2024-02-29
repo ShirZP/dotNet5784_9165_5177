@@ -386,7 +386,7 @@ internal class TaskImplementation : ITask
     }
 
     /// <summary>
-    /// The function recieves a BO task object and check the validations of it's fields.
+    /// The function receives a BO task object and check the validations of it's fields.
     /// </summary>
     /// <param name="task">BO task object</param>
     /// <exception cref="BlPositiveIntException">If the number is negative or equal to zero, throw an exception.</exception>

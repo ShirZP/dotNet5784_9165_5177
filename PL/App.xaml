@@ -20,7 +20,7 @@
         <!-- window icon -->
         <BitmapImage x:Key="AppIcon" UriSource="/IconImage.png"/>
 
-        <!-- window Background -->
+        <!-- window Background Image-->
         <ImageBrush x:Key="windowBackground" ImageSource="/images/background.jpg"/>
         
         <!-- Border Brush -->
@@ -42,9 +42,29 @@
             <GradientStop Color="#FF97DAEB" Offset="1"/>
         </LinearGradientBrush>
 
-        <!--Button Style-->
-        <Style TargetType="Button" x:Key ="ButtonStyleKey">
+        <!--blue purple Button Style-->
+        <Style TargetType="Button" x:Key ="BluePurpleButtonStyleKey">
             <Setter Property="Background" Value="#462AD8"/>
+            <Style.Triggers>
+                <Trigger Property="IsMouseOver" Value="True">
+                    <Setter Property="Background" Value="#28AEED"/>
+                </Trigger>
+            </Style.Triggers>
+        </Style>
+
+        <!--pink Button Style-->
+        <Style TargetType="Button" x:Key ="PinkButtonStyleKey">
+            <Setter Property="Background" Value="#DA34AE"/>
+            <Style.Triggers>
+                <Trigger Property="IsMouseOver" Value="True">
+                    <Setter Property="Background" Value="#28AEED"/>
+                </Trigger>
+            </Style.Triggers>
+        </Style>
+
+        <!--purple Button Style-->
+        <Style TargetType="Button" x:Key ="PurpleButtonStyleKey">
+            <Setter Property="Background" Value="#8A16C1"/>
             <Style.Triggers>
                 <Trigger Property="IsMouseOver" Value="True">
                     <Setter Property="Background" Value="#28AEED"/>

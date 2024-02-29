@@ -16,7 +16,7 @@ internal class TaskImplementation : ITask
     /// The function adds the new task to the xml of tasks with a unique ID for it.
     /// </summary>
     /// <param name="task">New task to add to the tasks xml</param>
-    /// <returns>The new task uniqe id</returns>
+    /// <returns>The new task unique id</returns>
     public int Create(DO.Task task)
     {
         //Deserialize

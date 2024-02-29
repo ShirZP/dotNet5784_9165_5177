@@ -19,7 +19,7 @@ internal class EngineerImplementation : IEngineer
     internal EngineerImplementation(IBl bl) => _bl = bl;
 
     /// <summary>
-    ///The function recieves an object of type BO.Engineer, Checks the correctness of fields and adds the engineer to the data layer as DO.Engineer.
+    ///The function receives an object of type BO.Engineer, Checks the correctness of fields and adds the engineer to the data layer as DO.Engineer.
     /// </summary>
     /// <param name="engineer">An object of type BO.Engineer</param>
     /// <exception cref="BlAlreadyExistsException">If the engineer already exists throw an exception from the data layer.</exception>
@@ -35,6 +35,13 @@ internal class EngineerImplementation : IEngineer
 
             //add the dal engineer to data layer
             int idEngineer = _dal.Engineer.Create(doEngineer);
+
+            //Create new user for the new engineer
+            BO.User user = new BO.User(engineer.ID, 
+                                       engineer.FullName.Replace(" ", ""), 
+                                       engineer.FullName.Replace(" ", "") + "123", 
+                                       BO.UserPermissions.Engineer);
+            _bl.User.Create(user);
 
             return idEngineer;
         }
@@ -79,6 +86,7 @@ internal class EngineerImplementation : IEngineer
         try
         {
             _dal.Engineer.Delete(id);
+            _bl.User.Delete(id);
         }
         catch (DO.DalDoesNotExistException dalex)
         {

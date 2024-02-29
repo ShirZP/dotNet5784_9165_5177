@@ -162,21 +162,44 @@ public static class Initialization
 
         }
     }
+    private static void createUsers()
+    {
+        string _userName, _password;
+        User newUser;
 
-    /// <summary>
-    /// Initializes the 3 lists of 3 entities respectively. 
-    /// </summary>
-    /// <param name="dalTask">An interface type to a task entity</param>
-    /// <param name="dalEngineer">An interface type to a task engineer</param>
-    /// <param name="dalDependency">An interface type to a task dependency</param>
-    /// <exception cref="NullReferenceException"></exception>
-    public static void Do()
+        List<Engineer> engineers = s_dal!.Engineer.ReadAll().ToList();
+        foreach(Engineer engineer in engineers) 
+        {
+            _userName = engineer.FullName.Replace(" ", "");
+            _password = engineer.FullName.Replace(" ", "") + "123";
+            newUser = new User(engineer.ID, _userName, _password, UserPermissions.Engineer);
+            s_dal.User.Create(newUser);
+        }
+
+        //create 2 managers
+        newUser = new User(323975177, "shirperez", "shirperez123", UserPermissions.Manager);
+        s_dal.User.Create(newUser);
+
+        newUser = new User(213479165, "yaelizralevitch", "yaelizralevitch123", UserPermissions.Manager);
+        s_dal.User.Create(newUser);
+
+    }
+
+        /// <summary>
+        /// Initializes the 3 lists of 3 entities respectively. 
+        /// </summary>
+        /// <param name="dalTask">An interface type to a task entity</param>
+        /// <param name="dalEngineer">An interface type to a task engineer</param>
+        /// <param name="dalDependency">An interface type to a task dependency</param>
+        /// <exception cref="NullReferenceException"></exception>
+        public static void Do()
     {
         DoReset();
 
         createEngineers();
         createTasks();
         createDependencies();
+        createUsers();
     }
 
     public static void DoReset()
@@ -184,5 +207,8 @@ public static class Initialization
         s_dal!.Task.Clear();
         s_dal!.Engineer.Clear();
         s_dal!.Dependency.Clear();
+        s_dal!.User.Clear();
+
+        s_dal.initializeProjectStatus();
     }
 }

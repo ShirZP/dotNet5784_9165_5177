@@ -7,6 +7,7 @@ public interface IDal
     ITask Task { get; }
     IEngineer Engineer { get; }
     IDependency Dependency { get; }
+    IUser User { get; }
 
     DateTime? ProjectStartDate { get; set; }
     DateTime? ProjectEndDate { get; set; }
