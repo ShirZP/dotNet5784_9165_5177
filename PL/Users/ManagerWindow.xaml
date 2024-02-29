@@ -6,6 +6,7 @@
         xmlns:local="clr-namespace:PL.Users"
         mc:Ignorable="d"
         Title="ManagerWindow" Height="450" Width="800"
+        DataContext="{Binding RelativeSource={RelativeSource Mode=Self}}" 
         Icon="{StaticResource AppIcon}"
         ResizeMode ="NoResize"
         WindowStartupLocation="CenterScreen"
@@ -21,30 +22,63 @@
 
             <Grid>
                 <!--Go to the list of engineers-->
-                <Button Content="Handle Engineers" HorizontalAlignment="Left" Margin="124,161,0,0" VerticalAlignment="Top" Click="BtnEngineerList_Click" RenderTransformOrigin="0.5,0.5" Background="#FFD78484" Height="85" Width="154" FontSize="18" FontWeight="Bold" Style="{StaticResource ButtonRoundKey}"/>
-                <Button Content="Init DB" HorizontalAlignment="Left" Margin="550,161,0,0" VerticalAlignment="Top" Click="BtnInitialization_Click" Height="85" Width="154" Background="#FFD78484" FontSize="18" FontWeight="Bold" Style="{StaticResource ButtonRoundKey}"/>
-                <Button Content="Reset DB" HorizontalAlignment="Left" Margin="400,161,0,0" VerticalAlignment="Top" Click="BtnReset_Click" Background="#FFD78484" Height="85" Width="150" FontSize="18" FontWeight="Bold" Style="{StaticResource ButtonRoundKey}"/>
-                <Button Content="Task Table" HorizontalAlignment="Left" Margin="128,288,0,0" VerticalAlignment="Top" Click="BtnTaskTable_Click" Background="#FFD78484" Height="85" Width="150" FontSize="18" FontWeight="Bold" Style="{StaticResource ButtonRoundKey}"/>
+                <Button Content="Handle Engineers" HorizontalAlignment="Left" Margin="57,161,0,0" VerticalAlignment="Top" Click="BtnEngineerList_Click" RenderTransformOrigin="0.5,0.5" Background="#FFD78484" Height="50" Width="150" FontSize="18" FontWeight="Bold" Style="{StaticResource ButtonRoundKey}"/>
+                <Button Content="Init DB" HorizontalAlignment="Left" Margin="614,342,0,0" VerticalAlignment="Top" Click="BtnInitialization_Click" Height="50" Width="150" Background="#FFD78484" FontSize="18" FontWeight="Bold" Style="{StaticResource ButtonRoundKey}"/>
+                <Button Content="Reset DB" HorizontalAlignment="Left" Margin="459,342,0,0" VerticalAlignment="Top" Click="BtnReset_Click" Background="#FFD78484" Height="50" Width="150" FontSize="18" FontWeight="Bold" Style="{StaticResource ButtonRoundKey}"/>
+                <Button Content="Task Table" HorizontalAlignment="Left" Margin="65,288,0,0" VerticalAlignment="Top" Click="BtnTaskTable_Click" Background="#FFD78484" Height="50" Width="150" FontSize="18" FontWeight="Bold" Style="{StaticResource ButtonRoundKey}"/>
                 <Button Content="Log In" 
                     BorderThickness="0"
                     Foreground="White"
                     FontFamily="Montserrant"
                     Cursor="Hand"
                     HorizontalAlignment="Left" 
-                    Margin="400,288,0,0" 
+                    Margin="260,283,0,0" 
                     VerticalAlignment="Top" 
                     Click="BtnTLogIn_Click" 
-                    Height="85" Width="150" FontSize="18" 
+                    Height="50" Width="150" FontSize="18" 
                     FontWeight="Bold" 
                     Style="{StaticResource ButtonStyleKey}"
                     Template="{StaticResource ButtonTemplateKey}"/>
-                <TextBlock HorizontalAlignment="Left" Margin="194,70,0,0" TextWrapping="Wrap" Text="project status:" VerticalAlignment="Top" Height="41" Width="131" FontSize="18" FontWeight="Bold"/>
-                <Button Content="Gantt chart" HorizontalAlignment="Left" Margin="400,62,0,0" VerticalAlignment="Top" Height="58" Width="144" FontSize="20" FontWeight="Bold" Background="#FF3D82A3" Style="{StaticResource ButtonRoundKey}"/>
+                <TextBlock HorizontalAlignment="Left" Margin="39,43,0,0"  Foreground="White" TextWrapping="Wrap" Text="project status:" VerticalAlignment="Top" Height="41" Width="131" FontSize="18" FontWeight="Bold"/>
+                <Button Content="Gantt chart" HorizontalAlignment="Left"  Margin="191,25,0,0" VerticalAlignment="Top" Height="58" Width="144" FontSize="20" FontWeight="Bold" Background="#FF3D82A3" Style="{StaticResource ButtonRoundKey}"/>
+                <Border  Margin="459,25,26,225" CornerRadius="10"  BorderThickness="2.5" Opacity="0.85" BorderBrush="{StaticResource BorderBrushKey}" Background="{StaticResource BackgroundBrushKey}">
+                    <Grid>
+                        <Grid.RowDefinitions>
+                            <RowDefinition Height="3*"/>
+                            <RowDefinition Height="*"/>
+                            <RowDefinition Height="*"/>
+                        </Grid.RowDefinitions>
+                        
+                        <Grid HorizontalAlignment="Stretch" Height="auto" Grid.Row="0" VerticalAlignment="Stretch" Width="auto">
+                            <TextBlock Foreground="White" HorizontalAlignment="Center" VerticalAlignment="Center" TextAlignment="Center">
+                                <Run Text="{Binding Clock, Mode=OneWay,StringFormat={}{0:dd/MM/yyyy}}" FontSize="30"/>
+                                <LineBreak/>
+                                <Run Text="{Binding Clock, Mode=OneWay, StringFormat={}{0:hh:mm:ss tt}}" FontSize="20"/>
+                            </TextBlock>
+                        </Grid>
+                        
+                        <Grid HorizontalAlignment="Stretch" Height="auto" Grid.Row="1" VerticalAlignment="Stretch" Width="auto">
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="*"/>
+                                <ColumnDefinition Width="*"/>
+                                <ColumnDefinition Width="*"/>
+                            </Grid.ColumnDefinitions>
+                            <Button Click ="BtnAddHour_Click" Grid.Column="0" Content="Add Hour" Style="{StaticResource ButtonStyleKey}" Template="{StaticResource ButtonTemplateKey}"  BorderThickness="0" Foreground="White" FontFamily="Montserrant" Cursor="Hand"/>
+                            <Button Click ="BtnAddDay_Click" Grid.Column="1" Content="Add Day" Style="{StaticResource ButtonStyleKey}" Template="{StaticResource ButtonTemplateKey}"  BorderThickness="0" Foreground="White" FontFamily="Montserrant" Cursor="Hand"/>
+                            <Button Click ="BtnAddYear_Click" Grid.Column="2" Content="Add Year" Style="{StaticResource ButtonStyleKey}" Template="{StaticResource ButtonTemplateKey}"  BorderThickness="0" Foreground="White" FontFamily="Montserrant" Cursor="Hand"/>
+                        </Grid>
 
+                        <Grid HorizontalAlignment="Stretch" Height="auto" Grid.Row="2" VerticalAlignment="Stretch" Width="auto">
+                            <Button Click ="BtnResetClock_Click" Grid.Column="2" Content="Reset Clock" Style="{StaticResource ButtonStyleKey}" Template="{StaticResource ButtonTemplateKey}"  BorderThickness="0" Foreground="White" FontFamily="Montserrant" Cursor="Hand"/>
+                        </Grid>
+                        
+                    </Grid>
+
+                </Border>
 
             </Grid>
         </Border>
     </Border>
 
 
-    </Window>
+</Window>

@@ -13,7 +13,10 @@ using System.Threading.Tasks;
 internal class EngineerImplementation : IEngineer
 {
     private DalApi.IDal _dal = DalApi.Factory.Get;
-    private BlApi.IBl _bl = BlApi.Factory.Get();
+    //private BlApi.IBl _bl = BlApi.Factory.Get();  //TODO:????
+
+    private readonly IBl _bl;
+    internal EngineerImplementation(IBl bl) => _bl = bl;
 
     /// <summary>
     ///The function recieves an object of type BO.Engineer, Checks the correctness of fields and adds the engineer to the data layer as DO.Engineer.
@@ -249,7 +252,7 @@ internal class EngineerImplementation : IEngineer
                 if (updatedEngineer.Level < blCurrentTaskEngineer.Complexity)
                     throw new BlInappropriateLevelException($"The level of the engineer - {updatedEngineer.ID}, is not high enough for the level of the assigned task");
 
-                DO.Task updatedTask = currentTaskEngineer with { StartDate = DateTime.Now, EngineerId = updatedEngineer.ID };
+                DO.Task updatedTask = currentTaskEngineer with { StartDate = _bl.Clock, EngineerId = updatedEngineer.ID };
                 _dal.Task.Update(updatedTask);
             }
         }

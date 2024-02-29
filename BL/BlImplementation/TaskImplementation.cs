@@ -12,7 +12,10 @@ using System.Xml.Linq;
 internal class TaskImplementation : ITask
 {
     private DalApi.IDal _dal = DalApi.Factory.Get;
-    private BlApi.IBl _bl = BlApi.Factory.Get();
+    //private BlApi.IBl _bl = BlApi.Factory.Get();  //TODO: ask????
+    private readonly IBl _bl;
+    internal TaskImplementation(IBl bl) => _bl = bl;
+    
 
     /// <summary>
     /// The function receives an object of type BO.Task.
@@ -239,7 +242,7 @@ internal class TaskImplementation : ITask
 
         if(updatedTask.Status == BO.Status.Complete && updatedTask.CompleteDate == null)
         {
-            updatedTask.CompleteDate = DateTime.Now;
+            updatedTask.CompleteDate = _bl.Clock;
         }
 
         try

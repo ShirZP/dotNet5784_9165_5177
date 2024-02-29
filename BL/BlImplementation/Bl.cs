@@ -6,9 +6,9 @@ namespace BlImplementation;
 internal class Bl : IBl
 {
     private DalApi.IDal _dal = DalApi.Factory.Get;
-    public ITask Task => new TaskImplementation();
+    public ITask Task => new TaskImplementation(this);
 
-    public IEngineer Engineer => new EngineerImplementation();
+    public IEngineer Engineer => new EngineerImplementation(this);
 
     public BO.ProjectStatus CalculateProjectStatus()
     {
@@ -86,4 +86,36 @@ internal class Bl : IBl
     {
         DalTest.Initialization.DoReset();
     }
+
+
+    #region Clock
+
+    private static DateTime s_Clock = DateTime.Now;
+    public DateTime Clock { get { return s_Clock; } private set { s_Clock = value; } }
+
+
+    public DateTime MoveClockYearForward()
+    {
+        s_Clock = s_Clock.AddYears(1);
+        return s_Clock;
+    }
+
+    public DateTime MoveClockDayForward()
+    {
+        s_Clock = s_Clock.AddDays(1);
+        return s_Clock;
+    }
+
+    public DateTime MoveClockHourForward()
+    {
+        s_Clock = s_Clock.AddHours(1);
+        return s_Clock;
+    }
+
+    public DateTime initializeClock()
+    {
+        s_Clock = DateTime.Now;
+        return s_Clock;
+    }
+    #endregion
 }
