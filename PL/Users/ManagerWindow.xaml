@@ -5,11 +5,46 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:PL.Users"
         mc:Ignorable="d"
-        Title="ManagerWindow" Height="450" Width="800">
-    <Grid Background="{StaticResource BackgroundKey}">
-        <Button Content="Engineers" HorizontalAlignment="Left" Margin="447,217,0,0" VerticalAlignment="Top" Height="108" Width="243" Click="BtnEngineerList_Click" FontSize="24" FontWeight="Bold" Background="#FF3D82A3" Style="{StaticResource ButtonRoundKey}"/>
-        <Button Content="Tasks" HorizontalAlignment="Left" Margin="133,217,0,0" VerticalAlignment="Top" Height="108" Width="243" Click="Button_Click" FontSize="24" FontWeight="Bold" Background="#FF3D82A3" Style="{StaticResource ButtonRoundKey}"/>
-        <TextBlock HorizontalAlignment="Left" Margin="194,70,0,0" TextWrapping="Wrap" Text="project status:" VerticalAlignment="Top" Height="41" Width="131" FontSize="18" FontWeight="Bold"/>
-        <Button Content="Gantt chart" HorizontalAlignment="Left" Margin="400,62,0,0" VerticalAlignment="Top" Height="58" Width="144" Click="Button1_Click" FontSize="20" FontWeight="Bold" Background="#FF3D82A3" Style="{StaticResource ButtonRoundKey}"/>
-    </Grid>
-</Window>
+        Title="ManagerWindow" Height="450" Width="800"
+        Icon="{StaticResource AppIcon}"
+        ResizeMode ="NoResize"
+        WindowStartupLocation="CenterScreen"
+        Background="Transparent">
+    <Border CornerRadius="50" 
+        Background="{StaticResource windowBackground}">
+
+        <Border CornerRadius="20"  
+            BorderThickness="5"
+            Opacity="0.85"
+            BorderBrush="{StaticResource BorderBrushKey}"
+            Background="{StaticResource BackgroundBrushKey}">
+
+            <Grid>
+                <!--Go to the list of engineers-->
+                <Button Content="Handle Engineers" HorizontalAlignment="Left" Margin="124,161,0,0" VerticalAlignment="Top" Click="BtnEngineerList_Click" RenderTransformOrigin="0.5,0.5" Background="#FFD78484" Height="85" Width="154" FontSize="18" FontWeight="Bold" Style="{StaticResource ButtonRoundKey}"/>
+                <Button Content="Init DB" HorizontalAlignment="Left" Margin="550,161,0,0" VerticalAlignment="Top" Click="BtnInitialization_Click" Height="85" Width="154" Background="#FFD78484" FontSize="18" FontWeight="Bold" Style="{StaticResource ButtonRoundKey}"/>
+                <Button Content="Reset DB" HorizontalAlignment="Left" Margin="400,161,0,0" VerticalAlignment="Top" Click="BtnReset_Click" Background="#FFD78484" Height="85" Width="150" FontSize="18" FontWeight="Bold" Style="{StaticResource ButtonRoundKey}"/>
+                <Button Content="Task Table" HorizontalAlignment="Left" Margin="128,288,0,0" VerticalAlignment="Top" Click="BtnTaskTable_Click" Background="#FFD78484" Height="85" Width="150" FontSize="18" FontWeight="Bold" Style="{StaticResource ButtonRoundKey}"/>
+                <Button Content="Log In" 
+                    BorderThickness="0"
+                    Foreground="White"
+                    FontFamily="Montserrant"
+                    Cursor="Hand"
+                    HorizontalAlignment="Left" 
+                    Margin="400,288,0,0" 
+                    VerticalAlignment="Top" 
+                    Click="BtnTLogIn_Click" 
+                    Height="85" Width="150" FontSize="18" 
+                    FontWeight="Bold" 
+                    Style="{StaticResource ButtonStyleKey}"
+                    Template="{StaticResource ButtonTemplateKey}"/>
+                <TextBlock HorizontalAlignment="Left" Margin="194,70,0,0" TextWrapping="Wrap" Text="project status:" VerticalAlignment="Top" Height="41" Width="131" FontSize="18" FontWeight="Bold"/>
+                <Button Content="Gantt chart" HorizontalAlignment="Left" Margin="400,62,0,0" VerticalAlignment="Top" Height="58" Width="144" FontSize="20" FontWeight="Bold" Background="#FF3D82A3" Style="{StaticResource ButtonRoundKey}"/>
+
+
+            </Grid>
+        </Border>
+    </Border>
+
+
+    </Window>

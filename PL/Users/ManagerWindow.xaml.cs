@@ -21,35 +21,61 @@ namespace PL.Users
     /// </summary>
     public partial class ManagerWindow : Window
     {
+        static readonly BlApi.IBl s_bl = BlApi.Factory.Get();
+
         public ManagerWindow()
         {
             InitializeComponent();
         }
 
         /// <summary>
-        /// Click on button Engineers opens the EngineerListWindow.
+        /// Click on button Handle Engineers opens the EngineerListWindow.
         /// </summary>
         private void BtnEngineerList_Click(object sender, RoutedEventArgs e)
         {
             new EngineerListWindow().Show();
         }
 
+        //Click on button Init DB - initial the data base.
+        private void BtnInitialization_Click(object sender, RoutedEventArgs e)
+        {
+            // Showing a MessageBox with Yes and No buttons and a question
+            MessageBoxResult result = MessageBox.Show("Do you want to proceed initialization?", "Initialization Confirmation", MessageBoxButton.YesNo, MessageBoxImage.Question);
+
+            // Code to execute if the user clicks Yes
+            if (result == MessageBoxResult.Yes)
+            {
+                // Initial the DB
+                s_bl.initializationDB();
+                MessageBoxResult messageBoxResult = MessageBox.Show("Initialization done successfully!", "Happy Message :)", MessageBoxButton.OK, MessageBoxImage.Information);
+            }
+        }
+
         /// <summary>
-        /// Click on button Tasks opens the TaskTableWindow.
+        /// Click on button Reset DB - reset the data base.
         /// </summary>
+        private void BtnReset_Click(object sender, RoutedEventArgs e)
+        {
+            // Showing a MessageBox with Yes and No buttons and a question
+            MessageBoxResult result = MessageBox.Show("Do you want to proceed reset data?", "Reset Data Confirmation", MessageBoxButton.YesNo, MessageBoxImage.Question);
+
+            // Code to execute if the user clicks Yes
+            if (result == MessageBoxResult.Yes)
+            {
+                // Initial the DB
+                s_bl.resetDB();
+                MessageBoxResult messageBoxResult = MessageBox.Show("Reset DB done successfully!", "Happy Message :)", MessageBoxButton.OK, MessageBoxImage.Information);
+            }
+        }
+
         private void BtnTaskTable_Click(object sender, RoutedEventArgs e)
         {
             new TaskTableWindow().Show();
         }
 
-        private void Button1_Click(object sender, RoutedEventArgs e)
+        private void BtnTLogIn_Click(object sender, RoutedEventArgs e)
         {
-
-        }
-
-        private void Button_Click(object sender, RoutedEventArgs e)
-        {
-
+            new LogInWindow().Show();
         }
     }
 }

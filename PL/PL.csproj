@@ -19,6 +19,12 @@
     <None Remove="IconImage.png" />
     <None Remove="marble.jpg" />
     <None Remove="Task\penIcon.png" />
+    <None Remove="Users\Beautiful Wallpapers For Iphone.jpeg" />
+    <None Remove="Users\code02.jpg" />
+    <None Remove="Users\desktop.jpeg" />
+    <None Remove="Users\desktop.jpg" />
+    <None Remove="Users\f74b8ce4b7518f44f4e03740dfd74d5a.jpg" />
+    <None Remove="Users\logo.png" />
     <None Remove="Users\UserNameImage.jpg" />
   </ItemGroup>
 
@@ -32,6 +38,12 @@
     <Resource Include="images\code.jpg" />
     <Resource Include="images\penIcon.png" />
     <Resource Include="Task\penIcon.png" />
+    <Resource Include="Users\Beautiful Wallpapers For Iphone.jpeg" />
+    <Resource Include="Users\code02.jpg" />
+    <Resource Include="Users\desktop.jpeg" />
+    <Resource Include="Users\desktop.jpg" />
+    <Resource Include="Users\f74b8ce4b7518f44f4e03740dfd74d5a.jpg" />
+    <Resource Include="Users\logo.png" />
     <Resource Include="Users\UserNameImage.jpg" />
   </ItemGroup>
 

@@ -18,8 +18,8 @@
             <ImageBrush ImageSource="/images/background.jpg"/>
         </Border.Background>
         <Border CornerRadius="20"  
-        BorderThickness="5"
-            Opacity="0.85">
+                BorderThickness="5"
+                Opacity="0.85">
             <Border.BorderBrush>
                 <LinearGradientBrush StartPoint="0,0" EndPoint="1,1">
                     <GradientStop Color="#462AD8" Offset="0"/>
