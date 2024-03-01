@@ -99,7 +99,7 @@
                             <RowDefinition Height="*"/>
                         </Grid.RowDefinitions>
 
-                        <DataGrid  ItemsSource="{Binding SelectedDependencies}" ItemContainerStyle="{StaticResource AlternatingRowStyle}" Background="#FF2A1E7E" BorderThickness="0" AutoGenerateColumns="False" CanUserAddRows="False" Height="260" Width="400" HorizontalAlignment="Left" Grid.RowSpan="2" Margin="-68,0,0,-23">
+                        <DataGrid  ItemsSource="{Binding SelectedDependencies}" ItemContainerStyle="{StaticResource AlternatingRowStyle}" Background="{StaticResource BackgroundBrushKey}" VerticalGridLinesBrush="Transparent" BorderThickness="0" AutoGenerateColumns="False" CanUserAddRows="False" Height="260" Width="400" HorizontalAlignment="Left" Grid.RowSpan="2" Margin="-68,0,0,-23">
                             <DataGrid.Columns>
                                 <DataGridTextColumn Header="ID" Binding="{Binding ID}"/>
                                 <DataGridTextColumn Header="Name" Binding="{Binding NickName}"/>

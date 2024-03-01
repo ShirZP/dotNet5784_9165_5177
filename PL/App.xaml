@@ -72,6 +72,25 @@
             </Border>
         </ControlTemplate>
 
+        <!--Icon Button Style-->
+        <Style TargetType="Button" x:Key="IconButtonStyleKey">
+            <!-- Remove default mouse-over background change -->
+            <Setter Property="Template">
+                <Setter.Value>
+                    <ControlTemplate TargetType="Button">
+                        <Border Background="{TemplateBinding Background}">
+                            <ContentPresenter HorizontalAlignment="Center" VerticalAlignment="Center"/>
+                        </Border>
+                    </ControlTemplate>
+                </Setter.Value>
+            </Setter>
+            <Setter Property="Background" Value="Transparent"/>
+            <Setter Property="BorderBrush" Value="Transparent"/>
+            <Setter Property="BorderThickness" Value="0"/>
+            <!-- Remove default focus rectangle -->
+            <Setter Property="FocusVisualStyle" Value="{x:Null}"/>
+        </Style>
+
 
         <!-- TextBox Style -->
         <Style TargetType="TextBox" x:Key="TextBoxStyleKey">
@@ -87,6 +106,8 @@
 
         <!-- Alternating Row Style -->
         <Style x:Key="AlternatingRowStyle" TargetType="DataGridRow">
+            <Setter Property="BorderBrush" Value="#28AEED"/>
+            <Setter Property="BorderThickness" Value="0,0,0,1"/>
             <Setter Property="Background" Value="LightGray"/>
             <Style.Triggers>
                 <Trigger Property="ItemsControl.AlternationIndex" Value="1">
@@ -97,14 +118,14 @@
 
         <!-- DataGrid Cell Style -->
         <Style TargetType="DataGridCell">
-            <Setter Property="BorderBrush" Value="Gray"/>
-            <Setter Property="BorderThickness" Value="0,0,0,1"/>
+            <Setter Property="BorderBrush" Value="Transparent"/>
+            <Setter Property="BorderThickness" Value="0"/>
             <Setter Property="Padding" Value="5"/>
         </Style>
 
         <!-- DataGridColumnHeader Style -->
         <Style TargetType="DataGridColumnHeader">
-            <Setter Property="Background" Value="DarkSlateBlue"/>
+            <Setter Property="Background" Value="#462AD8"/>
             <Setter Property="Foreground" Value="White"/>
             <Setter Property="FontWeight" Value="Bold"/>
             <Setter Property="Height" Value="32"/>

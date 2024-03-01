@@ -136,21 +136,6 @@
     <IsMileStone xsi:nil="true" />
   </Task>
   <Task>
-    <ID>32</ID>
-    <NickName>Automation and robotics</NickName>
-    <Description>Description - Automation and robotics</Description>
-    <ScheduledDate xsi:nil="true" />
-    <StartDate xsi:nil="true" />
-    <RequiredEffortTime>P4D</RequiredEffortTime>
-    <CompleteDate xsi:nil="true" />
-    <FinalProduct>FinalProduct - Automation and robotics</FinalProduct>
-    <Remarks>Remarks - Automation and robotics</Remarks>
-    <EngineerId xsi:nil="true" />
-    <Complexity>Expert</Complexity>
-    <DeadlineDate xsi:nil="true" />
-    <IsMileStone xsi:nil="true" />
-  </Task>
-  <Task>
     <ID>33</ID>
     <NickName>Firmware development</NickName>
     <Description>Description - Firmware development</Description>
@@ -312,6 +297,21 @@
     <Remarks>a</Remarks>
     <EngineerId xsi:nil="true" />
     <Complexity>AdvancedBeginner</Complexity>
+    <DeadlineDate xsi:nil="true" />
+    <IsMileStone>false</IsMileStone>
+  </Task>
+  <Task>
+    <ID>32</ID>
+    <NickName>Automation and r</NickName>
+    <Description>Description - Automation and robotics</Description>
+    <ScheduledDate xsi:nil="true" />
+    <StartDate xsi:nil="true" />
+    <RequiredEffortTime>P4D</RequiredEffortTime>
+    <CompleteDate xsi:nil="true" />
+    <FinalProduct>FinalProduct - Automation and robotics</FinalProduct>
+    <Remarks>Remarks - Automation and robotics</Remarks>
+    <EngineerId xsi:nil="true" />
+    <Complexity>Expert</Complexity>
     <DeadlineDate xsi:nil="true" />
     <IsMileStone>false</IsMileStone>
   </Task>
