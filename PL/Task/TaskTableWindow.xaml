@@ -17,7 +17,7 @@
             BorderThickness="5"
             Opacity="0.85"
             BorderBrush="{StaticResource BorderBrushKey}"
-            Background="#FF2A1E7E">
+            Background="{StaticResource BackgroundBrushKey}">
 
             <Grid>
                 <Grid.RowDefinitions>
@@ -39,7 +39,7 @@
                     <Label Grid.Column="2" Content="Subcategory:" Foreground="WhiteSmoke" FontWeight="Bold" FontFamily="Montserrant" HorizontalAlignment="Left" Margin="52,0,0,0" VerticalAlignment="Center" FontSize="18"/>
                     <ComboBox x:Name="SubcategoryFilter_CB" SelectionChanged="filterTable_SelectionChanged"  Grid.Column="3" VerticalAlignment="Stretch" Background="{DynamicResource {x:Static SystemColors.GradientActiveCaptionBrushKey}}" FontSize="18"/>
                 </Grid>
-                <DataGrid AutoGenerateColumns="False" Grid.Row="2" ItemsSource="{Binding Path=TasksList}" Margin="0,0,0,61" Width="Auto" Height ="460" Background="#FF2A1E7E" BorderThickness="0" MouseDoubleClick="DataGrid_MouseDoubleClick">
+                <DataGrid AutoGenerateColumns="False" Grid.Row="2" ItemsSource="{Binding Path=TasksList}" Margin="0,0,0,61" Width="Auto" Height ="460" Background="{StaticResource BackgroundBrushKey}"> BorderThickness="0" MouseDoubleClick="DataGrid_MouseDoubleClick">
                     <DataGrid.Columns>
                         <DataGridTextColumn Header="ID" Binding="{Binding ID}"/>
                         <DataGridTextColumn Header="Name" Binding="{Binding NickName}" Width="2*" />

@@ -18,7 +18,7 @@
                 BorderThickness="5"
                 Opacity="0.85"
                 BorderBrush="{StaticResource BorderBrushKey}"
-                Background="#FF2A1E7E">
+               Background="{StaticResource BackgroundBrushKey}">
 
 
             <!--Extrnal Grid-->
@@ -39,7 +39,7 @@
                     <ComboBox ItemsSource="{Binding Source={StaticResource ExperienceCollectionKey}}"  SelectedValue="{Binding Path=Experience, Mode=TwoWay}"
                       Grid.Column="1" VerticalAlignment="Stretch" Background="{DynamicResource {x:Static SystemColors.GradientActiveCaptionBrushKey}}" SelectionChanged="cbExperienceSelector_SelectionChanged" FontSize="18"/>
                 </Grid>
-                <ListView Grid.Row="1" ItemsSource="{Binding Path=EngineerList}" MouseDoubleClick="ListViewUpdateEngineer_MouseDoubleClick" Foreground="White" Background="#FF2A1E7E" BorderThickness="0"/>
+                <ListView Grid.Row="1" ItemsSource="{Binding Path=EngineerList}" MouseDoubleClick="ListViewUpdateEngineer_MouseDoubleClick" Foreground="White" Background="{StaticResource BackgroundBrushKey}" BorderThickness="0"/>
 
                 <Button Content="Add" Grid.Row="2" HorizontalAlignment="Right" VerticalAlignment="Top" Height="45" Width="140" 
                         Click="BtnAddNewEngineer_Click" 
