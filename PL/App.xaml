@@ -35,8 +35,7 @@
             <GradientStop Color="#060531" Offset="0"/>
             <GradientStop Color="#1B1448" Offset="0.75"/>
         </LinearGradientBrush>
-        
-        
+
         <!--blue purple Button Style-->
         <Style TargetType="Button" x:Key ="BluePurpleButtonStyleKey">
             <Setter Property="Background" Value="#462AD8"/>
@@ -73,6 +72,45 @@
             </Border>
         </ControlTemplate>
 
-        
+
+        <!-- TextBox Style -->
+        <Style TargetType="TextBox" x:Key="TextBoxStyleKey">
+            <Setter Property="FontSize" Value="13"/>
+            <Setter Property="FontWeight" Value="Medium"/>
+            <Setter Property="FontFamily" Value="Montserrant"/>
+            <Setter Property="Background" Value="Transparent"/>
+            <Setter Property="Foreground" Value="White"/>
+            <Setter Property="CaretBrush" Value="LightGray"/>
+            <Setter Property="BorderThickness" Value="0,0,0,1"/>
+            <Setter Property="BorderBrush" Value="DarkGray"/>
+        </Style>
+
+        <!-- Alternating Row Style -->
+        <Style x:Key="AlternatingRowStyle" TargetType="DataGridRow">
+            <Setter Property="Background" Value="LightGray"/>
+            <Style.Triggers>
+                <Trigger Property="ItemsControl.AlternationIndex" Value="1">
+                    <Setter Property="Background" Value="WhiteSmoke"/>
+                </Trigger>
+            </Style.Triggers>
+        </Style>
+
+        <!-- DataGrid Cell Style -->
+        <Style TargetType="DataGridCell">
+            <Setter Property="BorderBrush" Value="Gray"/>
+            <Setter Property="BorderThickness" Value="0,0,0,1"/>
+            <Setter Property="Padding" Value="5"/>
+        </Style>
+
+        <!-- DataGridColumnHeader Style -->
+        <Style TargetType="DataGridColumnHeader">
+            <Setter Property="Background" Value="DarkSlateBlue"/>
+            <Setter Property="Foreground" Value="White"/>
+            <Setter Property="FontWeight" Value="Bold"/>
+            <Setter Property="Height" Value="32"/>
+            <Setter Property="FontSize" Value="14"/>
+        </Style>
+
+
     </Application.Resources>
 </Application>
