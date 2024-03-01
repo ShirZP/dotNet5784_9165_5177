@@ -300,4 +300,19 @@
     <DeadlineDate xsi:nil="true" />
     <IsMileStone xsi:nil="true" />
   </Task>
+  <Task>
+    <ID>43</ID>
+    <NickName>a</NickName>
+    <Description>a</Description>
+    <ScheduledDate xsi:nil="true" />
+    <StartDate xsi:nil="true" />
+    <RequiredEffortTime>P11D</RequiredEffortTime>
+    <CompleteDate xsi:nil="true" />
+    <FinalProduct>a</FinalProduct>
+    <Remarks>a</Remarks>
+    <EngineerId xsi:nil="true" />
+    <Complexity>AdvancedBeginner</Complexity>
+    <DeadlineDate xsi:nil="true" />
+    <IsMileStone>false</IsMileStone>
+  </Task>
 </ArrayOfTask>

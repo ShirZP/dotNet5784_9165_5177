@@ -441,37 +441,41 @@ internal class TaskImplementation : ITask
             throw new BO.BlProjectStatusException("A task status field cannot be edited when the project status is in planning!");
         }
 
-        BO.Task originTask = Read(task.ID);
-
-        switch (task.Status)
+        if (task.ID != 0)
         {
-            case Status.Active:
-            case Status.Complete:
 
-                if (originTask.Status > task.Status)
-                    throw new BO.BlStatusException($"A task status cannot be changed from \"{originTask.Status}\" to \"{task.Status}\"!");
+            BO.Task originTask = Read(task.ID);
+
+            switch (task.Status)
+            {
+                case Status.Active:
+                case Status.Complete:
+
+                    if (originTask.Status > task.Status)
+                        throw new BO.BlStatusException($"A task status cannot be changed from \"{originTask.Status}\" to \"{task.Status}\"!");
 
 
-                if (projectStatus == BO.ProjectStatus.Execution && task.AssignedEngineer == null)
-                {
-                    throw new BO.BlEngineerNotAssignedToTaskException("A task cannot be in active or complete status if no engineer is assigned to the task");
-                }
+                    if (projectStatus == BO.ProjectStatus.Execution && task.AssignedEngineer == null)
+                    {
+                        throw new BO.BlEngineerNotAssignedToTaskException("A task cannot be in active or complete status if no engineer is assigned to the task");
+                    }
 
-                BO.Engineer assignedEngineer = _bl.Engineer.Read(task.AssignedEngineer!.ID);
-                if(assignedEngineer.EngineerCurrentTask == null || assignedEngineer.EngineerCurrentTask.ID != task.ID)
-                {
-                    throw new BO.BlEngineerNotAssignedToTaskException("A task status cannot be changed to active or completed when it is not the engineer's current task");
-                }
+                    BO.Engineer assignedEngineer = _bl.Engineer.Read(task.AssignedEngineer!.ID);
+                    if (assignedEngineer.EngineerCurrentTask == null || assignedEngineer.EngineerCurrentTask.ID != task.ID)
+                    {
+                        throw new BO.BlEngineerNotAssignedToTaskException("A task status cannot be changed to active or completed when it is not the engineer's current task");
+                    }
 
-                //Checking whether the previous tasks have been completed
-                TaskInList? notCompleteTask = (from taskInList in task.Dependencies
-                                               where taskInList.Status != BO.Status.Complete
-                                               select taskInList).FirstOrDefault();
+                    //Checking whether the previous tasks have been completed
+                    TaskInList? notCompleteTask = (from taskInList in task.Dependencies
+                                                   where taskInList.Status != BO.Status.Complete
+                                                   select taskInList).FirstOrDefault();
 
-                if (notCompleteTask != null)
-                    throw new BO.BlDependentsTasksException($"There is a previous task for the task - {task.ID} - that has not been completed");
-               
-                break;
+                    if (notCompleteTask != null)
+                        throw new BO.BlDependentsTasksException($"There is a previous task for the task - {task.ID} - that has not been completed");
+
+                    break;
+            }
         }
     }
 
