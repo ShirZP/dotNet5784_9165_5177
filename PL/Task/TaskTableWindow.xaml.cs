@@ -177,16 +177,5 @@ namespace PL.Task
                 }
             }
         }
-
-
-        //private void cbFilterSelector_SelectionChanged(object sender, SelectionChangedEventArgs e)
-        //{
-        //    if (Category == TaskFieldsToFilter.All)
-        //        TasksList = s_bl?.Task.ReadAllFullTasksDetails()!;
-        //    else if (Category == TaskFieldsToFilter.Status)
-        //    {
-
-        //    }
-        //}
     }
 }
