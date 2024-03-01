@@ -21,10 +21,10 @@
 
             <Grid>
                 <!--Go to the list of engineers-->
-                <Button Content="Handle Engineers" HorizontalAlignment="Left" Margin="124,161,0,0" VerticalAlignment="Top" Click="BtnEngineerList_Click" RenderTransformOrigin="0.5,0.5" Background="#FFD78484" Height="85" Width="154" FontSize="18" FontWeight="Bold" Style="{StaticResource ButtonRoundKey}"/>
-                <Button Content="Init DB" HorizontalAlignment="Left" Margin="550,161,0,0" VerticalAlignment="Top" Click="BtnInitialization_Click" Height="85" Width="154" Background="#FFD78484" FontSize="18" FontWeight="Bold" Style="{StaticResource ButtonRoundKey}"/>
-                <Button Content="Reset DB" HorizontalAlignment="Left" Margin="400,161,0,0" VerticalAlignment="Top" Click="BtnReset_Click" Background="#FFD78484" Height="85" Width="150" FontSize="18" FontWeight="Bold" Style="{StaticResource ButtonRoundKey}"/>
-                <Button Content="Task Table" HorizontalAlignment="Left" Margin="128,288,0,0" VerticalAlignment="Top" Click="BtnTaskTable_Click" Background="#FFD78484" Height="85" Width="150" FontSize="18" FontWeight="Bold" Style="{StaticResource ButtonRoundKey}"/>
+                <Button Content="Handle Engineers" HorizontalAlignment="Left" Margin="124,161,0,0" VerticalAlignment="Top" Click="BtnEngineerList_Click" RenderTransformOrigin="0.5,0.5" Background="#FFD78484" Height="85" Width="154" FontSize="18" FontWeight="Bold" />
+                <Button Content="Init DB" HorizontalAlignment="Left" Margin="550,161,0,0" VerticalAlignment="Top" Click="BtnInitialization_Click" Height="85" Width="154" Background="#FFD78484" FontSize="18" FontWeight="Bold"/>
+                <Button Content="Reset DB" HorizontalAlignment="Left" Margin="400,161,0,0" VerticalAlignment="Top" Click="BtnReset_Click" Background="#FFD78484" Height="85" Width="150" FontSize="18" FontWeight="Bold" />
+                <Button Content="Task Table" HorizontalAlignment="Left" Margin="128,288,0,0" VerticalAlignment="Top" Click="BtnTaskTable_Click" Background="#FFD78484" Height="85" Width="150" FontSize="18" FontWeight="Bold" />
                 <Button Content="Log In" 
                         BorderThickness="0"
                         Foreground="White"
@@ -36,7 +36,6 @@
                         Click="BtnTLogIn_Click" 
                         Height="85" Width="150" FontSize="18" 
                         FontWeight="Bold" 
-                        Style="{StaticResource ButtonStyleKey}"
                         Template="{StaticResource ButtonTemplateKey}"/>
 
             </Grid>

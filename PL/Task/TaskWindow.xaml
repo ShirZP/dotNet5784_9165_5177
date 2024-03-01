@@ -6,113 +6,125 @@
         xmlns:local="clr-namespace:PL"
         mc:Ignorable="d"
         Title="TaskWindow" Height="700" Width="850"
-        Icon="{StaticResource AppIcon}">
-    
-    <Grid Background="{StaticResource BackgroundKey}">
-        <TextBlock Text="Task Details:" HorizontalAlignment="Left" Height="39" Margin="50,10,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="329"/>
+        Icon="{StaticResource AppIcon}"
+        ResizeMode ="NoResize"
+        WindowStartupLocation="CenterScreen"
+        Background="Transparent">
+    <Border CornerRadius="50">
 
-        <Label Content="ID:" HorizontalAlignment="Left" Margin="50,76,0,0" VerticalAlignment="Top" Height="25" Width="110"/>
-        <Label Content="Name:" HorizontalAlignment="Left" Margin="50,106,0,0" VerticalAlignment="Top" Height="25" Width="110"/>
-        <Label Content="Description:" HorizontalAlignment="Left" Margin="50,136,0,0" VerticalAlignment="Top" Height="25" Width="110"/>
-        <Label Content="Status:" HorizontalAlignment="Left" Margin="50,194,0,0" VerticalAlignment="Top" Height="28" Width="110"/>
-        <Label Content="Complexity:" HorizontalAlignment="Left" Margin="50,230,0,0" VerticalAlignment="Top" Height="28" Width="110"/>
-        <Label Content="Scheduled Date:" Visibility="{Binding Path=(local:SharedDependencyProperties.ProjectStatus), Mode=OneTime, Converter={StaticResource ConvertProjectStatusNotPlanningToVisibleKey}}"  HorizontalAlignment="Left" Margin="440,158,0,0" VerticalAlignment="Top" Height="28" Width="110"/>
-        <Label Content="Start Date:" Visibility="{Binding Path=(local:SharedDependencyProperties.ProjectStatus), Mode=OneTime, Converter={StaticResource ConvertProjectStatusNotPlanningToVisibleKey}}"  HorizontalAlignment="Left" Margin="441,193,0,0" VerticalAlignment="Top" Height="28" Width="110"/>
-        <Label Content="Forecast Date:" Visibility="{Binding Path=(local:SharedDependencyProperties.ProjectStatus), Mode=OneTime, Converter={StaticResource ConvertProjectStatusNotPlanningToVisibleKey}}"  HorizontalAlignment="Left" Margin="441,223,0,0" VerticalAlignment="Top" Height="28" Width="110"/>
-        <Label Content="Complete Date:" Visibility="{Binding Path=(local:SharedDependencyProperties.ProjectStatus), Mode=OneTime, Converter={StaticResource ConvertProjectStatusNotPlanningToVisibleKey}}"  HorizontalAlignment="Left" Margin="441,253,0,0" VerticalAlignment="Top" Height="28" Width="110"/>
-        <Label Content="Required Days Effort:" HorizontalAlignment="Left" Margin="440,76,0,0" VerticalAlignment="Top" Height="28" Width="120"/>
-        <Label Content="Deliverables:" HorizontalAlignment="Left" Margin="440,104,0,0" VerticalAlignment="Top" Height="28" Width="110"/>
-        <Label Content="Remarks:" HorizontalAlignment="Left" Margin="50,264,0,0" VerticalAlignment="Top" Height="28" Width="110"/>
-        <Label Content="Assigned Engineer:" Visibility="{Binding Path=(local:SharedDependencyProperties.ProjectStatus), Mode=OneTime, Converter={StaticResource ConvertProjectStatusNotPlanningToVisibleKey}}"  HorizontalAlignment="Left" Margin="439,286,0,0" VerticalAlignment="Top" Height="28" Width="110"/>
+        <Border CornerRadius="20"  
+        BorderThickness="5"
+        Opacity="0.85"
+        BorderBrush="{StaticResource BorderBrushKey}"
+        Background="#FF2A1E7E">
 
-        <!-- ID -->
-        <TextBox Text="{Binding CurrentTask.ID, Mode=TwoWay, NotifyOnValidationError=true,  ValidatesOnExceptions=true}" IsEnabled="False"
-                 HorizontalAlignment="Left" Margin="177,76,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="217"/>
-        <!-- Name -->
-        <TextBox Text="{Binding CurrentTask.NickName, Mode=TwoWay, NotifyOnValidationError=true,  ValidatesOnExceptions=true}"
-         HorizontalAlignment="Left" Margin="177,106,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="217"/>
+            <Grid>
+                <TextBlock Text="Task Details:" Foreground="WhiteSmoke" FontSize="20" FontWeight="Bold" FontFamily="Montserrant" HorizontalAlignment="Left" Height="39" Margin="50,10,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="329"/>
 
-        <!-- Description -->
-        <TextBox Text="{Binding CurrentTask.Description, Mode=TwoWay, NotifyOnValidationError=true,  ValidatesOnExceptions=true}"
-                 HorizontalAlignment="Left" Margin="177,136,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="217"
-                 HorizontalScrollBarVisibility="Disabled"
-                 VerticalScrollBarVisibility="Auto"
-                 AcceptsReturn="True" Height="44"/>
-        <!-- Status -->
-        <ComboBox ItemsSource="{Binding Source={StaticResource TaskStatusCollectionKey}}" 
+                <Label Content="ID:" Foreground="DarkGray" FontWeight="Medium" FontFamily="Montserrant" HorizontalAlignment="Left" Margin="50,76,0,0" VerticalAlignment="Top" Height="25" Width="110"/>
+                <Label Content="Name:" Foreground="DarkGray" FontWeight="Medium" FontFamily="Montserrant" HorizontalAlignment="Left" Margin="50,106,0,0" VerticalAlignment="Top" Height="25" Width="110"/>
+                <Label Content="Description:" Foreground="DarkGray" FontWeight="Medium" FontFamily="Montserrant" HorizontalAlignment="Left" Margin="50,136,0,0" VerticalAlignment="Top" Height="25" Width="110"/>
+                <Label Content="Status:" Foreground="DarkGray" FontWeight="Medium" FontFamily="Montserrant" HorizontalAlignment="Left" Margin="50,194,0,0" VerticalAlignment="Top" Height="28" Width="110"/>
+                <Label Content="Complexity:" Foreground="DarkGray" FontWeight="Medium" FontFamily="Montserrant" HorizontalAlignment="Left" Margin="50,230,0,0" VerticalAlignment="Top" Height="28" Width="110"/>
+                <Label Content="Scheduled Date:" Visibility="{Binding Path=(local:SharedDependencyProperties.ProjectStatus), Mode=OneTime, Converter={StaticResource ConvertProjectStatusNotPlanningToVisibleKey}}" Foreground="DarkGray" FontWeight="Medium" FontFamily="Montserrant"  HorizontalAlignment="Left" Margin="440,158,0,0" VerticalAlignment="Top" Height="28" Width="110"/>
+                <Label Content="Start Date:" Visibility="{Binding Path=(local:SharedDependencyProperties.ProjectStatus), Mode=OneTime, Converter={StaticResource ConvertProjectStatusNotPlanningToVisibleKey}}" Foreground="DarkGray" FontWeight="Medium" FontFamily="Montserrant"  HorizontalAlignment="Left" Margin="441,193,0,0" VerticalAlignment="Top" Height="28" Width="110"/>
+                <Label Content="Forecast Date:" Visibility="{Binding Path=(local:SharedDependencyProperties.ProjectStatus), Mode=OneTime, Converter={StaticResource ConvertProjectStatusNotPlanningToVisibleKey}}" Foreground="DarkGray" FontWeight="Medium" FontFamily="Montserrant"  HorizontalAlignment="Left" Margin="441,223,0,0" VerticalAlignment="Top" Height="28" Width="110"/>
+                <Label Content="Complete Date:" Visibility="{Binding Path=(local:SharedDependencyProperties.ProjectStatus), Mode=OneTime, Converter={StaticResource ConvertProjectStatusNotPlanningToVisibleKey}}" Foreground="DarkGray" FontWeight="Medium" FontFamily="Montserrant" HorizontalAlignment="Left" Margin="441,253,0,0" VerticalAlignment="Top" Height="28" Width="110"/>
+                <Label Content="Required Days Effort:" Foreground="DarkGray" FontWeight="Medium" FontFamily="Montserrant" HorizontalAlignment="Left" Margin="440,76,0,0" VerticalAlignment="Top" Height="28" Width="125"/>
+                <Label Content="Deliverables:" Foreground="DarkGray" FontWeight="Medium" FontFamily="Montserrant" HorizontalAlignment="Left" Margin="440,104,0,0" VerticalAlignment="Top" Height="28" Width="110"/>
+                <Label Content="Remarks:" Foreground="DarkGray" FontWeight="Medium" FontFamily="Montserrant" HorizontalAlignment="Left" Margin="50,264,0,0" VerticalAlignment="Top" Height="28" Width="110"/>
+                <Label Content="Assigned Engineer:" Visibility="{Binding Path=(local:SharedDependencyProperties.ProjectStatus), Mode=OneTime, Converter={StaticResource ConvertProjectStatusNotPlanningToVisibleKey}}" Foreground="DarkGray" FontWeight="Medium" FontFamily="Montserrant" HorizontalAlignment="Left" Margin="439,286,0,0" VerticalAlignment="Top" Height="28" Width="115"/>
+
+                <!-- ID -->
+                <TextBox Text="{Binding CurrentTask.ID, Mode=TwoWay, NotifyOnValidationError=true,  ValidatesOnExceptions=true}" IsEnabled="False"
+                         FontSize="13" FontWeight="Medium" FontFamily="Montserrant" Background ="Transparent" Foreground="White" CaretBrush="LightGray" BorderBrush="DarkGray" BorderThickness="0,0,0,1" HorizontalAlignment="Left" Margin="177,76,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="217"/>
+                <!-- Name -->
+                <TextBox Text="{Binding CurrentTask.NickName, Mode=TwoWay, NotifyOnValidationError=true,  ValidatesOnExceptions=true}"
+                         FontSize="13" FontWeight="Medium" FontFamily="Montserrant" Background ="Transparent" Foreground="White" CaretBrush="LightGray" BorderBrush="DarkGray" BorderThickness="0,0,0,1"  HorizontalAlignment="Left" Margin="177,106,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="217"/>
+
+                <!-- Description -->
+                <TextBox Text="{Binding CurrentTask.Description, Mode=TwoWay, NotifyOnValidationError=true,  ValidatesOnExceptions=true}"
+                         FontSize="13" FontWeight="Medium" FontFamily="Montserrant" Background ="Transparent" Foreground="White" CaretBrush="LightGray" BorderBrush="DarkGray" BorderThickness="0,0,0,1" HorizontalAlignment="Left" Margin="177,136,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="217"
+                         HorizontalScrollBarVisibility="Disabled"
+                         VerticalScrollBarVisibility="Auto"
+                         AcceptsReturn="True" Height="44"/>
+                <!-- Status -->
+                <ComboBox ItemsSource="{Binding Source={StaticResource TaskStatusCollectionKey}}" 
                   SelectedValue="{Binding CurrentTask.Status, Mode=TwoWay, NotifyOnValidationError=true, ValidatesOnExceptions=true}" 
                   IsEnabled="{Binding Path=(local:SharedDependencyProperties.ProjectStatus), Mode=OneTime, Converter={StaticResource ConvertProjectStatusNotPlanningToEnabledKey}}" 
                   HorizontalAlignment="Left" Margin="177,194,0,0" VerticalAlignment="Top" Height="25" Width="217"/>
-        <!-- Complexity -->
-        <ComboBox ItemsSource="{Binding Source={StaticResource EngineerExperienceCollectionKey}}" 
+                <!-- Complexity -->
+                <ComboBox ItemsSource="{Binding Source={StaticResource EngineerExperienceCollectionKey}}" 
                   SelectedValue="{Binding CurrentTask.Complexity, Mode=TwoWay, NotifyOnValidationError=true, ValidatesOnExceptions=true}"  
                   HorizontalAlignment="Left" Margin="177,230,0,0" VerticalAlignment="Top" Height="25" Width="217"/>
 
-        <!-- Scheduled Date -->
-        <DatePicker SelectedDate="{Binding CurrentTask.StartDate}" IsEnabled="False" Visibility="{Binding Path=(local:SharedDependencyProperties.ProjectStatus), Mode=OneTime, Converter={StaticResource ConvertProjectStatusNotPlanningToVisibleKey}}" HorizontalAlignment="Left" Margin="567,158,0,0" VerticalAlignment="Top" Width ="217" Loaded="DatePicker_Loaded" />
-        <!-- Start Date -->
-        <DatePicker SelectedDate="{Binding CurrentTask.StartDate}" IsEnabled="False" Visibility="{Binding Path=(local:SharedDependencyProperties.ProjectStatus), Mode=OneTime, Converter={StaticResource ConvertProjectStatusNotPlanningToVisibleKey}}" Margin="568,193,0,0" VerticalAlignment="Top" HorizontalAlignment="Left" Width ="217" Loaded="DatePicker_Loaded" />
-        <!-- Forecast Date -->
-        <DatePicker SelectedDate="{Binding CurrentTask.ForecastDate}" HorizontalAlignment="Left" IsEnabled="False" Visibility="{Binding Path=(local:SharedDependencyProperties.ProjectStatus), Mode=OneTime, Converter={StaticResource ConvertProjectStatusNotPlanningToVisibleKey}}" Margin="568,223,0,0" VerticalAlignment="Top" Width ="217" Loaded="DatePicker_Loaded" />
-        <!-- Complete Date -->
-        <DatePicker SelectedDate="{Binding CurrentTask.CompleteDate}" HorizontalAlignment="Left" IsEnabled="False" Visibility="{Binding Path=(local:SharedDependencyProperties.ProjectStatus), Mode=OneTime, Converter={StaticResource ConvertProjectStatusNotPlanningToVisibleKey}}" Margin="568,253,0,0" VerticalAlignment="Top" Width ="217" Loaded="DatePicker_Loaded" />
+                <!-- Scheduled Date -->
+                <DatePicker SelectedDate="{Binding CurrentTask.StartDate}" IsEnabled="False" Visibility="{Binding Path=(local:SharedDependencyProperties.ProjectStatus), Mode=OneTime, Converter={StaticResource ConvertProjectStatusNotPlanningToVisibleKey}}" HorizontalAlignment="Left" Margin="571,158,0,0" VerticalAlignment="Top" Width ="217"/>
+                <!-- Start Date -->
+                <DatePicker SelectedDate="{Binding CurrentTask.StartDate}" IsEnabled="False" Visibility="{Binding Path=(local:SharedDependencyProperties.ProjectStatus), Mode=OneTime, Converter={StaticResource ConvertProjectStatusNotPlanningToVisibleKey}}" Margin="572,193,0,0" VerticalAlignment="Top" HorizontalAlignment="Left" Width ="217"/>
+                <!-- Forecast Date -->
+                <DatePicker SelectedDate="{Binding CurrentTask.ForecastDate}" HorizontalAlignment="Left" IsEnabled="False" Visibility="{Binding Path=(local:SharedDependencyProperties.ProjectStatus), Mode=OneTime, Converter={StaticResource ConvertProjectStatusNotPlanningToVisibleKey}}" Margin="572,223,0,0" VerticalAlignment="Top" Width ="217"/>
+                <!-- Complete Date -->
+                <DatePicker SelectedDate="{Binding CurrentTask.CompleteDate}" HorizontalAlignment="Left" IsEnabled="False" Visibility="{Binding Path=(local:SharedDependencyProperties.ProjectStatus), Mode=OneTime, Converter={StaticResource ConvertProjectStatusNotPlanningToVisibleKey}}" Margin="572,253,0,0" VerticalAlignment="Top" Width ="217"/>
 
-        <!-- Required Effort Time -->
-        <ComboBox ItemsSource="{Binding daysEffortTimeOptions}"
+                <!-- Required Effort Time -->
+                <ComboBox ItemsSource="{Binding daysEffortTimeOptions, StringFormat={}{0:[d]}}"
                   SelectedValue="{Binding CurrentTask.RequiredEffortTime, Mode=TwoWay, NotifyOnValidationError=true, ValidatesOnExceptions=true}" 
                   IsEnabled="{Binding Path=(local:SharedDependencyProperties.ProjectStatus), Mode=OneTime, Converter={StaticResource ConvertProjectStatusPlanningToEnabledKey}}" 
-                  HorizontalAlignment="Left" Margin="567,76,0,0" VerticalAlignment="Top" Height="20" Width="217"/>
+                  HorizontalAlignment="Left" Margin="571,76,0,0" VerticalAlignment="Top" Height="20" Width="217"/>
 
-        <!-- Deliverables -->
-        <TextBox Text="{Binding CurrentTask.Deliverables, Mode=TwoWay, NotifyOnValidationError=true,  ValidatesOnExceptions=true}"
-         HorizontalAlignment="Left" Margin="568,104,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="216"
-         HorizontalScrollBarVisibility="Disabled"
-         VerticalScrollBarVisibility="Auto"
-         AcceptsReturn="True" Height="44"/>
+                <!-- Deliverables -->
+                <TextBox Text="{Binding CurrentTask.Deliverables, Mode=TwoWay, NotifyOnValidationError=true,  ValidatesOnExceptions=true}"
+                         FontSize="13" FontWeight="Medium" FontFamily="Montserrant" Background ="Transparent" Foreground="White" CaretBrush="LightGray" BorderBrush="DarkGray" BorderThickness="0,0,0,1"  HorizontalAlignment="Left" Margin="572,104,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="216"
+                         HorizontalScrollBarVisibility="Disabled"
+                         VerticalScrollBarVisibility="Auto"
+                         AcceptsReturn="True" Height="44"/>
 
-        <!-- Remarks -->
-        <TextBox Text="{Binding CurrentTask.Remarks, Mode=TwoWay, NotifyOnValidationError=true,  ValidatesOnExceptions=true}"
-         HorizontalAlignment="Left" Margin="177,264,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="217"
-         HorizontalScrollBarVisibility="Disabled"
-         VerticalScrollBarVisibility="Auto"
-         AcceptsReturn="True" Height="44"/>
+                <!-- Remarks -->
+                <TextBox Text="{Binding CurrentTask.Remarks, Mode=TwoWay, NotifyOnValidationError=true,  ValidatesOnExceptions=true}"
+                         FontSize="13" FontWeight="Medium" FontFamily="Montserrant" Background ="Transparent" Foreground="White" CaretBrush="LightGray" BorderBrush="DarkGray" BorderThickness="0,0,0,1"  HorizontalAlignment="Left" Margin="177,264,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="217"
+                         HorizontalScrollBarVisibility="Disabled"
+                         VerticalScrollBarVisibility="Auto"
+                         AcceptsReturn="True" Height="44"/>
 
-        <!-- Assigned Engineer -->
-        <ComboBox ItemsSource="{Binding AssignedEngineer}" SelectedItem="{Binding SelectedEngineerName, Mode=TwoWay}"
-                  Visibility="{Binding Path=(local:SharedDependencyProperties.ProjectStatus), Mode=OneTime, Converter={StaticResource ConvertProjectStatusNotPlanningToVisibleKey}}" 
-                  HorizontalAlignment="Left" Margin="569,286,0,0" VerticalAlignment="Top" Width="217"/>
-        <!-- Dependencies -->
-        <Expander HorizontalAlignment="Left"  Header="Depends On Previous Tasks" Margin="53,330,0,0" VerticalAlignment="Top" Height="260" Width="745" IsExpanded="False">
-            <Grid Width="600">
-                <Grid.RowDefinitions>
-                    <RowDefinition Height="Auto"/>
-                    <RowDefinition Height="*"/>
-                </Grid.RowDefinitions>
+                <!-- Assigned Engineer -->
+                <ComboBox ItemsSource="{Binding AssignedEngineer}" SelectedItem="{Binding SelectedEngineerName, Mode=TwoWay}"
+                          Visibility="{Binding Path=(local:SharedDependencyProperties.ProjectStatus), Mode=OneTime, Converter={StaticResource ConvertProjectStatusNotPlanningToVisibleKey}}" 
+                          HorizontalAlignment="Left" Margin="573,286,0,0" VerticalAlignment="Top" Width="217"/>
+                <!-- Dependencies -->
+                <Expander Header="Depends On Previous Tasks" Foreground="DarkGray" FontWeight="Medium" FontFamily="Montserrant" HorizontalAlignment="Left" Margin="53,330,0,0" VerticalAlignment="Top" Height="260" Width="745" IsExpanded="False">
+                    <Grid Width="600">
+                        <Grid.RowDefinitions>
+                            <RowDefinition Height="Auto"/>
+                            <RowDefinition Height="*"/>
+                        </Grid.RowDefinitions>
 
-                <DataGrid  ItemsSource="{Binding SelectedDependencies}" AutoGenerateColumns="False" CanUserAddRows="False" Height="260" Width="400" HorizontalAlignment="Left" Grid.RowSpan="2" Margin="-68,0,0,-23">
-                    <DataGrid.Columns>
-                        <DataGridTextColumn Header="ID" Binding="{Binding ID}"/>
-                        <DataGridTextColumn Header="Name" Binding="{Binding NickName}"/>
-                        <DataGridTextColumn Header="Status" Binding="{Binding Status}" Width="*"/>
-                    </DataGrid.Columns>
-                </DataGrid>
+                        <DataGrid  ItemsSource="{Binding SelectedDependencies}" Background="#FF2A1E7E" BorderThickness="0" AutoGenerateColumns="False" CanUserAddRows="False" Height="260" Width="400" HorizontalAlignment="Left" Grid.RowSpan="2" Margin="-68,0,0,-23">
+                            <DataGrid.Columns>
+                                <DataGridTextColumn Header="ID" Binding="{Binding ID}"/>
+                                <DataGridTextColumn Header="Name" Binding="{Binding NickName}"/>
+                                <DataGridTextColumn Header="Status" Binding="{Binding Status}" Width="*"/>
+                            </DataGrid.Columns>
+                        </DataGrid>
 
-                <Button Content="+" 
-                        Click="BtnListBoxPopup_Click" 
-                        Visibility="{Binding Path=(local:SharedDependencyProperties.ProjectStatus), Mode=OneTime, Converter={StaticResource ConvertProjectStatusPlanningToVisibleKey}}" 
-                        Width="24" Height="25" 
-                        Style="{StaticResource ButtonRoundKey}" HorizontalAlignment="Left" VerticalAlignment="Center" Margin="332,0,0,0"/>
-                <Popup x:Name="dependenciesPopup" Width = "345" Height="235" StaysOpen="False" AllowsTransparency="True" Placement="Bottom" OpacityMask="White">
-                    <ListBox x:Name="listBox" ItemsSource="{Binding DependenciesInList}" SelectionChanged="LBDependencies_SelectionChanged" SelectionMode="Multiple">
+                        <Button Content="+" 
+                                Click="BtnListBoxPopup_Click" 
+                                Visibility="{Binding Path=(local:SharedDependencyProperties.ProjectStatus), Mode=OneTime, Converter={StaticResource ConvertProjectStatusPlanningToVisibleKey}}" 
+                                Width="24" Height="25" 
+                                BorderThickness="0" Foreground="White" Template="{StaticResource ButtonTemplateKey}" Style="{StaticResource PinkButtonStyleKey}" FontFamily="Montserrant" FontWeight="Bold" FontSize="18" Cursor="Hand" VerticalAlignment="Top" HorizontalAlignment="Left"  Margin="332,0,0,0"/>
+                        <Popup x:Name="dependenciesPopup" Width="345" Height="235" StaysOpen="False" AllowsTransparency="True" Placement="Bottom" OpacityMask="White">
+                            <ListBox x:Name="listBox" ItemsSource="{Binding DependenciesInList}" SelectionChanged="LBDependencies_SelectionChanged" SelectionMode="Multiple">
 
-                    </ListBox>
-                </Popup>
+                            </ListBox>
+                        </Popup>
+                    </Grid>
+                </Expander>
+
+
+                <Button Content="{Binding CurrentTask.ID, Mode=OneTime, Converter={StaticResource ConverIdToContentKey}}" Click="BtnAddOrUpdate_Click" BorderThickness="0" Foreground="White" Template="{StaticResource ButtonTemplateKey}" Style="{StaticResource PinkButtonStyleKey}" FontFamily="Montserrant" FontWeight="Bold" FontSize="18" Cursor="Hand" VerticalAlignment="Top" HorizontalAlignment="Left" Margin="725,617,0,0" Height="25" Width="78"/>
+
+
             </Grid>
-        </Expander>
-
-
-        <Button Content="{Binding CurrentTask.ID, Mode=OneTime, Converter={StaticResource ConverIdToContentKey}}" Click="BtnAddOrUpdate_Click" HorizontalAlignment="Left" Margin="729,633,0,0" VerticalAlignment="Top" Height="25" Width="78" Background="#FF99B4D1" FontWeight="Bold" Style="{StaticResource ButtonRoundKey}"/>
-
-
-    </Grid>
+        </Border>
+    </Border>
 </Window>

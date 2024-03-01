@@ -5,37 +5,55 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:PL.Engineer"
         mc:Ignorable="d"
-        Title="EngineerWindow" Height="420" Width="420"
-        Icon="{StaticResource AppIcon}">
-    
-    <Grid Background="{StaticResource BackgroundKey}">
-        <Label Content="ID:" HorizontalAlignment="Left" Margin="50,56,0,0" VerticalAlignment="Top" Height="25" Width="65"/>
-        <Label Content="Full Name:" HorizontalAlignment="Left" Margin="50,106,0,0" VerticalAlignment="Top" Height="25" Width="65"/>
-        <Label Content="Email:" HorizontalAlignment="Left" Margin="50,156,0,0" VerticalAlignment="Top" Height="25" Width="65"/>
-        <Label Content="Engineer Level:" HorizontalAlignment="Left" Margin="50,206,0,0" VerticalAlignment="Top" Height="28" Width="90"/>
-        <Label Content="Hourly Cost:" HorizontalAlignment="Left" Margin="50,256,0,0" VerticalAlignment="Top" Height="28" Width="75"/>
-        <Label Content="Current Task:" Visibility="{Binding CurrentEngineer.ID, Mode=OneTime, Converter={StaticResource ConvertIdToVisibilityKey}}" HorizontalAlignment="Left" Margin="50,306,0,0" VerticalAlignment="Top" Height="28" Width="90"/>
-        <!-- ID -->
-        <TextBox Text="{Binding CurrentEngineer.ID, Mode=TwoWay, NotifyOnValidationError=true,  ValidatesOnExceptions=true}"
-                 IsEnabled="{Binding CurrentEngineer.ID, Mode=OneTime, Converter={StaticResource ConvertIdToIsEnabledKey}}"
-                 HorizontalAlignment="Left" Margin="163,56,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="217"/>
-        <!-- FullName -->
-        <TextBox Text="{Binding CurrentEngineer.FullName, Mode=TwoWay, NotifyOnValidationError=true,  ValidatesOnExceptions=true}" HorizontalAlignment="Left" Margin="163,106,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="217"/>
-        <!-- Email -->
-        <TextBox Text="{Binding CurrentEngineer.Email, Mode=TwoWay, NotifyOnValidationError=true,  ValidatesOnExceptions=true}" HorizontalAlignment="Left" Margin="163,156,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="217"/>
-        <!-- Level -->
-        <ComboBox ItemsSource="{Binding Source={StaticResource EngineerExperienceCollectionKey}}" 
-                  SelectedValue="{Binding CurrentEngineer.Level, Mode=TwoWay, NotifyOnValidationError=true, 
-                  ValidatesOnExceptions=true}" HorizontalAlignment="Left" Margin="163,206,0,0" VerticalAlignment="Top" Width="217"/>
-        <!-- Cost -->
-        <TextBox Text="{Binding CurrentEngineer.Cost, Mode=TwoWay, NotifyOnValidationError=true,  ValidatesOnExceptions=true}" HorizontalAlignment="Left" Margin="163,256,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="217"/>
-        <!-- Current Task -->
-        <ComboBox ItemsSource="{Binding engineerTasksName}" SelectedItem="{Binding SelectedTaskName, Mode=TwoWay}"
-                  Visibility="{Binding CurrentEngineer.ID, Mode=OneTime, Converter={StaticResource ConvertIdToVisibilityKey}}" 
-                  HorizontalAlignment="Left" Margin="163,304,0,0" VerticalAlignment="Top" Width="217"/>
+        Title="EngineerWindow" Height="430" Width="420"
+        Icon="{StaticResource AppIcon}"
+        ResizeMode ="NoResize"
+        WindowStartupLocation="CenterScreen"
+        Background="Transparent">
+    <Border CornerRadius="50">
 
-        <Button Content="{Binding CurrentEngineer.ID, Mode=OneTime, Converter={StaticResource ConverIdToContentKey}}" 
-                HorizontalAlignment="Left" Margin="315,350,0,0" VerticalAlignment="Top" Height="25" Width="77" 
-                Click="BtnAddOrUpdate_Click" Background="#FF99B4D1" FontWeight="Bold" Style="{StaticResource ButtonRoundKey}"/>
-    </Grid>
+        <Border CornerRadius="20"  
+            BorderThickness="5"
+            Opacity="0.85"
+            BorderBrush="{StaticResource BorderBrushKey}"
+            Background="#FF2A1E7E">
+
+            <Grid>
+                <TextBlock Text="Engineer Details:" Foreground="WhiteSmoke" FontSize="20" FontWeight="Bold" FontFamily="Montserrant" HorizontalAlignment="Left" Height="39" Margin="50,10,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="329"/>
+
+                <Label Content="ID:" Foreground="DarkGray" FontWeight="Medium" FontFamily="Montserrant"  HorizontalAlignment="Left" Margin="50,56,0,0" VerticalAlignment="Top" Height="25" Width="65"/>
+                <Label Content="Full Name:" Foreground="DarkGray" FontWeight="Medium" FontFamily="Montserrant"  HorizontalAlignment="Left" Margin="50,106,0,0" VerticalAlignment="Top" Height="25" Width="65"/>
+                <Label Content="Email:" Foreground="DarkGray" FontWeight="Medium" FontFamily="Montserrant"  HorizontalAlignment="Left" Margin="50,156,0,0" VerticalAlignment="Top" Height="25" Width="65"/>
+                <Label Content="Engineer Level:" Foreground="DarkGray" FontWeight="Medium" FontFamily="Montserrant"  HorizontalAlignment="Left" Margin="50,206,0,0" VerticalAlignment="Top" Height="28" Width="91"/>
+                <Label Content="Hourly Cost:" Foreground="DarkGray" FontWeight="Medium" FontFamily="Montserrant"  HorizontalAlignment="Left" Margin="50,256,0,0" VerticalAlignment="Top" Height="28" Width="75"/>
+                <Label Content="Current Task:" Visibility="{Binding CurrentEngineer.ID, Mode=OneTime, Converter={StaticResource ConvertIdToVisibilityKey}}" Foreground="DarkGray" FontWeight="Medium" FontFamily="Montserrant"  HorizontalAlignment="Left" Margin="50,306,0,0" VerticalAlignment="Top" Height="28" Width="90"/>
+                <!-- ID -->
+                <TextBox Text="{Binding CurrentEngineer.ID, Mode=TwoWay, NotifyOnValidationError=true,  ValidatesOnExceptions=true}"
+                         IsEnabled="{Binding CurrentEngineer.ID, Mode=OneTime, Converter={StaticResource ConvertIdToIsEnabledKey}}"
+                         FontSize="13" FontWeight="Medium" FontFamily="Montserrant" Background ="Transparent" Foreground="White" CaretBrush="LightGray" BorderBrush="DarkGray" BorderThickness="0,0,0,1"  HorizontalAlignment="Left" Margin="163,56,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="217"/>
+                <!-- FullName -->
+                <TextBox Text="{Binding CurrentEngineer.FullName, Mode=TwoWay, NotifyOnValidationError=true,  ValidatesOnExceptions=true}" 
+                         FontSize="13" FontWeight="Medium" FontFamily="Montserrant" Background ="Transparent" Foreground="White" CaretBrush="LightGray" BorderBrush="DarkGray" BorderThickness="0,0,0,1"  HorizontalAlignment="Left" Margin="163,106,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="217"/>
+                <!-- Email -->
+                <TextBox Text="{Binding CurrentEngineer.Email, Mode=TwoWay, NotifyOnValidationError=true, ValidatesOnExceptions=true}"
+                         FontSize="13" FontWeight="Medium" FontFamily="Montserrant" Background ="Transparent" Foreground="White" CaretBrush="LightGray" BorderBrush="DarkGray" BorderThickness="0,0,0,1"  HorizontalAlignment="Left" Margin="163,156,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="217"/>
+                <!-- Level -->
+                <ComboBox ItemsSource="{Binding Source={StaticResource EngineerExperienceCollectionKey}}" 
+                          SelectedValue="{Binding CurrentEngineer.Level, Mode=TwoWay, NotifyOnValidationError=true, 
+                          ValidatesOnExceptions=true}" HorizontalAlignment="Left" Margin="163,206,0,0" VerticalAlignment="Top" Width="217"/>
+                <!-- Cost -->
+                <TextBox Text="{Binding CurrentEngineer.Cost, Mode=TwoWay, NotifyOnValidationError=true, ValidatesOnExceptions=true}" 
+                         FontSize="13" FontWeight="Medium" FontFamily="Montserrant" Background ="Transparent" Foreground="White" CaretBrush="LightGray" BorderBrush="DarkGray" BorderThickness="0,0,0,1"  HorizontalAlignment="Left" Margin="163,256,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="217"/>
+                <!-- Current Task -->
+                <ComboBox ItemsSource="{Binding engineerTasksName}" SelectedItem="{Binding SelectedTaskName, Mode=TwoWay}"
+                          Visibility="{Binding CurrentEngineer.ID, Mode=OneTime, Converter={StaticResource ConvertIdToVisibilityKey}}" 
+                          HorizontalAlignment="Left" Margin="163,304,0,0" VerticalAlignment="Top" Width="217"/>
+
+                <Button Content="{Binding CurrentEngineer.ID, Mode=OneTime, Converter={StaticResource ConverIdToContentKey}}" 
+                        HorizontalAlignment="Left" Margin="308,352,0,0" VerticalAlignment="Top" Height="25" Width="77" 
+                        BorderThickness="0" Foreground="White" Template="{StaticResource ButtonTemplateKey}" Style="{StaticResource PinkButtonStyleKey}" FontFamily="Montserrant" 
+                        Click="BtnAddOrUpdate_Click" FontWeight="Bold"/>
+            </Grid>
+        </Border>
+    </Border>
 </Window>

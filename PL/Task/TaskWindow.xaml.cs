@@ -178,16 +178,6 @@ namespace PL.Task
             }
         }
 
-        private void DatePicker_Loaded(object sender, RoutedEventArgs e)
-        {
-            if (sender is DatePicker datePicker)
-            {
-                datePicker.DisplayDateStart = s_bl.GetProjectStartDate();
-                datePicker.DisplayDateEnd = s_bl.GetProjectEndDate();
-            }
-        }
-
-
         private void BtnAddOrUpdate_Click(object sender, RoutedEventArgs e)
         {
             Button? button = sender as Button;

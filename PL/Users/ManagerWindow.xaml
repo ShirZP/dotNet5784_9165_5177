@@ -11,7 +11,7 @@
         ResizeMode ="NoResize"
         WindowStartupLocation="CenterScreen"
         Background="Transparent">
-    <Border CornerRadius="50" 
+    <Border CornerRadius="50"
         Background="{StaticResource windowBackground}">
 
         <Border CornerRadius="20"  
@@ -35,7 +35,7 @@
                     HorizontalAlignment="Left" 
                     Margin="149,0,0,0" 
                     VerticalAlignment="Center" 
-                    Click="BtnTLogIn_Click" 
+                    Click="BtnTLogIn_Click"
                     Height="50" Width="150" FontSize="18" 
                     FontWeight="Bold" 
                     Style="{StaticResource BluePurpleButtonStyleKey}"
