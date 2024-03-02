@@ -11,8 +11,8 @@
         ResizeMode ="NoResize"
         WindowStartupLocation="CenterScreen"
         Background="Transparent">
-    
-    <Border CornerRadius="50">
+
+    <Border CornerRadius="50" Background="{StaticResource windowBackground}">
 
         <Border CornerRadius="20"  
             BorderThickness="5"

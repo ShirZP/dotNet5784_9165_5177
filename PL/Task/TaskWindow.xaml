@@ -9,8 +9,8 @@
         Icon="{StaticResource AppIcon}"
         ResizeMode ="NoResize"
         WindowStartupLocation="CenterScreen"
-        Background="Transparent">
-    <Border CornerRadius="50">
+        Background="Transparent" >
+    <Border CornerRadius="50" Background="{StaticResource windowBackground}">
 
         <Border CornerRadius="20"  
         BorderThickness="5"
@@ -99,11 +99,11 @@
                             <RowDefinition Height="*"/>
                         </Grid.RowDefinitions>
 
-                        <DataGrid  ItemsSource="{Binding SelectedDependencies}" ItemContainerStyle="{StaticResource AlternatingRowStyle}" Background="{StaticResource BackgroundBrushKey}" VerticalGridLinesBrush="Transparent" BorderThickness="0" AutoGenerateColumns="False" CanUserAddRows="False" Height="260" Width="400" HorizontalAlignment="Left" Grid.RowSpan="2" Margin="-68,0,0,-23">
+                        <DataGrid  ItemsSource="{Binding SelectedDependencies}" ItemContainerStyle="{StaticResource AlternatingRowStyle}" Background="Transparent" VerticalGridLinesBrush="Transparent" BorderThickness="0" AutoGenerateColumns="False" CanUserAddRows="False" Height="260" Width="400" HorizontalAlignment="Left" Grid.RowSpan="2" Margin="-68,0,0,-23">
                             <DataGrid.Columns>
-                                <DataGridTextColumn Header="ID" Binding="{Binding ID}"/>
+                                <DataGridTextColumn Header="ID" Binding="{Binding ID}" Width="0.1*"/>
                                 <DataGridTextColumn Header="Name" Binding="{Binding NickName}"/>
-                                <DataGridTextColumn Header="Status" Binding="{Binding Status}" Width="*"/>
+                                <DataGridTextColumn Header="  Status" Binding="{Binding Status}" Width="*"/>
                             </DataGrid.Columns>
                         </DataGrid>
 
