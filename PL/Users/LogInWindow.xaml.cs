@@ -72,7 +72,7 @@ namespace PL.Users
                 {
                     case BO.UserPermissions.Engineer:
                         this.Close();
-                        //new windowE(user.ID).Show();
+                        new UserEngineerWindow(user.ID).Show();
                         break;
 
                     case BO.UserPermissions.Manager:

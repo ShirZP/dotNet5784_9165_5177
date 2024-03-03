@@ -91,21 +91,6 @@
     <IsMileStone xsi:nil="true" />
   </Task>
   <Task>
-    <ID>29</ID>
-    <NickName>Data analysis</NickName>
-    <Description>Description - Data analysis</Description>
-    <ScheduledDate xsi:nil="true" />
-    <StartDate xsi:nil="true" />
-    <RequiredEffortTime>P2D</RequiredEffortTime>
-    <CompleteDate xsi:nil="true" />
-    <FinalProduct>FinalProduct - Data analysis</FinalProduct>
-    <Remarks>Remarks - Data analysis</Remarks>
-    <EngineerId xsi:nil="true" />
-    <Complexity>AdvancedBeginner</Complexity>
-    <DeadlineDate xsi:nil="true" />
-    <IsMileStone xsi:nil="true" />
-  </Task>
-  <Task>
     <ID>30</ID>
     <NickName>VR/AR development</NickName>
     <Description>Description - VR/AR development</Description>
@@ -312,6 +297,34 @@
     <Remarks>Remarks - Automation and robotics</Remarks>
     <EngineerId xsi:nil="true" />
     <Complexity>Expert</Complexity>
+    <DeadlineDate xsi:nil="true" />
+    <IsMileStone>false</IsMileStone>
+  </Task>
+  <Task>
+    <ID>29</ID>
+    <NickName>Data analysis</NickName>
+    <Description>Description - Data analysis</Description>
+    <ScheduledDate xsi:nil="true" />
+    <StartDate xsi:nil="true" />
+    <RequiredEffortTime>P6D</RequiredEffortTime>
+    <CompleteDate xsi:nil="true" />
+    <FinalProduct>FinalProduct - Data analysis</FinalProduct>
+    <Remarks>Remarks - Data analysis</Remarks>
+    <EngineerId xsi:nil="true" />
+    <Complexity>AdvancedBeginner</Complexity>
+    <DeadlineDate xsi:nil="true" />
+    <IsMileStone>false</IsMileStone>
+  </Task>
+  <Task>
+    <ID>44</ID>
+    <NickName>name</NickName>
+    <Description>something</Description>
+    <ScheduledDate xsi:nil="true" />
+    <StartDate xsi:nil="true" />
+    <RequiredEffortTime>P3D</RequiredEffortTime>
+    <CompleteDate xsi:nil="true" />
+    <EngineerId xsi:nil="true" />
+    <Complexity>Intermediate</Complexity>
     <DeadlineDate xsi:nil="true" />
     <IsMileStone>false</IsMileStone>
   </Task>

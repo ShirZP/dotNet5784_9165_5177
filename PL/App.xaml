@@ -6,6 +6,10 @@
     <Application.Resources>
         <local:ExperienceCollection x:Key="ExperienceCollectionKey"/>
         <local:EngineerExperienceCollection x:Key="EngineerExperienceCollectionKey"/>
+        <local:TaskFieldsToFilterCollection x:Key="TaskFieldsToFilterCollectionKey"/>
+        <local:TaskStatusCollection x:Key="TaskStatusCollectionKey"/>
+
+
         <local:ConvertIdToContent x:Key="ConverIdToContentKey"/>
         <local:ConvertIdToIsEnabled x:Key="ConvertIdToIsEnabledKey"/>
         <local:ConvertIdToVisibility x:Key="ConvertIdToVisibilityKey"/>
@@ -13,10 +17,11 @@
         <local:ConvertProjectStatusPlanningToVisible x:Key="ConvertProjectStatusPlanningToVisibleKey"/>
         <local:ConvertProjectStatusPlanningToEnabled x:Key="ConvertProjectStatusPlanningToEnabledKey"/>
         <local:ConvertProjectStatusNotPlanningToEnabled x:Key="ConvertProjectStatusNotPlanningToEnabledKey"/>
+        <local:ConvertEngineerCurrentTaskToVisible x:Key="ConvertEngineerCurrentTaskToVisibleyKey"/>
+        <local:ConvertEmptyEngineerCurrentTaskToVisible x:Key="ConvertEmptyEngineerCurrentTaskToVisibleKey"/>
         <local:ConvertTaskInListIEnumerableToBool x:Key="ConvertTaskInListIEnumerableToBoolKey"/>
-        <local:TaskFieldsToFilterCollection x:Key="TaskFieldsToFilterCollectionKey"/>
-        <local:TaskStatusCollection x:Key="TaskStatusCollectionKey"/>
         <local:ConvertPasswordToString x:Key="ConvertPasswordToStringKey"/>
+        
         
         <!-- window icon -->
         <BitmapImage x:Key="AppIcon" UriSource="/IconImage.png"/>

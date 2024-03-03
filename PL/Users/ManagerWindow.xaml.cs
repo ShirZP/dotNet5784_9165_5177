@@ -23,21 +23,10 @@ namespace PL.Users
     {
         static readonly BlApi.IBl s_bl = BlApi.Factory.Get();
 
-        public static readonly DependencyProperty ClockProperty = DependencyProperty.Register(
-                                                                                        "Clock",
-                                                                                        typeof(DateTime),
-                                                                                        typeof(ManagerWindow),
-                                                                                        new PropertyMetadata(null));
-        public DateTime Clock
-        {
-            get { return (DateTime)GetValue(ClockProperty); }
-            set { SetValue(ClockProperty, value); }
-        }
-
         public ManagerWindow()
         {
             InitializeComponent();
-            Clock = s_bl.Clock;
+            SharedDependencyProperties.SetClock(this, s_bl.Clock);
         }
 
         /// <summary>
@@ -95,22 +84,22 @@ namespace PL.Users
 
         private void BtnAddHour_Click(object sender, RoutedEventArgs e)
         {
-            Clock = s_bl.MoveClockHourForward();
+            SharedDependencyProperties.SetClock(this, s_bl.MoveClockHourForward());
         }
 
         private void BtnAddDay_Click(object sender, RoutedEventArgs e)
         {
-            Clock = s_bl.MoveClockDayForward();
+            SharedDependencyProperties.SetClock(this, s_bl.MoveClockDayForward());
         }
 
         private void BtnAddYear_Click(object sender, RoutedEventArgs e)
         {
-            Clock = s_bl.MoveClockYearForward();
+            SharedDependencyProperties.SetClock(this, s_bl.MoveClockYearForward());
         }
 
         private void BtnResetClock_Click(object sender, RoutedEventArgs e)
         {
-            Clock = s_bl.initializeClock();
+            SharedDependencyProperties.SetClock(this, s_bl.initializeClock());
         }
 
         #endregion
