@@ -151,6 +151,8 @@ internal class EngineerImplementation : IEngineer
             //validation of the engineer's fields
             checkEngineerFields(updatedEngineer);
 
+            checkEngineerLevel(updatedEngineer);
+
             DO.Engineer doEngineer = new DO.Engineer(updatedEngineer.ID, updatedEngineer.FullName, updatedEngineer.Email, (DO.EngineerExperience)updatedEngineer.Level, updatedEngineer.Cost);
             _dal.Engineer.Update(doEngineer);
         }
@@ -201,8 +203,6 @@ internal class EngineerImplementation : IEngineer
         {
             throw new BlStringException("The engineer's email is not valid!");
         }
-
-        checkEngineerLevel(engineer);
 
         checkEngineerCurrentTask(engineer, projectStatus);
     }

@@ -3,6 +3,7 @@ using System.Windows.Data;
 using System.Collections;
 using System.Windows;
 using BO;
+using System.Windows.Controls;
 
 
 namespace PL;
@@ -71,6 +72,7 @@ class ConvertProjectStatusPlanningToVisible : IValueConverter
         throw new NotImplementedException();
     }
 }
+
 class ConvertProjectStatusPlanningToEnabled : IValueConverter
 {
     public object Convert(object value, Type targetType, object parameter, CultureInfo culture)
@@ -108,6 +110,26 @@ class ConvertTaskInListIEnumerableToBool : IValueConverter
     public object ConvertBack(object value, Type targetType, object parameter, CultureInfo culture)
     {
         throw new NotImplementedException();
+    }
+}
+
+
+class ConvertPasswordToString : IValueConverter
+{
+    public object Convert(object value, Type targetType, object parameter, CultureInfo culture)
+    {
+        return DependencyProperty.UnsetValue;
+    }
+
+    public object ConvertBack(object value, Type targetType, object parameter, CultureInfo culture)
+    {       
+        var password = value as PasswordBox;
+        if (password != null)
+        {
+            return password.SecurePassword.Copy();
+        }
+
+        return null;
     }
 }
 

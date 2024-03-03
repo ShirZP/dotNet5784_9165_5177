@@ -48,4 +48,10 @@
     <Password>yaelizralevitch123</Password>
     <Permission>Manager</Permission>
   </User>
+  <User>
+    <ID>123456789</ID>
+    <UserName>yael</UserName>
+    <Password>yael123</Password>
+    <Permission>Engineer</Permission>
+  </User>
 </ArrayOfUser>

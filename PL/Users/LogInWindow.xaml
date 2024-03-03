@@ -155,7 +155,8 @@
                                FontFamily="Montserrant"
                                Margin="0,30,0,0"/>
 
-                    <PasswordBox PasswordChar="{Binding UserLogIn.Password, Mode=TwoWay, NotifyOnValidationError=true, ValidatesOnExceptions=true}"
+                    <PasswordBox x:Name="passwordBox"
+                                 PasswordChanged="PasswordBox_PasswordChanged"
                                  FontSize="13"
                                  FontWeight="Medium"
                                  FontFamily="Montserrant"

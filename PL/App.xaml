@@ -16,6 +16,7 @@
         <local:ConvertTaskInListIEnumerableToBool x:Key="ConvertTaskInListIEnumerableToBoolKey"/>
         <local:TaskFieldsToFilterCollection x:Key="TaskFieldsToFilterCollectionKey"/>
         <local:TaskStatusCollection x:Key="TaskStatusCollectionKey"/>
+        <local:ConvertPasswordToString x:Key="ConvertPasswordToStringKey"/>
         
         <!-- window icon -->
         <BitmapImage x:Key="AppIcon" UriSource="/IconImage.png"/>

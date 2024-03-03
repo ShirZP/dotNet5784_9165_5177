@@ -1,8 +1,12 @@
-﻿using PL.Engineer;
+﻿using PL;
+using PL.Engineer;
 using PL.Task;
 using System;
+using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
+using System.Net;
+using System.Security;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows;
@@ -62,7 +66,7 @@ namespace PL.Users
         {
             try
             {
-                BO.User user = s_bl.User.Read(UserLogIn.UserName, UserLogIn.Password);
+                BO.User user = s_bl.User.Read(UserLogIn.UserName, passwordBox.Password);
 
                 switch (user.Permission)
                 {
@@ -84,6 +88,30 @@ namespace PL.Users
                 UserLogIn.Password = "";
             }
         }
-        
+
+        private void PasswordBox_PasswordChanged(object sender, RoutedEventArgs e)
+        {
+            //if (DataContext is YourViewModel viewModel)
+            //{
+               // UserLogIn.Password = ((PasswordBox)sender).SecurePassword.Copy();
+            //}
+        }
+    }
+
+    public static class PasswordBoxHelper
+    {
+        public static readonly DependencyProperty SecurePasswordProperty =
+            DependencyProperty.RegisterAttached("SecurePassword", typeof(SecureString), typeof(PasswordBoxHelper));
+
+        public static SecureString GetSecurePassword(DependencyObject obj)
+        {
+            return (SecureString)obj.GetValue(SecurePasswordProperty);
+        }
+
+        public static void SetSecurePassword(DependencyObject obj, SecureString value)
+        {
+            obj.SetValue(SecurePasswordProperty, value);
+        }
     }
 }
+
