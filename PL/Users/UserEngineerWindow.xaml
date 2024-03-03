@@ -31,8 +31,8 @@
                     <TextBlock Text="Hi, " HorizontalAlignment="Left" Foreground="White" TextWrapping="Wrap" VerticalAlignment="Top" Height="41" Width="131" FontSize="18" FontWeight="Bold"/>
                     <TextBlock Text="{Binding EngineerUser.FullName}" HorizontalAlignment="Left"  Foreground="White" TextWrapping="Wrap"  VerticalAlignment="Center" Height="40" Width="131" FontSize="18" FontWeight="Bold" Margin="32,0,0,0"/>
 
-                    <TextBlock Text="project status:" Foreground="White" TextWrapping="Wrap"  VerticalAlignment="Center" Height="40" Width="130" FontSize="18" FontWeight="Bold" Margin="514,0,146,0"/>
-                    <TextBlock Text="{Binding Path=(local:SharedDependencyProperties.ProjectStatus), Mode=TwoWay }" HorizontalAlignment="Right"  Foreground="White" TextWrapping="Wrap"  VerticalAlignment="Center" Height="40" Width="131" FontSize="18" FontWeight="Bold" Margin="32,0,0,0"/>
+                    <TextBlock Text="project status:" Foreground="White" TextWrapping="Wrap" VerticalAlignment="Center" Width="170" FontSize="18" FontWeight="Bold" Margin="476,0,144,0"/>
+                    <TextBlock Text="{Binding Path=(local:SharedDependencyProperties.ProjectStatus), Mode=OneTime}" HorizontalAlignment="Right"  Foreground="White" TextWrapping="Wrap"  VerticalAlignment="Center" Width="131" FontSize="18" FontWeight="Bold" Margin="32,0,0,0"/>
 
                 </Grid>
 
@@ -107,6 +107,14 @@
                 <Grid HorizontalAlignment="Stretch" Height="auto" Grid.Row="2" VerticalAlignment="Stretch" Width="auto">
                     <TextBlock Text="Current Task:" HorizontalAlignment="Left" Foreground="LightGray" FontFamily="Montserrant" TextWrapping="Wrap" Height="40" Width="130" FontSize="18" FontWeight="Bold"/>
 
+                    <Button Click="BtnCurrentTaskView_Click" 
+                            Visibility="{Binding EngineerUser.EngineerCurrentTask, Mode=OneWay, Converter={StaticResource ConvertEngineerCurrentTaskToVisibleyKey}}"
+                            Width="24" Height="25" 
+                            Foreground="White" FontFamily="Montserrant" FontWeight="Bold" FontSize="18" Cursor="Hand" VerticalAlignment="Top" HorizontalAlignment="Left"
+                            Style="{StaticResource IconButtonStyleKey}" Margin="135,5,0,0">
+                            <Image Source="/Users/eye.png"/>
+
+                    </Button>
                 </Grid>
 
                 <Grid HorizontalAlignment="Stretch" Height="auto" Grid.Row="3" VerticalAlignment="Stretch" Width="auto">
@@ -122,8 +130,8 @@
                     </StackPanel>
                     
                     <StackPanel HorizontalAlignment="Stretch" Grid.Column="1" VerticalAlignment="Stretch" RenderTransformOrigin="0.425,0.524" Margin="10,0,0,0">
-                        <TextBlock Text="{Binding EngineerUser.EngineerCurrentTask.ID}" Visibility="{Binding EngineerUser.EngineerCurrentTask, Mode=OneWay, Converter={StaticResource ConvertEngineerCurrentTaskToVisibleyKey}}" Foreground="DarkGray" HorizontalAlignment="Left" FontWeight="Medium" FontFamily="Montserrant" Height="35" Width="70"/>
-                        <TextBlock Text="{Binding EngineerUser.EngineerCurrentTask.NickName}" Visibility="{Binding EngineerUser.EngineerCurrentTask, Mode=OneWay, Converter={StaticResource ConvertEngineerCurrentTaskToVisibleyKey}}" Foreground="DarkGray" HorizontalAlignment="Left" FontWeight="Medium" FontFamily="Montserrant" Height="35" Width="70"/>
+                        <TextBlock Text="{Binding EngineerUser.EngineerCurrentTask.ID}" Visibility="{Binding EngineerUser.EngineerCurrentTask, Mode=OneWay, Converter={StaticResource ConvertEngineerCurrentTaskToVisibleyKey}}" Foreground="DarkGray"  HorizontalAlignment="Stretch" FontWeight="Medium" FontFamily="Montserrant" Height="35"/>
+                        <TextBlock Text="{Binding EngineerUser.EngineerCurrentTask.NickName}" Visibility="{Binding EngineerUser.EngineerCurrentTask, Mode=OneWay, Converter={StaticResource ConvertEngineerCurrentTaskToVisibleyKey}}" Foreground="DarkGray"  HorizontalAlignment="Stretch" FontWeight="Medium" FontFamily="Montserrant" Height="35"/>
                         <TextBlock Text="You have no current task :(" Visibility="{Binding EngineerUser.EngineerCurrentTask, Mode=OneWay, Converter={StaticResource ConvertEmptyEngineerCurrentTaskToVisibleKey}}"  HorizontalAlignment="Left" Foreground="LightGray" TextWrapping="Wrap" Height="40" Width="239" FontSize="18" FontWeight="Medium" FontFamily="Montserrant"/>
 
                     </StackPanel>

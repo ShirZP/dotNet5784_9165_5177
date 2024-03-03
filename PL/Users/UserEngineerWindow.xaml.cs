@@ -1,4 +1,5 @@
-﻿using System;
+﻿using PL.Task;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -44,6 +45,7 @@ namespace PL.Users
             {
                 EngineerUser = s_bl.Engineer.Read(id);
                 SharedDependencyProperties.SetClock(this, s_bl.Clock);
+                SharedDependencyProperties.SetProjectStatus(this, s_bl.GetProjectStatus());
             }
             catch(Exception ex)
             {
@@ -75,5 +77,10 @@ namespace PL.Users
         }
 
         #endregion
+
+        private void BtnCurrentTaskView_Click(object sender, RoutedEventArgs e)
+        {
+            new TaskDetails(EngineerUser.EngineerCurrentTask!.ID).ShowDialog();
+        }
     }
 }

@@ -60,7 +60,7 @@
                         <DataGridTemplateColumn Header="">
                             <DataGridTemplateColumn.CellTemplate>
                                 <DataTemplate>
-                                    <Button Click="PenButton_Click" Width="20" Height="20" BorderThickness="0" Background="Transparent">
+                                    <Button Click="PenButton_Click" Width="20" Height="20" BorderThickness="0" Style="{StaticResource IconButtonStyleKey}">
                                         <Image Source="/Task/penIcon.png" Stretch="UniformToFill"/>
                                     </Button>
                                 </DataTemplate>
