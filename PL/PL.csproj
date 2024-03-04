@@ -39,4 +39,8 @@
     <Resource Include="Users\UserNameImage.jpg" />
   </ItemGroup>
 
+  <ItemGroup>
+    <Folder Include="GanttChar\" />
+  </ItemGroup>
+
 </Project>
