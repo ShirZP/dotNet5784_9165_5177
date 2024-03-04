@@ -136,6 +136,19 @@
 
                     </StackPanel>
 
+                    <Button Grid.Column="2"
+                            Content="Select a task" 
+                            BorderThickness="0"
+                            Foreground="White"
+                            FontFamily="Montserrant"
+                            Cursor="Hand"
+                            HorizontalAlignment="Left" 
+                            Margin="149,0,0,0" 
+                            VerticalAlignment="Center" 
+                            Height="50" Width="150" FontSize="18" 
+                            FontWeight="Bold" 
+                            Style="{StaticResource BluePurpleButtonStyleKey}"
+                            Template="{StaticResource ButtonTemplateKey}"/>
                 </Grid>
             </Grid>
         </Border>
