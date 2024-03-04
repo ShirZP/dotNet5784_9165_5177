@@ -180,6 +180,7 @@ internal class TaskImplementation : ITask
 
         //Grouping the list of tasks according to whether there is a dependency on the data layer
         IEnumerable<IGrouping<bool, BO.TaskInList>> dalDependencies;
+
         dalDependencies = (from taskInList in updatedTask.Dependencies
                            let dalDependency = _dal.Dependency.Read(item => item.DependentTask == updatedTask.ID && item.DependensOnTask == taskInList.ID) //Retrieving the dependency on which the updatedTask depends on the task
                            group taskInList by (dalDependency == null) into dalDep
@@ -243,6 +244,9 @@ internal class TaskImplementation : ITask
         if(updatedTask.Status == BO.Status.Complete && updatedTask.CompleteDate == null)
         {
             updatedTask.CompleteDate = _bl.Clock;
+            BO.Engineer engineer = _bl.Engineer.Read(updatedTask.AssignedEngineer.ID);
+            BO.Engineer updateEngineer = new BO.Engineer(engineer.ID, engineer.FullName, engineer.Email, engineer.Level, engineer.Cost, null);
+            _bl.Engineer.Update(updateEngineer);
         }
 
         try
@@ -473,6 +477,13 @@ internal class TaskImplementation : ITask
 
                     if (notCompleteTask != null)
                         throw new BO.BlDependentsTasksException($"There is a previous task for the task - {task.ID} - that has not been completed");
+
+                    break;
+
+                case Status.New:
+
+                    if (originTask.Status > task.Status)
+                        throw new BO.BlStatusException($"A task status cannot be changed from \"{originTask.Status}\" to \"{task.Status}\"!");
 
                     break;
             }

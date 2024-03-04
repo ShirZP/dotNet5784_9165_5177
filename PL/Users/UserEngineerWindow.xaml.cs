@@ -1,4 +1,5 @@
-﻿using PL.Task;
+﻿using BO;
+using PL.Task;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -81,6 +82,8 @@ namespace PL.Users
         private void BtnCurrentTaskView_Click(object sender, RoutedEventArgs e)
         {
             new TaskDetails(EngineerUser.EngineerCurrentTask!.ID).ShowDialog();
+            EngineerUser = s_bl.Engineer.Read(EngineerUser.ID);
         }
+
     }
 }
