@@ -76,7 +76,7 @@
                     </Grid>
 
                 </Border>
-                <Border  Margin="459,25,26,225" CornerRadius="10"  BorderThickness="2.5" Opacity="0.85" BorderBrush="{StaticResource BorderBrushKey}" Background="{StaticResource BackgroundBrushKey}">
+                <Border  Margin="459,25,26,225" CornerRadius="10"  BorderThickness="2.5" Opacity="0.85" BorderBrush="{StaticResource BorderBrushKey}">
                     <Grid>
                         <Grid.RowDefinitions>
                             <RowDefinition Height="3*"/>

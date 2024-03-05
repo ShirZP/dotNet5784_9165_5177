@@ -66,7 +66,7 @@ namespace PL.Users
         {
             try
             {
-                BO.User user = s_bl.User.Read(UserLogIn.UserName, passwordBox.Password);
+                BO.User user = s_bl.User.Read(UserLogIn.UserName, UserLogIn.Password);
 
                 switch (user.Permission)
                 {
