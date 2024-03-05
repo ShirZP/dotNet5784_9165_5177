@@ -38,13 +38,13 @@ namespace PL.GanttChar
 
 
         public static readonly DependencyProperty GanttDatesListProperty = DependencyProperty.Register("GanttDatesList",
-                                                                                                       typeof(List<DateTime>),
+                                                                                                       typeof(List<DateGantt>),
                                                                                                        typeof(GanttCharWindow),
                                                                                                        new PropertyMetadata(null));
 
-        public List<DateTime> GanttDatesList
+        public List<DateGantt> GanttDatesList
         {
-            get { return (List<DateTime>)GetValue(GanttDatesListProperty); }
+            get { return (List<DateGantt>)GetValue(GanttDatesListProperty); }
             set { SetValue(GanttDatesListProperty, value); }
         }
 
@@ -54,13 +54,18 @@ namespace PL.GanttChar
         {
             InitializeComponent();
 
-            //GanttTasksList = (from task in s_bl.Task.ReadAllFullTasksDetails()
-            //                 select convertTaskToGanttTask(task)).ToList();
-            GanttTasksList = new List<TaskGantt>()
-            {new TaskGantt() {taskID = 1,taskName = "T1",duration = 30, timeFromStart = 20,    timeToEnd = 7},
-            new TaskGantt() {taskID = 2,taskName = "T2",duration = 50, timeFromStart = 60,    timeToEnd = 4},
-            new TaskGantt() { taskID = 3, taskName = "T3", duration = 70, timeFromStart = 10, timeToEnd = 13 }
-            };
+            loadGanttDatesList();
+
+            GanttTasksList = (from task in s_bl.Task.ReadAllFullTasksDetails()
+                              select convertTaskToGanttTask(task)).ToList();
+
+            //GanttTasksList = new List<TaskGantt>()
+            //{new TaskGantt() {taskID = 1,taskName = "T1",duration = 30, timeFromStart = 20,    timeToEnd = 7},
+            //new TaskGantt() {taskID = 2,taskName = "T2",duration = 50, timeFromStart = 60,    timeToEnd = 4},
+            //new TaskGantt() { taskID = 3, taskName = "T3", duration = 70, timeFromStart = 10, timeToEnd = 13 }
+            //};
+
+            this.DataContext = this;
         
         }
 
@@ -69,22 +74,22 @@ namespace PL.GanttChar
         {
             DateTime? projectStartDate = s_bl.GetProjectStartDate();
             DateTime? projectEndDate = s_bl.GetProjectEndDate();
-            int duration = (int)task.RequiredEffortTime.Value.Days;
-            int timeFromStart = (int)(task.ScheduledDate - projectStartDate).Value.TotalDays;
-            int timeToEnd = (int)(projectEndDate - task.ForecastDate).Value.TotalDays;
+            int duration = (int)task.RequiredEffortTime!.Value.Days;
+            int timeFromStart = (int)(task.ScheduledDate - projectStartDate)!.Value.TotalDays;
+            int timeToEnd = (int)(projectEndDate - task.ForecastDate)!.Value.TotalDays;
 
-            return new TaskGantt(){taskID = task.ID,taskName = task.NickName,duration = duration, timeFromStart = timeFromStart,    timeToEnd = timeToEnd};
+            return new TaskGantt(){taskID = task.ID,taskName = task.NickName,duration = duration * 60, timeFromStart = timeFromStart,    timeToEnd = timeToEnd};
            
         
         }
 
-        private void getDatesList()
+        private void loadGanttDatesList()
         {
-            GanttDatesList = new List<DateTime>();
+             GanttDatesList = new List<DateGantt>();
 
             for (DateTime date = s_bl.GetProjectStartDate().Value; date <= s_bl.GetProjectEndDate(); date = date.AddDays(1))
             {
-                GanttDatesList.Add(date);
+                GanttDatesList.Add(new DateGantt() { Date = date });
             }
         }
     }

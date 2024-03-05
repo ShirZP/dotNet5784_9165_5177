@@ -66,17 +66,15 @@ namespace PL.Users
         {
             try
             {
-                BO.User user = s_bl.User.Read(UserLogIn.UserName, UserLogIn.Password);
+                BO.User user = s_bl.User.Read(UserLogIn.UserName, passwordBox.Password);
 
                 switch (user.Permission)
                 {
                     case BO.UserPermissions.Engineer:
-                        this.Close();
                         new UserEngineerWindow(user.ID).Show();
                         break;
 
                     case BO.UserPermissions.Manager:
-                        this.Close();
                         new ManagerWindow().Show();
                         break;
                 }

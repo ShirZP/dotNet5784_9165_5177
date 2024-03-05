@@ -26,6 +26,8 @@ namespace PL.Users
 
         public ManagerWindow()
         {
+            SharedDependencyProperties.SetProjectStatus(this, s_bl.GetProjectStatus());
+
             InitializeComponent();
             SharedDependencyProperties.SetClock(this, s_bl.Clock);
         }
@@ -35,7 +37,7 @@ namespace PL.Users
         /// </summary>
         private void BtnEngineerList_Click(object sender, RoutedEventArgs e)
         {
-            new EngineerListWindow().Show();
+            new EngineerListWindow().ShowDialog();
         }
 
         //Click on button Init DB - initial the data base.
@@ -72,12 +74,7 @@ namespace PL.Users
 
         private void BtnTaskTable_Click(object sender, RoutedEventArgs e)
         {
-            new TaskTableWindow().Show();
-        }
-
-        private void BtnTLogIn_Click(object sender, RoutedEventArgs e)
-        {
-            new LogInWindow().Show();
+            new TaskTableWindow().ShowDialog();
         }
 
 
@@ -107,7 +104,7 @@ namespace PL.Users
 
         private void Button_Click(object sender, RoutedEventArgs e)
         {
-            new GanttCharWindow().Show();
+                new GanttCharWindow().ShowDialog();
         }
     }
 }

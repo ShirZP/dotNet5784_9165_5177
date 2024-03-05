@@ -5,12 +5,30 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:PL.GanttChar"
         mc:Ignorable="d"
-        Title="GanttChar" Height="450" Width="800"
-        DataContext =  "{Binding RelativeSource = {RelativeSource Mode=self}}">
+        Title="GanttChar" Height="450" Width="1100">
     <Grid>
-        <ItemsControl ItemsSource="{Binding GanttDatesList}">
-            <TextBlock HorizontalAlignment="Left" Text="{Binding date}" FontWeight="Bold" Background="Aquamarine"/>
+        <ItemsControl ItemsSource="{Binding GanttDatesList}" Height="25" VerticalAlignment="Top" Margin="64,22,-64,0">
+            <!-- Set the panel that arranges the items -->
+            <ItemsControl.ItemsPanel>
+                <ItemsPanelTemplate>
+                    
+                        <StackPanel Orientation="Horizontal"/>
+                </ItemsPanelTemplate>
+            </ItemsControl.ItemsPanel>
+            <!-- Template for each item -->
+            <ItemsControl.ItemTemplate>
+                <DataTemplate>
+                    <Border BorderThickness="1" BorderBrush="Black">
+                    <TextBlock Text="{Binding Date}" 
+                       Width="{Binding Duration}" 
+                       FontWeight="Bold" 
+                       HorizontalAlignment="Left" 
+                       Background="Aquamarine"/>
+                    </Border>
+                </DataTemplate>
+            </ItemsControl.ItemTemplate>
         </ItemsControl>
+        
         <ItemsControl ItemsSource="{Binding GanttTasksList}" Margin="65,51,83,44">
             <ItemsControl.ItemTemplate>
                 <DataTemplate>

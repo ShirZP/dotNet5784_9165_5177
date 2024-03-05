@@ -24,24 +24,15 @@
                 <!--Go to the list of engineers-->
                 <Button Content="Handle Engineers" BorderThickness="0" Foreground="White" Template="{StaticResource ButtonTemplateKey}" Style="{StaticResource BluePurpleButtonStyleKey}" FontFamily="Montserrant" FontWeight="Bold" FontSize="18" Cursor="Hand" VerticalAlignment="Top" HorizontalAlignment="Left" Margin="74,264,0,0" Click="BtnEngineerList_Click" RenderTransformOrigin="0.5,0.5" Height="50" Width="150"/>
 
-                <Button Content="Init DB" BorderThickness="0" Foreground="White" Template="{StaticResource ButtonTemplateKey}" Style="{StaticResource BluePurpleButtonStyleKey}" FontFamily="Montserrant" FontWeight="Bold" FontSize="18" Cursor="Hand" VerticalAlignment="Top" HorizontalAlignment="Left" Margin="614,348,0,0" Click="BtnInitialization_Click" Height="50" Width="150"/>
+                <Button Content="Init DB" Foreground="White" Template="{StaticResource ButtonTemplateKey}" Style="{StaticResource BluePurpleButtonStyleKey}" FontFamily="Montserrant" FontWeight="Bold" FontSize="18" Cursor="Hand" VerticalAlignment="Top" HorizontalAlignment="Left" Margin="614,348,0,0" Click="BtnInitialization_Click" Height="50" Width="150"/>
                 <Button Content="Reset DB" BorderThickness="0" Foreground="White" Template="{StaticResource ButtonTemplateKey}" Style="{StaticResource BluePurpleButtonStyleKey}" FontFamily="Montserrant" FontWeight="Bold" FontSize="18" Cursor="Hand" VerticalAlignment="Top" HorizontalAlignment="Left"  Margin="459,348,0,0" Click="BtnReset_Click" Height="50" Width="150" />
                 <Button Content="Task Table" BorderThickness="0" Foreground="White" Template="{StaticResource ButtonTemplateKey}" Style="{StaticResource BluePurpleButtonStyleKey}" FontFamily="Montserrant" FontWeight="Bold" FontSize="18" Cursor="Hand" VerticalAlignment="Top" HorizontalAlignment="Left" Margin="229,264,0,0" Click="BtnTaskTable_Click" Height="50" Width="150"/>
-                <Button Content="Log In" 
-                    BorderThickness="0"
-                    Foreground="White"
-                    FontFamily="Montserrant"
-                    Cursor="Hand"
-                    HorizontalAlignment="Left" 
-                    Margin="149,0,0,0" 
-                    VerticalAlignment="Center" 
-                    Click="BtnTLogIn_Click"
-                    Height="50" Width="150" FontSize="18" 
-                    FontWeight="Bold" 
-                    Style="{StaticResource BluePurpleButtonStyleKey}"
-                    Template="{StaticResource ButtonTemplateKey}"/>
+
                 <TextBlock HorizontalAlignment="Left" Margin="39,43,0,0"  Foreground="White" TextWrapping="Wrap" Text="project status:" VerticalAlignment="Top" Height="41" Width="131" FontSize="18" FontWeight="Bold"/>
-                <Button Content="Gantt chart" BorderThickness="0" Foreground="White" Template="{StaticResource ButtonTemplateKey}" Style="{StaticResource PurpleButtonStyleKey}" FontFamily="Montserrant" FontWeight="Bold" FontSize="18" Cursor="Hand" VerticalAlignment="Top" HorizontalAlignment="Left" Margin="251,34,0,0" Height="58" Width="144" Click="Button_Click"/>
+                <TextBlock Text="{Binding Path=(local:SharedDependencyProperties.ProjectStatus), Mode=OneTime}" HorizontalAlignment="Right"  Foreground="White" TextWrapping="Wrap"  VerticalAlignment="Top" Width="131" FontSize="18" FontWeight="Bold" Margin="0,44,467,0" Height="20"/>
+
+
+                <Button Content="Gantt chart" Visibility="{Binding Path=(local:SharedDependencyProperties.ProjectStatus), Mode=OneTime, Converter={StaticResource ConvertProjectStatusExecutionToVisibledKey}}" Foreground="White" Template="{StaticResource ButtonTemplateKey}" Style="{StaticResource PurpleButtonStyleKey}" FontSize="18" FontWeight="Bold" VerticalAlignment="Top" HorizontalAlignment="Left" Margin="251,34,0,0" Height="58" Width="144" Click="Button_Click"/>
                 <Border  Margin="459,25,26,225" CornerRadius="10"  BorderThickness="2.5" Opacity="0.85" BorderBrush="{StaticResource BorderBrushKey}" Background="{StaticResource BackgroundBrushKey}">
                     <Grid>
                         <Grid.RowDefinitions>
