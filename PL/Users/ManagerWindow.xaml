@@ -41,7 +41,7 @@
                     Style="{StaticResource BluePurpleButtonStyleKey}"
                     Template="{StaticResource ButtonTemplateKey}"/>
                 <TextBlock HorizontalAlignment="Left" Margin="39,43,0,0"  Foreground="White" TextWrapping="Wrap" Text="project status:" VerticalAlignment="Top" Height="41" Width="131" FontSize="18" FontWeight="Bold"/>
-                <Button Content="Gantt chart" BorderThickness="0" Foreground="White" Template="{StaticResource ButtonTemplateKey}" Style="{StaticResource PurpleButtonStyleKey}" FontFamily="Montserrant" FontWeight="Bold" FontSize="18" Cursor="Hand" VerticalAlignment="Top" HorizontalAlignment="Left" Margin="251,34,0,0" Height="58" Width="144"/>
+                <Button Content="Gantt chart" BorderThickness="0" Foreground="White" Template="{StaticResource ButtonTemplateKey}" Style="{StaticResource PurpleButtonStyleKey}" FontFamily="Montserrant" FontWeight="Bold" FontSize="18" Cursor="Hand" VerticalAlignment="Top" HorizontalAlignment="Left" Margin="251,34,0,0" Height="58" Width="144" Click="Button_Click"/>
                 <Border  Margin="459,25,26,225" CornerRadius="10"  BorderThickness="2.5" Opacity="0.85" BorderBrush="{StaticResource BorderBrushKey}" Background="{StaticResource BackgroundBrushKey}">
                     <Grid>
                         <Grid.RowDefinitions>
