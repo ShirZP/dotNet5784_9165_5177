@@ -1,4 +1,5 @@
 ﻿using PL.Engineer;
+using PL.GanttChar;
 using PL.Task;
 using System;
 using System.Collections.Generic;
@@ -103,5 +104,10 @@ namespace PL.Users
         }
 
         #endregion
+
+        private void Button_Click(object sender, RoutedEventArgs e)
+        {
+            new GanttCharWindow().Show();
+        }
     }
 }
