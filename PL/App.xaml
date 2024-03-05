@@ -22,6 +22,7 @@
         <local:ConvertEmptyEngineerCurrentTaskToVisible x:Key="ConvertEmptyEngineerCurrentTaskToVisibleKey"/>
         <local:ConvertTaskInListIEnumerableToBool x:Key="ConvertTaskInListIEnumerableToBoolKey"/>
         <local:ConvertPasswordToString x:Key="ConvertPasswordToStringKey"/>
+        <local:ConvertTaskStatusToColor x:Key="ConvertTaskStatusToColorKey"/>
         
         
         <!-- window icon -->

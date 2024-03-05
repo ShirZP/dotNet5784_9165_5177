@@ -78,7 +78,7 @@ namespace PL.GanttChar
             int timeFromStart = (int)(task.ScheduledDate - projectStartDate)!.Value.TotalDays;
             int timeToEnd = (int)(projectEndDate - task.ForecastDate)!.Value.TotalDays;
 
-            return new TaskGantt(){taskID = task.ID,taskName = task.NickName,duration = duration * 60, timeFromStart = timeFromStart,    timeToEnd = timeToEnd};
+            return new TaskGantt(){taskID = task.ID,taskName = task.NickName,duration = duration * 60, taskStatus = task.Status, timeFromStart = timeFromStart, timeToEnd = timeToEnd};
            
         
         }

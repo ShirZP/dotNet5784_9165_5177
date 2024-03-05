@@ -174,5 +174,31 @@ class ConvertPasswordToString : IValueConverter
     }
 }
 
+class ConvertTaskStatusToColor : IValueConverter
+{
+    public object Convert(object value, Type targetType, object parameter, CultureInfo culture)
+    {
+        switch ((BO.Status)value)
+        {
+            case Status.New:
+                return "LightGray";
+
+            case Status.Active:
+                return "#462AD8";
+
+            case Status.Complete:
+                return "#8A16C1";
+
+            default:
+                return "Black";
+        }
+    }
+
+    public object ConvertBack(object value, Type targetType, object parameter, CultureInfo culture)
+    {
+        throw new NotImplementedException();
+    }
+}
+
 
 

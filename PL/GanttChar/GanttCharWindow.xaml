@@ -5,48 +5,73 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:PL.GanttChar"
         mc:Ignorable="d"
-        Title="GanttChar" Height="450" Width="1100">
-    <Grid>
-        <ItemsControl ItemsSource="{Binding GanttDatesList}" Height="25" VerticalAlignment="Top" Margin="64,22,-64,0">
-            <!-- Set the panel that arranges the items -->
-            <ItemsControl.ItemsPanel>
-                <ItemsPanelTemplate>
-                    
-                        <StackPanel Orientation="Horizontal"/>
-                </ItemsPanelTemplate>
-            </ItemsControl.ItemsPanel>
-            <!-- Template for each item -->
-            <ItemsControl.ItemTemplate>
-                <DataTemplate>
-                    <Border BorderThickness="1" BorderBrush="Black">
-                    <TextBlock Text="{Binding Date}" 
-                       Width="{Binding Duration}" 
-                       FontWeight="Bold" 
-                       HorizontalAlignment="Left" 
-                       Background="Aquamarine"/>
-                    </Border>
-                </DataTemplate>
-            </ItemsControl.ItemTemplate>
-        </ItemsControl>
-        
-        <ItemsControl ItemsSource="{Binding GanttTasksList}" Margin="65,51,83,44">
-            <ItemsControl.ItemTemplate>
-                <DataTemplate>
-                    <Border BorderThickness="2" BorderBrush="Aqua">
-                        <StackPanel Orientation="Horizontal" HorizontalAlignment="Left">
-                            <TextBlock HorizontalAlignment="Left" Text="{Binding taskID}" FontWeight="Bold" Background="Aquamarine"/>
-                            <Rectangle HorizontalAlignment="Left" Height="20" Width="{Binding timeFromStart}"  Fill="White"/>
+        Title="GanttChar" Height="450" Width="1100"
+            Icon="{StaticResource AppIcon}"
+    ResizeMode ="NoResize"
+    WindowStartupLocation="CenterScreen"
+    Background="Transparent">
+    <Border CornerRadius="50"
+    Background="{StaticResource windowBackground}">
 
-                            <!--Width="{Binding DaysFromStart}"-->
-                            <!--Width="{Binding DaysFromStart}"-->
-                            <TextBlock HorizontalAlignment="Left" Text="{Binding taskName}" Width="{Binding duration}" FontWeight="Bold" Background="Aquamarine"/>
-                            <Rectangle HorizontalAlignment="Left" Height="20" Width="{Binding timeToEnd}"  Fill="White"/>
+        <Border CornerRadius="20"  
+        BorderThickness="5"
+        Opacity="0.85"
+        BorderBrush="{StaticResource BorderBrushKey}"
+        Background="{StaticResource BackgroundBrushKey}">
+
+            <Grid>
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="40"/>
+                    <RowDefinition Height="auto"/>
+                </Grid.RowDefinitions>
+
+                <TextBlock Text="Project progress:" Grid.Row="0" Foreground="WhiteSmoke" FontSize="20" FontWeight="Bold" FontFamily="Montserrant" HorizontalAlignment="Left" Height="39" Margin="50,10,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="329"/>
+
+                <StackPanel Grid.Row="1">
+
+                    <ItemsControl ItemsSource="{Binding GanttDatesList}" Height="25"  Margin="30,0,0,0" VerticalAlignment="Top">
+                        <!-- Set the panel that arranges the items -->
+                        <ItemsControl.ItemsPanel>
+                            <ItemsPanelTemplate>
+
+                                <StackPanel Orientation="Horizontal"/>
+                            </ItemsPanelTemplate>
+                        </ItemsControl.ItemsPanel>
+                        <!-- Template for each item -->
+                        <ItemsControl.ItemTemplate>
+                            <DataTemplate>
+                                <Border BorderThickness="1" BorderBrush="Black">
+                                    <TextBlock Text="{Binding Date}" 
+                           Width="{Binding Duration}" 
+                           FontWeight="Bold" 
+                           HorizontalAlignment="Left" 
+                           Background="Aquamarine"/>
+                                </Border>
+                            </DataTemplate>
+                        </ItemsControl.ItemTemplate>
+                    </ItemsControl>
+
+                    <ItemsControl ItemsSource="{Binding GanttTasksList}" Margin="30,0,0,0">
+                        <ItemsControl.ItemTemplate>
+                            <DataTemplate>
+                                <Border BorderThickness="2" BorderBrush="White">
+                                    <StackPanel Orientation="Horizontal" HorizontalAlignment="Left">
+                                        <TextBlock HorizontalAlignment="Left" Text="{Binding taskID}" FontWeight="Bold" Background="#462AD8"/>
+                                        <Rectangle HorizontalAlignment="Left" Height="20" Width="{Binding timeFromStart}"  Fill="White"/>
+
+                                        <!--Width="{Binding DaysFromStart}"-->
+                                        <!--Width="{Binding DaysFromStart}"-->
+                                        <TextBlock HorizontalAlignment="Left" Text="{Binding taskName}" Width="{Binding duration}" FontWeight="Bold" Background="{Binding taskStatus, Mode=OneWay, Converter={StaticResource ConvertTaskStatusToColorKey}}"/>
+                                        <Rectangle HorizontalAlignment="Left" Height="20" Width="{Binding timeToEnd}"  Fill="White"/>
 
 
-                        </StackPanel>
-                    </Border>
-                </DataTemplate>
-            </ItemsControl.ItemTemplate>
-        </ItemsControl>
-    </Grid>
+                                    </StackPanel>
+                                </Border>
+                            </DataTemplate>
+                        </ItemsControl.ItemTemplate>
+                    </ItemsControl>
+                </StackPanel>
+            </Grid>
+        </Border>
+    </Border>
 </Window>
