@@ -6,6 +6,7 @@
         xmlns:local="clr-namespace:PL"
         mc:Ignorable="d"
         Title="ManagerWindow" Height="500" Width="800"
+        Activated="RefreshWindow_Activated"
         DataContext="{Binding RelativeSource={RelativeSource Mode=Self}}" 
         Icon="{StaticResource AppIcon}"
         ResizeMode ="NoResize"
@@ -29,7 +30,7 @@
 
                 <Grid Grid.Row="0">
                     <TextBlock  Text="project status:" HorizontalAlignment="Left" Foreground="White" TextWrapping="Wrap" VerticalAlignment="Top" Height="40" Width="131" FontSize="18" FontWeight="Bold" Margin="20,8,0,0"/>
-                    <TextBlock Text="{Binding Path=(local:SharedDependencyProperties.ProjectStatus), Mode=OneTime}" HorizontalAlignment="Left"  Foreground="White" TextWrapping="Wrap"  VerticalAlignment="Top" Width="130" FontSize="18" FontWeight="Bold" Height="30" Margin="166,11,0,0"/>
+                    <TextBlock Text="{Binding Path=(local:SharedDependencyProperties.ProjectStatus), Mode=OneWay}" HorizontalAlignment="Left"  Foreground="White" TextWrapping="Wrap"  VerticalAlignment="Top" Width="130" FontSize="18" FontWeight="Bold" Height="30" Margin="166,11,0,0"/>
                 </Grid>
 
                 <Grid Grid.Row="1">
@@ -47,25 +48,25 @@
 
                         <StackPanel Grid.Column="0" Margin="30,0,0,0">
                             <!--מעבר לסטטוס ביצוע + הכנסת תאריך התחלת פרוייקט -->
-                            <Button Content="Execute Project" Click="BtnExecuteProject_Click" Visibility="{Binding Path=(local:SharedDependencyProperties.ProjectStatus), Mode=OneTime, Converter={StaticResource ConvertProjectStatusExecutionToVisibledKey}}"  HorizontalAlignment="Left" BorderThickness="0" Foreground="White" Template="{StaticResource ButtonTemplateKey}" Style="{StaticResource BluePurpleButtonStyleKey}" FontFamily="Montserrant" FontWeight="Bold" FontSize="18" Cursor="Hand" Height="50" Width="150"/>
-                            <Label x:Name="StartDateLabel" Content="Project Start Date:" Visibility="Collapsed" Foreground="DarkGray" FontWeight="Medium" FontFamily="Montserrant" HorizontalAlignment="Left" VerticalAlignment="Top" Height="25" Width="110"/>
+                            <Button Content="Execute Project" Click="BtnExecuteProject_Click" Visibility="{Binding Path=(local:SharedDependencyProperties.ProjectStatus), Mode=OneWay, Converter={StaticResource ConvertProjectStatusPlanningToVisibleKey}}"  HorizontalAlignment="Left" BorderThickness="0" Foreground="White" Template="{StaticResource ButtonTemplateKey}" Style="{StaticResource BluePurpleButtonStyleKey}" FontFamily="Montserrant" FontWeight="Bold" FontSize="18" Cursor="Hand" Height="50" Width="150"/>
+                            <Label x:Name="StartDateLabel" Content="Project Start Date:" Visibility="{Binding Path=(local:SharedDependencyProperties.ProjectStatus), Mode=OneWay, Converter={StaticResource ConvertProjectStatusExecutionToVisibleKey}}" Foreground="DarkGray" FontWeight="Medium" FontFamily="Montserrant" HorizontalAlignment="Left" VerticalAlignment="Top" Height="25" Width="110"/>
 
                             <!-- תצוגת תאריכי התחלה וסיום הפרוייקט -->
-                            <Label x:Name="EndDateViewLabel" Content="Project End Date:" Visibility="Collapsed" Foreground="DarkGray" FontWeight="Medium" FontFamily="Montserrant" HorizontalAlignment="Left" VerticalAlignment="Top" Height="25" Width="110"/>
+                            <Label x:Name="EndDateViewLabel" Content="Project End Date:"  Visibility="{Binding Path=(local:SharedDependencyProperties.ProjectStatus), Mode=OneWay, Converter={StaticResource ConvertProjectStatusExecutionToVisibleKey}}" Foreground="DarkGray" FontWeight="Medium" FontFamily="Montserrant" HorizontalAlignment="Left" VerticalAlignment="Top" Height="25" Width="110"/>
                         </StackPanel>
                     
                         <StackPanel Grid.Column="1">
-                            <DatePicker x:Name="StartDatePicker" Visibility="Collapsed" HorizontalAlignment="Left" VerticalAlignment="Top" Width ="217"/>
+                            <DatePicker x:Name="StartDatePicker" SelectedDateChanged="StartDatePicker_SelectedDateChanged"  DisplayDateStart="{Binding Path=(local:SharedDependencyProperties.Clock), Mode=OneWay}"  Visibility="Collapsed" HorizontalAlignment="Left" VerticalAlignment="Top" Width ="217"/>
                             <Button x:Name="ChooseDateBtn" 
                                     Content="choose" 
                                     Click="BtnChooseDate_Click" 
                                     IsEnabled="{Binding ElementName=StartDatePicker, Path=SelectedDate, Converter={StaticResource ConvertDateToBooleanKey}}" Visibility="Collapsed" HorizontalAlignment="Left" BorderThickness="0" Foreground="White" Template="{StaticResource ButtonTemplateKey}" Style="{StaticResource BluePurpleButtonStyleKey}" FontFamily="Montserrant" FontSize="13" Cursor="Hand" Height="20" Width="50"/>
                             
                             <!-- תצוגת תאריכי התחלה וסיום הפרוייקט -->
-                            <TextBlock x:Name="StartDateView" Text="StartDateView" Visibility="Collapsed" Foreground="DarkGray" FontWeight="Medium" FontFamily="Montserrant" HorizontalAlignment="Left" VerticalAlignment="Top" Height="25" Width="110"/>
-                            <TextBlock x:Name="EndDateView" Text="EndDateView" Visibility="Collapsed" Foreground="DarkGray" FontWeight="Medium" FontFamily="Montserrant" HorizontalAlignment="Left" VerticalAlignment="Top" Height="25" Width="110"/>
+                            <TextBlock x:Name="StartDateView" Text="{Binding Path=(local:SharedDependencyProperties.ProjectStartDate), Mode=OneWay, StringFormat={}{0:dd/MM/yyyy} }" Visibility="{Binding Path=(local:SharedDependencyProperties.ProjectStatus), Mode=OneWay, Converter={StaticResource ConvertProjectStatusExecutionToVisibleKey}}" Foreground="DarkGray" FontWeight="Medium" FontFamily="Montserrant" HorizontalAlignment="Left" VerticalAlignment="Top" Height="25" Width="110"/>
+                            <TextBlock x:Name="EndDateView" Text="{Binding Path=(local:SharedDependencyProperties.ProjectEndDate), Mode=OneWay, StringFormat={}{0:dd/MM/yyyy}}"  Visibility="{Binding Path=(local:SharedDependencyProperties.ProjectStatus), Mode=OneWay, Converter={StaticResource ConvertProjectStatusExecutionToVisibleKey}}" Foreground="DarkGray" FontWeight="Medium" FontFamily="Montserrant" HorizontalAlignment="Left" VerticalAlignment="Top" Height="25" Width="110"/>
                             <!-- כפתור גאנט -->
-                            <Button x:Name="GanttChartBtn" Content="Gantt chart" Visibility="Collapsed" Foreground="White" Template="{StaticResource ButtonTemplateKey}" Style="{StaticResource PurpleButtonStyleKey}" FontSize="18" FontWeight="Bold" VerticalAlignment="Top" HorizontalAlignment="Left" Height="58" Width="144" Click="BtnGanttChart_Click"/>
+                            <Button x:Name="GanttChartBtn" Content="Gantt chart"  Visibility="{Binding Path=(local:SharedDependencyProperties.ProjectStatus), Mode=OneWay, Converter={StaticResource ConvertProjectStatusExecutionToVisibleKey}}" Foreground="White" Template="{StaticResource ButtonTemplateKey}" Style="{StaticResource PurpleButtonStyleKey}" FontSize="18" FontWeight="Bold" VerticalAlignment="Top" HorizontalAlignment="Left" Height="58" Width="144" Click="BtnGanttChart_Click"/>
 
                         </StackPanel>
                     </Grid>

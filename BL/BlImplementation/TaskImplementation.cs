@@ -123,7 +123,7 @@ internal class TaskImplementation : ITask
                            dalTask.FinalProduct,
                            dalTask.Remarks,
                            getAssignedEngineer(dalTask),
-                           blExperience);
+                           (BO.EngineerExperience)dalTask.Complexity);
     }
 
     /// <summary>
@@ -381,7 +381,7 @@ internal class TaskImplementation : ITask
     /// <returns></returns>
     private EngineerInTask? getAssignedEngineer(DO.Task dalTask)
     {
-        if (dalTask.EngineerId != null)
+        if (dalTask.EngineerId != null && dalTask.EngineerId != 0)
         {
             DO.Engineer dalEngineer = _dal.Engineer.Read(item => item.ID == dalTask.EngineerId)!;
             return new EngineerInTask(dalEngineer.ID, dalEngineer.FullName);
@@ -561,7 +561,7 @@ internal class TaskImplementation : ITask
             //If there are no dependencies then the Scheduled date is equal to the project start date plus a day
             if (!task.Dependencies.Any())
             {
-                scheduledDateAuto = projectStartDate.AddDays(1);
+                scheduledDateAuto = projectStartDate.AddDays(1);//TODO:
             }
             else
             {

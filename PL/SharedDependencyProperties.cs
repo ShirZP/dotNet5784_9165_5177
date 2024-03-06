@@ -29,6 +29,44 @@ namespace PL
 
         #endregion
 
+        #region ProjectDatesProperty
+        public static readonly DependencyProperty ProjectStartDateProperty = DependencyProperty.RegisterAttached(
+                                                                                            "ProjectStartDate",
+                                                                                            typeof(DateTime),
+                                                                                            typeof(SharedDependencyProperties),
+                                                                                            new PropertyMetadata(null));
+
+        public static readonly DependencyProperty ProjectEndDateProperty = DependencyProperty.RegisterAttached(
+                                                                                           "ProjectEndDate",
+                                                                                           typeof(DateTime),
+                                                                                           typeof(SharedDependencyProperties),
+                                                                                           new PropertyMetadata(null));
+
+        public static void SetProjectStartDate(DependencyObject element, DateTime value)
+        {
+            element.SetValue(ProjectStartDateProperty, value);
+        }
+
+        public static DateTime GetProjectStartDate(DependencyObject element)
+        {
+            return (DateTime)element.GetValue(ProjectStartDateProperty);
+        }
+
+       
+
+        public static void SetProjectEndDate(DependencyObject element, DateTime value)
+        {
+            element.SetValue(ProjectEndDateProperty, value);
+        }
+
+        public static DateTime GetProjectEndDate(DependencyObject element)
+        {
+            return (DateTime)element.GetValue(ProjectStatusProperty);
+        }
+
+        #endregion
+
+
         #region ClockProperty
         public static readonly DependencyProperty ClockProperty = DependencyProperty.RegisterAttached(
                                                                                     "Clock",

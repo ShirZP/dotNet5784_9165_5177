@@ -682,7 +682,7 @@
                             DateTime endDate;
                             DateTime.TryParse(ans, out endDate);
 
-                            s_bl.SetProjectEndDate(endDate);
+                            s_bl.SetProjectEndDate();
                         }
 
                         //change the status of the project from Planing to BuildingSchedule

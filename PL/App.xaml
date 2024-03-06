@@ -17,8 +17,8 @@
         <local:ConvertProjectStatusPlanningToVisible x:Key="ConvertProjectStatusPlanningToVisibleKey"/>
         <local:ConvertProjectStatusPlanningToEnabled x:Key="ConvertProjectStatusPlanningToEnabledKey"/>
         <local:ConvertProjectStatusNotPlanningToEnabled x:Key="ConvertProjectStatusNotPlanningToEnabledKey"/>
-        <local:ConvertProjectStatusExecutionToVisible x:Key="ConvertProjectStatusExecutionToVisibledKey"/>
-        <local:ConvertEngineerCurrentTaskToVisible x:Key="ConvertEngineerCurrentTaskToVisibleyKey"/>
+        <local:ConvertProjectStatusExecutionToVisible x:Key="ConvertProjectStatusExecutionToVisibleKey"/>
+        <local:ConvertEngineerCurrentTaskToVisible x:Key="ConvertEngineerCurrentTaskToVisibleKey"/>
         <local:ConvertEmptyEngineerCurrentTaskToVisible x:Key="ConvertEmptyEngineerCurrentTaskToVisibleKey"/>
         <local:ConvertTaskInListIEnumerableToBool x:Key="ConvertTaskInListIEnumerableToBoolKey"/>
         <local:ConvertPasswordToString x:Key="ConvertPasswordToStringKey"/>

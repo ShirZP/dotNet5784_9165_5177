@@ -67,7 +67,7 @@ internal class Bl : IBl
     {
         if (GetProjectEndDate() == null)
         {
-            DateTime endDate;
+            DateTime? endDate = default(DateTime);
 
             foreach (BO.Task task in Task.ReadAllFullTasksDetails())
             {
@@ -75,7 +75,8 @@ internal class Bl : IBl
                     endDate = task.ForecastDate;
             }
 
-            _dal.setProjectEndDate(endDate);
+            _dal.setProjectEndDate(endDate.Value);
+            _dal.changeStatusToExecution();
         }
         else
             throw new Exception("The project already has an end date");

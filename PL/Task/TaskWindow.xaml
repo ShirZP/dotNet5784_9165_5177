@@ -23,7 +23,7 @@
                     <RowDefinition Height="30"/>
                     <RowDefinition Height="auto"/>
                 </Grid.RowDefinitions>
-                
+
                 <Grid Grid.Row="0">
                     <Button Content="Back"
                             BorderThickness="0" Foreground="White" Template="{StaticResource ButtonTemplateKey}" Style="{StaticResource PurpleButtonStyleKey}" FontFamily="Montserrant" FontWeight="Medium" Cursor="Hand" 
@@ -33,7 +33,7 @@
 
                 </Grid>
 
-                    <Grid Grid.Row="1">
+                <Grid Grid.Row="1">
                     <TextBlock Text="Task Details:" Foreground="WhiteSmoke" FontSize="25" FontWeight="Bold" FontFamily="Montserrant" HorizontalAlignment="Left" Height="39" Margin="50,10,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="329"/>
 
                     <Label Content="ID:" Foreground="DarkGray" FontWeight="Medium" FontFamily="Montserrant" HorizontalAlignment="Left" Margin="50,76,0,0" VerticalAlignment="Top" Height="25" Width="110"/>
@@ -74,13 +74,13 @@
                                 HorizontalAlignment="Left" Margin="177,230,0,0" VerticalAlignment="Top" Height="25" Width="217"/>
 
                     <!-- Scheduled Date -->
-                    <DatePicker SelectedDate="{Binding CurrentTask.StartDate}" IsEnabled="False" Visibility="{Binding Path=(local:SharedDependencyProperties.ProjectStatus), Mode=OneTime, Converter={StaticResource ConvertProjectStatusNotPlanningToVisibleKey}}" HorizontalAlignment="Left" Margin="571,158,0,0" VerticalAlignment="Top" Width ="217"/>
+                    <TextBlock Text="{Binding CurrentTask.ScheduledDate, StringFormat={}{0:dd/MM/yyyy}}" Foreground="DarkGray" FontFamily="Montserrant"  Width ="217" Visibility="{Binding Path=(local:SharedDependencyProperties.ProjectStatus), Mode=OneTime, Converter={StaticResource ConvertProjectStatusNotPlanningToVisibleKey}}" HorizontalAlignment="Left" Margin="571,165,0,0" VerticalAlignment="Top"/>
                     <!-- Start Date -->
-                    <DatePicker SelectedDate="{Binding CurrentTask.StartDate}" IsEnabled="False" Visibility="{Binding Path=(local:SharedDependencyProperties.ProjectStatus), Mode=OneTime, Converter={StaticResource ConvertProjectStatusNotPlanningToVisibleKey}}" Margin="572,193,0,0" VerticalAlignment="Top" HorizontalAlignment="Left" Width ="217"/>
+                    <TextBlock Text="{Binding CurrentTask.StartDate, StringFormat={}{0:dd/MM/yyyy}}" Foreground="DarkGray" FontFamily="Montserrant" Visibility="{Binding Path=(local:SharedDependencyProperties.ProjectStatus), Mode=OneTime, Converter={StaticResource ConvertProjectStatusNotPlanningToVisibleKey}}" Margin="572,200,0,0" VerticalAlignment="Top" HorizontalAlignment="Left" Width ="217"/>
                     <!-- Forecast Date -->
-                    <DatePicker SelectedDate="{Binding CurrentTask.ForecastDate}" HorizontalAlignment="Left" IsEnabled="False" Visibility="{Binding Path=(local:SharedDependencyProperties.ProjectStatus), Mode=OneTime, Converter={StaticResource ConvertProjectStatusNotPlanningToVisibleKey}}" Margin="572,223,0,0" VerticalAlignment="Top" Width ="217"/>
+                    <TextBlock Text="{Binding CurrentTask.ForecastDate, StringFormat={}{0:dd/MM/yyyy}}" Foreground="DarkGray" FontFamily="Montserrant" HorizontalAlignment="Left" Visibility="{Binding Path=(local:SharedDependencyProperties.ProjectStatus), Mode=OneTime, Converter={StaticResource ConvertProjectStatusNotPlanningToVisibleKey}}" Margin="572,230,0,0" VerticalAlignment="Top" Width ="217"/>
                     <!-- Complete Date -->
-                    <DatePicker SelectedDate="{Binding CurrentTask.CompleteDate}" HorizontalAlignment="Left" IsEnabled="False" Visibility="{Binding Path=(local:SharedDependencyProperties.ProjectStatus), Mode=OneTime, Converter={StaticResource ConvertProjectStatusNotPlanningToVisibleKey}}" Margin="572,253,0,0" VerticalAlignment="Top" Width ="217"/>
+                    <TextBlock Text="{Binding CurrentTask.CompleteDate, StringFormat={}{0:dd/MM/yyyy}}" Foreground="DarkGray" FontFamily="Montserrant" HorizontalAlignment="Left" Visibility="{Binding Path=(local:SharedDependencyProperties.ProjectStatus), Mode=OneTime, Converter={StaticResource ConvertProjectStatusNotPlanningToVisibleKey}}" Margin="572,260,0,0" VerticalAlignment="Top" Width ="217"/>
 
                     <!-- Required Effort Time -->
                     <ComboBox ItemsSource="{Binding daysEffortTimeOptions, StringFormat={}{0:[d]}}"
@@ -103,9 +103,10 @@
                                 AcceptsReturn="True" Height="44"/>
 
                     <!-- Assigned Engineer -->
-                    <ComboBox ItemsSource="{Binding AssignedEngineer}" SelectedItem="{Binding SelectedEngineerName, Mode=TwoWay}"
+                    <TextBlock Text="{Binding CurrentTask.AssignedEngineer}"
                                 Visibility="{Binding Path=(local:SharedDependencyProperties.ProjectStatus), Mode=OneTime, Converter={StaticResource ConvertProjectStatusNotPlanningToVisibleKey}}" 
-                                HorizontalAlignment="Left" Margin="573,286,0,0" VerticalAlignment="Top" Width="217"/>
+                                Foreground="DarkGray" FontFamily="Montserrant" HorizontalAlignment="Left" Margin="573,286,0,0" VerticalAlignment="Top" Width="217"/>
+                    
                     <!-- Dependencies -->
                     <Expander Header="Depends On Previous Tasks" Foreground="DarkGray" FontWeight="Medium" FontFamily="Montserrant" HorizontalAlignment="Left" Margin="53,330,0,0" VerticalAlignment="Top" Height="260" Width="745" IsExpanded="False">
                         <Grid Width="600">
@@ -139,7 +140,7 @@
                     <Button Content="{Binding CurrentTask.ID, Mode=OneTime, Converter={StaticResource ConverIdToContentKey}}" Click="BtnAddOrUpdate_Click" BorderThickness="0" Foreground="White" Template="{StaticResource ButtonTemplateKey}" Style="{StaticResource PinkButtonStyleKey}" FontFamily="Montserrant" FontWeight="Bold" FontSize="18" Cursor="Hand" VerticalAlignment="Top" HorizontalAlignment="Left" Margin="719,599,0,0" Height="25" Width="78"/>
 
 
-            </Grid>
+                </Grid>
             </Grid>
         </Border>
     </Border>

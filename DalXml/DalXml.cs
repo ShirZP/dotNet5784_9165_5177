@@ -114,10 +114,10 @@ sealed internal class DalXml : IDal
     public void changeStatusToExecution()
     {
         XElement root = XMLTools.LoadListFromXMLElement(Config.s_data_config_xml);
-        if (root.Element("ProjectStatus")!.Value == DO.ProjectStatus.Planning.ToString())
-        {
-            throw new DalChangProjectStatusException("can't change status from planning to Execution");
-        }
+        //if (root.Element("ProjectStatus")!.Value == DO.ProjectStatus.Planning.ToString())  //TODO: clear
+        //{
+        //    throw new DalChangProjectStatusException("can't change status from planning to Execution");
+        //}
         root.Element("ProjectStatus")!.SetValue(DO.ProjectStatus.Execution.ToString());
         XMLTools.SaveListToXMLElement(root, Config.s_data_config_xml);
     }

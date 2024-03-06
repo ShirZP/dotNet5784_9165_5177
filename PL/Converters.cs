@@ -38,7 +38,7 @@ class ConvertIdToVisibility : IValueConverter
 {
     public object Convert(object value, Type targetType, object parameter, CultureInfo culture)
     {
-        return (int)value == 0 ? Visibility.Hidden : Visibility.Visible;
+        return (int)value == 0 ? Visibility.Collapsed : Visibility.Visible;
     }
 
     public object ConvertBack(object value, Type targetType, object parameter, CultureInfo culture)
@@ -51,7 +51,7 @@ class ConvertProjectStatusNotPlanningToVisible : IValueConverter
 {
     public object Convert(object value, Type targetType, object parameter, CultureInfo culture)
     {
-        return (BO.ProjectStatus)value == BO.ProjectStatus.Planning ? Visibility.Hidden : Visibility.Visible;
+        return (BO.ProjectStatus)value == BO.ProjectStatus.Planning ? Visibility.Collapsed : Visibility.Visible;
     }
 
     public object ConvertBack(object value, Type targetType, object parameter, CultureInfo culture)
@@ -64,7 +64,7 @@ class ConvertProjectStatusPlanningToVisible : IValueConverter
 {
     public object Convert(object value, Type targetType, object parameter, CultureInfo culture)
     {
-        return (BO.ProjectStatus)value == BO.ProjectStatus.Planning ? Visibility.Visible : Visibility.Hidden;
+        return (BO.ProjectStatus)value == BO.ProjectStatus.Planning ? Visibility.Visible : Visibility.Collapsed;
     }
 
     public object ConvertBack(object value, Type targetType, object parameter, CultureInfo culture)
@@ -77,7 +77,7 @@ class ConvertProjectStatusExecutionToVisible : IValueConverter
 {
     public object Convert(object value, Type targetType, object parameter, CultureInfo culture)
     {
-        return (BO.ProjectStatus)value == BO.ProjectStatus.Execution ? Visibility.Visible : Visibility.Hidden;
+        return (BO.ProjectStatus)value == BO.ProjectStatus.Execution ? Visibility.Visible : Visibility.Collapsed;
     }
 
     public object ConvertBack(object value, Type targetType, object parameter, CultureInfo culture)

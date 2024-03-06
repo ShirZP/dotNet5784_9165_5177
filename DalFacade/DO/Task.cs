@@ -31,7 +31,7 @@ public record Task
     bool? IsMileStone = false
 )
 {
-    public Task() : this(0, "", "", null, null, null, null, "", "", 0, null) { }
+    public Task() : this(0, "", "", null, null, null, null, "", "", null, null) { }
     
     public DateTime CreateAtDate => DateTime.Now;
 }

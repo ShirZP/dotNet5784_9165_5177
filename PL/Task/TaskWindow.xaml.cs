@@ -73,48 +73,6 @@ namespace PL.Task
         public TimeSpan daysEffortTime;
 
 
-        //The list of all the engineers
-        private IEnumerable<BO.Engineer> assignedEngineer = new List<BO.Engineer>();
-
-        //The list of all the names of the engineers
-        public List<string> AssignedEngineer
-        {
-            get { return (List<string>)GetValue(AssignedEngineerProperty); }
-            set { SetValue(AssignedEngineerProperty, value); }
-        }
-
-        //The name selected in the ComboBox of Assigned Engineer
-        private string _selectedEngineerName = "None";
-        public string SelectedEngineerName
-        {
-            get => _selectedEngineerName;
-            set
-            {
-                _selectedEngineerName = value;
-                UpdateCurrentEngineerCurrentTask(_selectedEngineerName);
-            }
-        }
-
-        /// <summary>
-        /// Updating the EngineerCurrentTask field of the engineer according to the name of the task
-        /// </summary>
-        /// <param name="selectedTaskName">The name selected in the ComboBox of EngineerCurrentTask</param>
-        private void UpdateCurrentEngineerCurrentTask(string selectedEngineerName)
-        {
-            if (CurrentTask != null && !string.IsNullOrEmpty(selectedEngineerName) && selectedEngineerName != "None")
-            {
-                BO.Engineer? engineerInTask = (from t in assignedEngineer
-                                               where t.FullName == selectedEngineerName
-                                               select t).FirstOrDefault();
-                if (engineerInTask != null)
-                {
-                    BO.EngineerInTask engineerInTaskObj = new EngineerInTask(engineerInTask.ID, engineerInTask.FullName);
-                    CurrentTask.AssignedEngineer = engineerInTaskObj;
-                }
-            }
-        }
-
-
         public TaskWindow(int id = 0)
         {
             InitializeComponent();
@@ -147,21 +105,12 @@ namespace PL.Task
                 daysEffortTimeOptions.Add(dayTimeSpan);
             }
 
-            LoadAllEngineers();
-
             LoadDependenciesLists();
 
             this.DataContext = this;
         }
 
-        private void LoadAllEngineers()
-        {
-            assignedEngineer = s_bl.Engineer.ReadAll();
-
-            AssignedEngineer = (from engineer in assignedEngineer
-                                select engineer.FullName).ToList();
-            AssignedEngineer.Add("None");
-        }
+        
         private void LoadDependenciesLists()
         {
             SelectedDependencies = (from dependency in CurrentTask.Dependencies

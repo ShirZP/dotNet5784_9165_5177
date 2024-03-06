@@ -1,4 +1,5 @@
-﻿using PL.Engineer;
+﻿using BO;
+using PL.Engineer;
 using PL.GanttChar;
 using PL.Task;
 using System;
@@ -26,10 +27,11 @@ namespace PL.Users
 
         public ManagerWindow()
         {
-            SharedDependencyProperties.SetProjectStatus(this, s_bl.GetProjectStatus());
-
+            this.Activate();
+            
             InitializeComponent();
             SharedDependencyProperties.SetClock(this, s_bl.Clock);
+            StartDatePicker.DisplayDateStart = SharedDependencyProperties.GetClock(this);
         }
 
         /// <summary>
@@ -51,6 +53,7 @@ namespace PL.Users
             {
                 // Initial the DB
                 s_bl.initializationDB();
+                this.Activate();
                 MessageBoxResult messageBoxResult = MessageBox.Show("Initialization done successfully!", "Happy Message :)", MessageBoxButton.OK, MessageBoxImage.Information);
             }
         }
@@ -68,6 +71,7 @@ namespace PL.Users
             {
                 // Initial the DB
                 s_bl.resetDB();
+                this.Activate();
                 MessageBoxResult messageBoxResult = MessageBox.Show("Reset DB done successfully!", "Happy Message :)", MessageBoxButton.OK, MessageBoxImage.Information);
             }
         }
@@ -130,24 +134,61 @@ namespace PL.Users
             // Code to execute if the user clicks Yes
             if (result == MessageBoxResult.Yes)
             {
-                //הסתרת הפקדים הלא נחוצים
-                StartDatePicker.Visibility = Visibility.Collapsed;
-                ChooseDateBtn.Visibility = Visibility.Collapsed;
+                try
+                {
+                    //הסתרת הפקדים הלא נחוצים
+                    StartDatePicker.Visibility = Visibility.Collapsed;
+                    ChooseDateBtn.Visibility = Visibility.Collapsed;
 
-                s_bl.SetProjectStartDate((DateTime)StartDatePicker.SelectedDate!);
-                //קביעת הלוז אוטומטית
-                s_bl.Task.autoScheduledDate();
-                s_bl.SetProjectEndDate();//TODO: לכתוב את הפונקציה לחישוב תאריך הסיום
+                    s_bl.SetProjectStartDate((DateTime)StartDatePicker.SelectedDate!);
+                    //קביעת הלוז אוטומטית
+                    s_bl.Task.autoScheduledDate();
+                    s_bl.SetProjectEndDate();
 
-                StartDateView.Text = s_bl.GetProjectStartDate().ToString();
-                EndDateView.Text = s_bl.GetProjectEndDate().ToString();
+                    //StartDateView.Text = s_bl.GetProjectStartDate().ToString();
+                    //EndDateView.Text = s_bl.GetProjectEndDate().ToString();
+                    SharedDependencyProperties.SetProjectStartDate(this, s_bl.GetProjectStartDate()!.Value);
+                    SharedDependencyProperties.SetProjectEndDate(this, s_bl.GetProjectEndDate()!.Value);
 
-                EndDateViewLabel.Visibility = Visibility.Visible;
-                StartDateView.Visibility = Visibility.Visible;
-                EndDateView.Visibility = Visibility.Visible;
-                GanttChartBtn.Visibility = Visibility.Visible;
+
+                    SharedDependencyProperties.SetProjectStatus(this, s_bl.GetProjectStatus());
+                    
+
+                    EndDateViewLabel.Visibility = Visibility.Visible;
+                    StartDateView.Visibility = Visibility.Visible;
+                    EndDateView.Visibility = Visibility.Visible;
+                    GanttChartBtn.Visibility = Visibility.Visible;
+                }
+                catch (Exception ex)
+                {
+                    MessageBox.Show(ex.Message, "ERROR :(", MessageBoxButton.OK, MessageBoxImage.Error);
+                }
             }
 
+        }
+
+        /// <summary>
+        /// Refresh the ManagerWindow
+        /// </summary>
+        private void RefreshWindow_Activated(object sender, EventArgs e)
+        {
+            SharedDependencyProperties.SetProjectStatus(this, s_bl.GetProjectStatus());
+
+            if (s_bl.GetProjectStartDate() != null)
+            {
+                SharedDependencyProperties.SetProjectStartDate(this, s_bl.GetProjectStartDate()!.Value);
+                SharedDependencyProperties.SetProjectEndDate(this, s_bl.GetProjectEndDate()!.Value);
+            }
+        }
+
+        private void StartDatePicker_SelectedDateChanged(object sender, SelectionChangedEventArgs e)
+        {
+            var picker = sender as DatePicker;
+            if (picker.SelectedDate < SharedDependencyProperties.GetClock(this)) // Assuming DateTime.Today is the minimum allowed date
+            {
+                MessageBox.Show("It is not possible to select a date earlier than now!");
+                picker.SelectedDate = SharedDependencyProperties.GetClock(this); // Set to minimum allowed date or null
+            }
         }
     }
 }

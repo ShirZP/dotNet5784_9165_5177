@@ -77,7 +77,7 @@
                             Width="24" Height="25" 
                             Foreground="White" FontFamily="Montserrant" FontWeight="Bold" FontSize="18" Cursor="Hand" VerticalAlignment="Top" HorizontalAlignment="Left"
                             Style="{StaticResource IconButtonStyleKey}" Margin="135,5,0,0">
-                            <Image Source="/Users/eye.png"/>
+                        <Image Source="/Users/eye.png"/>
 
                     </Button>
                 </Grid>
@@ -88,12 +88,12 @@
                         <ColumnDefinition Width="4*"/>
                         <ColumnDefinition Width="5*"/>
                     </Grid.ColumnDefinitions>
-                    
+
                     <StackPanel HorizontalAlignment="Stretch" Grid.Column="0" VerticalAlignment="Stretch" RenderTransformOrigin="0.425,0.524" Margin="10,0,0,0">
                         <TextBlock Text="ID:" Visibility="{Binding EngineerUser.EngineerCurrentTask, Mode=OneWay, Converter={StaticResource ConvertEngineerCurrentTaskToVisibleyKey}}" Foreground="White" HorizontalAlignment="Left" FontWeight="Medium" FontFamily="Montserrant"  Height="35" Width="70"/>
                         <TextBlock Text="Name:" Visibility="{Binding EngineerUser.EngineerCurrentTask, Mode=OneWay, Converter={StaticResource ConvertEngineerCurrentTaskToVisibleyKey}}" Foreground="White" HorizontalAlignment="Left" FontWeight="Medium" FontFamily="Montserrant" Height="35" Width="70"/>
                     </StackPanel>
-                    
+
                     <StackPanel HorizontalAlignment="Stretch" Grid.Column="1" VerticalAlignment="Stretch" RenderTransformOrigin="0.425,0.524" Margin="10,0,0,0">
                         <TextBlock Text="{Binding EngineerUser.EngineerCurrentTask.ID}" Visibility="{Binding EngineerUser.EngineerCurrentTask, Mode=OneWay, Converter={StaticResource ConvertEngineerCurrentTaskToVisibleyKey}}" Foreground="DarkGray"  HorizontalAlignment="Stretch" FontWeight="Medium" FontFamily="Montserrant" Height="35"/>
                         <TextBlock Text="{Binding EngineerUser.EngineerCurrentTask.NickName}" Visibility="{Binding EngineerUser.EngineerCurrentTask, Mode=OneWay, Converter={StaticResource ConvertEngineerCurrentTaskToVisibleyKey}}" Foreground="DarkGray"  HorizontalAlignment="Stretch" FontWeight="Medium" FontFamily="Montserrant" Height="35"/>
@@ -108,8 +108,8 @@
                             FontFamily="Montserrant"
                             Cursor="Hand"
                             HorizontalAlignment="Left" 
-                            Margin="149,0,0,0" 
-                            VerticalAlignment="Center" 
+                            Margin="139,20,0,0" 
+                            VerticalAlignment="Top" 
                             Height="50" Width="150" FontSize="18" 
                             FontWeight="Bold" 
                             Style="{StaticResource BluePurpleButtonStyleKey}"
