@@ -16,7 +16,7 @@ public interface IBl
     public BO.ProjectStatus GetProjectStatus();
     public void SetProjectStartDate(DateTime startDate);    
     public DateTime? GetProjectStartDate();
-    public void SetProjectEndDate(DateTime endDate);
+    public void SetProjectEndDate();
     public DateTime? GetProjectEndDate();
     public void changeStatusToBuildingSchedule();
     public void changeStatusToExecution();

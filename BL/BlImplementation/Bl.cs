@@ -50,7 +50,12 @@ internal class Bl : IBl
 
     public void SetProjectStartDate(DateTime startDate)
     {
-        _dal.setProjectStartDate(startDate);    
+        if (GetProjectStartDate() == null)
+        {
+            _dal.setProjectStartDate(startDate);
+        }
+        else
+            throw new Exception("There is already a start date for the project");
     }
 
     public DateTime? GetProjectEndDate()
@@ -58,9 +63,22 @@ internal class Bl : IBl
         return _dal.getProjectEndDate();
     }
 
-    public void SetProjectEndDate(DateTime endDate)
+    public void SetProjectEndDate()
     {
-        _dal.setProjectEndDate(endDate);
+        if (GetProjectEndDate() == null)
+        {
+            DateTime endDate;
+
+            foreach (BO.Task task in Task.ReadAllFullTasksDetails())
+            {
+                if (task.ForecastDate > endDate)
+                    endDate = task.ForecastDate;
+            }
+
+            _dal.setProjectEndDate(endDate);
+        }
+        else
+            throw new Exception("The project already has an end date");
     }
 
     public void changeStatusToBuildingSchedule()

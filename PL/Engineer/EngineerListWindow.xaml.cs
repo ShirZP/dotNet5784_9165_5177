@@ -75,5 +75,10 @@ namespace PL.Engineer
         {
             EngineerList = (Experience == BO.EngineerExperience.All) ? s_bl?.Engineer.ReadAll()! : s_bl?.Engineer.ReadAll(item => item.Level == Experience)!;
         }
+
+        private void BtnBack_Click(object sender, RoutedEventArgs e)
+        {
+            this.Close();
+        }
     }
 }

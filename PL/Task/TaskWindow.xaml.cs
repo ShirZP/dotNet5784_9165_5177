@@ -231,5 +231,9 @@ namespace PL.Task
         {
             SelectedDependencies = ((ListBox)sender).SelectedItems;
         }
+        private void BtnBack_Click(object sender, RoutedEventArgs e)
+        {
+            this.Close();
+        }
     }
 }

@@ -538,7 +538,15 @@ internal class TaskImplementation : ITask
                select taskInList;
     }
 
-    public void autoScheduledDate(BO.Task task)
+    public void autoScheduledDate()
+    {
+        foreach(var task in ReadAllFullTasksDetails())
+        {
+            autoScheduledDate(task);
+        }
+         
+    }
+    private void autoScheduledDate(BO.Task task)
     {
         if (task.ScheduledDate != null) return;
 

@@ -23,6 +23,7 @@
         <local:ConvertTaskInListIEnumerableToBool x:Key="ConvertTaskInListIEnumerableToBoolKey"/>
         <local:ConvertPasswordToString x:Key="ConvertPasswordToStringKey"/>
         <local:ConvertTaskStatusToColor x:Key="ConvertTaskStatusToColorKey"/>
+        <local:ConvertDateToBoolean x:Key="ConvertDateToBooleanKey"/>
         
         
         <!-- window icon -->
@@ -46,6 +47,7 @@
 
         <!--blue purple Button Style-->
         <Style TargetType="Button" x:Key ="BluePurpleButtonStyleKey">
+            <Setter Property="RenderTransformOrigin" Value="0.5,0.5"/>
             <Setter Property="FontFamily" Value="Montserrant"/>
             <Setter Property="Cursor" Value="Hand"/>
             <Setter Property="BorderThickness" Value="0"/>
@@ -59,6 +61,7 @@
 
         <!--pink Button Style-->
         <Style TargetType="Button" x:Key ="PinkButtonStyleKey">
+            <Setter Property="RenderTransformOrigin" Value="0.5,0.5"/>
             <Setter Property="FontFamily" Value="Montserrant"/>
             <Setter Property="Cursor" Value="Hand"/>
             <Setter Property="BorderThickness" Value="0"/>
@@ -72,6 +75,7 @@
 
         <!--purple Button Style-->
         <Style TargetType="Button" x:Key ="PurpleButtonStyleKey">
+            <Setter Property="RenderTransformOrigin" Value="0.5,0.5"/>
             <Setter Property="FontFamily" Value="Montserrant"/>
             <Setter Property="Cursor" Value="Hand"/>
             <Setter Property="BorderThickness" Value="0"/>

@@ -102,9 +102,52 @@ namespace PL.Users
 
         #endregion
 
-        private void Button_Click(object sender, RoutedEventArgs e)
+        private void BtnGanttChart_Click(object sender, RoutedEventArgs e)
         {
                 new GanttCharWindow().ShowDialog();
+        }
+
+        private void BtnExecuteProject_Click(object sender, RoutedEventArgs e)
+        {
+            MessageBoxResult result = MessageBox.Show("Do you want to proceed execute project?", "Execution Confirmation", MessageBoxButton.YesNo, MessageBoxImage.Question);
+
+            // Code to execute if the user clicks Yes
+            if (result == MessageBoxResult.Yes)
+            {
+                Button btnExecuteProject = sender as Button;
+                btnExecuteProject.Visibility = Visibility.Collapsed;
+
+                StartDateLabel.Visibility = Visibility.Visible;
+                StartDatePicker.Visibility = Visibility.Visible;
+                ChooseDateBtn.Visibility = Visibility.Visible;
+            }
+        }
+
+        private void BtnChooseDate_Click(object sender, RoutedEventArgs e)
+        {
+            MessageBoxResult result = MessageBox.Show("Are you sure about the date you chose?", "Start Date Confirmation", MessageBoxButton.YesNo, MessageBoxImage.Question);
+
+            // Code to execute if the user clicks Yes
+            if (result == MessageBoxResult.Yes)
+            {
+                //הסתרת הפקדים הלא נחוצים
+                StartDatePicker.Visibility = Visibility.Collapsed;
+                ChooseDateBtn.Visibility = Visibility.Collapsed;
+
+                s_bl.SetProjectStartDate((DateTime)StartDatePicker.SelectedDate!);
+                //קביעת הלוז אוטומטית
+                s_bl.Task.autoScheduledDate();
+                s_bl.SetProjectEndDate();//TODO: לכתוב את הפונקציה לחישוב תאריך הסיום
+
+                StartDateView.Text = s_bl.GetProjectStartDate().ToString();
+                EndDateView.Text = s_bl.GetProjectEndDate().ToString();
+
+                EndDateViewLabel.Visibility = Visibility.Visible;
+                StartDateView.Visibility = Visibility.Visible;
+                EndDateView.Visibility = Visibility.Visible;
+                GanttChartBtn.Visibility = Visibility.Visible;
+            }
+
         }
     }
 }

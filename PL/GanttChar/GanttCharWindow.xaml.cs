@@ -56,14 +56,14 @@ namespace PL.GanttChar
 
             loadGanttDatesList();
 
-            GanttTasksList = (from task in s_bl.Task.ReadAllFullTasksDetails()
-                              select convertTaskToGanttTask(task)).ToList();
+            //GanttTasksList = (from task in s_bl.Task.ReadAllFullTasksDetails()
+            //                  select convertTaskToGanttTask(task)).ToList();
 
-            //GanttTasksList = new List<TaskGantt>()
-            //{new TaskGantt() {taskID = 1,taskName = "T1",duration = 30, timeFromStart = 20,    timeToEnd = 7},
-            //new TaskGantt() {taskID = 2,taskName = "T2",duration = 50, timeFromStart = 60,    timeToEnd = 4},
-            //new TaskGantt() { taskID = 3, taskName = "T3", duration = 70, timeFromStart = 10, timeToEnd = 13 }
-            //};
+            GanttTasksList = new List<TaskGantt>()
+            {new TaskGantt() {taskID = 1,taskName = "T1",taskStatus = BO.Status.New, duration = 3*60, timeFromStart = 20,    timeToEnd = 7},
+            new TaskGantt() {taskID = 2,taskName = "T2",taskStatus = BO.Status.Active, duration = 5*60, timeFromStart = 60,    timeToEnd = 4},
+            new TaskGantt() { taskID = 3, taskName = "T3",taskStatus = BO.Status.Complete, duration = 2*60, timeFromStart = 10, timeToEnd = 13 }
+            };
 
             this.DataContext = this;
         
@@ -72,13 +72,15 @@ namespace PL.GanttChar
 
         private TaskGantt convertTaskToGanttTask(BO.Task task)
         {
+            int dateDurationSize = 70;
+
             DateTime? projectStartDate = s_bl.GetProjectStartDate();
             DateTime? projectEndDate = s_bl.GetProjectEndDate();
             int duration = (int)task.RequiredEffortTime!.Value.Days;
             int timeFromStart = (int)(task.ScheduledDate - projectStartDate)!.Value.TotalDays;
             int timeToEnd = (int)(projectEndDate - task.ForecastDate)!.Value.TotalDays;
 
-            return new TaskGantt(){taskID = task.ID,taskName = task.NickName,duration = duration * 60, taskStatus = task.Status, timeFromStart = timeFromStart, timeToEnd = timeToEnd};
+            return new TaskGantt(){taskID = task.ID,taskName = task.NickName, taskStatus = task.Status, duration = duration * dateDurationSize,  timeFromStart = timeFromStart * dateDurationSize, timeToEnd = timeToEnd * dateDurationSize };
            
         
         }

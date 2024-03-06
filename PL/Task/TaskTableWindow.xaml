@@ -6,7 +6,7 @@
         xmlns:local="clr-namespace:PL"
         Activated="RefreshWindow_Activated"
         mc:Ignorable="d"
-        Title="TaskTableWindow" Height="660" Width="800"
+        Title="TaskTableWindow" Height="700" Width="850"
         Icon="{StaticResource AppIcon}"
         ResizeMode ="NoResize"
         WindowStartupLocation="CenterScreen"
@@ -28,6 +28,11 @@
                 </Grid.RowDefinitions>
 
                 <Grid HorizontalAlignment="Stretch" Height="auto" Grid.Row="0" VerticalAlignment="Stretch" Width="auto">
+                    <Button Content="Back"
+                            BorderThickness="0" Foreground="White" Template="{StaticResource ButtonTemplateKey}" Style="{StaticResource PurpleButtonStyleKey}" FontFamily="Montserrant" FontWeight="Medium" Cursor="Hand" 
+                            HorizontalAlignment="Left" 
+                            Height="30" Width="50" 
+                            FontSize="18" Click="BtnBack_Click"/>
 
                     <TextBlock Text="project status:" Foreground="LightGray" TextWrapping="Wrap" VerticalAlignment="Center" Width="170" FontSize="18" FontWeight="Medium" Margin="476,0,144,0"/>
                     <TextBlock Text="{Binding Path=(local:SharedDependencyProperties.ProjectStatus), Mode=OneTime}" HorizontalAlignment="Right"  Foreground="LightGray" TextWrapping="Wrap"  VerticalAlignment="Center" Width="131" FontSize="18" FontWeight="Medium" Margin="32,0,0,0"/>
@@ -49,7 +54,7 @@
                     <Label Grid.Column="2" Content="Subcategory:" Foreground="WhiteSmoke" FontWeight="Bold" FontFamily="Montserrant" HorizontalAlignment="Left" Margin="52,0,0,0" VerticalAlignment="Center" FontSize="18"/>
                     <ComboBox x:Name="SubcategoryFilter_CB" SelectionChanged="filterTable_SelectionChanged"  Grid.Column="3" VerticalAlignment="Stretch" Background="{DynamicResource {x:Static SystemColors.GradientActiveCaptionBrushKey}}" FontSize="18"/>
                 </Grid>
-                <DataGrid AutoGenerateColumns="False" Grid.Row="2" ItemsSource="{Binding Path=TasksList}" ItemContainerStyle="{StaticResource AlternatingRowStyle}"  VerticalGridLinesBrush="Transparent" Margin="0,0,0,61" Width="Auto" Height ="460" Background="{StaticResource BackgroundBrushKey}" BorderThickness="0">
+                <DataGrid AutoGenerateColumns="False" Grid.Row="2" ItemsSource="{Binding Path=TasksList}" ItemContainerStyle="{StaticResource AlternatingRowStyle}"  VerticalGridLinesBrush="Transparent" Margin="0,0,0,61" Width="Auto" Height ="470" Background="{StaticResource BackgroundBrushKey}" BorderThickness="0">
                     <DataGrid.Columns>
                         <DataGridTextColumn Header="ID" Binding="{Binding ID}" Width="0.3*"/>
                         <DataGridTextColumn Header="Name" Binding="{Binding NickName}" Width="1.5*" />

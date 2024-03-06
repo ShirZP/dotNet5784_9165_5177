@@ -16,7 +16,7 @@ public interface ITask
 
     public void ScheduledDateUpdate(int id, DateTime? newScheduledDate, BO.ProjectStatus projectStatus);  //Update a task's scheduled start date
 
-    public void autoScheduledDate(BO.Task task);
+    public void autoScheduledDate();
 
     public IEnumerable<BO.TaskInList> SortByID();
 

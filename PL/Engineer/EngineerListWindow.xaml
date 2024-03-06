@@ -31,6 +31,11 @@
                 </Grid.RowDefinitions>
 
                 <Grid HorizontalAlignment="Stretch" Height="auto" Grid.Row="0" VerticalAlignment="Stretch" Width="auto">
+                    <Button Content="Back"
+                             BorderThickness="0" Foreground="White" Template="{StaticResource ButtonTemplateKey}" Style="{StaticResource PurpleButtonStyleKey}" FontFamily="Montserrant" FontWeight="Medium" Cursor="Hand" 
+                             HorizontalAlignment="Left" 
+                             Height="30" Width="50" 
+                             FontSize="18" Click="BtnBack_Click"/>
 
                     <TextBlock Text="project status:" Foreground="LightGray" TextWrapping="Wrap" VerticalAlignment="Center" Width="170" FontSize="18" FontWeight="Medium" Margin="476,0,144,0"/>
                     <TextBlock Text="{Binding Path=(local:SharedDependencyProperties.ProjectStatus), Mode=OneTime}" HorizontalAlignment="Right"  Foreground="LightGray" TextWrapping="Wrap"  VerticalAlignment="Center" Width="131" FontSize="18" FontWeight="Medium" Margin="32,0,0,0"/>
