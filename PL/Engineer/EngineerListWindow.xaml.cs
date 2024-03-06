@@ -38,6 +38,8 @@ namespace PL.Engineer
         public EngineerListWindow()
         {
             InitializeComponent();
+            SharedDependencyProperties.SetProjectStatus(this, s_bl.GetProjectStatus());
+            this.DataContext = this;
         }
 
         /// <summary>
