@@ -45,20 +45,5 @@ namespace PL.Task
                 MessageBox.Show(ex.Message, "ERROR :(", MessageBoxButton.OK, MessageBoxImage.Error);
             }
         }
-
-        private void BtnUpdate_Click(object sender, RoutedEventArgs e)
-        {
-            try
-            {
-                s_bl.Task.Update(TaskView);
-                MessageBox.Show($"Task {TaskView.ID} status updated Successfully!", "Happy Message :)", MessageBoxButton.OK, MessageBoxImage.Information);
-
-                this.Close();
-            }
-            catch (Exception ex)
-            {
-                MessageBox.Show(ex.Message, "ERROR :(", MessageBoxButton.OK, MessageBoxImage.Error);
-            }
-        }
     }
 }
