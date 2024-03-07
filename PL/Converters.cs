@@ -34,11 +34,24 @@ class ConvertIdToIsEnabled : IValueConverter
     }
 }
 
-class ConvertIdToVisibility : IValueConverter
+class ConvertIdZeroToCollapsed : IValueConverter
 {
     public object Convert(object value, Type targetType, object parameter, CultureInfo culture)
     {
         return (int)value == 0 ? Visibility.Collapsed : Visibility.Visible;
+    }
+
+    public object ConvertBack(object value, Type targetType, object parameter, CultureInfo culture)
+    {
+        throw new NotImplementedException();
+    }
+}
+
+class ConvertIdZeroToVisible : IValueConverter
+{
+    public object Convert(object value, Type targetType, object parameter, CultureInfo culture)
+    {
+        return (int)value == 0 ? Visibility.Visible : Visibility.Collapsed;
     }
 
     public object ConvertBack(object value, Type targetType, object parameter, CultureInfo culture)
@@ -212,6 +225,22 @@ public class ConvertDateToBoolean : IValueConverter
         throw new NotImplementedException();
     }
 }
+
+public class ConvertCurrentTaskToContent : IValueConverter
+{
+    public object Convert(object value, Type targetType, object parameter, CultureInfo culture)
+    {
+        return (BO.TaskInEngineer)value == null ? "Select Task" : "Complete Task";
+    }
+
+    public object ConvertBack(object value, Type targetType, object parameter, CultureInfo culture)
+    {
+        throw new NotImplementedException();
+    }
+}
+
+
+
 
 
 

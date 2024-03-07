@@ -238,7 +238,7 @@ internal class EngineerImplementation : IEngineer
             DO.Task currentTaskEngineer = _dal.Task.Read(item => item.ID == idTaskInEngineer)!;
 
             //if there is another engineer assigned to the current task engineer
-            if (currentTaskEngineer.EngineerId != null && currentTaskEngineer.EngineerId != updatedEngineer.ID)
+            if (currentTaskEngineer.EngineerId != null && currentTaskEngineer.EngineerId != 0 && currentTaskEngineer.EngineerId != updatedEngineer.ID)
             {
                 throw new BO.BlEngineerNotAssignedToTaskException($"There is another engineer assigned to the task - {idTaskInEngineer}!");
             }

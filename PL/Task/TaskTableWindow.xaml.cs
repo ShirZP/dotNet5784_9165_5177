@@ -29,20 +29,33 @@ namespace PL.Task
                                                                                          typeof(TaskTableWindow),
                                                                                          new PropertyMetadata(null));
 
+        public static readonly DependencyProperty UserIDPermissionProperty = DependencyProperty.Register(
+                                                                                        "UserIDPermission",
+                                                                                        typeof(int),
+                                                                                        typeof(TaskTableWindow),
+                                                                                        new PropertyMetadata(null));
+
         public IEnumerable<BO.Task> TasksList
         {
             get { return (IEnumerable<BO.Task>)GetValue(TasksListProperty); }
             set { SetValue(TasksListProperty, value); }
         }
 
+        public int UserIDPermission
+        {
+            get { return (int)GetValue(UserIDPermissionProperty); }
+            set { SetValue(UserIDPermissionProperty, value); }
+        }
+
         public TaskFieldsToFilter Category { get; set; } = TaskFieldsToFilter.All;
 
 
-        public TaskTableWindow()
+        public TaskTableWindow(int id = 0)
         {
             InitializeComponent();
             SharedDependencyProperties.SetProjectStatus(this, s_bl.GetProjectStatus());
             SubcategoryFilter_CB.IsEnabled = false;
+            UserIDPermission = id;
             this.DataContext = this;
         }
 
@@ -51,7 +64,34 @@ namespace PL.Task
         /// </summary>
         private void RefreshWindow_Activated(object sender, EventArgs e)
         {
-            TasksList = s_bl?.Task.ReadAllFullTasksDetails()!;
+            if(UserIDPermission == 0) 
+            {
+                TasksList = s_bl?.Task.ReadAllFullTasksDetails()!;
+            }
+            else
+            {
+                BO.Engineer engineerUser = s_bl.Engineer.Read(UserIDPermission);
+
+                TasksList = (from task in s_bl?.Task.ReadAllFullTasksDetails()!
+                             where task.AssignedEngineer == null && task.Complexity <= engineerUser.Level && taskDependenciesComplete(task)
+                             select task).ToList(); 
+            }
+        }
+
+        /// <summary>
+        /// The function checks whether the task has completed dependencies.
+        /// </summary>
+        private bool taskDependenciesComplete(BO.Task task)
+        {
+            BO.TaskInList? notCompleteTask = (from dependency in task.Dependencies
+                                       where dependency.Status != BO.Status.Complete
+                                       select dependency).FirstOrDefault(); 
+            if(notCompleteTask != null)
+            {
+                return false;   
+            }
+
+            return true;
         }
 
         private void PenButton_Click(object sender, RoutedEventArgs e)
@@ -62,22 +102,11 @@ namespace PL.Task
             {
                 new TaskWindow(task.ID).ShowDialog();
             }
-
-
         }
 
         private void BtnAdd_Click(object sender, RoutedEventArgs e)
         {
             new TaskWindow().ShowDialog();
-        }
-
-        private void DataGrid_MouseDoubleClick(object sender, MouseButtonEventArgs e)
-        {
-            BO.Task? task = (sender as DataGrid)?.SelectedItem as BO.Task;
-            if (task != null)
-            {
-                new TaskWindow(task.ID).Show();
-            }
         }
 
         private void filterChange_SelectionChanged(object sender, SelectionChangedEventArgs e)
@@ -181,6 +210,32 @@ namespace PL.Task
         private void BtnBack_Click(object sender, RoutedEventArgs e)
         {
             this.Close();
+        }
+
+        private void DgSelectTask_PreviewMouseDoubleClick(object sender, MouseButtonEventArgs e)
+        {
+            try
+            {
+                e.Handled = true;
+                if (sender is DataGrid dataGrid && dataGrid.SelectedItem is BO.Task selectedTask)
+                {
+                    if (UserIDPermission == 0)
+                    {
+                        new TaskDetails(selectedTask.ID).ShowDialog();
+                    }
+                    else
+                    {
+                        BO.Engineer engineer = s_bl.Engineer.Read(UserIDPermission);
+                        engineer.EngineerCurrentTask = new BO.TaskInEngineer(selectedTask.ID, selectedTask.NickName);
+                        s_bl.Engineer.Update(engineer);
+                        this.Close();
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message, "ERROR :(", MessageBoxButton.OK, MessageBoxImage.Error);
+            }
         }
     }
 }

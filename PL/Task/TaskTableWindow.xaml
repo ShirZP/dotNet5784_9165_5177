@@ -49,12 +49,12 @@
                     </Grid.ColumnDefinitions>
 
                     <!--Task Table grid filter options-->
-                    <Label Grid.Column="0" Content="Filter By:" Foreground="WhiteSmoke" FontWeight="Bold" FontFamily="Montserrant" HorizontalAlignment="Left" Margin="85,0,0,0" VerticalAlignment="Center" FontSize="18"/>
+                    <Label Grid.Column="0"  Content="Filter By:" Foreground="WhiteSmoke" FontWeight="Bold" FontFamily="Montserrant" HorizontalAlignment="Left" Margin="85,0,0,0" VerticalAlignment="Center" FontSize="18"/>
                     <ComboBox x:Name="MainCategoryFilter_CB" Grid.Column="1" ItemsSource="{Binding Source={StaticResource TaskFieldsToFilterCollectionKey}}"  SelectedValue="{Binding Path=Category, Mode=TwoWay}" SelectionChanged="filterChange_SelectionChanged" VerticalAlignment="Stretch" Background="{DynamicResource {x:Static SystemColors.GradientActiveCaptionBrushKey}}" FontSize="18"/>
                     <Label Grid.Column="2" Content="Subcategory:" Foreground="WhiteSmoke" FontWeight="Bold" FontFamily="Montserrant" HorizontalAlignment="Left" Margin="52,0,0,0" VerticalAlignment="Center" FontSize="18"/>
                     <ComboBox x:Name="SubcategoryFilter_CB" SelectionChanged="filterTable_SelectionChanged"  Grid.Column="3" VerticalAlignment="Stretch" Background="{DynamicResource {x:Static SystemColors.GradientActiveCaptionBrushKey}}" FontSize="18"/>
                 </Grid>
-                <DataGrid AutoGenerateColumns="False" Grid.Row="2" ItemsSource="{Binding Path=TasksList}" ItemContainerStyle="{StaticResource AlternatingRowStyle}"  VerticalGridLinesBrush="Transparent" Margin="0,0,0,61" Width="Auto" Height ="470" Background="{StaticResource BackgroundBrushKey}" BorderThickness="0">
+                <DataGrid AutoGenerateColumns="False" Grid.Row="2" PreviewMouseDoubleClick="DgSelectTask_PreviewMouseDoubleClick" ItemsSource="{Binding Path=TasksList}" ItemContainerStyle="{StaticResource AlternatingRowStyle}"  VerticalGridLinesBrush="Transparent" Margin="0,0,0,61" Width="Auto" Height ="470" Background="{StaticResource BackgroundBrushKey}" BorderThickness="0">
                     <DataGrid.Columns>
                         <DataGridTextColumn Header="ID" Binding="{Binding ID}" Width="0.3*"/>
                         <DataGridTextColumn Header="Name" Binding="{Binding NickName}" Width="1.5*" />
@@ -74,7 +74,7 @@
                         <DataGridTemplateColumn Header="">
                             <DataGridTemplateColumn.CellTemplate>
                                 <DataTemplate>
-                                    <Button Click="PenButton_Click" Width="20" Height="20" BorderThickness="0" Style="{StaticResource IconButtonStyleKey}">
+                                    <Button Click="PenButton_Click" Visibility="{Binding DataContext.UserIDPermission, RelativeSource={RelativeSource AncestorType={x:Type DataGrid}} ,Mode=OneWay, Converter={StaticResource ConvertIdZeroToVisibleKey}}" Width="20" Height="20" BorderThickness="0" Style="{StaticResource IconButtonStyleKey}">
                                         <Image Source="/Task/penIcon.png" Stretch="UniformToFill"/>
                                     </Button>
                                 </DataTemplate>

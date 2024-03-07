@@ -12,7 +12,8 @@
 
         <local:ConvertIdToContent x:Key="ConverIdToContentKey"/>
         <local:ConvertIdToIsEnabled x:Key="ConvertIdToIsEnabledKey"/>
-        <local:ConvertIdToVisibility x:Key="ConvertIdToVisibilityKey"/>
+        <local:ConvertIdZeroToCollapsed x:Key="ConvertIdZeroToCollapsedKey"/>
+        <local:ConvertIdZeroToVisible x:Key="ConvertIdZeroToVisibleKey"/>
         <local:ConvertProjectStatusNotPlanningToVisible x:Key="ConvertProjectStatusNotPlanningToVisibleKey"/>
         <local:ConvertProjectStatusPlanningToVisible x:Key="ConvertProjectStatusPlanningToVisibleKey"/>
         <local:ConvertProjectStatusPlanningToEnabled x:Key="ConvertProjectStatusPlanningToEnabledKey"/>
@@ -24,6 +25,7 @@
         <local:ConvertPasswordToString x:Key="ConvertPasswordToStringKey"/>
         <local:ConvertTaskStatusToColor x:Key="ConvertTaskStatusToColorKey"/>
         <local:ConvertDateToBoolean x:Key="ConvertDateToBooleanKey"/>
+        <local:ConvertCurrentTaskToContent x:Key="ConvertCurrentTaskToContentKey"/>
         
         
         <!-- window icon -->

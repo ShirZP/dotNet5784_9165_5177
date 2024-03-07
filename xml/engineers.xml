@@ -15,13 +15,6 @@
     <cost>72</cost>
   </engineer>
   <engineer>
-    <id>268289610</id>
-    <fullName>Yair Cohen</fullName>
-    <email>YairCohen@gmail.com</email>
-    <level>AdvancedBeginner</level>
-    <cost>42</cost>
-  </engineer>
-  <engineer>
     <id>310761882</id>
     <fullName>Ariela Levin</fullName>
     <email>ArielaLevin@gmail.com</email>
@@ -41,5 +34,12 @@
     <email>ShiraIsraelof@gmail.com</email>
     <level>AdvancedBeginner</level>
     <cost>45</cost>
+  </engineer>
+  <engineer>
+    <id>268289610</id>
+    <fullName>Yair Cohen</fullName>
+    <email>YairCohen@gmail.com</email>
+    <level>Intermediate</level>
+    <cost>42</cost>
   </engineer>
 </ArrayOfEngineer>

@@ -73,7 +73,7 @@
                     <TextBlock Text="Current Task:" HorizontalAlignment="Left" Foreground="LightGray" FontFamily="Montserrant" TextWrapping="Wrap" Height="40" Width="130" FontSize="18" FontWeight="Bold"/>
 
                     <Button Click="BtnCurrentTaskView_Click" 
-                            Visibility="{Binding EngineerUser.EngineerCurrentTask, Mode=OneWay, Converter={StaticResource ConvertEngineerCurrentTaskToVisibleyKey}}"
+                            Visibility="{Binding EngineerUser.EngineerCurrentTask, Mode=OneWay, Converter={StaticResource ConvertEngineerCurrentTaskToVisibleKey}}"
                             Width="24" Height="25" 
                             Foreground="White" FontFamily="Montserrant" FontWeight="Bold" FontSize="18" Cursor="Hand" VerticalAlignment="Top" HorizontalAlignment="Left"
                             Style="{StaticResource IconButtonStyleKey}" Margin="135,5,0,0">
@@ -90,19 +90,19 @@
                     </Grid.ColumnDefinitions>
 
                     <StackPanel HorizontalAlignment="Stretch" Grid.Column="0" VerticalAlignment="Stretch" RenderTransformOrigin="0.425,0.524" Margin="10,0,0,0">
-                        <TextBlock Text="ID:" Visibility="{Binding EngineerUser.EngineerCurrentTask, Mode=OneWay, Converter={StaticResource ConvertEngineerCurrentTaskToVisibleyKey}}" Foreground="White" HorizontalAlignment="Left" FontWeight="Medium" FontFamily="Montserrant"  Height="35" Width="70"/>
-                        <TextBlock Text="Name:" Visibility="{Binding EngineerUser.EngineerCurrentTask, Mode=OneWay, Converter={StaticResource ConvertEngineerCurrentTaskToVisibleyKey}}" Foreground="White" HorizontalAlignment="Left" FontWeight="Medium" FontFamily="Montserrant" Height="35" Width="70"/>
+                        <TextBlock Text="ID:" Visibility="{Binding EngineerUser.EngineerCurrentTask, Mode=OneWay, Converter={StaticResource ConvertEngineerCurrentTaskToVisibleKey}}" Foreground="White" HorizontalAlignment="Left" FontWeight="Medium" FontFamily="Montserrant"  Height="35" Width="70"/>
+                        <TextBlock Text="Name:" Visibility="{Binding EngineerUser.EngineerCurrentTask, Mode=OneWay, Converter={StaticResource ConvertEngineerCurrentTaskToVisibleKey}}" Foreground="White" HorizontalAlignment="Left" FontWeight="Medium" FontFamily="Montserrant" Height="35" Width="70"/>
                     </StackPanel>
 
                     <StackPanel HorizontalAlignment="Stretch" Grid.Column="1" VerticalAlignment="Stretch" RenderTransformOrigin="0.425,0.524" Margin="10,0,0,0">
-                        <TextBlock Text="{Binding EngineerUser.EngineerCurrentTask.ID}" Visibility="{Binding EngineerUser.EngineerCurrentTask, Mode=OneWay, Converter={StaticResource ConvertEngineerCurrentTaskToVisibleyKey}}" Foreground="DarkGray"  HorizontalAlignment="Stretch" FontWeight="Medium" FontFamily="Montserrant" Height="35"/>
-                        <TextBlock Text="{Binding EngineerUser.EngineerCurrentTask.NickName}" Visibility="{Binding EngineerUser.EngineerCurrentTask, Mode=OneWay, Converter={StaticResource ConvertEngineerCurrentTaskToVisibleyKey}}" Foreground="DarkGray"  HorizontalAlignment="Stretch" FontWeight="Medium" FontFamily="Montserrant" Height="35"/>
+                        <TextBlock Text="{Binding EngineerUser.EngineerCurrentTask.ID}" Visibility="{Binding DataContext.EngineerUser.EngineerCurrentTask, RelativeSource={RelativeSource AncestorType={x:Type DataGrid}},Mode=OneWay, Converter={StaticResource ConvertEngineerCurrentTaskToVisibleKey}}" Foreground="DarkGray"  HorizontalAlignment="Stretch" FontWeight="Medium" FontFamily="Montserrant" Height="35"/>
+                        <TextBlock Text="{Binding EngineerUser.EngineerCurrentTask.NickName}" Visibility="{Binding EngineerUser.EngineerCurrentTask, Mode=OneWay, Converter={StaticResource ConvertEngineerCurrentTaskToVisibleKey}}" Foreground="DarkGray"  HorizontalAlignment="Stretch" FontWeight="Medium" FontFamily="Montserrant" Height="35"/>
                         <TextBlock Text="You have no current task :(" Visibility="{Binding EngineerUser.EngineerCurrentTask, Mode=OneWay, Converter={StaticResource ConvertEmptyEngineerCurrentTaskToVisibleKey}}"  HorizontalAlignment="Left" Foreground="LightGray" TextWrapping="Wrap" Height="40" Width="239" FontSize="18" FontWeight="Medium" FontFamily="Montserrant"/>
 
                     </StackPanel>
 
                     <Button Grid.Column="2"
-                            Content="Select a task" 
+                            Content="{Binding EngineerUser.EngineerCurrentTask, Mode=OneWay, Converter={StaticResource ConvertCurrentTaskToContentKey}}"  
                             BorderThickness="0"
                             Foreground="White"
                             FontFamily="Montserrant"
@@ -113,7 +113,8 @@
                             Height="50" Width="150" FontSize="18" 
                             FontWeight="Bold" 
                             Style="{StaticResource BluePurpleButtonStyleKey}"
-                            Template="{StaticResource ButtonTemplateKey}"/>
+                            Template="{StaticResource ButtonTemplateKey}"
+                            Click="BtnSelectOrDoneTask_Click"/>
                 </Grid>
             </Grid>
         </Border>

@@ -85,5 +85,44 @@ namespace PL.Users
             EngineerUser = s_bl.Engineer.Read(EngineerUser.ID);
         }
 
+        private void BtnSelectOrDoneTask_Click(object sender, RoutedEventArgs e)
+        {
+            Button? button = sender as Button;
+            if (button != null)
+            {
+                try
+                {
+                    MessageBoxResult messageBoxResult;
+
+                    if (button.Content.ToString() == "Select Task")
+                    {
+                        new TaskTableWindow(EngineerUser.ID).ShowDialog();
+                        EngineerUser = s_bl.Engineer.Read(EngineerUser.ID);
+                    }
+                    else
+                    {
+                        MessageBoxResult result = MessageBox.Show("Do you want to mark the task as complete?", "Initialization Confirmation", MessageBoxButton.YesNo, MessageBoxImage.Question);
+
+                        if(result == MessageBoxResult.Yes) 
+                        {
+                            BO.Task task = s_bl.Task.Read(EngineerUser.EngineerCurrentTask!.ID);
+                            task.Status = BO.Status.Complete;
+                            s_bl.Task.Update(task);
+
+                            //update the current of the engineer to be empty.  
+                            EngineerUser.EngineerCurrentTask = null;
+                            s_bl.Engineer.Update(EngineerUser);
+                        }
+                       
+                    }
+
+                 
+                }
+                catch (Exception ex)
+                {
+                    MessageBox.Show(ex.Message, "ERROR", MessageBoxButton.OK, MessageBoxImage.Error);
+                }
+            }
+        }
     }
 }
