@@ -32,6 +32,7 @@ namespace PL.Users
             InitializeComponent();
             SharedDependencyProperties.SetClock(this, s_bl.Clock);
             StartDatePicker.DisplayDateStart = SharedDependencyProperties.GetClock(this);
+            ExecuteProjectByClock();
         }
 
         /// <summary>
@@ -87,21 +88,25 @@ namespace PL.Users
         private void BtnAddHour_Click(object sender, RoutedEventArgs e)
         {
             SharedDependencyProperties.SetClock(this, s_bl.MoveClockHourForward());
+            ExecuteProjectByClock();
         }
 
         private void BtnAddDay_Click(object sender, RoutedEventArgs e)
         {
             SharedDependencyProperties.SetClock(this, s_bl.MoveClockDayForward());
+            ExecuteProjectByClock();
         }
 
         private void BtnAddYear_Click(object sender, RoutedEventArgs e)
         {
             SharedDependencyProperties.SetClock(this, s_bl.MoveClockYearForward());
+            ExecuteProjectByClock();
         }
 
         private void BtnResetClock_Click(object sender, RoutedEventArgs e)
         {
             SharedDependencyProperties.SetClock(this, s_bl.initializeClock());
+            ExecuteProjectByClock();
         }
 
         #endregion
@@ -145,19 +150,17 @@ namespace PL.Users
                     s_bl.Task.autoScheduledDate();
                     s_bl.SetProjectEndDate();
 
-                    //StartDateView.Text = s_bl.GetProjectStartDate().ToString();
-                    //EndDateView.Text = s_bl.GetProjectEndDate().ToString();
                     SharedDependencyProperties.SetProjectStartDate(this, s_bl.GetProjectStartDate()!.Value);
                     SharedDependencyProperties.SetProjectEndDate(this, s_bl.GetProjectEndDate()!.Value);
 
 
-                    SharedDependencyProperties.SetProjectStatus(this, s_bl.GetProjectStatus());
-                    
+                    ExecuteProjectByClock();
+
+
 
                     EndDateViewLabel.Visibility = Visibility.Visible;
                     StartDateView.Visibility = Visibility.Visible;
                     EndDateView.Visibility = Visibility.Visible;
-                    GanttChartBtn.Visibility = Visibility.Visible;
                 }
                 catch (Exception ex)
                 {
@@ -188,6 +191,27 @@ namespace PL.Users
             {
                 MessageBox.Show("It is not possible to select a date earlier than now!");
                 picker.SelectedDate = SharedDependencyProperties.GetClock(this); // Set to minimum allowed date or null
+            }
+        }
+
+        private void ExecuteProjectByClock()
+        {
+            if(s_bl.GetProjectStartDate().HasValue && s_bl.GetProjectStatus() == BO.ProjectStatus.Planning)
+            {
+                if(SharedDependencyProperties.GetClock(this) >= s_bl.GetProjectStartDate())
+                {
+                    s_bl.changeStatusToExecution();
+                    SharedDependencyProperties.SetProjectStatus(this, s_bl.GetProjectStatus());
+
+                }
+            }
+            else if(s_bl.GetProjectStatus() == BO.ProjectStatus.Execution )
+            {
+                if(SharedDependencyProperties.GetClock(this) < s_bl.GetProjectStartDate())
+                {
+                    s_bl.changeStatusToPlanning();
+                    SharedDependencyProperties.SetProjectStatus(this, s_bl.GetProjectStatus());
+                }
             }
         }
     }

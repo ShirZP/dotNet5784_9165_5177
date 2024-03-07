@@ -5,11 +5,10 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:PL.GanttChar"
         mc:Ignorable="d"
-        Title="GanttChar" Height="450" Width="1100"
-            Icon="{StaticResource AppIcon}"
-    ResizeMode ="NoResize"
-    WindowStartupLocation="CenterScreen"
-    Background="Transparent">
+        Title="GanttChar" Height="800" Width="1500"
+        Icon="{StaticResource AppIcon}"
+        WindowStartupLocation="CenterScreen"
+        Background="Transparent">
     <Border CornerRadius="50"
     Background="{StaticResource windowBackground}">
 
@@ -18,8 +17,10 @@
         Opacity="0.85"
         BorderBrush="{StaticResource BorderBrushKey}"
         Background="{StaticResource BackgroundBrushKey}">
+            
+            <ScrollViewer VerticalScrollBarVisibility="Auto" HorizontalScrollBarVisibility="Auto">
 
-            <Grid>
+                <Grid>
                 <Grid.RowDefinitions>
                     <RowDefinition Height="40"/>
                     <RowDefinition Height="auto"/>
@@ -72,6 +73,8 @@
                     </ItemsControl>
                 </StackPanel>
             </Grid>
+            
+            </ScrollViewer>
         </Border>
     </Border>
 </Window>

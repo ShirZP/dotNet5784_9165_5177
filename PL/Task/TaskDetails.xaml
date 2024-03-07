@@ -20,59 +20,65 @@
                 Background="{StaticResource BackgroundBrushKey}">
 
             <Grid>
-                <TextBlock Text="Task Details:" Foreground="WhiteSmoke" FontSize="20" FontWeight="Bold" FontFamily="Montserrant" HorizontalAlignment="Left" Height="39" Margin="50,10,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="329"/>
+                <Button Content="Back"
+                        BorderThickness="0" Foreground="White" Template="{StaticResource ButtonTemplateKey}" Style="{StaticResource PurpleButtonStyleKey}" FontFamily="Montserrant" FontWeight="Medium" Cursor="Hand" 
+                        HorizontalAlignment="Left" 
+                        VerticalAlignment="Top"
+                        Height="30" Width="50" 
+                        FontSize="18" Click="BtnBack_Click"/>
+                
+                <TextBlock Text="Task Details:" Foreground="WhiteSmoke" FontSize="20" FontWeight="Bold" FontFamily="Montserrant" HorizontalAlignment="Left" Height="39" Margin="50,50,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="329"/>
 
-                <!-- Status -->
-                <ComboBox ItemsSource="{Binding Source={StaticResource TaskStatusCollectionKey}}" 
-                          SelectedValue="{Binding TaskView.Status, Mode=TwoWay, NotifyOnValidationError=true, ValidatesOnExceptions=true}" HorizontalAlignment="Left" Margin="113,196,0,0" VerticalAlignment="Top" Height="25" Width="217"/>
 
-
-                <Label Content="ID:" Foreground="White" FontWeight="Medium" FontFamily="Montserrant" HorizontalAlignment="Left" Margin="50,56,0,0" VerticalAlignment="Top" Height="25" Width="110"/>
-                <Label Content="Name:" Foreground="White" FontWeight="Medium" FontFamily="Montserrant" HorizontalAlignment="Left" Margin="50,86,0,0" VerticalAlignment="Top" Height="25" Width="110"/>
-                <Label Content="Description:" Foreground="White" FontWeight="Medium" FontFamily="Montserrant" HorizontalAlignment="Left" Margin="50,116,0,0" VerticalAlignment="Top" Height="25" Width="110"/>
-                <Label Content="Status:" Foreground="White" FontWeight="Medium" FontFamily="Montserrant" HorizontalAlignment="Left" Margin="50,196,0,0" VerticalAlignment="Top" Height="28" Width="110"/>
-                <Label Content="Complexity:" Foreground="White" FontWeight="Medium" FontFamily="Montserrant" HorizontalAlignment="Left" Margin="50,276,0,0" VerticalAlignment="Top" Height="28" Width="110"/>
-                <Label Content="Scheduled Date:"  Foreground="White" FontWeight="Medium" FontFamily="Montserrant"  HorizontalAlignment="Left" Margin="440,138,0,0" VerticalAlignment="Top" Height="28" Width="110"/>
-                <Label Content="Start Date:" Foreground="White" FontWeight="Medium" FontFamily="Montserrant"  HorizontalAlignment="Left" Margin="441,173,0,0" VerticalAlignment="Top" Height="28" Width="110"/>
-                <Label Content="Forecast Date:" Foreground="White" FontWeight="Medium" FontFamily="Montserrant"  HorizontalAlignment="Left" Margin="441,203,0,0" VerticalAlignment="Top" Height="28" Width="110"/>
-                <Label Content="Complete Date:"  Foreground="White" FontWeight="Medium" FontFamily="Montserrant" HorizontalAlignment="Left" Margin="441,236,0,0" VerticalAlignment="Top" Height="28" Width="110"/>
-                <Label Content="Required Days Effort:" Foreground="White" FontWeight="Medium" FontFamily="Montserrant" HorizontalAlignment="Left" Margin="440,56,0,0" VerticalAlignment="Top" Height="28" Width="125"/>
-                <Label Content="Deliverables:" Foreground="White" FontWeight="Medium" FontFamily="Montserrant" HorizontalAlignment="Left" Margin="440,92,0,0" VerticalAlignment="Top" Height="28" Width="110"/>
-                <Label Content="Remarks:" Foreground="White" FontWeight="Medium" FontFamily="Montserrant" HorizontalAlignment="Left" Margin="50,310,0,0" VerticalAlignment="Top" Height="28" Width="110"/>
+                <Label Content="ID:" Foreground="White" FontWeight="Medium" FontFamily="Montserrant" HorizontalAlignment="Left" Margin="50,106,0,0" VerticalAlignment="Top" Height="25" Width="110"/>
+                <Label Content="Name:" Foreground="White" FontWeight="Medium" FontFamily="Montserrant" HorizontalAlignment="Left" Margin="50,136,0,0" VerticalAlignment="Top" Height="25" Width="110"/>
+                <Label Content="Description:" Foreground="White" FontWeight="Medium" FontFamily="Montserrant" HorizontalAlignment="Left" Margin="50,166,0,0" VerticalAlignment="Top" Height="25" Width="110"/>
+                <Label Content="Status:" Foreground="White" FontWeight="Medium" FontFamily="Montserrant" HorizontalAlignment="Left" Margin="50,246,0,0" VerticalAlignment="Top" Height="28" Width="110"/>
+                <Label Content="Complexity:" Foreground="White" FontWeight="Medium" FontFamily="Montserrant" HorizontalAlignment="Left" Margin="50,284,0,0" VerticalAlignment="Top" Height="28" Width="110"/>
+                <Label Content="Scheduled Date:"  Foreground="White" FontWeight="Medium" FontFamily="Montserrant"  HorizontalAlignment="Left" Margin="440,188,0,0" VerticalAlignment="Top" Height="28" Width="110"/>
+                <Label Content="Start Date:" Foreground="White" FontWeight="Medium" FontFamily="Montserrant"  HorizontalAlignment="Left" Margin="441,223,0,0" VerticalAlignment="Top" Height="28" Width="110"/>
+                <Label Content="Forecast Date:" Foreground="White" FontWeight="Medium" FontFamily="Montserrant"  HorizontalAlignment="Left" Margin="441,253,0,0" VerticalAlignment="Top" Height="28" Width="110"/>
+                <Label Content="Complete Date:"  Foreground="White" FontWeight="Medium" FontFamily="Montserrant" HorizontalAlignment="Left" Margin="441,286,0,0" VerticalAlignment="Top" Height="28" Width="110"/>
+                <Label Content="Required Days Effort:" Foreground="White" FontWeight="Medium" FontFamily="Montserrant" HorizontalAlignment="Left" Margin="440,106,0,0" VerticalAlignment="Top" Height="28" Width="125"/>
+                <Label Content="Deliverables:" Foreground="White" FontWeight="Medium" FontFamily="Montserrant" HorizontalAlignment="Left" Margin="440,142,0,0" VerticalAlignment="Top" Height="28" Width="110"/>
+                <Label Content="Remarks:" Foreground="White" FontWeight="Medium" FontFamily="Montserrant" HorizontalAlignment="Left" Margin="50,318,0,0" VerticalAlignment="Top" Height="28" Width="110"/>
 
                 <!-- ID -->
-                <TextBlock Text="{Binding TaskView.ID}" Foreground="DarkGray" FontFamily="Montserrant" HorizontalAlignment="Left" Margin="177,56,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="217"/>
+                <TextBlock Text="{Binding TaskView.ID}" Foreground="DarkGray" FontFamily="Montserrant" HorizontalAlignment="Left" Margin="177,106,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="217"/>
                 <!-- Name -->
-                <TextBlock Text="{Binding TaskView.NickName}" Foreground="DarkGray" FontFamily="Montserrant" HorizontalAlignment="Left" Margin="177,91,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="217"/>
+                <TextBlock Text="{Binding TaskView.NickName}" Foreground="DarkGray" FontFamily="Montserrant" HorizontalAlignment="Left" Margin="177,141,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="217"/>
 
                 <!-- Description -->
-                <TextBlock Text="{Binding TaskView.Description}" Foreground="DarkGray" FontFamily="Montserrant" HorizontalAlignment="Left" Margin="177,116,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="217" Height="71"/>
+                <TextBlock Text="{Binding TaskView.Description}" Foreground="DarkGray" FontFamily="Montserrant" HorizontalAlignment="Left" Margin="177,166,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="217" Height="71"/>
+
+                <!-- Status -->
+                <TextBlock Text="{Binding TaskView.Status, Mode=TwoWay}" HorizontalAlignment="Left" Margin="176,246,0,0" VerticalAlignment="Top" Height="25" Width="217"/>
 
                 <!-- Complexity -->
-                <TextBlock Text="{Binding TaskView.Complexity}" Foreground="DarkGray" FontFamily="Montserrant" HorizontalAlignment="Left" Margin="177,276,0,0" VerticalAlignment="Top" Height="25" Width="217"/>
+                <TextBlock Text="{Binding TaskView.Complexity}" Foreground="DarkGray" FontFamily="Montserrant" HorizontalAlignment="Left" Margin="177,284,0,0" VerticalAlignment="Top" Height="25" Width="217"/>
 
                 <!-- Scheduled Date -->
-                <TextBlock Text="{Binding TaskView.ScheduledDate}" Foreground="DarkGray" FontFamily="Montserrant" HorizontalAlignment="Left" Margin="573,143,0,0" VerticalAlignment="Top" Width ="217"/>
+                <TextBlock Text="{Binding TaskView.ScheduledDate, StringFormat={}{0:dd/MM/yyyy}}" Foreground="DarkGray" FontFamily="Montserrant" HorizontalAlignment="Left" Margin="573,193,0,0" VerticalAlignment="Top" Width ="217"/>
                 <!-- Start Date -->
-                <TextBlock Text="{Binding TaskView.StartDate}" Foreground="DarkGray" FontFamily="Montserrant" Margin="573,180,0,0" VerticalAlignment="Top" HorizontalAlignment="Left" Width ="217"/>
+                <TextBlock Text="{Binding TaskView.StartDate, StringFormat={}{0:dd/MM/yyyy}}" Foreground="DarkGray" FontFamily="Montserrant" Margin="573,230,0,0" VerticalAlignment="Top" HorizontalAlignment="Left" Width ="217"/>
                 <!-- Forecast Date -->
-                <TextBlock Text="{Binding TaskView.ForecastDate}" Foreground="DarkGray" FontFamily="Montserrant" HorizontalAlignment="Left" Margin="572,208,0,0" VerticalAlignment="Top" Width ="217"/>
+                <TextBlock Text="{Binding TaskView.ForecastDate, StringFormat={}{0:dd/MM/yyyy}}" Foreground="DarkGray" FontFamily="Montserrant" HorizontalAlignment="Left" Margin="572,258,0,0" VerticalAlignment="Top" Width ="217"/>
                 <!-- Complete Date -->
-                <TextBlock Text="{Binding TaskView.CompleteDate}" Foreground="DarkGray" FontFamily="Montserrant" HorizontalAlignment="Left" Margin="573,240,0,0" VerticalAlignment="Top" Width ="217"/>
+                <TextBlock Text="{Binding TaskView.CompleteDate, StringFormat={}{0:dd/MM/yyyy}}" Foreground="DarkGray" FontFamily="Montserrant" HorizontalAlignment="Left" Margin="573,290,0,0" VerticalAlignment="Top" Width ="217"/>
 
                 <!-- Required Effort Time -->
-                <TextBlock Text="{Binding TaskView.RequiredEffortTime}" Foreground="DarkGray" FontFamily="Montserrant" HorizontalAlignment="Left" Margin="571,60,0,0" VerticalAlignment="Top" Height="20" Width="217"/>
+                <TextBlock Text="{Binding TaskView.RequiredEffortTime}" Foreground="DarkGray" FontFamily="Montserrant" HorizontalAlignment="Left" Margin="571,110,0,0" VerticalAlignment="Top" Height="20" Width="217"/>
 
                 <!-- Deliverables -->
-                <TextBlock Text="{Binding TaskView.Deliverables}" Foreground="DarkGray" FontFamily="Montserrant" HorizontalAlignment="Left" Margin="572,84,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="216" Height="44"/>
+                <TextBlock Text="{Binding TaskView.Deliverables}" Foreground="DarkGray" FontFamily="Montserrant" HorizontalAlignment="Left" Margin="572,134,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="216" Height="44"/>
 
                 <!-- Remarks -->
-                <TextBlock Text="{Binding TaskView.Remarks}" Foreground="DarkGray" FontFamily="Montserrant" HorizontalAlignment="Left" Margin="177,310,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="217" Height="44"/>
+                <TextBlock Text="{Binding TaskView.Remarks}" Foreground="DarkGray" FontFamily="Montserrant" HorizontalAlignment="Left" Margin="177,318,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="217" Height="44"/>
 
                 <!-- Dependencies -->
                 <Label Content="Dependencies:" Foreground="DarkGray" FontWeight="Medium" FontFamily="Montserrant" HorizontalAlignment="Left" Margin="50,370,0,0" VerticalAlignment="Top" Height="25" Width="110"/>
 
-                <DataGrid  ItemsSource="{Binding TaskView.Dependencies}" ItemContainerStyle="{StaticResource AlternatingRowStyle}" Background="Transparent" VerticalGridLinesBrush="Transparent" BorderThickness="0" AutoGenerateColumns="False" CanUserAddRows="False" Height="190" Width="400" HorizontalAlignment="Left" Margin="56,400,0,34">
+                <DataGrid  ItemsSource="{Binding TaskView.Dependencies}" ItemContainerStyle="{StaticResource AlternatingRowStyle}" PreviewMouseDoubleClick="DgSelectTask_PreviewMouseDoubleClick" Background="Transparent" VerticalGridLinesBrush="Transparent" BorderThickness="0" AutoGenerateColumns="False" CanUserAddRows="False" Height="190" Width="400" HorizontalAlignment="Left" Margin="56,400,0,34">
                     <DataGrid.Columns>
                         <DataGridTextColumn Header="ID" Binding="{Binding ID}" Width="0.1*"/>
                         <DataGridTextColumn Header="Name" Binding="{Binding NickName}"/>

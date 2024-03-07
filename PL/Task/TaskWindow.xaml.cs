@@ -184,5 +184,14 @@ namespace PL.Task
         {
             this.Close();
         }
+
+        private void DgSelectTask_PreviewMouseDoubleClick(object sender, MouseButtonEventArgs e)
+        {
+            e.Handled = true;
+            if (sender is DataGrid dataGrid && dataGrid.SelectedItem is BO.TaskInList selectedTask)
+            {
+                new TaskDetails(selectedTask.ID).ShowDialog();
+            }
+        }
     }
 }

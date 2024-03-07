@@ -51,6 +51,14 @@ sealed internal class DalList : IDal
     }
 
     /// <summary>
+    /// The function change the status to status Planning
+    /// </summary>
+    public void changeStatusToPlanning()
+    {
+        DataSource.Config.projectStatus = DO.ProjectStatus.Planning;
+    }
+
+    /// <summary>
     /// The function change the status to status BuildingSchedule
     /// </summary>
     /// <exception cref="DalChangProjectStatusException">If you try to change from status Execution to status BuildingSchedule</exception>

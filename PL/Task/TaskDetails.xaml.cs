@@ -45,5 +45,19 @@ namespace PL.Task
                 MessageBox.Show(ex.Message, "ERROR :(", MessageBoxButton.OK, MessageBoxImage.Error);
             }
         }
+
+        private void DgSelectTask_PreviewMouseDoubleClick(object sender, MouseButtonEventArgs e)
+        {
+            e.Handled = true;
+            if (sender is DataGrid dataGrid && dataGrid.SelectedItem is BO.TaskInList selectedTask)
+            {
+                new TaskDetails(selectedTask.ID).ShowDialog();
+            }
+        }
+
+        private void BtnBack_Click(object sender, RoutedEventArgs e)
+        {
+            this.Close();
+        }
     }
 }

@@ -76,10 +76,13 @@ internal class Bl : IBl
             }
 
             _dal.setProjectEndDate(endDate.Value);
-            _dal.changeStatusToExecution();
         }
         else
             throw new Exception("The project already has an end date");
+    }
+    public void changeStatusToPlanning()
+    {
+        _dal.changeStatusToPlanning();
     }
 
     public void changeStatusToBuildingSchedule()

@@ -56,14 +56,14 @@ namespace PL.GanttChar
 
             loadGanttDatesList();
 
-            //GanttTasksList = (from task in s_bl.Task.ReadAllFullTasksDetails()
-            //                  select convertTaskToGanttTask(task)).ToList();
+            GanttTasksList = (from task in s_bl.Task.ReadAllFullTasksDetails()
+                              select convertTaskToGanttTask(task)).ToList();
 
-            GanttTasksList = new List<TaskGantt>()
-            {new TaskGantt() {taskID = 1,taskName = "T1",taskStatus = BO.Status.New, duration = 3*60, timeFromStart = 20,    timeToEnd = 7},
-            new TaskGantt() {taskID = 2,taskName = "T2",taskStatus = BO.Status.Active, duration = 5*60, timeFromStart = 60,    timeToEnd = 4},
-            new TaskGantt() { taskID = 3, taskName = "T3",taskStatus = BO.Status.Complete, duration = 2*60, timeFromStart = 10, timeToEnd = 13 }
-            };
+            //GanttTasksList = new List<TaskGantt>()
+            //{new TaskGantt() {taskID = 1,taskName = "T1",taskStatus = BO.Status.New, duration = 3*60, timeFromStart = 20,    timeToEnd = 7},
+            //new TaskGantt() {taskID = 2,taskName = "T2",taskStatus = BO.Status.Active, duration = 5*60, timeFromStart = 60,    timeToEnd = 4},
+            //new TaskGantt() { taskID = 3, taskName = "T3",taskStatus = BO.Status.Complete, duration = 2*60, timeFromStart = 10, timeToEnd = 13 }
+            //};
 
             this.DataContext = this;
         

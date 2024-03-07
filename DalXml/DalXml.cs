@@ -92,6 +92,17 @@ sealed internal class DalXml : IDal
     }
 
     /// <summary>
+    /// The function change the status to status Planning
+    /// </summary>
+    public void changeStatusToPlanning()
+    {
+        XElement root = XMLTools.LoadListFromXMLElement(Config.s_data_config_xml);
+        root.Element("ProjectStatus")!.SetValue(DO.ProjectStatus.Planning.ToString());
+        XMLTools.SaveListToXMLElement(root, Config.s_data_config_xml);
+
+    }
+
+    /// <summary>
     /// The function change the status to status BuildingSchedule
     /// </summary>
     /// <exception cref="DalChangProjectStatusException">If you try to change from status Execution to status BuildingSchedule</exception>
