@@ -107,35 +107,6 @@ public partial class ManagerWindow : Window
         new TaskTableWindow().ShowDialog();
     }
 
-
-    #region Clock methods
-
-    private void BtnAddHour_Click(object sender, RoutedEventArgs e)
-    {
-        SharedDependencyProperties.SetClock(this, s_bl.MoveClockHourForward());
-        ExecuteProjectByClock();
-    }
-
-    private void BtnAddDay_Click(object sender, RoutedEventArgs e)
-    {
-        SharedDependencyProperties.SetClock(this, s_bl.MoveClockDayForward());
-        ExecuteProjectByClock();
-    }
-
-    private void BtnAddYear_Click(object sender, RoutedEventArgs e)
-    {
-        SharedDependencyProperties.SetClock(this, s_bl.MoveClockYearForward());
-        ExecuteProjectByClock();
-    }
-
-    private void BtnResetClock_Click(object sender, RoutedEventArgs e)
-    {
-        SharedDependencyProperties.SetClock(this, s_bl.initializeClock());
-        ExecuteProjectByClock();
-    }
-
-    #endregion
-
     private void BtnGanttChart_Click(object sender, RoutedEventArgs e)
     {
             new GanttCharWindow().ShowDialog();
@@ -231,4 +202,32 @@ public partial class ManagerWindow : Window
             }
         }
     }
+
+    #region Clock methods
+
+    private void BtnAddHour_Click(object sender, RoutedEventArgs e)
+    {
+        SharedDependencyProperties.SetClock(this, s_bl.MoveClockHourForward());
+        ExecuteProjectByClock();
+    }
+
+    private void BtnAddDay_Click(object sender, RoutedEventArgs e)
+    {
+        SharedDependencyProperties.SetClock(this, s_bl.MoveClockDayForward());
+        ExecuteProjectByClock();
+    }
+
+    private void BtnAddYear_Click(object sender, RoutedEventArgs e)
+    {
+        SharedDependencyProperties.SetClock(this, s_bl.MoveClockYearForward());
+        ExecuteProjectByClock();
+    }
+
+    private void BtnResetClock_Click(object sender, RoutedEventArgs e)
+    {
+        SharedDependencyProperties.SetClock(this, s_bl.initializeClock());
+        ExecuteProjectByClock();
+    }
+
+    #endregion
 }

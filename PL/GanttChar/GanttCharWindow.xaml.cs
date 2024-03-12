@@ -59,12 +59,6 @@ namespace PL.GanttChar
             GanttTasksList = (from task in s_bl.Task.ReadAllFullTasksDetails()
                               select convertTaskToGanttTask(task)).ToList();
 
-            //GanttTasksList = new List<TaskGantt>()
-            //{new TaskGantt() {taskID = 1,taskName = "T1",taskStatus = BO.Status.New, duration = 3*60, timeFromStart = 20,    timeToEnd = 7},
-            //new TaskGantt() {taskID = 2,taskName = "T2",taskStatus = BO.Status.Active, duration = 5*60, timeFromStart = 60,    timeToEnd = 4},
-            //new TaskGantt() { taskID = 3, taskName = "T3",taskStatus = BO.Status.Complete, duration = 2*60, timeFromStart = 10, timeToEnd = 13 }
-            //};
-
             this.DataContext = this;
         
         }
@@ -76,11 +70,35 @@ namespace PL.GanttChar
 
             DateTime? projectStartDate = s_bl.GetProjectStartDate();
             DateTime? projectEndDate = s_bl.GetProjectEndDate();
-            int duration = (int)task.RequiredEffortTime!.Value.Days;
-            int timeFromStart = (int)(task.ScheduledDate - projectStartDate)!.Value.TotalDays;
-            int timeToEnd = (int)(projectEndDate - task.ForecastDate)!.Value.TotalDays;
 
-            return new TaskGantt(){taskID = task.ID,taskName = task.NickName, taskStatus = task.Status, duration = duration * dateDurationSize,  timeFromStart = timeFromStart * dateDurationSize, timeToEnd = timeToEnd * dateDurationSize };
+            DateTime? start = task.StartDate == null ? task.ScheduledDate.Value.Date : task.StartDate.Value.Date;
+            DateTime? end = task.CompleteDate == null ? task.ForecastDate.Value.Date : task.CompleteDate.Value.Date;
+           
+            TimeSpan? effort;
+            if(task.StartDate != null && task.CompleteDate != null)
+            {
+                effort = (task.CompleteDate - task.StartDate);
+            }
+            else if(task.StartDate != null && task.CompleteDate == null)
+            {
+                effort = (task.ForecastDate - task.StartDate);
+            }
+            else
+            {
+                effort = task.RequiredEffortTime;
+            }
+
+
+            int duration = (int)effort!.Value.Days + 1;
+            double timeFromStart = (start - projectStartDate)!.Value.TotalDays;
+            double timeToEnd = ((projectEndDate!.Value - end).Value.TotalDays == 0) ? 0 : (projectEndDate!.Value - end)!.Value.TotalDays + 1;
+
+            return new TaskGantt(){taskID = task.ID,
+                                   taskName = task.NickName, 
+                                   taskStatus = task.Status,
+                                   duration = duration * dateDurationSize + duration + 1,
+                                   timeFromStart = timeFromStart * dateDurationSize + timeFromStart + 1,
+                                   timeToEnd = timeToEnd * dateDurationSize + timeToEnd + 1};
            
         
         }
@@ -89,7 +107,7 @@ namespace PL.GanttChar
         {
              GanttDatesList = new List<DateGantt>();
 
-            for (DateTime date = s_bl.GetProjectStartDate().Value; date <= s_bl.GetProjectEndDate(); date = date.AddDays(1))
+            for (DateTime date = s_bl.GetProjectStartDate().Value; date.Date < s_bl.GetProjectEndDate()!.Value.Date; date = date.AddDays(1))
             {
                 GanttDatesList.Add(new DateGantt() { Date = date });
             }

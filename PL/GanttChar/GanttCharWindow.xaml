@@ -30,6 +30,7 @@
 
                 <StackPanel Grid.Row="1">
 
+                    <!--Dates-->
                     <ItemsControl ItemsSource="{Binding GanttDatesList}" Height="25"  Margin="60,0,0,0" VerticalAlignment="Top">
                         <!-- Set the panel that arranges the items -->
                         <ItemsControl.ItemsPanel>
@@ -52,19 +53,17 @@
                         </ItemsControl.ItemTemplate>
                     </ItemsControl>
 
+                    <!--Gantt list-->
                     <ItemsControl ItemsSource="{Binding GanttTasksList}" Margin="30,0,0,0">
                         <ItemsControl.ItemTemplate>
                             <DataTemplate>
                                 <Border BorderThickness="2" BorderBrush="White">
                                     <StackPanel Orientation="Horizontal" HorizontalAlignment="Left">
-                                            <TextBlock HorizontalAlignment="Left" Text="{Binding taskID}" Width="30" FontWeight="Bold" Background="#462AD8" Foreground="White"/>
+                                            <TextBlock HorizontalAlignment="left" Text="{Binding taskID}" TextAlignment="Center" Width="30" FontWeight="Bold" Background="#462AD8" Foreground="White"/>
+                                       
                                         <Rectangle HorizontalAlignment="Left" Height="20" Width="{Binding timeFromStart}"  Fill="White"/>
-
-                                        <!--Width="{Binding DaysFromStart}"-->
-                                        <!--Width="{Binding DaysFromStart}"-->
                                         <TextBlock HorizontalAlignment="Left" Text="{Binding taskName}" Width="{Binding duration}" FontWeight="Bold" Background="{Binding taskStatus, Mode=OneWay, Converter={StaticResource ConvertTaskStatusToColorKey}}"/>
                                         <Rectangle HorizontalAlignment="Left" Height="20" Width="{Binding timeToEnd}"  Fill="White"/>
-
 
                                     </StackPanel>
                                 </Border>

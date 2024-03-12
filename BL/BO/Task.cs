@@ -91,7 +91,8 @@ public class Task
         Dependencies = dependencies;    
         ScheduledDate = scheduledDate;  
         StartDate = startDate;  
-        ForecastDate = forecastDate;    
+        ForecastDate = forecastDate;
+        CompleteDate = completeDate;
         RequiredEffortTime = (requiredEffortTime == null) ? TimeSpan.FromDays(3) : requiredEffortTime;
         Deliverables = deliverables;    
         Remarks = remarks;  

@@ -14,7 +14,7 @@ internal class TaskImplementation : ITask
     private DalApi.IDal _dal = DalApi.Factory.Get;
     //private BlApi.IBl _bl = BlApi.Factory.Get();  //TODO: ask????
     private readonly IBl _bl;
-    internal TaskImplementation(IBl bl) => _bl = bl;
+    internal TaskImplementation(IBl bl) => _bl = bl; 
     
 
     /// <summary>
@@ -109,7 +109,6 @@ internal class TaskImplementation : ITask
         else
             blExperience = (BO.EngineerExperience)dalExperience;
 
-
         return new BO.Task(dalTask.ID,
                            dalTask.NickName,
                            dalTask.Description,
@@ -124,6 +123,8 @@ internal class TaskImplementation : ITask
                            dalTask.Remarks,
                            getAssignedEngineer(dalTask),
                            (BO.EngineerExperience)dalTask.Complexity);
+
+        
     }
 
     /// <summary>
@@ -304,7 +305,7 @@ internal class TaskImplementation : ITask
             }
 
             BO.TaskInList? earlyForecastDateInTask = (from taskInList in updateTask.Dependencies
-                                                      where Read(taskInList.ID).ForecastDate > newScheduledDate
+                                                      where Read(taskInList.ID).ForecastDate.Value.Date > newScheduledDate.Value.Date
                                                       select taskInList).FirstOrDefault();
 
             if (earlyForecastDateInTask != null)
@@ -588,7 +589,7 @@ internal class TaskImplementation : ITask
                     if (tempDate > maxDate) maxDate = tempDate;
                 }
 
-                scheduledDateAuto = maxDate?.AddDays(1);
+                scheduledDateAuto = maxDate?.AddHours(1);
             }
 
             DO.Task updateTask = new DO.Task(task.ID,
