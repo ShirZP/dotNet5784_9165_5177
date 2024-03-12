@@ -86,11 +86,36 @@ class ConvertProjectStatusPlanningToVisible : IValueConverter
     }
 }
 
+class ConvertButtonToVisible : IValueConverter
+{
+    public object Convert(object value, Type targetType, object parameter, CultureInfo culture)
+    {
+        return (Visibility)value == Visibility.Visible ? Visibility.Collapsed : Visibility.Visible;
+    }
+
+    public object ConvertBack(object value, Type targetType, object parameter, CultureInfo culture)
+    {
+        throw new NotImplementedException();
+    }
+}
+
 class ConvertProjectStatusExecutionToVisible : IValueConverter
 {
     public object Convert(object value, Type targetType, object parameter, CultureInfo culture)
     {
         return (BO.ProjectStatus)value == BO.ProjectStatus.Execution ? Visibility.Visible : Visibility.Collapsed;
+    }
+
+    public object ConvertBack(object value, Type targetType, object parameter, CultureInfo culture)
+    {
+        throw new NotImplementedException();
+    }
+}
+class ConvertProjectStartDateToVisible : IValueConverter
+{
+    public object Convert(object value, Type targetType, object parameter, CultureInfo culture)
+    {
+        return (DateTime)value != default(DateTime) ? Visibility.Visible : Visibility.Collapsed;
     }
 
     public object ConvertBack(object value, Type targetType, object parameter, CultureInfo culture)
@@ -197,10 +222,10 @@ class ConvertTaskStatusToColor : IValueConverter
                 return "LightGray";
 
             case Status.Active:
-                return "#462AD8";
+                return "#28AEED";
 
             case Status.Complete:
-                return "#8A16C1";
+                return "#FF65C28F";
 
             default:
                 return "Black";

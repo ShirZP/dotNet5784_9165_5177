@@ -1,6 +1,7 @@
 ﻿using DalApi;
 using DO;
 using System.Data.Common;
+using System.Xml.Linq;
 namespace Dal;
 
 internal class DependencyImplementation : IDependency
@@ -113,5 +114,11 @@ internal class DependencyImplementation : IDependency
         DependenciesList.Clear();
         //Serialize
         XMLTools.SaveListToXMLSerializer<Dependency>(DependenciesList, s_dependencies_xml);
+
+        //TODO: איפוס ההמספר הרץ ל 1
+        XElement root = XMLTools.LoadListFromXMLElement(Config.s_data_config_xml);
+        root.Element("NextDependencyId")!.SetValue("1");
+
+        XMLTools.SaveListToXMLElement(root, Config.s_data_config_xml);
     }
 }

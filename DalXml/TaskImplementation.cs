@@ -3,6 +3,7 @@ using DO;
 using System;
 using System.Data.Common;
 using System.Threading.Tasks;
+using System.Xml.Linq;
 using System.Xml.Serialization;
 
 
@@ -58,7 +59,7 @@ internal class TaskImplementation : ITask
     /// <summary>
     /// The function returns a reference to the task with the requested filter
     /// </summary>
-    /// <param name="filter">Delegate Func that recieves Task and returns bool</param>
+    /// <param name="filter">Delegate Func that receives Task and returns bool</param>
     /// <returns>reference to the task with the requested filter</returns>
     public DO.Task? Read(Func<DO.Task, bool> filter)
     {
@@ -120,6 +121,12 @@ internal class TaskImplementation : ITask
     {
         List<DO.Task> tasksList = XMLTools.LoadListFromXMLSerializer<DO.Task>(s_tasks_xml);
         tasksList.Clear();
-        XMLTools.SaveListToXMLSerializer(tasksList, s_tasks_xml);   
+        XMLTools.SaveListToXMLSerializer(tasksList, s_tasks_xml);
+
+        //TODO: איפוס ההמספר הרץ ל 1
+        XElement root = XMLTools.LoadListFromXMLElement(Config.s_data_config_xml);
+        root.Element("NextTaskId")!.SetValue("1");
+
+        XMLTools.SaveListToXMLElement(root, Config.s_data_config_xml);
     }
 }

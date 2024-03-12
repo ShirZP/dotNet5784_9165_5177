@@ -26,6 +26,8 @@
         <local:ConvertTaskStatusToColor x:Key="ConvertTaskStatusToColorKey"/>
         <local:ConvertDateToBoolean x:Key="ConvertDateToBooleanKey"/>
         <local:ConvertCurrentTaskToContent x:Key="ConvertCurrentTaskToContentKey"/>
+        <local:ConvertButtonToVisible x:Key="ConvertButtonToVisibleKey"/>
+        <local:ConvertProjectStartDateToVisible x:Key="ConvertProjectStartDateToVisibleKey"/>
         
         
         <!-- window icon -->

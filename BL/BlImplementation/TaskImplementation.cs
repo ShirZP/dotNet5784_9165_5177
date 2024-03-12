@@ -561,7 +561,7 @@ internal class TaskImplementation : ITask
             //If there are no dependencies then the Scheduled date is equal to the project start date plus a day
             if (!task.Dependencies.Any())
             {
-                scheduledDateAuto = projectStartDate.AddDays(1);//TODO:
+                scheduledDateAuto = projectStartDate;
             }
             else
             {

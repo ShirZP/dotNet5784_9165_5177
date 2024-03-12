@@ -77,7 +77,7 @@
                             Width="24" Height="25" 
                             Foreground="White" FontFamily="Montserrant" FontWeight="Bold" FontSize="18" Cursor="Hand" VerticalAlignment="Top" HorizontalAlignment="Left"
                             Style="{StaticResource IconButtonStyleKey}" Margin="135,5,0,0">
-                        <Image Source="/Users/eye.png"/>
+                        <Image Source="/Users/eye.png" />
 
                     </Button>
                 </Grid>
@@ -108,7 +108,7 @@
                             FontFamily="Montserrant"
                             Cursor="Hand"
                             HorizontalAlignment="Left" 
-                            Margin="139,20,0,0" 
+                            Margin="139,14,0,0" 
                             VerticalAlignment="Top" 
                             Height="50" Width="150" FontSize="18" 
                             FontWeight="Bold" 

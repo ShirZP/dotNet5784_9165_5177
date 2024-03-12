@@ -46,7 +46,7 @@
                                                Width="{Binding Duration}" 
                                                FontWeight="Bold" 
                                                HorizontalAlignment="Center" 
-                                               Background="Aquamarine"/>
+                                               Background="#8A16C1"/>
                                 </Border>
                             </DataTemplate>
                         </ItemsControl.ItemTemplate>
@@ -57,7 +57,7 @@
                             <DataTemplate>
                                 <Border BorderThickness="2" BorderBrush="White">
                                     <StackPanel Orientation="Horizontal" HorizontalAlignment="Left">
-                                        <TextBlock HorizontalAlignment="Left" Text="{Binding taskID}" Width="30" FontWeight="Bold" Background="#462AD8"/>
+                                            <TextBlock HorizontalAlignment="Left" Text="{Binding taskID}" Width="30" FontWeight="Bold" Background="#462AD8" Foreground="White"/>
                                         <Rectangle HorizontalAlignment="Left" Height="20" Width="{Binding timeFromStart}"  Fill="White"/>
 
                                         <!--Width="{Binding DaysFromStart}"-->

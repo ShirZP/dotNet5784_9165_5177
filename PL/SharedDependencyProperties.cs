@@ -11,6 +11,7 @@ namespace PL
     public static class SharedDependencyProperties
     {
         #region ProjectStatusProperty
+
         public static readonly DependencyProperty ProjectStatusProperty = DependencyProperty.RegisterAttached(
                                                                                             "ProjectStatus",
                                                                                             typeof(BO.ProjectStatus),
@@ -41,6 +42,8 @@ namespace PL
                                                                                            typeof(DateTime),
                                                                                            typeof(SharedDependencyProperties),
                                                                                            new PropertyMetadata(null));
+
+
 
         public static void SetProjectStartDate(DependencyObject element, DateTime value)
         {

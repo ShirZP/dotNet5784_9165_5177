@@ -142,7 +142,9 @@ namespace PL.Task
 
                 case "All":
                     if (SubcategoryFilter_CB != null)
+                    {
                         SubcategoryFilter_CB.IsEnabled = false;
+                    }
                     break;
             }
 

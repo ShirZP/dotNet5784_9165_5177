@@ -110,8 +110,8 @@ namespace PL.Users
                             s_bl.Task.Update(task);
 
                             //update the current of the engineer to be empty.  
-                            EngineerUser.EngineerCurrentTask = null;
                             s_bl.Engineer.Update(EngineerUser);
+                            EngineerUser = s_bl.Engineer.Read(EngineerUser.ID);
                         }
                        
                     }

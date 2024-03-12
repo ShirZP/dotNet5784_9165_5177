@@ -15,7 +15,15 @@ internal class UserImplementation : IUser
     /// </summary>
     public void Clear()
     {
-        DataSource.Users.Clear();
+        //TODO:לבדוק אם עובד!!!!!!!!
+        foreach (DO.User User in DataSource.Users)
+        {
+            if (User.Permission == UserPermissions.Engineer)
+            {
+                DataSource.Users.Remove(User);
+            }
+        }
+       
     }
 
     /// <summary>

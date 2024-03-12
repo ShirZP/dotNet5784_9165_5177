@@ -1,42 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <ArrayOfUser xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
   <User>
-    <ID>229373014</ID>
-    <UserName>DaniLevi</UserName>
-    <Password>DaniLevi123</Password>
-    <Permission>Engineer</Permission>
-  </User>
-  <User>
-    <ID>333299971</ID>
-    <UserName>EliAmar</UserName>
-    <Password>EliAmar123</Password>
-    <Permission>Engineer</Permission>
-  </User>
-  <User>
-    <ID>329225692</ID>
-    <UserName>YairCohen</UserName>
-    <Password>YairCohen123</Password>
-    <Permission>Engineer</Permission>
-  </User>
-  <User>
-    <ID>270186071</ID>
-    <UserName>ArielaLevin</UserName>
-    <Password>ArielaLevin123</Password>
-    <Permission>Engineer</Permission>
-  </User>
-  <User>
-    <ID>380404721</ID>
-    <UserName>DinaKlein</UserName>
-    <Password>DinaKlein123</Password>
-    <Permission>Engineer</Permission>
-  </User>
-  <User>
-    <ID>365254206</ID>
-    <UserName>ShiraIsraelof</UserName>
-    <Password>ShiraIsraelof123</Password>
-    <Permission>Engineer</Permission>
-  </User>
-  <User>
     <ID>323975177</ID>
     <UserName>shirperez</UserName>
     <Password>shirperez123</Password>
@@ -47,5 +11,41 @@
     <UserName>yaelizralevitch</UserName>
     <Password>yaelizralevitch123</Password>
     <Permission>Manager</Permission>
+  </User>
+  <User>
+    <ID>241118291</ID>
+    <UserName>DaniLevi</UserName>
+    <Password>DaniLevi123</Password>
+    <Permission>Engineer</Permission>
+  </User>
+  <User>
+    <ID>367486921</ID>
+    <UserName>EliAmar</UserName>
+    <Password>EliAmar123</Password>
+    <Permission>Engineer</Permission>
+  </User>
+  <User>
+    <ID>387339907</ID>
+    <UserName>YairCohen</UserName>
+    <Password>YairCohen123</Password>
+    <Permission>Engineer</Permission>
+  </User>
+  <User>
+    <ID>394687432</ID>
+    <UserName>ArielaLevin</UserName>
+    <Password>ArielaLevin123</Password>
+    <Permission>Engineer</Permission>
+  </User>
+  <User>
+    <ID>220403751</ID>
+    <UserName>DinaKlein</UserName>
+    <Password>DinaKlein123</Password>
+    <Permission>Engineer</Permission>
+  </User>
+  <User>
+    <ID>357906015</ID>
+    <UserName>ShiraIsraelof</UserName>
+    <Password>ShiraIsraelof123</Password>
+    <Permission>Engineer</Permission>
   </User>
 </ArrayOfUser>

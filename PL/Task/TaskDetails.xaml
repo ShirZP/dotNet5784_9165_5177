@@ -52,7 +52,7 @@
                 <TextBlock Text="{Binding TaskView.Description}" Foreground="DarkGray" FontFamily="Montserrant" HorizontalAlignment="Left" Margin="177,166,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="217" Height="71"/>
 
                 <!-- Status -->
-                <TextBlock Text="{Binding TaskView.Status, Mode=TwoWay}" HorizontalAlignment="Left" Margin="176,246,0,0" VerticalAlignment="Top" Height="25" Width="217"/>
+                <TextBlock Text="{Binding TaskView.Status, Mode=TwoWay}" Foreground="DarkGray" FontFamily="Montserrant" HorizontalAlignment="Left" Margin="176,246,0,0" VerticalAlignment="Top" Height="25" Width="217"/>
 
                 <!-- Complexity -->
                 <TextBlock Text="{Binding TaskView.Complexity}" Foreground="DarkGray" FontFamily="Montserrant" HorizontalAlignment="Left" Margin="177,284,0,0" VerticalAlignment="Top" Height="25" Width="217"/>

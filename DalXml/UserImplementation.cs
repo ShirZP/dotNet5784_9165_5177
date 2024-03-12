@@ -1,6 +1,7 @@
 ﻿using DalApi;
 using DO;
 using System;
+using System.Collections.Generic;
 using System.Data.Common;
 using System.Linq;
 using System.Threading.Tasks;
@@ -15,8 +16,12 @@ internal class UserImplementation : IUser
     public void Clear()
     {
         List<DO.User> UsersList = XMLTools.LoadListFromXMLSerializer<DO.User>(s_users_xml);
-        UsersList.Clear();
-        XMLTools.SaveListToXMLSerializer(UsersList, s_users_xml);
+
+        List<DO.User> newList = (from user in UsersList
+                                 where user.Permission == UserPermissions.Manager
+                                 select user).ToList();
+
+        XMLTools.SaveListToXMLSerializer(newList, s_users_xml);
     }
 
     public int Create(User user)

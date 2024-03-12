@@ -175,14 +175,6 @@ public static class Initialization
             newUser = new User(engineer.ID, _userName, _password, UserPermissions.Engineer);
             s_dal.User.Create(newUser);
         }
-
-        //create 2 managers
-        newUser = new User(323975177, "shirperez", "shirperez123", UserPermissions.Manager);
-        s_dal.User.Create(newUser);
-
-        newUser = new User(213479165, "yaelizralevitch", "yaelizralevitch123", UserPermissions.Manager);
-        s_dal.User.Create(newUser);
-
     }
 
         /// <summary>
