@@ -78,6 +78,11 @@ namespace PL.Task
             InitializeComponent();
             SharedDependencyProperties.SetProjectStatus(this, s_bl.GetProjectStatus());
 
+            if (s_bl.GetProjectStartDate() != null)
+            {
+                SharedDependencyProperties.SetProjectStartDate(this, s_bl.GetProjectStartDate()!.Value);
+            }
+
             //According to the id we will update CurrentEngineer. If id ==0 - an empty engineer will be opened to be added. Otherwise we will pull out the engineer and open a window for updating
             if (id == 0)
             {
@@ -136,6 +141,13 @@ namespace PL.Task
                 {
                     MessageBoxResult messageBoxResult;
 
+                    //clear the Dependencies of the CurrentTask and then load the new Dependencies to it
+                    CurrentTask.Dependencies.Clear();
+                    foreach (var item in SelectedDependencies)
+                    {
+                        CurrentTask.Dependencies.Add((BO.TaskInList)item);
+                    }
+
                     if (button.Content.ToString() == "Add")
                     {
                         int id = s_bl.Task.Create(CurrentTask);
@@ -143,11 +155,6 @@ namespace PL.Task
                     }
                     else
                     {
-                        CurrentTask.Dependencies.Clear();
-                        foreach (var item in SelectedDependencies)
-                        {
-                            CurrentTask.Dependencies.Add((BO.TaskInList)item);
-                        }
                         s_bl.Task.Update(CurrentTask);
                         messageBoxResult = MessageBox.Show($"Task {CurrentTask.ID} updated Successfully!", "Happy Message :)", MessageBoxButton.OK, MessageBoxImage.Information);
                     }

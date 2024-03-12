@@ -84,7 +84,7 @@
                 </DataGrid>
 
                 <Button Content="Add" 
-                Visibility="{Binding Path=(local:SharedDependencyProperties.ProjectStatus), Mode=OneTime, Converter={StaticResource ConvertProjectStatusPlanningToVisibleKey}}"
+                Visibility="{Binding Path=(local:SharedDependencyProperties.ProjectStartDate), Mode=OneTime, Converter={StaticResource ConvertProjectStartDateToCollapsedKey}}"
                 Grid.Row="2" 
                 BorderThickness="0" Foreground="White" Template="{StaticResource ButtonTemplateKey}" Style="{StaticResource PinkButtonStyleKey}" FontFamily="Montserrant" FontWeight="Bold" Cursor="Hand" 
                 HorizontalAlignment="Right" 

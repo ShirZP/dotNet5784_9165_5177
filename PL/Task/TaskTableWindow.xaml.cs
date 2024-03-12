@@ -54,6 +54,12 @@ namespace PL.Task
         {
             InitializeComponent();
             SharedDependencyProperties.SetProjectStatus(this, s_bl.GetProjectStatus());
+
+            if (s_bl.GetProjectStartDate() != null)
+            {
+                SharedDependencyProperties.SetProjectStartDate(this, s_bl.GetProjectStartDate()!.Value);
+            }
+            
             SubcategoryFilter_CB.IsEnabled = false;
             UserIDPermission = id;
             this.DataContext = this;
@@ -64,17 +70,25 @@ namespace PL.Task
         /// </summary>
         private void RefreshWindow_Activated(object sender, EventArgs e)
         {
-            if(UserIDPermission == 0) 
+            readAllTasksByPermission();
+        }
+
+        /// <summary>
+        /// The function filters all tasks according to the user's permission
+        /// </summary>
+        private void readAllTasksByPermission()
+        {
+            if (UserIDPermission == 0)  //manager user
             {
                 TasksList = s_bl?.Task.ReadAllFullTasksDetails()!;
             }
-            else
+            else  //engineer user
             {
                 BO.Engineer engineerUser = s_bl.Engineer.Read(UserIDPermission);
 
                 TasksList = (from task in s_bl?.Task.ReadAllFullTasksDetails()!
                              where task.AssignedEngineer == null && task.Complexity <= engineerUser.Level && taskDependenciesComplete(task)
-                             select task).ToList(); 
+                             select task).ToList();
             }
         }
 
@@ -144,6 +158,7 @@ namespace PL.Task
                     if (SubcategoryFilter_CB != null)
                     {
                         SubcategoryFilter_CB.IsEnabled = false;
+                        readAllTasksByPermission();
                     }
                     break;
             }

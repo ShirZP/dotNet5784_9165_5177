@@ -124,6 +124,32 @@ class ConvertProjectStartDateToVisible : IValueConverter
     }
 }
 
+class ConvertProjectStartDateToCollapsed : IValueConverter
+{
+    public object Convert(object value, Type targetType, object parameter, CultureInfo culture)
+    {
+        return (DateTime)value != default(DateTime) ? Visibility.Collapsed : Visibility.Visible;
+    }
+
+    public object ConvertBack(object value, Type targetType, object parameter, CultureInfo culture)
+    {
+        throw new NotImplementedException();
+    }
+}
+
+class ConvertProjectStartDateToBool : IValueConverter
+{
+    public object Convert(object value, Type targetType, object parameter, CultureInfo culture)
+    {
+        return (DateTime)value != default(DateTime) ? false : true;
+    }
+
+    public object ConvertBack(object value, Type targetType, object parameter, CultureInfo culture)
+    {
+        throw new NotImplementedException();
+    }
+}
+
 class ConvertProjectStatusPlanningToEnabled : IValueConverter
 {
     public object Convert(object value, Type targetType, object parameter, CultureInfo culture)
@@ -256,6 +282,19 @@ public class ConvertCurrentTaskToContent : IValueConverter
     public object Convert(object value, Type targetType, object parameter, CultureInfo culture)
     {
         return (BO.TaskInEngineer)value == null ? "Select Task" : "Complete Task";
+    }
+
+    public object ConvertBack(object value, Type targetType, object parameter, CultureInfo culture)
+    {
+        throw new NotImplementedException();
+    }
+}
+
+public class ConvertProjectStatusToContent : IValueConverter
+{
+    public object Convert(object value, Type targetType, object parameter, CultureInfo culture)
+    {
+        return (BO.ProjectStatus)value == BO.ProjectStatus.Planning ? "The project is still in the planning stages..." : "You have no current task :(";
     }
 
     public object ConvertBack(object value, Type targetType, object parameter, CultureInfo culture)

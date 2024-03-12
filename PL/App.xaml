@@ -28,6 +28,9 @@
         <local:ConvertCurrentTaskToContent x:Key="ConvertCurrentTaskToContentKey"/>
         <local:ConvertButtonToVisible x:Key="ConvertButtonToVisibleKey"/>
         <local:ConvertProjectStartDateToVisible x:Key="ConvertProjectStartDateToVisibleKey"/>
+        <local:ConvertProjectStartDateToCollapsed x:Key="ConvertProjectStartDateToCollapsedKey"/>
+        <local:ConvertProjectStartDateToBool x:Key="ConvertProjectStartDateToBoolKey"/>
+        <local:ConvertProjectStatusToContent x:Key="ConvertProjectStatusToContentKey"/>
         
         
         <!-- window icon -->
