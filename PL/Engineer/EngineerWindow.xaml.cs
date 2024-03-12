@@ -162,5 +162,18 @@ namespace PL.Engineer
                 }
             }
         }
+
+        /// <summary>
+        /// The function allows you to type only numbers.
+        /// </summary>
+        private void CheckValidInt(object sender, TextCompositionEventArgs e)
+        {
+            if (!(int.TryParse(e.Text, out _)))
+            {
+                e.Handled = true;
+            }
+        }
+
+        
     }
 }
