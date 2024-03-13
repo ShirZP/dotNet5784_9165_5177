@@ -7,6 +7,7 @@ internal static class DataSource
         internal static DateTime? projectStartDate = null;
         internal static DateTime? projectEndDate = null;
         internal static DO.ProjectStatus projectStatus = DO.ProjectStatus.Planning;
+        internal static DateTime clock = DateTime.Now;
 
        //Unique ID number for a Task
        internal const int startTaskId = 1;

@@ -115,7 +115,7 @@ internal class DependencyImplementation : IDependency
         //Serialize
         XMLTools.SaveListToXMLSerializer<Dependency>(DependenciesList, s_dependencies_xml);
 
-        //TODO: איפוס ההמספר הרץ ל 1
+        //Reset the running number to 1
         XElement root = XMLTools.LoadListFromXMLElement(Config.s_data_config_xml);
         root.Element("NextDependencyId")!.SetValue("1");
 

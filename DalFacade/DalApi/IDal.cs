@@ -28,6 +28,7 @@ public interface IDal
     #region  Clock
     public void SetClock(DateTime clock);
     public DateTime GetClock();
+    public void initializeClock();
     #endregion
 
 }

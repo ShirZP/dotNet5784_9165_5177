@@ -113,41 +113,37 @@ internal class Bl : IBl
 
     #region Clock
 
-    private static DateTime s_Clock = DateTime.Now;
-    public DateTime Clock { get { return s_Clock; } private set { s_Clock = value; } }
+    //TODO:
+    //private static DateTime s_Clock = DateTime.Now;
+    //public DateTime Clock { get { return s_Clock; } private set { s_Clock = value; } }
 
     public DateTime GetClock()
     {
         return _dal.GetClock();
     }
 
-    public void SetClock(DateTime clock)
-    {
-        _dal.SetClock(clock);
-    }
-
     public DateTime MoveClockYearForward()
     {
-        s_Clock = s_Clock.AddYears(1);
-        return s_Clock;
+        _dal.SetClock(GetClock().AddYears(1));
+        return GetClock();
     }
 
     public DateTime MoveClockDayForward()
     {
-        s_Clock = s_Clock.AddDays(1);
-        return s_Clock;
+        _dal.SetClock(GetClock().AddDays(1));
+        return GetClock();
     }
 
     public DateTime MoveClockHourForward()
     {
-        s_Clock = s_Clock.AddHours(1);
-        return s_Clock;
+        _dal.SetClock(GetClock().AddHours(1));
+        return GetClock();
     }
 
     public DateTime initializeClock()
     {
-        s_Clock = DateTime.Now;
-        return s_Clock;
+        _dal.SetClock(DateTime.Now);
+        return GetClock();
     }
     #endregion
 }

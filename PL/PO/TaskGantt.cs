@@ -2,11 +2,12 @@
 
 public class TaskGantt
 {
-    public int taskID { get; init; }
-    public string taskName { get; init; }
-    public BO.Status taskStatus { get; init; }
-    public int duration { get; set; }    //width of rectangle task
-    public double timeFromStart { get; set; }  //width of empty rectangle from start to task
-    public double timeToEnd { get; set; }    //width of empty rectangle from task to end
+    public int TaskID { get; init; }
+    public string TaskName { get; init; }
+    public GanttTaskStatus TaskStatus { get; init; }
+    public List<string> DependenciesName { get; init; }
+    public int Duration { get; set; }    //width of rectangle task
+    public double TimeFromStart { get; set; }  //width of empty rectangle from start to task
+    public double TimeToEnd { get; set; }    //width of empty rectangle from task to end
 }
 

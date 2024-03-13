@@ -218,39 +218,22 @@ class ConvertEmptyEngineerCurrentTaskToVisible : IValueConverter
     }
 }
 
-//TODO: *****************************************
-class ConvertPasswordToString : IValueConverter
-{
-    public object Convert(object value, Type targetType, object parameter, CultureInfo culture)
-    {
-        return DependencyProperty.UnsetValue;
-    }
-
-    public object ConvertBack(object value, Type targetType, object parameter, CultureInfo culture)
-    {       
-        var password = value as PasswordBox;
-        if (password != null)
-        {
-            return password.SecurePassword.Copy();
-        }
-
-        return null;
-    }
-}
-
 class ConvertTaskStatusToColor : IValueConverter
 {
     public object Convert(object value, Type targetType, object parameter, CultureInfo culture)
     {
-        switch ((BO.Status)value)
+        switch ((GanttTaskStatus)value)
         {
-            case Status.New:
+            case GanttTaskStatus.New:
                 return "LightGray";
 
-            case Status.Active:
+            case GanttTaskStatus.Active:
                 return "#28AEED";
 
-            case Status.Complete:
+            case GanttTaskStatus.Delayed:
+                return "#FFD22E2E";
+
+            case GanttTaskStatus.Complete:
                 return "#FF65C28F";
 
             default:

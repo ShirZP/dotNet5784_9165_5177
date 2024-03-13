@@ -17,63 +17,116 @@
         Opacity="0.85"
         BorderBrush="{StaticResource BorderBrushKey}"
         Background="{StaticResource BackgroundBrushKey}">
-            
-            <ScrollViewer VerticalScrollBarVisibility="Auto" HorizontalScrollBarVisibility="Auto">
 
-                <Grid>
+
+
+            <Grid>
                 <Grid.RowDefinitions>
                     <RowDefinition Height="40"/>
+                    <RowDefinition Height="640"/>
                     <RowDefinition Height="auto"/>
                 </Grid.RowDefinitions>
 
                 <TextBlock Text="Project progress:" Grid.Row="0" Foreground="WhiteSmoke" FontSize="20" FontWeight="Bold" FontFamily="Montserrant" HorizontalAlignment="Left" Height="39" Margin="50,10,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="329"/>
 
-                <StackPanel Grid.Row="1">
+                <ScrollViewer Grid.Row="1" VerticalScrollBarVisibility="Auto">
+                    <Grid>
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="*"/>
+                            <ColumnDefinition Width="4*"/>
+                        </Grid.ColumnDefinitions>
 
-                    <!--Dates-->
-                    <ItemsControl ItemsSource="{Binding GanttDatesList}" Height="25"  Margin="60,0,0,0" VerticalAlignment="Top">
-                        <!-- Set the panel that arranges the items -->
-                        <ItemsControl.ItemsPanel>
-                            <ItemsPanelTemplate>
+                            <StackPanel Grid.Column="0">
+                                <!--names list-->
+                            <ItemsControl ItemsSource="{Binding GanttTasksList}" Margin="0,25,0,0" HorizontalAlignment="Right">
+                                    <ItemsControl.ItemTemplate>
+                                        <DataTemplate>
+                                            <Border BorderThickness="2" BorderBrush="White">
+                                                <StackPanel Orientation="Horizontal" HorizontalAlignment="Left">
+                                                <TextBlock HorizontalAlignment="left" Text="{Binding TaskName}" Height="20" TextAlignment="Left" Width="290" FontWeight="Bold" Background="#8A16C1" Foreground="White"/>
+                                                </StackPanel>
+                                            </Border>
+                                        </DataTemplate>
+                                    </ItemsControl.ItemTemplate>
+                                </ItemsControl>
+                            </StackPanel>
 
-                                <StackPanel Orientation="Horizontal"/>
-                            </ItemsPanelTemplate>
-                        </ItemsControl.ItemsPanel>
-                        <!-- Template for each item -->
-                        <ItemsControl.ItemTemplate>
-                            <DataTemplate>
-                                <Border BorderThickness="1" BorderBrush="Black">
-                                    <TextBlock Text="{Binding Date, StringFormat={}{0:dd/MM/yyyy}}" 
-                                               Width="{Binding Duration}" 
-                                               FontWeight="Bold" 
-                                               HorizontalAlignment="Center" 
-                                               Background="#8A16C1"/>
-                                </Border>
-                            </DataTemplate>
-                        </ItemsControl.ItemTemplate>
-                    </ItemsControl>
+                        <ScrollViewer Grid.Column="1" HorizontalScrollBarVisibility="Auto" VerticalScrollBarVisibility="Hidden">
+                                <Grid>
+                                <StackPanel>
 
-                    <!--Gantt list-->
-                    <ItemsControl ItemsSource="{Binding GanttTasksList}" Margin="30,0,0,0">
-                        <ItemsControl.ItemTemplate>
-                            <DataTemplate>
-                                <Border BorderThickness="2" BorderBrush="White">
-                                    <StackPanel Orientation="Horizontal" HorizontalAlignment="Left">
-                                            <TextBlock HorizontalAlignment="left" Text="{Binding taskID}" TextAlignment="Center" Width="30" FontWeight="Bold" Background="#462AD8" Foreground="White"/>
-                                       
-                                        <Rectangle HorizontalAlignment="Left" Height="20" Width="{Binding timeFromStart}"  Fill="White"/>
-                                        <TextBlock HorizontalAlignment="Left" Text="{Binding taskName}" Width="{Binding duration}" FontWeight="Bold" Background="{Binding taskStatus, Mode=OneWay, Converter={StaticResource ConvertTaskStatusToColorKey}}"/>
-                                        <Rectangle HorizontalAlignment="Left" Height="20" Width="{Binding timeToEnd}"  Fill="White"/>
+                                    <!--Dates-->
+                                    <ItemsControl ItemsSource="{Binding GanttDatesList}" Height="25"  Margin="31,0,0,0" VerticalAlignment="Top">
+                                        <!-- Set the panel that arranges the items -->
+                                        <ItemsControl.ItemsPanel>
+                                            <ItemsPanelTemplate>
+                                                <StackPanel Orientation="Horizontal"/>
+                                            </ItemsPanelTemplate>
+                                        </ItemsControl.ItemsPanel>
+                                        <!-- Template for each item -->
+                                        <ItemsControl.ItemTemplate>
+                                            <DataTemplate>
+                                                <Border BorderThickness="1" BorderBrush="Black">
+                                                    <TextBlock Text="{Binding Date, StringFormat={}{0:dd/MM/yyyy}}" 
+                                                           Width="{Binding Duration}" 
+                                                           FontWeight="Bold" 
+                                                           HorizontalAlignment="Center" 
+                                                           Background="#8A16C1"/>
+                                                </Border>
+                                            </DataTemplate>
+                                        </ItemsControl.ItemTemplate>
+                                    </ItemsControl>
+                                </StackPanel>
 
-                                    </StackPanel>
-                                </Border>
-                            </DataTemplate>
-                        </ItemsControl.ItemTemplate>
-                    </ItemsControl>
-                </StackPanel>
+                                <StackPanel>
+                                    <!--Gantt list-->
+                                    <ItemsControl ItemsSource="{Binding GanttTasksList}" Margin="0,25,0,0">
+                                        <ItemsControl.ItemTemplate>
+                                            <DataTemplate>
+                                                <Border BorderThickness="2" BorderBrush="White">
+                                                    <StackPanel Orientation="Horizontal" HorizontalAlignment="Left">
+                                                        <TextBlock HorizontalAlignment="left" Text="{Binding TaskID}" TextAlignment="Center" Width="30" FontWeight="Bold" Background="#462AD8" Foreground="White"/>
+
+                                                        <Rectangle HorizontalAlignment="Left" Height="20" Width="{Binding TimeFromStart}"  Fill="White"/>
+                                                        <TextBlock HorizontalAlignment="Left" Width="{Binding Duration}" FontWeight="Bold" Background="{Binding TaskStatus, Mode=OneWay, Converter={StaticResource ConvertTaskStatusToColorKey}}">
+                                                            <TextBlock.ToolTip>
+                                                                    <ToolTip>
+                                                                        <ItemsControl ItemsSource="{Binding DependenciesName}">
+                                                                            <ItemsControl.ItemTemplate>
+                                                                                <DataTemplate>
+                                                                                    <TextBlock Text="{Binding}"/>
+                                                                                </DataTemplate>
+                                                                            </ItemsControl.ItemTemplate>
+                                                                        </ItemsControl>
+                                                                    </ToolTip>
+                                                                </TextBlock.ToolTip>
+                                                            </TextBlock>
+                                                        <Rectangle HorizontalAlignment="Left" Height="20" Width="{Binding TimeToEnd}"  Fill="White"/>
+
+                                                    </StackPanel>
+                                                </Border>
+                                            </DataTemplate>
+                                        </ItemsControl.ItemTemplate>
+                                    </ItemsControl>
+                                </StackPanel>
+                            </Grid>
+                            </ScrollViewer>
+                            
+                    </Grid>
+                </ScrollViewer>
+                    
+
+                <Grid Grid.Row="2">
+                    <TextBlock Text="Color Legend:" Foreground="WhiteSmoke" FontSize="20" FontWeight="Bold" FontFamily="Montserrant" HorizontalAlignment="Left" Height="39" Margin="50,21,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="153"/>
+                    <TextBlock Text="New" Background="LightGray" FontSize="20" FontWeight="Bold" Width="160" Height="35" TextAlignment="Center" Margin="230,25,1100,0"/>
+                    <TextBlock Text="Active" Background="#28AEED" FontSize="20" FontWeight="Bold" Width="160" Height="35" TextAlignment="Center" Margin="421,25,909,0"/>
+                    <TextBlock Text="Delayed" Background="#FFD22E2E" FontSize="20" FontWeight="Bold" Width="160" Height="35" TextAlignment="Center" Margin="610,25,720,0"/>
+                    <TextBlock Text="Complete" Background="#FF65C28F" FontSize="20" FontWeight="Bold" Width="160" Height="35" TextAlignment="Center" Margin="796,25,534,0"/>
+
+                </Grid>
             </Grid>
-            
-            </ScrollViewer>
+
+
         </Border>
     </Border>
 </Window>

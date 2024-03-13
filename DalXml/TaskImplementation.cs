@@ -123,7 +123,7 @@ internal class TaskImplementation : ITask
         tasksList.Clear();
         XMLTools.SaveListToXMLSerializer(tasksList, s_tasks_xml);
 
-        //TODO: איפוס ההמספר הרץ ל 1
+        //Reset the running number to 1
         XElement root = XMLTools.LoadListFromXMLElement(Config.s_data_config_xml);
         root.Element("NextTaskId")!.SetValue("1");
 

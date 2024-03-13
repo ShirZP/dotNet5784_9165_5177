@@ -50,4 +50,12 @@ public enum TaskStatusFilter
     All
 }
 
+public enum GanttTaskStatus
+{
+    New,
+    Active,
+    Complete,
+    Delayed
+}
+
 #endregion

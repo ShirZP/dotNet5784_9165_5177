@@ -47,16 +47,17 @@ internal class TaskImplementation : ITask
                                      null,
                                      (DO.EngineerExperience)task.Complexity);
 
+        //Add the dal task to the data layer
+        int idTask = _dal.Task.Create(doTask);
+
         //Creating a list of DO.Dependency objects
-        IEnumerable<DO.Dependency>? dalDependenciesList = task.Dependencies.Select(taskInList => new DO.Dependency(0, task.ID, taskInList.ID));
+        IEnumerable<DO.Dependency>? dalDependenciesList = task.Dependencies.Select(taskInList => new DO.Dependency(0, idTask, taskInList.ID));
         
         //Adding the task's dependencies to the data layer
         (from dependency in dalDependenciesList
          where dependency != null
          select _dal.Dependency.Create(dependency)).ToList();
-
-        //Add the dal task to the data layer
-        int idTask = _dal.Task.Create(doTask);
+        
         return idTask;
     }
 
@@ -244,7 +245,7 @@ internal class TaskImplementation : ITask
 
         if(updatedTask.Status == BO.Status.Complete && updatedTask.CompleteDate == null)
         {
-            updatedTask.CompleteDate = _bl.Clock;
+            updatedTask.CompleteDate = _bl.GetClock();
             BO.Engineer engineer = _bl.Engineer.Read(updatedTask.AssignedEngineer.ID);
             BO.Engineer updateEngineer = new BO.Engineer(engineer.ID, engineer.FullName, engineer.Email, engineer.Level, engineer.Cost, null);
             _bl.Engineer.Update(updateEngineer);
@@ -532,11 +533,11 @@ internal class TaskImplementation : ITask
     /// The function returns a collection of TaskInList objects sorted by ID
     /// </summary>
     /// <returns>A collection of TaskInList objects sorted by ID</returns>
-    public IEnumerable<BO.TaskInList> SortByID()
+    public IEnumerable<BO.Task> SortByID()
     {
-        return from taskInList in ReadAll()
-               orderby taskInList.ID
-               select taskInList;
+        return from task in ReadAllFullTasksDetails()
+               orderby task.ID
+               select task;
     }
 
     public void autoScheduledDate()
@@ -589,7 +590,7 @@ internal class TaskImplementation : ITask
                     if (tempDate > maxDate) maxDate = tempDate;
                 }
 
-                scheduledDateAuto = maxDate?.AddHours(1);
+                scheduledDateAuto = maxDate?.AddDays(1).AddHours(1);
             }
 
             DO.Task updateTask = new DO.Task(task.ID,

@@ -141,4 +141,14 @@ sealed internal class DalXml : IDal
     {
         return Config.Clock;
     }
+
+    public void initializeClock()
+    {
+        XElement root = XMLTools.LoadListFromXMLElement(Config.s_data_config_xml);
+
+        //initialize Clock
+        root.Element("Clock")!.SetValue(DateTime.Now);
+
+        XMLTools.SaveListToXMLElement(root, Config.s_data_config_xml);
+    }
 }

@@ -21,7 +21,7 @@ namespace PL.GanttChar
     /// </summary>
     public partial class GanttCharWindow : Window
     {
-
+        #region DependencyProperties
         static readonly BlApi.IBl s_bl = BlApi.Factory.Get();
 
         public static readonly DependencyProperty GanttTasksListProperty = DependencyProperty.Register("GanttTasksList",
@@ -48,7 +48,7 @@ namespace PL.GanttChar
             set { SetValue(GanttDatesListProperty, value); }
         }
 
-
+        #endregion
 
         public GanttCharWindow()
         {
@@ -56,61 +56,65 @@ namespace PL.GanttChar
 
             loadGanttDatesList();
 
-            GanttTasksList = (from task in s_bl.Task.ReadAllFullTasksDetails()
+            //Creating a list of TaskGantt tasks and sorting them by ID
+            GanttTasksList = (from task in s_bl.Task.SortByID()
                               select convertTaskToGanttTask(task)).ToList();
 
             this.DataContext = this;
         
         }
 
-
+        #region Methods
+        /// <summary>
+        /// The function accepts a BO.Task task and returns a TaskGantt task.
+        /// </summary>
         private TaskGantt convertTaskToGanttTask(BO.Task task)
         {
             int dateDurationSize = 70;
 
-            DateTime? projectStartDate = s_bl.GetProjectStartDate();
-            DateTime? projectEndDate = s_bl.GetProjectEndDate();
+            DateTime? projectStartDate = s_bl.GetProjectStartDate()!.Value.Date;
+            DateTime? projectEndDate = s_bl.GetProjectEndDate()!.Value.Date;
 
-            DateTime? start = task.StartDate == null ? task.ScheduledDate.Value.Date : task.StartDate.Value.Date;
-            DateTime? end = task.CompleteDate == null ? task.ForecastDate.Value.Date : task.CompleteDate.Value.Date;
-           
-            TimeSpan? effort;
-            if(task.StartDate != null && task.CompleteDate != null)
-            {
-                effort = (task.CompleteDate - task.StartDate);
-            }
-            else if(task.StartDate != null && task.CompleteDate == null)
-            {
-                effort = (task.ForecastDate - task.StartDate);
-            }
-            else
-            {
-                effort = task.RequiredEffortTime;
-            }
+            GanttTaskStatus ganttTaskStatus = (task.Status == BO.Status.Active && task.ForecastDate!.Value.Date < s_bl.GetClock().Date) ? GanttTaskStatus.Delayed : (GanttTaskStatus)task.Status;
+
+            //The list of dependencies for the ToolTip in the Gantt
+            List<string> dependenciesName = (from d in  task.Dependencies
+                                              select d.NickName).ToList();
+            dependenciesName.Insert(0, "Task Dependencies:");
 
 
-            int duration = (int)effort!.Value.Days + 1;
-            double timeFromStart = (start - projectStartDate)!.Value.TotalDays;
-            double timeToEnd = ((projectEndDate!.Value - end).Value.TotalDays == 0) ? 0 : (projectEndDate!.Value - end)!.Value.TotalDays + 1;
+            int duration = (int)task.RequiredEffortTime!.Value.Days + 1;
+            double timeFromStart = (task.ScheduledDate - projectStartDate)!.Value.TotalDays;
 
-            return new TaskGantt(){taskID = task.ID,
-                                   taskName = task.NickName, 
-                                   taskStatus = task.Status,
-                                   duration = duration * dateDurationSize + duration + 1,
-                                   timeFromStart = timeFromStart * dateDurationSize + timeFromStart + 1,
-                                   timeToEnd = timeToEnd * dateDurationSize + timeToEnd + 1};
+            double timeToEnd = (projectEndDate - projectStartDate)!.Value.TotalDays - timeFromStart - duration + 2;
+
+            //double end = (projectEndDate - task.ForecastDate)!.Value.TotalDays;
+            //double timeToEnd = (end == 0) ? 0 : end + 1;
+
+            return new TaskGantt(){TaskID = task.ID,
+                                   TaskName = task.NickName,
+                                   TaskStatus = ganttTaskStatus,
+                                   DependenciesName = dependenciesName,
+                                   Duration = duration * dateDurationSize + duration + 1,
+                                   TimeFromStart = timeFromStart * dateDurationSize + timeFromStart + 1,
+                                   TimeToEnd = timeToEnd * dateDurationSize + timeToEnd + 1};
            
         
         }
 
+        /// <summary>
+        /// The function returns a list of all dates from the beginning to the end of the project
+        /// </summary>
         private void loadGanttDatesList()
         {
              GanttDatesList = new List<DateGantt>();
 
-            for (DateTime date = s_bl.GetProjectStartDate().Value; date.Date < s_bl.GetProjectEndDate()!.Value.Date; date = date.AddDays(1))
+            for (DateTime date = s_bl.GetProjectStartDate().Value; date.Date <= s_bl.GetProjectEndDate()!.Value.Date; date = date.AddDays(1))
             {
                 GanttDatesList.Add(new DateGantt() { Date = date });
             }
         }
+
+        #endregion
     }
 }

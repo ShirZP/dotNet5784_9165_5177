@@ -45,7 +45,7 @@ public partial class ManagerWindow : Window
         IsButtonVisible = (s_bl.GetProjectStartDate() == null || s_bl.GetProjectStartDate() == default(DateTime)) ? Visibility.Visible : Visibility.Collapsed;
 
         InitializeComponent();
-        SharedDependencyProperties.SetClock(this, s_bl.Clock);
+        SharedDependencyProperties.SetClock(this, s_bl.GetClock());
         StartDatePicker.DisplayDateStart = SharedDependencyProperties.GetClock(this);
 
         ExecuteProjectByClock();
@@ -74,6 +74,8 @@ public partial class ManagerWindow : Window
             SharedDependencyProperties.SetProjectStatus(this, ProjectStatus.Planning);
             SharedDependencyProperties.SetProjectStartDate(this, default(DateTime));
             SharedDependencyProperties.SetProjectEndDate(this, default(DateTime));
+            SharedDependencyProperties.SetClock(this, s_bl.GetClock());
+            StartDatePicker.DisplayDateStart = SharedDependencyProperties.GetClock(this);
             IsButtonVisible = Visibility.Visible;
             ChooseDateBtn.Visibility = Visibility.Collapsed;
             MessageBoxResult messageBoxResult = MessageBox.Show("Initialization done successfully!", "Happy Message :)", MessageBoxButton.OK, MessageBoxImage.Information);
@@ -96,6 +98,8 @@ public partial class ManagerWindow : Window
             SharedDependencyProperties.SetProjectStatus(this, ProjectStatus.Planning);
             SharedDependencyProperties.SetProjectStartDate(this, default(DateTime));
             SharedDependencyProperties.SetProjectEndDate(this, default(DateTime));
+            SharedDependencyProperties.SetClock(this, s_bl.GetClock());
+            StartDatePicker.DisplayDateStart = SharedDependencyProperties.GetClock(this);
             IsButtonVisible = Visibility.Visible;
             ChooseDateBtn.Visibility = Visibility.Collapsed;
             MessageBoxResult messageBoxResult = MessageBox.Show("Reset DB done successfully!", "Happy Message :)", MessageBoxButton.OK, MessageBoxImage.Information);
@@ -227,6 +231,7 @@ public partial class ManagerWindow : Window
     {
         SharedDependencyProperties.SetClock(this, s_bl.initializeClock());
         ExecuteProjectByClock();
+        StartDatePicker.DisplayDateStart = SharedDependencyProperties.GetClock(this);
     }
 
     #endregion

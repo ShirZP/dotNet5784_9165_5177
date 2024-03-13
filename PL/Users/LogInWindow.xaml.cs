@@ -87,33 +87,9 @@ namespace PL.Users
             }
         }
 
-        private void PasswordBox_PasswordChanged(object sender, RoutedEventArgs e)
-        {
-            //if (DataContext is YourViewModel viewModel)
-            //{
-               // UserLogIn.Password = ((PasswordBox)sender).SecurePassword.Copy();
-            //}
-        }
-
         private void Reset_MouseLeftButtonDown(object sender, MouseButtonEventArgs e)
         {
             MessageBoxResult messageBoxResult = MessageBox.Show("It's your problem that you forgot the password!", "", MessageBoxButton.OK, MessageBoxImage.Information);
-        }
-    }
-
-    public static class PasswordBoxHelper
-    {
-        public static readonly DependencyProperty SecurePasswordProperty =
-            DependencyProperty.RegisterAttached("SecurePassword", typeof(SecureString), typeof(PasswordBoxHelper));
-
-        public static SecureString GetSecurePassword(DependencyObject obj)
-        {
-            return (SecureString)obj.GetValue(SecurePasswordProperty);
-        }
-
-        public static void SetSecurePassword(DependencyObject obj, SecureString value)
-        {
-            obj.SetValue(SecurePasswordProperty, value);
         }
     }
 }

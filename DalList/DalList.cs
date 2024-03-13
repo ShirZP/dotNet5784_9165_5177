@@ -14,6 +14,7 @@ sealed internal class DalList : IDal
     public DateTime? ProjectStartDate { get; set; }
     public DateTime? ProjectEndDate { get; set; }
     public DO.ProjectStatus ProjectStatus { get; set; }
+    public DateTime Clock { get; set; }
 
     private DalList() { }
 
@@ -84,5 +85,20 @@ sealed internal class DalList : IDal
         }
 
         DataSource.Config.projectStatus = DO.ProjectStatus.Execution;
+    }
+
+    public void SetClock(DateTime clock)
+    {
+        DataSource.Config.clock = clock;
+    }
+
+    public DateTime GetClock()
+    {
+       return DataSource.Config.clock;
+    }
+
+    public void initializeClock()
+    {
+        DataSource.Config.clock = DateTime.Now;
     }
 }

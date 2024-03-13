@@ -156,7 +156,6 @@
                                Margin="0,30,0,0"/>
 
                     <PasswordBox x:Name="passwordBox"
-                                 PasswordChanged="PasswordBox_PasswordChanged"
                                  FontSize="13"
                                  FontWeight="Medium"
                                  FontFamily="Montserrant"

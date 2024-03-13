@@ -22,7 +22,6 @@
         <local:ConvertEngineerCurrentTaskToVisible x:Key="ConvertEngineerCurrentTaskToVisibleKey"/>
         <local:ConvertEmptyEngineerCurrentTaskToVisible x:Key="ConvertEmptyEngineerCurrentTaskToVisibleKey"/>
         <local:ConvertTaskInListIEnumerableToBool x:Key="ConvertTaskInListIEnumerableToBoolKey"/>
-        <local:ConvertPasswordToString x:Key="ConvertPasswordToStringKey"/>
         <local:ConvertTaskStatusToColor x:Key="ConvertTaskStatusToColorKey"/>
         <local:ConvertDateToBoolean x:Key="ConvertDateToBooleanKey"/>
         <local:ConvertCurrentTaskToContent x:Key="ConvertCurrentTaskToContentKey"/>

@@ -45,7 +45,6 @@ namespace PL.Users
             try 
             {
                 EngineerUser = s_bl.Engineer.Read(id);
-                SharedDependencyProperties.SetClock(this, s_bl.Clock);
                 SharedDependencyProperties.SetProjectStatus(this, s_bl.GetProjectStatus());
             }
             catch(Exception ex)
