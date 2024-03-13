@@ -218,7 +218,8 @@
                                    FontWeight="Medium"
                                    FontFamily="Montserrat"
                                    Cursor="Hand"
-                                   Margin="8,0,0,0"/>
+                                   Margin="8,0,0,0"
+                                   MouseLeftButtonDown="Reset_MouseLeftButtonDown"/>
                     </StackPanel>
 
                 </StackPanel>

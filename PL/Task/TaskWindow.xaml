@@ -137,7 +137,7 @@
                     </Expander>
 
 
-                    <Button Content="{Binding CurrentTask.ID, Mode=OneTime, Converter={StaticResource ConverIdToContentKey}}" Click="BtnAddOrUpdate_Click" BorderThickness="0" Foreground="White" Template="{StaticResource ButtonTemplateKey}" Style="{StaticResource PinkButtonStyleKey}" FontFamily="Montserrant" FontWeight="Bold" FontSize="18" Cursor="Hand" VerticalAlignment="Top" HorizontalAlignment="Left" Margin="719,599,0,0" Height="25" Width="78"/>
+                    <Button Content="{Binding CurrentTask.ID, Mode=OneTime, Converter={StaticResource ConverIdToContentKey}}" Click="BtnAddOrUpdate_Click" BorderThickness="0" Foreground="White" Template="{StaticResource ButtonTemplateKey}" Style="{StaticResource PinkButtonStyleKey}" FontFamily="Montserrant" FontWeight="Bold" FontSize="18" Cursor="Hand" VerticalAlignment="Top" HorizontalAlignment="Left" Margin="727,571,0,0" Height="25" Width="78"/>
 
 
                 </Grid>
