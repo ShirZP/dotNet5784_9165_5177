@@ -1,9 +1,9 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <config>
-  <ProjectStartDate>15/03/2024 00:00:00</ProjectStartDate>
-  <ProjectEndDate>26/05/2024 19:00:00</ProjectEndDate>
-  <ProjectStatus>Execution</ProjectStatus>
-  <Clock>15/03/2024 14:18:31</Clock>
-  <NextTaskId>31</NextTaskId>
+  <ProjectStartDate></ProjectStartDate>
+  <ProjectEndDate></ProjectEndDate>
+  <ProjectStatus>Planning</ProjectStatus>
+  <Clock>2024-03-13T14:50:16.7323507+02:00</Clock>
+  <NextTaskId>21</NextTaskId>
   <NextDependencyId>42</NextDependencyId>
 </config>
