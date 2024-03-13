@@ -94,6 +94,11 @@ namespace PL.Users
                // UserLogIn.Password = ((PasswordBox)sender).SecurePassword.Copy();
             //}
         }
+
+        private void Reset_MouseLeftButtonDown(object sender, MouseButtonEventArgs e)
+        {
+            MessageBoxResult messageBoxResult = MessageBox.Show("It's your problem that you forgot the password!", "", MessageBoxButton.OK, MessageBoxImage.Information);
+        }
     }
 
     public static class PasswordBoxHelper
