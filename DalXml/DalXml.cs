@@ -15,6 +15,7 @@ sealed internal class DalXml : IDal
     public DateTime? ProjectStartDate { get; set; }
     public DateTime? ProjectEndDate { get; set; }
     public DO.ProjectStatus ProjectStatus { get; set; }
+    public DateTime Clock { get => throw new NotImplementedException(); set => throw new NotImplementedException(); }
 
     private DalXml() { }
 
@@ -125,11 +126,19 @@ sealed internal class DalXml : IDal
     public void changeStatusToExecution()
     {
         XElement root = XMLTools.LoadListFromXMLElement(Config.s_data_config_xml);
-        //if (root.Element("ProjectStatus")!.Value == DO.ProjectStatus.Planning.ToString())  //TODO: clear
-        //{
-        //    throw new DalChangProjectStatusException("can't change status from planning to Execution");
-        //}
         root.Element("ProjectStatus")!.SetValue(DO.ProjectStatus.Execution.ToString());
         XMLTools.SaveListToXMLElement(root, Config.s_data_config_xml);
+    }
+
+    public void SetClock(DateTime clock)
+    {
+        XElement root = XMLTools.LoadListFromXMLElement(Config.s_data_config_xml);
+        root.Element("Clock")!.SetValue(clock.ToString());
+        XMLTools.SaveListToXMLElement(root, Config.s_data_config_xml);
+    }
+
+    public DateTime GetClock()
+    {
+        return Config.Clock;
     }
 }

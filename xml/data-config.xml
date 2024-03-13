@@ -3,6 +3,7 @@
   <ProjectStartDate>13/03/2024 00:00:00</ProjectStartDate>
   <ProjectEndDate>09/05/2024 19:00:00</ProjectEndDate>
   <ProjectStatus>Execution</ProjectStatus>
+  <Clock></Clock>
   <NextTaskId>21</NextTaskId>
   <NextDependencyId>42</NextDependencyId>
 </config>

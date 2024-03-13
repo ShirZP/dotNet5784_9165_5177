@@ -116,6 +116,15 @@ internal class Bl : IBl
     private static DateTime s_Clock = DateTime.Now;
     public DateTime Clock { get { return s_Clock; } private set { s_Clock = value; } }
 
+    public DateTime GetClock()
+    {
+        return _dal.GetClock();
+    }
+
+    public void SetClock(DateTime clock)
+    {
+        _dal.SetClock(clock);
+    }
 
     public DateTime MoveClockYearForward()
     {

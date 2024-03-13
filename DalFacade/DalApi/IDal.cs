@@ -12,6 +12,7 @@ public interface IDal
     DateTime? ProjectStartDate { get; set; }
     DateTime? ProjectEndDate { get; set; }
     DO.ProjectStatus ProjectStatus { get; set; }
+    DateTime Clock { get; set; }
 
     public DateTime? getProjectStartDate();
     public DateTime? getProjectEndDate();
@@ -23,6 +24,11 @@ public interface IDal
     public void changeStatusToPlanning();
     public void changeStatusToBuildingSchedule();
     public void changeStatusToExecution();
+
+    #region  Clock
+    public void SetClock(DateTime clock);
+    public DateTime GetClock();
+    #endregion
 
 }
 

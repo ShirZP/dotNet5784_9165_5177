@@ -26,7 +26,8 @@ public interface IBl
 
     #region Clock
     public DateTime Clock { get; }
-
+    public DateTime GetClock();
+    public void SetClock(DateTime clock);  //update the Dal Clock
     public DateTime MoveClockYearForward();
     public DateTime MoveClockDayForward();
     public DateTime MoveClockHourForward();
