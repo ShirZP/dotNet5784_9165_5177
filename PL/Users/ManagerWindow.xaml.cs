@@ -46,7 +46,7 @@ public partial class ManagerWindow : Window
 
         InitializeComponent();
         SharedDependencyProperties.SetClock(this, s_bl.GetClock());
-        StartDatePicker.DisplayDateStart = SharedDependencyProperties.GetClock(this);
+        StartDatePicker.DisplayDateStart = SharedDependencyProperties.GetClock(this).AddDays(1);
 
         ExecuteProjectByClock();
 
