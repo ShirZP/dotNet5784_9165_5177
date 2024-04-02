@@ -5,7 +5,7 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:PL.GanttChar"
         mc:Ignorable="d"
-        Title="GanttChar" Height="800" Width="1500"
+        Title="GanttChar" Height="820" Width="1500"
         Icon="{StaticResource AppIcon}"
         WindowStartupLocation="CenterScreen"
         Background="Transparent">
@@ -36,23 +36,23 @@
                             <ColumnDefinition Width="4*"/>
                         </Grid.ColumnDefinitions>
 
-                            <StackPanel Grid.Column="0">
-                                <!--names list-->
+                        <StackPanel Grid.Column="0">
+                            <!--names list-->
                             <ItemsControl ItemsSource="{Binding GanttTasksList}" Margin="0,25,0,0" HorizontalAlignment="Right">
-                                    <ItemsControl.ItemTemplate>
-                                        <DataTemplate>
-                                            <Border BorderThickness="2" BorderBrush="White">
-                                                <StackPanel Orientation="Horizontal" HorizontalAlignment="Left">
+                                <ItemsControl.ItemTemplate>
+                                    <DataTemplate>
+                                        <Border BorderThickness="2" BorderBrush="White">
+                                            <StackPanel Orientation="Horizontal" HorizontalAlignment="Left">
                                                 <TextBlock HorizontalAlignment="left" Text="{Binding TaskName}" Height="20" TextAlignment="Left" Width="290" FontWeight="Bold" Background="#8A16C1" Foreground="White"/>
-                                                </StackPanel>
-                                            </Border>
-                                        </DataTemplate>
-                                    </ItemsControl.ItemTemplate>
-                                </ItemsControl>
-                            </StackPanel>
+                                            </StackPanel>
+                                        </Border>
+                                    </DataTemplate>
+                                </ItemsControl.ItemTemplate>
+                            </ItemsControl>
+                        </StackPanel>
 
                         <ScrollViewer Grid.Column="1" HorizontalScrollBarVisibility="Auto" VerticalScrollBarVisibility="Hidden">
-                                <Grid>
+                            <Grid>
                                 <StackPanel>
 
                                     <!--Dates-->
@@ -90,16 +90,16 @@
                                                         <Rectangle HorizontalAlignment="Left" Height="20" Width="{Binding TimeFromStart}"  Fill="White"/>
                                                         <TextBlock HorizontalAlignment="Left" Width="{Binding Duration}" FontWeight="Bold" Background="{Binding TaskStatus, Mode=OneWay, Converter={StaticResource ConvertTaskStatusToColorKey}}">
                                                             <TextBlock.ToolTip>
-                                                                    <ToolTip>
-                                                                        <ItemsControl ItemsSource="{Binding DependenciesName}">
-                                                                            <ItemsControl.ItemTemplate>
-                                                                                <DataTemplate>
-                                                                                    <TextBlock Text="{Binding}"/>
-                                                                                </DataTemplate>
-                                                                            </ItemsControl.ItemTemplate>
-                                                                        </ItemsControl>
-                                                                    </ToolTip>
-                                                                </TextBlock.ToolTip>
+                                                                <ToolTip>
+                                                                    <ItemsControl ItemsSource="{Binding DependenciesName}">
+                                                                        <ItemsControl.ItemTemplate>
+                                                                            <DataTemplate>
+                                                                                <TextBlock Text="{Binding}"/>
+                                                                            </DataTemplate>
+                                                                        </ItemsControl.ItemTemplate>
+                                                                    </ItemsControl>
+                                                                </ToolTip>
+                                                            </TextBlock.ToolTip>
                                                             </TextBlock>
                                                         <Rectangle HorizontalAlignment="Left" Height="20" Width="{Binding TimeToEnd}"  Fill="White"/>
 
@@ -110,13 +110,14 @@
                                     </ItemsControl>
                                 </StackPanel>
                             </Grid>
-                            </ScrollViewer>
-                            
+                        </ScrollViewer>
+
                     </Grid>
                 </ScrollViewer>
-                    
+
 
                 <Grid Grid.Row="2">
+                    <Rectangle Stroke="{StaticResource BorderBrushKey}" StrokeThickness="3" Margin="27,10,496,-20" Fill="#FF3E3153"/>
                     <TextBlock Text="Color Legend:" Foreground="WhiteSmoke" FontSize="20" FontWeight="Bold" FontFamily="Montserrant" HorizontalAlignment="Left" Height="39" Margin="50,21,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="153"/>
                     <TextBlock Text="New" Background="LightGray" FontSize="20" FontWeight="Bold" Width="160" Height="35" TextAlignment="Center" Margin="230,25,1100,0"/>
                     <TextBlock Text="Active" Background="#28AEED" FontSize="20" FontWeight="Bold" Width="160" Height="35" TextAlignment="Center" Margin="421,25,909,0"/>
@@ -124,6 +125,7 @@
                     <TextBlock Text="Complete" Background="#FF65C28F" FontSize="20" FontWeight="Bold" Width="160" Height="35" TextAlignment="Center" Margin="796,25,534,0"/>
 
                 </Grid>
+                
             </Grid>
 
 
