@@ -52,17 +52,17 @@
 
                     <!-- ID -->
                     <TextBox Text="{Binding CurrentTask.ID, Mode=TwoWay, NotifyOnValidationError=true,  ValidatesOnExceptions=true}" IsEnabled="False"
-                                Style="{StaticResource TextBoxStyleKey}" HorizontalAlignment="Left" Margin="177,76,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="217"/>
+                             Style="{StaticResource TextBoxStyleKey}" HorizontalAlignment="Left" Margin="177,76,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="217"/>
                     <!-- Name -->
                     <TextBox Text="{Binding CurrentTask.NickName, Mode=TwoWay, NotifyOnValidationError=true,  ValidatesOnExceptions=true}"
-                                Style="{StaticResource TextBoxStyleKey}" HorizontalAlignment="Left" Margin="177,106,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="217"/>
+                             MaxLength ="30" Style="{StaticResource TextBoxStyleKey}" HorizontalAlignment="Left" Margin="177,106,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="217"/>
 
                     <!-- Description -->
                     <TextBox Text="{Binding CurrentTask.Description, Mode=TwoWay, NotifyOnValidationError=true,  ValidatesOnExceptions=true}"
-                                Style="{StaticResource TextBoxStyleKey}" HorizontalAlignment="Left" Margin="177,136,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="217"
-                                HorizontalScrollBarVisibility="Disabled"
-                                VerticalScrollBarVisibility="Auto"
-                                AcceptsReturn="True" Height="44"/>
+                             MaxLength ="200" Style="{StaticResource TextBoxStyleKey}" HorizontalAlignment="Left" Margin="177,136,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="217"
+                             HorizontalScrollBarVisibility="Disabled"
+                             VerticalScrollBarVisibility="Auto"
+                             AcceptsReturn="True" Height="44"/>
                     <!-- Status -->
                     <ComboBox ItemsSource="{Binding Source={StaticResource TaskStatusCollectionKey}}" 
                                 SelectedValue="{Binding CurrentTask.Status, Mode=TwoWay, NotifyOnValidationError=true, ValidatesOnExceptions=true}" 
@@ -90,17 +90,17 @@
 
                     <!-- Deliverables -->
                     <TextBox Text="{Binding CurrentTask.Deliverables, Mode=TwoWay, NotifyOnValidationError=true,  ValidatesOnExceptions=true}"
-                                Style="{StaticResource TextBoxStyleKey}" HorizontalAlignment="Left" Margin="572,104,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="216"
-                                HorizontalScrollBarVisibility="Disabled"
-                                VerticalScrollBarVisibility="Auto"
-                                AcceptsReturn="True" Height="44"/>
+                             MaxLength ="200" Style="{StaticResource TextBoxStyleKey}" HorizontalAlignment="Left" Margin="572,104,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="216"
+                             HorizontalScrollBarVisibility="Disabled"
+                             VerticalScrollBarVisibility="Auto"
+                             AcceptsReturn="True" Height="44"/>
 
                     <!-- Remarks -->
                     <TextBox Text="{Binding CurrentTask.Remarks, Mode=TwoWay, NotifyOnValidationError=true,  ValidatesOnExceptions=true}"
-                                Style="{StaticResource TextBoxStyleKey}" HorizontalAlignment="Left" Margin="177,264,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="217"
-                                HorizontalScrollBarVisibility="Disabled"
-                                VerticalScrollBarVisibility="Auto"
-                                AcceptsReturn="True" Height="44"/>
+                             MaxLength ="200" Style="{StaticResource TextBoxStyleKey}" HorizontalAlignment="Left" Margin="177,264,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="217"
+                             HorizontalScrollBarVisibility="Disabled"
+                             VerticalScrollBarVisibility="Auto"
+                             AcceptsReturn="True" Height="44"/>
 
                     <!-- Assigned Engineer -->
                     <TextBlock Text="{Binding CurrentTask.AssignedEngineer}"

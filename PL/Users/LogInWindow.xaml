@@ -129,10 +129,10 @@
                                Margin="0,35,0,0"/>
 
                     <TextBox Text="{Binding UserLogIn.UserName, Mode=TwoWay, NotifyOnValidationError=true, ValidatesOnExceptions=true}"
+                             MaxLength ="20"
                              FontSize="13"
                              FontWeight="Medium"
                              FontFamily="Montserrant"
-                             Background ="Transparent"
                              Foreground="White"
                              CaretBrush="LightGray"
                              BorderBrush="DarkGray"
@@ -140,12 +140,12 @@
                              Height="28"
                              VerticalAlignment="Bottom"
                              Margin="0,5,0,0"
-                             Padding="20,0,0,-50">
-                        <!--TextBox.Background>-->
-                        <!-- <ImageBrush ImageSource="/Users/UserNameImage.jpg"-->
-                        <!--Stretch="None"-->
-                        <!--AlignmentX="Left"/>-->
-                        <!--</TextBox.Background>-->
+                             Padding="30,5,0,0">
+                        <TextBox.Background>
+                            <ImageBrush ImageSource="/Users/userIcon.png" 
+                                        Stretch="Uniform"
+                                        AlignmentX ="Left"/>
+                        </TextBox.Background>
                     </TextBox>
 
                     <TextBlock Text="Password"
@@ -156,10 +156,10 @@
                                Margin="0,30,0,0"/>
 
                     <PasswordBox PasswordChanged="PasswordBox_PasswordChanged"
+                                 MaxLength ="20"
                                  FontSize="13"
                                  FontWeight="Medium"
                                  FontFamily="Montserrant"
-                                 Background ="Transparent"
                                  Foreground="White"
                                  CaretBrush="LightGray"
                                  BorderBrush="DarkGray"
@@ -167,12 +167,12 @@
                                  Height="28"
                                  VerticalAlignment="Bottom"
                                  Margin="0,5,0,0"
-                                 Padding="20,0,0,0">
-                        <!--Password.Background>-->
-                        <!-- <ImageBrush ImageSource="/Users/UserNameImage.jpg"-->
-                        <!--Stretch="None"-->
-                        <!--AlignmentX="Left"/>-->
-                        <!--</Password.Background>-->
+                                 Padding="30,5,0,0">
+                        <PasswordBox.Background>
+                            <ImageBrush ImageSource="/Users/passwordIcon.png" 
+                                        Stretch="Uniform"
+                                        AlignmentX ="Left"/>
+                        </PasswordBox.Background>
                     </PasswordBox>
 
                     <!--Button Log In-->
