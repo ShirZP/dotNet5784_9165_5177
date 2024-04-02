@@ -176,7 +176,7 @@
                         break;
 
                     case 7: //SortByID
-                        IEnumerable<BO.TaskInList> tasksSortList = s_bl!.Task.SortByID();
+                        IEnumerable<BO.Task> tasksSortList = s_bl!.Task.SortByID();
                         foreach (var e in tasksSortList)
                         {
                             Console.WriteLine(e);

@@ -126,7 +126,7 @@
     <Description>Description - UX/UI improvement</Description>
     <ScheduledDate>2024-05-07T08:00:00</ScheduledDate>
     <StartDate xsi:nil="true" />
-    <RequiredEffortTime>P3D</RequiredEffortTime>
+    <RequiredEffortTime>P4D</RequiredEffortTime>
     <CompleteDate xsi:nil="true" />
     <FinalProduct>FinalProduct - UX/UI improvement</FinalProduct>
     <Remarks>Remarks - UX/UI improvement</Remarks>
@@ -156,7 +156,7 @@
     <Description>Description - Firmware development</Description>
     <ScheduledDate>2024-05-14T10:00:00</ScheduledDate>
     <StartDate xsi:nil="true" />
-    <RequiredEffortTime>P3D</RequiredEffortTime>
+    <RequiredEffortTime>P2D</RequiredEffortTime>
     <CompleteDate xsi:nil="true" />
     <FinalProduct>FinalProduct - Firmware development</FinalProduct>
     <Remarks>Remarks - Firmware development</Remarks>
@@ -246,7 +246,7 @@
     <Description>Description - Cyber-physical systems</Description>
     <ScheduledDate>2024-06-03T16:00:00</ScheduledDate>
     <StartDate xsi:nil="true" />
-    <RequiredEffortTime>P3D</RequiredEffortTime>
+    <RequiredEffortTime>P1D</RequiredEffortTime>
     <CompleteDate xsi:nil="true" />
     <FinalProduct>FinalProduct - Cyber-physical systems</FinalProduct>
     <Remarks>Remarks - Cyber-physical systems</Remarks>
