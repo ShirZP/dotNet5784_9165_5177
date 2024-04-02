@@ -19,9 +19,11 @@
     <None Remove="IconImage.png" />
     <None Remove="marble.jpg" />
     <None Remove="Task\penIcon.png" />
+    <None Remove="Users\engineersIcon.png" />
     <None Remove="Users\eye.png" />
-    <None Remove="Users\f74b8ce4b7518f44f4e03740dfd74d5a.jpg" />
-    <None Remove="Users\UserNameImage.jpg" />
+    <None Remove="Users\passwordIcon.png" />
+    <None Remove="Users\tasksIcon.png" />
+    <None Remove="Users\userIcon.png" />
   </ItemGroup>
 
   <ItemGroup>
@@ -34,9 +36,11 @@
     <Resource Include="images\code.jpg" />
     <Resource Include="images\penIcon.png" />
     <Resource Include="Task\penIcon.png" />
+    <Resource Include="Users\engineersIcon.png" />
     <Resource Include="Users\eye.png" />
-    <Resource Include="Users\f74b8ce4b7518f44f4e03740dfd74d5a.jpg" />
-    <Resource Include="Users\UserNameImage.jpg" />
+    <Resource Include="Users\passwordIcon.png" />
+    <Resource Include="Users\tasksIcon.png" />
+    <Resource Include="Users\userIcon.png" />
   </ItemGroup>
 
 </Project>

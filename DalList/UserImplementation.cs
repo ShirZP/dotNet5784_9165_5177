@@ -15,7 +15,6 @@ internal class UserImplementation : IUser
     /// </summary>
     public void Clear()
     {
-        //TODO:לבדוק אם עובד!!!!!!!!
         foreach (DO.User User in DataSource.Users)
         {
             if (User.Permission == UserPermissions.Engineer)
@@ -64,6 +63,11 @@ internal class UserImplementation : IUser
         {
             throw new DalDoesNotExistException($"An user with ID={id} does not exist");
         }
+    }
+
+    public string PasswordHash(string str)
+    {
+        throw new NotImplementedException();
     }
 
     /// <summary>

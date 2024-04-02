@@ -29,22 +29,22 @@
                 <Label Content="Current Task:" Visibility="{Binding CurrentEngineer.ID, Mode=OneTime, Converter={StaticResource ConvertIdZeroToCollapsedKey}}" Foreground="DarkGray" FontWeight="Medium" FontFamily="Montserrant"  HorizontalAlignment="Left" Margin="50,306,0,0" VerticalAlignment="Top" Height="28" Width="90"/>
                 <!-- ID -->
                 <TextBox Text="{Binding CurrentEngineer.ID, Mode=TwoWay, NotifyOnValidationError=true,  ValidatesOnExceptions=true}"
-                         IsEnabled="{Binding CurrentEngineer.ID, Mode=OneTime, Converter={StaticResource ConvertIdToIsEnabledKey}}"
+                         MaxLength ="9" IsEnabled="{Binding CurrentEngineer.ID, Mode=OneTime, Converter={StaticResource ConvertIdToIsEnabledKey}}"
                          PreviewTextInput="CheckValidInt"
                          Style="{StaticResource TextBoxStyleKey}" HorizontalAlignment="Left" Margin="163,56,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="217"/>
                 <!-- FullName -->
                 <TextBox Text="{Binding CurrentEngineer.FullName, Mode=TwoWay, NotifyOnValidationError=true,  ValidatesOnExceptions=true}" 
-                         Style="{StaticResource TextBoxStyleKey}" HorizontalAlignment="Left" Margin="163,106,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="217"/>
+                         MaxLength ="25" Style="{StaticResource TextBoxStyleKey}" HorizontalAlignment="Left" Margin="163,106,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="217"/>
                 <!-- Email -->
                 <TextBox Text="{Binding CurrentEngineer.Email, Mode=TwoWay, NotifyOnValidationError=true, ValidatesOnExceptions=true}"
-                         Style="{StaticResource TextBoxStyleKey}" HorizontalAlignment="Left" Margin="163,156,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="217"/>
+                         MaxLength ="25" Style="{StaticResource TextBoxStyleKey}" HorizontalAlignment="Left" Margin="163,156,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="217"/>
                 <!-- Level -->
                 <ComboBox ItemsSource="{Binding Source={StaticResource EngineerExperienceCollectionKey}}" 
                           SelectedValue="{Binding CurrentEngineer.Level, Mode=TwoWay, NotifyOnValidationError=true, 
                           ValidatesOnExceptions=true}" HorizontalAlignment="Left" Margin="163,206,0,0" VerticalAlignment="Top" Width="217"/>
                 <!-- Cost -->
                 <TextBox Text="{Binding CurrentEngineer.Cost, Mode=TwoWay, NotifyOnValidationError=true, ValidatesOnExceptions=true}" 
-                         Style="{StaticResource TextBoxStyleKey}"  HorizontalAlignment="Left" Margin="163,256,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="217"
+                         MaxLength ="10" Style="{StaticResource TextBoxStyleKey}"  HorizontalAlignment="Left" Margin="163,256,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="217"
                          PreviewTextInput="CheckValidInt"/>
                 
                 <!-- Current Task -->

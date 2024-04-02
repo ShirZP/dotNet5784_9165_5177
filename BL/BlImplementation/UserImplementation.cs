@@ -16,7 +16,7 @@ internal class UserImplementation : IUser
     {
         try
         {
-            DO.User newUser = new DO.User(user.ID, user.UserName,user.Password,(DO.UserPermissions)user.Permission);
+            DO.User newUser = new DO.User(user.ID, user.UserName, user.Password, (DO.UserPermissions)user.Permission);
             return _dal.User.Create(newUser);
         }
         catch (DO.DalAlreadyExistsException dalEx)
@@ -37,10 +37,11 @@ internal class UserImplementation : IUser
         }
     }
 
+    
     public User Read(string userName, string password)
     {
         //Retrieving the User from the data layer
-        DO.User? dalUser = _dal.User.Read(item => item.UserName == userName && item.Password == password);
+        DO.User? dalUser = _dal.User.Read(item => item.UserName == userName && item.Password == _dal.User.PasswordHash(password));
 
         if (dalUser == null)
             throw new BO.BlDoesNotExistException("Username or password is incorrect");
