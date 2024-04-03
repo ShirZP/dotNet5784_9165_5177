@@ -93,6 +93,8 @@
             </Style.Triggers>
         </Style>
 
+        
+        <!-- Control Template round button -->
         <ControlTemplate TargetType="Button" x:Key ="ButtonTemplateKey">
             <Border CornerRadius="9" Background="{TemplateBinding Background}">
                 <ContentPresenter VerticalAlignment="Center" HorizontalAlignment="Center"/>
@@ -117,6 +119,32 @@
             <!-- Remove default focus rectangle -->
             <Setter Property="FocusVisualStyle" Value="{x:Null}"/>
         </Style>
+        
+        <!-- Back button style-->
+        <Style TargetType="Button" x:Key="BackButtonStyleKey">
+            <!-- Remove default mouse-over background change -->
+            <Setter Property="Template">
+                <Setter.Value>
+                    <ControlTemplate TargetType="Button">
+                        <Border Background="{TemplateBinding Background}">
+                            <ContentPresenter HorizontalAlignment="Center" VerticalAlignment="Center"/>
+                        </Border>
+                    </ControlTemplate>
+                </Setter.Value>
+            </Setter>
+            <Setter Property="Background" Value="Transparent"/>
+            <Setter Property="BorderBrush" Value="Transparent"/>
+            <Setter Property="BorderThickness" Value="0"/>
+            <!-- Remove default focus rectangle -->
+            <Setter Property="FocusVisualStyle" Value="{x:Null}"/>
+            <Setter Property="Content">
+                <Setter.Value>
+                    <Image Source="/pink-back-arrow.png"/>
+                </Setter.Value>
+            </Setter>
+        </Style>
+
+
 
 
         <!-- TextBox Style -->

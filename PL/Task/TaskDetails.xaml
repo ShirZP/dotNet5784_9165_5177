@@ -20,13 +20,14 @@
                 Background="{StaticResource BackgroundBrushKey}">
 
             <Grid>
-                <Button Content="Back"
-                        BorderThickness="0" Foreground="White" Template="{StaticResource ButtonTemplateKey}" Style="{StaticResource PurpleButtonStyleKey}" FontFamily="Montserrant" FontWeight="Medium" Cursor="Hand" 
+                <Button BorderThickness="0" Foreground="White" Style="{StaticResource BackButtonStyleKey}" FontFamily="Montserrant" FontWeight="Medium" Cursor="Hand" 
                         HorizontalAlignment="Left" 
                         VerticalAlignment="Top"
-                        Height="30" Width="50" 
-                        FontSize="18" Click="BtnBack_Click"/>
-                
+                        Height="28" Width="36" 
+                        FontSize="18" Click="BtnBack_Click" Margin="-2,2,0,0"/>
+               
+
+
                 <TextBlock Text="Task Details:" Foreground="WhiteSmoke" FontSize="20" FontWeight="Bold" FontFamily="Montserrant" HorizontalAlignment="Left" Height="39" Margin="50,50,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="329"/>
 
 

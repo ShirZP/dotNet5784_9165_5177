@@ -15,13 +15,6 @@
     <cost>43</cost>
   </engineer>
   <engineer>
-    <id>375685635</id>
-    <fullName>Yair Cohen</fullName>
-    <email>YairCohen@gmail.com</email>
-    <level>AdvancedBeginner</level>
-    <cost>52</cost>
-  </engineer>
-  <engineer>
     <id>296901275</id>
     <fullName>Ariela Levin</fullName>
     <email>ArielaLevin@gmail.com</email>
@@ -29,17 +22,24 @@
     <cost>74</cost>
   </engineer>
   <engineer>
-    <id>362740439</id>
-    <fullName>Dina Klein</fullName>
-    <email>DinaKlein@gmail.com</email>
-    <level>Advanced</level>
-    <cost>75</cost>
-  </engineer>
-  <engineer>
     <id>309825181</id>
     <fullName>Shira Israelof</fullName>
     <email>ShiraIsraelof@gmail.com</email>
     <level>Advanced</level>
     <cost>66</cost>
+  </engineer>
+  <engineer>
+    <id>375685635</id>
+    <fullName>Yair Cohen</fullName>
+    <email>YairCohen@gmail.com</email>
+    <level>Expert</level>
+    <cost>52</cost>
+  </engineer>
+  <engineer>
+    <id>362740439</id>
+    <fullName>Dina Klein</fullName>
+    <email>DinaKlein@gmail.com</email>
+    <level>Expert</level>
+    <cost>75</cost>
   </engineer>
 </ArrayOfEngineer>

@@ -1,36 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <ArrayOfTask xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
   <Task>
-    <ID>1</ID>
-    <NickName>Algorithm development</NickName>
-    <Description>Description - Algorithm development</Description>
-    <ScheduledDate>2024-04-03T00:00:00</ScheduledDate>
-    <StartDate xsi:nil="true" />
-    <RequiredEffortTime>P4D</RequiredEffortTime>
-    <CompleteDate xsi:nil="true" />
-    <FinalProduct>FinalProduct - Algorithm development</FinalProduct>
-    <Remarks>Remarks - Algorithm development</Remarks>
-    <EngineerId>0</EngineerId>
-    <Complexity>Intermediate</Complexity>
-    <DeadlineDate xsi:nil="true" />
-    <IsMileStone>false</IsMileStone>
-  </Task>
-  <Task>
-    <ID>2</ID>
-    <NickName>Software design and testing</NickName>
-    <Description>Description - Software design and testing</Description>
-    <ScheduledDate>2024-04-08T01:00:00</ScheduledDate>
-    <StartDate xsi:nil="true" />
-    <RequiredEffortTime>P3D</RequiredEffortTime>
-    <CompleteDate xsi:nil="true" />
-    <FinalProduct>FinalProduct - Software design and testing</FinalProduct>
-    <Remarks>Remarks - Software design and testing</Remarks>
-    <EngineerId>0</EngineerId>
-    <Complexity>AdvancedBeginner</Complexity>
-    <DeadlineDate xsi:nil="true" />
-    <IsMileStone>false</IsMileStone>
-  </Task>
-  <Task>
     <ID>3</ID>
     <NickName>Hardware prototyping</NickName>
     <Description>Description - Hardware prototyping</Description>
@@ -297,6 +267,36 @@
     <Remarks>Remarks - Research and development</Remarks>
     <EngineerId>0</EngineerId>
     <Complexity>Beginner</Complexity>
+    <DeadlineDate xsi:nil="true" />
+    <IsMileStone>false</IsMileStone>
+  </Task>
+  <Task>
+    <ID>1</ID>
+    <NickName>Algorithm development</NickName>
+    <Description>Description - Algorithm development</Description>
+    <ScheduledDate>2024-04-03T00:00:00</ScheduledDate>
+    <StartDate>2024-04-03T20:50:15</StartDate>
+    <RequiredEffortTime>P4D</RequiredEffortTime>
+    <CompleteDate>2024-04-03T20:50:15</CompleteDate>
+    <FinalProduct>FinalProduct - Algorithm development</FinalProduct>
+    <Remarks>Remarks - Algorithm development</Remarks>
+    <EngineerId>375685635</EngineerId>
+    <Complexity>Intermediate</Complexity>
+    <DeadlineDate xsi:nil="true" />
+    <IsMileStone>false</IsMileStone>
+  </Task>
+  <Task>
+    <ID>2</ID>
+    <NickName>Software design and testing</NickName>
+    <Description>Description - Software design and testing</Description>
+    <ScheduledDate>2024-04-08T01:00:00</ScheduledDate>
+    <StartDate>2024-04-03T20:50:15</StartDate>
+    <RequiredEffortTime>P3D</RequiredEffortTime>
+    <CompleteDate xsi:nil="true" />
+    <FinalProduct>FinalProduct - Software design and testing</FinalProduct>
+    <Remarks>Remarks - Software design and testing</Remarks>
+    <EngineerId>375685635</EngineerId>
+    <Complexity>AdvancedBeginner</Complexity>
     <DeadlineDate xsi:nil="true" />
     <IsMileStone>false</IsMileStone>
   </Task>

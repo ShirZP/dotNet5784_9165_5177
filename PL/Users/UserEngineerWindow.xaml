@@ -28,11 +28,22 @@
                     <RowDefinition Height="auto"/>
                 </Grid.RowDefinitions>
                 <Grid HorizontalAlignment="Stretch" Height="auto" Grid.Row="0" VerticalAlignment="Stretch" Width="auto">
+                    <Button BorderThickness="0" Foreground="White" Style="{StaticResource PinkButtonStyleKey}" FontFamily="Montserrant" FontWeight="Bold" FontSize="14" Cursor="Hand" VerticalAlignment="Center" HorizontalAlignment="Left" Click="BtnRefresh_Click" Height="32" Width="31" Margin="741,0,0,0">
+                        <Button.Template>
+                            <ControlTemplate TargetType="Button">
+                                <Border CornerRadius="25" Background="{TemplateBinding Background}">
+                                    <ContentPresenter VerticalAlignment="Center" HorizontalAlignment="Center"/>
+                                </Border>
+                            </ControlTemplate>
+                        </Button.Template>
+                        <Image Source="/Users/refreshIcon.png" Height="27" Width="21"/>
+                    </Button>
+
                     <TextBlock Text="Hi, " HorizontalAlignment="Left" Foreground="White" TextWrapping="Wrap" VerticalAlignment="Top" Height="41" Width="131" FontSize="18" FontWeight="Bold"/>
                     <TextBlock Text="{Binding EngineerUser.FullName}" HorizontalAlignment="Left"  Foreground="White" TextWrapping="Wrap"  VerticalAlignment="Center" Height="40" Width="131" FontSize="18" FontWeight="Bold" Margin="32,0,0,0"/>
 
-                    <TextBlock Text="project status:" Foreground="White" TextWrapping="Wrap" VerticalAlignment="Center" Width="170" FontSize="18" FontWeight="Bold" Margin="476,0,144,0"/>
-                    <TextBlock Text="{Binding Path=(local:SharedDependencyProperties.ProjectStatus), Mode=OneTime}" HorizontalAlignment="Right"  Foreground="White" TextWrapping="Wrap"  VerticalAlignment="Center" Width="131" FontSize="18" FontWeight="Bold" Margin="32,0,0,0"/>
+                    <TextBlock Text="project status:" Foreground="White" TextWrapping="Wrap" VerticalAlignment="Center" Width="170" FontSize="18" FontWeight="Bold" Margin="407,0,213,0"/>
+                    <TextBlock Text="{Binding Path=(local:SharedDependencyProperties.ProjectStatus), Mode=OneTime}" HorizontalAlignment="Left"  Foreground="White" TextWrapping="Wrap"  VerticalAlignment="Center" Width="131" FontSize="18" FontWeight="Bold" Margin="590,0,0,0"/>
 
                 </Grid>
 

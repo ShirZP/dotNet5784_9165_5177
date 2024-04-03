@@ -18,10 +18,12 @@
     <None Remove="EngineerPic.jpeg" />
     <None Remove="IconImage.png" />
     <None Remove="marble.jpg" />
+    <None Remove="pink-back-arrow.png" />
     <None Remove="Task\penIcon.png" />
     <None Remove="Users\engineersIcon.png" />
     <None Remove="Users\eye.png" />
     <None Remove="Users\passwordIcon.png" />
+    <None Remove="Users\refreshIcon.png" />
     <None Remove="Users\tasksIcon.png" />
     <None Remove="Users\userIcon.png" />
   </ItemGroup>
@@ -33,12 +35,13 @@
   <ItemGroup>
     <Resource Include="IconImage.png" />
     <Resource Include="images\background.jpg" />
-    <Resource Include="images\code.jpg" />
     <Resource Include="images\penIcon.png" />
+    <Resource Include="pink-back-arrow.png" />
     <Resource Include="Task\penIcon.png" />
     <Resource Include="Users\engineersIcon.png" />
     <Resource Include="Users\eye.png" />
     <Resource Include="Users\passwordIcon.png" />
+    <Resource Include="Users\refreshIcon.png" />
     <Resource Include="Users\tasksIcon.png" />
     <Resource Include="Users\userIcon.png" />
   </ItemGroup>

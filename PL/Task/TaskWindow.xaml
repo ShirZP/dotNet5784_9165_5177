@@ -25,10 +25,9 @@
                 </Grid.RowDefinitions>
 
                 <Grid Grid.Row="0">
-                    <Button Content="Back"
-                            BorderThickness="0" Foreground="White" Template="{StaticResource ButtonTemplateKey}" Style="{StaticResource PurpleButtonStyleKey}" FontFamily="Montserrant" FontWeight="Medium" Cursor="Hand" 
+                    <Button BorderThickness="0" Foreground="White" Style="{StaticResource BackButtonStyleKey}" FontFamily="Montserrant" FontWeight="Medium" Cursor="Hand" 
                             HorizontalAlignment="Left" 
-                            Height="30" Width="50" 
+                            Height="30" Width="36" 
                             FontSize="18" Click="BtnBack_Click"/>
 
                 </Grid>

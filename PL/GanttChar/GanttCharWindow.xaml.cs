@@ -116,5 +116,13 @@ namespace PL.GanttChar
         }
 
         #endregion
+
+        /// <summary>
+        /// The function close the window.
+        /// </summary>
+        private void BtnBack_Click(object sender, RoutedEventArgs e)
+        {
+            this.Close();   
+        }
     }
 }

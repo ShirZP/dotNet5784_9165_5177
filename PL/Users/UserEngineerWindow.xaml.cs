@@ -41,16 +41,7 @@ namespace PL.Users
         {
             InitializeComponent();
             this.DataContext = this;
-
-            try 
-            {
-                EngineerUser = s_bl.Engineer.Read(id);
-                SharedDependencyProperties.SetProjectStatus(this, s_bl.GetProjectStatus());
-            }
-            catch(Exception ex)
-            {
-                MessageBox.Show(ex.Message, "ERROR :(", MessageBoxButton.OK, MessageBoxImage.Error);
-            }
+            ReadUser(id);
         }
 
 
@@ -121,6 +112,31 @@ namespace PL.Users
                 {
                     MessageBox.Show(ex.Message, "ERROR", MessageBoxButton.OK, MessageBoxImage.Error);
                 }
+            }
+        }
+
+        /// <summary>
+        ///  The function re-extracts the engineer.
+        /// </summary>
+        private void BtnRefresh_Click(object sender, RoutedEventArgs e)
+        {
+            ReadUser(EngineerUser.ID);
+        }
+
+        /// <summary>
+        /// The fuction recieves an engineer id and read it into EngineerUser.
+        /// </summary>
+        /// <param name="id">User id</param>
+        private void ReadUser(int id)
+        {
+            try
+            {
+                EngineerUser = s_bl.Engineer.Read(id);
+                SharedDependencyProperties.SetProjectStatus(this, s_bl.GetProjectStatus());
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message, "ERROR :(", MessageBoxButton.OK, MessageBoxImage.Error);
             }
         }
     }
