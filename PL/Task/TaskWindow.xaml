@@ -67,10 +67,8 @@
                              VerticalScrollBarVisibility="Auto"
                              AcceptsReturn="True" Height="44"/>
                     <!-- Status -->
-                    <ComboBox ItemsSource="{Binding Source={StaticResource TaskStatusCollectionKey}}" 
-                                SelectedValue="{Binding CurrentTask.Status, Mode=TwoWay, NotifyOnValidationError=true, ValidatesOnExceptions=true}" 
-                                IsEnabled="{Binding Path=(local:SharedDependencyProperties.ProjectStatus), Mode=OneTime, Converter={StaticResource ConvertProjectStatusNotPlanningToEnabledKey}}" 
-                                HorizontalAlignment="Left" Margin="177,194,0,0" VerticalAlignment="Top" Height="25" Width="217"/>
+                    <TextBlock Text="{Binding CurrentTask.Status, Mode=OneWay}" 
+                               Foreground="DarkGray" FontFamily="Montserrant" HorizontalAlignment="Left" Margin="177,194,0,0" VerticalAlignment="Top" Width="217"/>
                     <!-- Complexity -->
                     <ComboBox ItemsSource="{Binding Source={StaticResource EngineerExperienceCollectionKey}}" 
                                 SelectedValue="{Binding CurrentTask.Complexity, Mode=TwoWay, NotifyOnValidationError=true, ValidatesOnExceptions=true}"  

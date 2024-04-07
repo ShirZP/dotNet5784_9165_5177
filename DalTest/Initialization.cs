@@ -17,7 +17,7 @@ public static class Initialization
     private const int MIN_ID = 200000000;
     private const int MAX_ID = 400000000;
 
-    private static IDal? s_dal = Factory.Get; //stage 4
+    private static IDal? s_dal = Factory.Get;
 
     private static readonly Random s_rand = new();
 
@@ -190,6 +190,9 @@ public static class Initialization
         createUsers();
     }
 
+    /// <summary>
+    /// Reset the Data
+    /// </summary>
     public static void DoReset()
     {
         s_dal!.Task.Clear();

@@ -93,7 +93,7 @@ public class Task
         StartDate = startDate;  
         ForecastDate = forecastDate;
         CompleteDate = completeDate;
-        RequiredEffortTime = (requiredEffortTime == null) ? TimeSpan.FromDays(3) : requiredEffortTime;
+        RequiredEffortTime = requiredEffortTime ?? TimeSpan.FromDays(3);
         Deliverables = deliverables;    
         Remarks = remarks;  
         AssignedEngineer = assignedEngineer;    

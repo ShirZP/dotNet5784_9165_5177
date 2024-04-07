@@ -25,11 +25,12 @@ public partial class ManagerWindow : Window
 {
     static readonly BlApi.IBl s_bl = BlApi.Factory.Get();
 
-    // Using a DependencyProperty as the backing store for MyProperty.  This enables animation, styling, binding, etc...
+    
     public static readonly DependencyProperty IsButtonVisibleProperty =
         DependencyProperty.Register("IsButtonVisible", typeof(Visibility), typeof(ManagerWindow), new PropertyMetadata(null));
 
 
+    //use this DP in ExecuteProject button
     public Visibility IsButtonVisible
     {
         get { return (Visibility)GetValue(IsButtonVisibleProperty); }
@@ -38,48 +39,43 @@ public partial class ManagerWindow : Window
 
 
     public ManagerWindow()
-    {
-        this.Activate();
+    { 
         SharedDependencyProperties.SetProjectStatus(this, s_bl.GetProjectStatus());
 
-        IsButtonVisible = (s_bl.GetProjectStartDate() == null || s_bl.GetProjectStartDate() == default(DateTime)) ? Visibility.Visible : Visibility.Collapsed;
+        IsButtonVisible = (s_bl.GetProjectStartDate() == default(DateTime)) ? Visibility.Visible : Visibility.Collapsed;
 
         InitializeComponent();
         SharedDependencyProperties.SetClock(this, s_bl.GetClock());
         StartDatePicker.DisplayDateStart = SharedDependencyProperties.GetClock(this).AddDays(1);
 
         ExecuteProjectByClock();
-
     }
+
+    #region init and reset data methods
 
     /// <summary>
-    /// Click on button Handle Engineers opens the EngineerListWindow.
+    /// Click on button Init DB - initial the data base.
     /// </summary>
-    private void BtnEngineerList_Click(object sender, RoutedEventArgs e)
-    {
-        new EngineerListWindow().ShowDialog();
-    }
-
-    //Click on button Init DB - initial the data base.
     private void BtnInitialization_Click(object sender, RoutedEventArgs e)
     {
         // Showing a MessageBox with Yes and No buttons and a question
         MessageBoxResult result = MessageBox.Show("Do you want to proceed initialization?", "Initialization Confirmation", MessageBoxButton.YesNo, MessageBoxImage.Question);
-
-        // Code to execute if the user clicks Yes
-        if (result == MessageBoxResult.Yes)
+        try
         {
-            // Initial the DB
-            s_bl.initializationDB();
-            SharedDependencyProperties.SetProjectStatus(this, ProjectStatus.Planning);
-            SharedDependencyProperties.SetProjectStartDate(this, default(DateTime));
-            SharedDependencyProperties.SetProjectEndDate(this, default(DateTime));
-            SharedDependencyProperties.SetClock(this, s_bl.GetClock());
-            StartDatePicker.DisplayDateStart = SharedDependencyProperties.GetClock(this);
-            IsButtonVisible = Visibility.Visible;
-            ChooseDateBtn.Visibility = Visibility.Collapsed;
-            MessageBoxResult messageBoxResult = MessageBox.Show("Initialization done successfully!", "Happy Message :)", MessageBoxButton.OK, MessageBoxImage.Information);
+            // Code to execute if the user clicks Yes
+            if (result == MessageBoxResult.Yes)
+            {
+                // Initial the DB
+                s_bl.initializationDB();
+                resetData();
+                MessageBoxResult messageBoxResult = MessageBox.Show("Initialization done successfully!", "Happy Message :)", MessageBoxButton.OK, MessageBoxImage.Information);
+            }
         }
+        catch (Exception ex)
+        {
+            MessageBox.Show(ex.Message, "ERROR :(", MessageBoxButton.OK, MessageBoxImage.Error);
+        }
+
     }
 
     /// <summary>
@@ -89,32 +85,38 @@ public partial class ManagerWindow : Window
     {
         // Showing a MessageBox with Yes and No buttons and a question
         MessageBoxResult result = MessageBox.Show("Do you want to proceed reset data?", "Reset Data Confirmation", MessageBoxButton.YesNo, MessageBoxImage.Question);
-
-        // Code to execute if the user clicks Yes
-        if (result == MessageBoxResult.Yes)
+        try
         {
-            // Initial the DB
-            s_bl.resetDB();
-            SharedDependencyProperties.SetProjectStatus(this, ProjectStatus.Planning);
-            SharedDependencyProperties.SetProjectStartDate(this, default(DateTime));
-            SharedDependencyProperties.SetProjectEndDate(this, default(DateTime));
-            SharedDependencyProperties.SetClock(this, s_bl.GetClock());
-            StartDatePicker.DisplayDateStart = SharedDependencyProperties.GetClock(this);
-            IsButtonVisible = Visibility.Visible;
-            ChooseDateBtn.Visibility = Visibility.Collapsed;
-            MessageBoxResult messageBoxResult = MessageBox.Show("Reset DB done successfully!", "Happy Message :)", MessageBoxButton.OK, MessageBoxImage.Information);
+            // Code to execute if the user clicks Yes
+            if (result == MessageBoxResult.Yes)
+            {
+                // Reset the DB
+                s_bl.resetDB();
+                resetData();
+                MessageBoxResult messageBoxResult = MessageBox.Show("Reset DB done successfully!", "Happy Message :)", MessageBoxButton.OK, MessageBoxImage.Information);
+            }
+        }
+        catch (Exception ex)
+        {
+            MessageBox.Show(ex.Message, "ERROR :(", MessageBoxButton.OK, MessageBoxImage.Error);
         }
     }
 
-    private void BtnTaskTable_Click(object sender, RoutedEventArgs e)
+    /// <summary>
+    /// Reset data - project status, start date, end date, clock;
+    /// </summary>
+    private void resetData()
     {
-        new TaskTableWindow().ShowDialog();
+        SharedDependencyProperties.SetProjectStatus(this, ProjectStatus.Planning);
+        SharedDependencyProperties.SetProjectStartDate(this, default(DateTime));
+        SharedDependencyProperties.SetProjectEndDate(this, default(DateTime));
+        SharedDependencyProperties.SetClock(this, s_bl.GetClock());
+        StartDatePicker.DisplayDateStart = SharedDependencyProperties.GetClock(this).AddDays(1);
+        IsButtonVisible = Visibility.Visible;
+        ChooseDateBtn.Visibility = Visibility.Collapsed;
     }
 
-    private void BtnGanttChart_Click(object sender, RoutedEventArgs e)
-    {
-            new GanttCharWindow().ShowDialog();
-    }
+    #endregion
 
     private void BtnExecuteProject_Click(object sender, RoutedEventArgs e)
     {
@@ -130,6 +132,9 @@ public partial class ManagerWindow : Window
         }
     }
 
+    /// <summary>
+    ///  set the start date of the project and setting the project plan.
+    /// </summary>
     private void BtnChooseDate_Click(object sender, RoutedEventArgs e)
     {
         MessageBoxResult result = MessageBox.Show("Are you sure about the date you chose?", "Start Date Confirmation", MessageBoxButton.YesNo, MessageBoxImage.Question);
@@ -176,16 +181,22 @@ public partial class ManagerWindow : Window
         }
     }
 
+    /// <summary>
+    /// Selecting or typing a project start date
+    /// </summary>
     private void StartDatePicker_SelectedDateChanged(object sender, SelectionChangedEventArgs e)
     {
         var picker = sender as DatePicker;
-        if (picker.SelectedDate < SharedDependencyProperties.GetClock(this)) // Assuming DateTime.Today is the minimum allowed date
+        if (picker.SelectedDate < SharedDependencyProperties.GetClock(this).AddDays(1)) // Assuming DateTime.Today is the minimum allowed date
         {
             MessageBox.Show("It is not possible to select a date earlier than now!");
-            picker.SelectedDate = SharedDependencyProperties.GetClock(this); // Set to minimum allowed date or null
+            picker.SelectedDate = SharedDependencyProperties.GetClock(this).AddDays(1); // Set to minimum allowed date or null
         }
     }
 
+    /// <summary>
+    /// The function checks what the date is on the clock and based on that it knows whether to go to the execution stage.
+    /// </summary>
     private void ExecuteProjectByClock()
     {
         if(s_bl.GetProjectStartDate().HasValue && s_bl.GetProjectStatus() == BO.ProjectStatus.Planning)
@@ -197,7 +208,7 @@ public partial class ManagerWindow : Window
 
             }
         }
-        else if(s_bl.GetProjectStatus() == BO.ProjectStatus.Execution )
+        else if(s_bl.GetProjectStatus() == BO.ProjectStatus.Execution)
         {
             if(SharedDependencyProperties.GetClock(this) < s_bl.GetProjectStartDate())
             {
@@ -206,6 +217,23 @@ public partial class ManagerWindow : Window
             }
         }
     }
+
+    #region open windows buttons
+    private void BtnTaskTable_Click(object sender, RoutedEventArgs e)
+    {
+        new TaskTableWindow().ShowDialog();
+    }
+
+    private void BtnGanttChart_Click(object sender, RoutedEventArgs e)
+    {
+        new GanttCharWindow().ShowDialog();
+    }
+
+    private void BtnEngineerList_Click(object sender, RoutedEventArgs e)
+    {
+        new EngineerListWindow().ShowDialog();
+    }
+    #endregion
 
     #region Clock methods
 
@@ -231,7 +259,7 @@ public partial class ManagerWindow : Window
     {
         SharedDependencyProperties.SetClock(this, s_bl.initializeClock());
         ExecuteProjectByClock();
-        StartDatePicker.DisplayDateStart = SharedDependencyProperties.GetClock(this);
+        StartDatePicker.DisplayDateStart = SharedDependencyProperties.GetClock(this).AddDays(1);
     }
 
     #endregion

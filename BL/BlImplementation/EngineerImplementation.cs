@@ -13,7 +13,6 @@ using System.Threading.Tasks;
 internal class EngineerImplementation : IEngineer
 {
     private DalApi.IDal _dal = DalApi.Factory.Get;
-    //private BlApi.IBl _bl = BlApi.Factory.Get();  //TODO:????
 
     private readonly IBl _bl;
     internal EngineerImplementation(IBl bl) => _bl = bl;
@@ -41,6 +40,8 @@ internal class EngineerImplementation : IEngineer
                                        engineer.FullName.Replace(" ", ""), 
                                        engineer.FullName.Replace(" ", "") + "123", 
                                        BO.UserPermissions.Engineer);
+
+            //create new user
             _bl.User.Create(user);
 
             return idEngineer;
@@ -62,26 +63,11 @@ internal class EngineerImplementation : IEngineer
         //Retrieving all the tasks that the delete engineer is registered on
         IEnumerable<DO.Task>? tasks = _dal.Task.ReadAll(item => item.EngineerId == id);
 
-        //Checks whether there is a task from the engineer's task list that has been performed or is being performed
-        DO.Task? startedTask = tasks.Select(task => task).Where(task => task.StartDate != null).FirstOrDefault();
+        //Checks whether there is a task from the engineer's task list that is active
+        DO.Task? startedTask = tasks.Select(task => task).Where(task => task.CompleteDate == null).FirstOrDefault();
 
         if (startedTask != null)
             throw new BO.BlCompleteOrActiveTasksException($"It is not possible to delete the engineer - {id} because he has already finished a task or is actively working on a task");
-
-
-        //Deleting the engineer from all the tasks he is registered on
-        if (tasks != null)
-        {
-            IEnumerable<DO.Task?> updatedTasks = (from task in tasks
-                                                  let updateTask = task with { EngineerId = null }
-                                                  select updateTask).ToList();
-           
-            foreach (DO.Task? task in updatedTasks)
-            {
-                if (task != null)
-                    _dal.Task.Update(task);
-            }
-        }
 
         try
         {
@@ -98,7 +84,6 @@ internal class EngineerImplementation : IEngineer
     /// The function receives the ID of an engineer and returns it as an object of type BO.
     /// </summary>
     /// <param name="id">the ID of an engineer</param>
-    /// <returns></returns>
     /// <exception cref="BO.BlDoesNotExistException">if the engineer is not exists</exception>
     public BO.Engineer Read(int id)
     {
@@ -151,6 +136,7 @@ internal class EngineerImplementation : IEngineer
             //validation of the engineer's fields
             checkEngineerFields(updatedEngineer);
 
+            //check if the engineer level is updated to a lower level than it was
             checkEngineerLevel(updatedEngineer);
 
             DO.Engineer doEngineer = new DO.Engineer(updatedEngineer.ID, updatedEngineer.FullName, updatedEngineer.Email, (DO.EngineerExperience)updatedEngineer.Level, updatedEngineer.Cost);
@@ -219,12 +205,8 @@ internal class EngineerImplementation : IEngineer
     }
 
     /// <summary>
-    /// The function check the updating of the field engineerCurrentTask
-    /// </summary>
-    /// <param name="updatedEngineer"></param>
-    /// <exception cref="BO.BlEngineerNotAssignedToTaskException"></exception>
-    /// <exception cref="BO.BlDependentsTasksException"></exception>
-    /// <exception cref="BlInappropriateLevelException"></exception>
+    /// The function check the updating of the field engineerCurrentTask, Ensures that all previous tasks have been completed and that no other engineer has been assigned to her.
+    /// </summary>  
     private void checkEngineerCurrentTask(BO.Engineer updatedEngineer, BO.ProjectStatus projectStatus)
     {
         if (updatedEngineer.EngineerCurrentTask != null)

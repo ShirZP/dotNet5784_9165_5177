@@ -24,6 +24,7 @@ public static class Factory
             Type type = Type.GetType($"{dal.Namespace}.{dal.Class}, {dal.Package}") ??
                 throw new DalConfigException($"Class {dal.Namespace}.{dal.Class} was not found in {dal.Package}.dll");
 
+            //returns the property "instance" (public and atatic) which its type is IDal.
             return type.GetProperty("Instance", BindingFlags.Public | BindingFlags.Static)?.GetValue(null) as IDal ??
                 throw new DalConfigException($"Class {dal.Class} is not a singleton or wrong property name for Instance");
         }
