@@ -9,8 +9,8 @@ internal static class DataSource
         internal static DO.ProjectStatus projectStatus = DO.ProjectStatus.Planning;
         internal static DateTime clock = DateTime.Now;
 
-       //Unique ID number for a Task
-       internal const int startTaskId = 1;
+        //Unique ID number for a Task
+        internal const int startTaskId = 1;
         private static int nextTaskId = startTaskId;
         internal static int NextTaskId { get => nextTaskId++; }
 

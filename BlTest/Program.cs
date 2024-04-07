@@ -73,7 +73,7 @@
         private static void printTaskSubMenu()
         {
             Console.WriteLine($"Select an action for the task:");
-            Console.WriteLine("1 - Create\n" + "2 - Read\n" + "3 - ReadAll\n" + "4 - Update\n" + "5 - Delete\n" + "6 - Update the scheduled date\n" + "7 - SortByID\n" + "0 - Exit\n");
+            Console.WriteLine("1 - Create\n" + "2 - Read\n" + "3 - ReadAll\n" + "4 - Update\n" + "5 - Delete\n" + "6 - SortByID\n" + "0 - Exit\n");
         }
 
         /// <summary>
@@ -164,18 +164,7 @@
                         Console.WriteLine("Deleted successfully");
                         break;
 
-                    case 6: //ScheduledDateUpdate
-                        Console.WriteLine("Enter Task ID to update scheduled date:");
-                        intString = Console.ReadLine()!;
-                        int.TryParse(intString, out id);
-
-                        Console.WriteLine("Enter date to update the scheduled date of the task:");
-                        st = Console.ReadLine()!;
-                        newScheduledDate = TryParseDateTime(st);
-                        s_bl.Task.ScheduledDateUpdate(id, newScheduledDate, s_bl.GetProjectStatus());
-                        break;
-
-                    case 7: //SortByID
+                    case 6: //SortByID
                         IEnumerable<BO.Task> tasksSortList = s_bl!.Task.SortByID();
                         foreach (var e in tasksSortList)
                         {

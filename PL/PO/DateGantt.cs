@@ -2,7 +2,7 @@
 
 public class DateGantt
 {
-    public DateTime Date { get; init; }
-    public int Duration { get; init; } = 70;
+    public DateTime Date { get; init; }  
+    public int Duration { get; } = 70;  // Duration of date
 }
 

@@ -39,7 +39,7 @@ static class XMLTools
     {
         XElement root = XMLTools.LoadListFromXMLElement(data_config_xml);
 
-        return root.ToDateTimeNullable(elemName); //?? throw new FormatException($"can't convert date.  {data_config_xml}, {elemName}"); //TODO:
+        return root.ToDateTimeNullable(elemName);
     }
 
     public static DO.ProjectStatus GetProjectStatus(string data_config_xml, string elemName)

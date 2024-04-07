@@ -12,7 +12,7 @@ using System.Xml.Linq;
 internal class TaskImplementation : ITask
 {
     private DalApi.IDal _dal = DalApi.Factory.Get;
-    //private BlApi.IBl _bl = BlApi.Factory.Get();  //TODO: ask????
+
     private readonly IBl _bl;
     internal TaskImplementation(IBl bl) => _bl = bl; 
     
@@ -181,16 +181,17 @@ internal class TaskImplementation : ITask
         //Adding new dependencies in the data layer for each new task that added to the dependencies list in the updated task
 
         //Grouping the list of tasks according to whether there is a dependency on the data layer
-        IEnumerable<IGrouping<bool, BO.TaskInList>> dalDependencies;
+        IEnumerable<IGrouping<bool, BO.TaskInList>> groupDalDependencies;
 
-        dalDependencies = (from taskInList in updatedTask.Dependencies
+        groupDalDependencies = (from taskInList in updatedTask.Dependencies
                            let dalDependency = _dal.Dependency.Read(item => item.DependentTask == updatedTask.ID && item.DependensOnTask == taskInList.ID) //Retrieving the dependency on which the updatedTask depends on the task
                            group taskInList by (dalDependency == null) into dalDep
                            select dalDep);
 
         if (projectStatus == BO.ProjectStatus.Execution)
         {
-            BO.TaskInList? noDependencytask = (from taskInList in dalDependencies
+            //Searching whether we created a new dependency during the execution level
+            BO.TaskInList? noDependencytask = (from taskInList in groupDalDependencies
                                                where taskInList.Key == true
                                                from task in taskInList
                                                select task).FirstOrDefault();
@@ -201,7 +202,7 @@ internal class TaskImplementation : ITask
     
 
         //For the tasks (in updatedTask's dependencies list) that do not have dependencies in the data layer - we will create dependencies
-        var d = (from task in dalDependencies
+        var d = (from task in groupDalDependencies
                  where task.Key == true
                  from t in task
                  let newDependency = new DO.Dependency(0, updatedTask.ID, t.ID)
@@ -212,7 +213,7 @@ internal class TaskImplementation : ITask
 
         if (updatedTask.Dependencies != null)
         {
-            //if find dependency between task to updatedTask 
+            //in data but not in updatedTask
             IEnumerable<IGrouping<bool, BO.TaskInList>> missingTasks;
             missingTasks = (from task in blOldTask.Dependencies
                             let t = updatedTask.Dependencies.FirstOrDefault(item => item.ID == task.ID)
@@ -243,10 +244,11 @@ internal class TaskImplementation : ITask
             }
         }
 
-        if(updatedTask.Status == BO.Status.Complete && updatedTask.CompleteDate == null)
+        //If the status is completed and does not have an end date, an end date will be applied.
+        if (updatedTask.Status == BO.Status.Complete && updatedTask.CompleteDate == null)
         {
             updatedTask.CompleteDate = _bl.GetClock();
-            BO.Engineer engineer = _bl.Engineer.Read(updatedTask.AssignedEngineer.ID);
+            BO.Engineer engineer = _bl.Engineer.Read(updatedTask.AssignedEngineer!.ID);
             BO.Engineer updateEngineer = new BO.Engineer(engineer.ID, engineer.FullName, engineer.Email, engineer.Level, engineer.Cost, null);
             _bl.Engineer.Update(updateEngineer);
         }
@@ -274,58 +276,6 @@ internal class TaskImplementation : ITask
         {
             throw new BO.BlDoesNotExistException($"An object of type Task with ID={updatedTask.ID} does not exist", dalEx);
         }
-    }
-
-    private void checkScheduledDateField(int id, DateTime? newScheduledDate, BO.ProjectStatus projectStatus)
-    {
-        if (newScheduledDate.HasValue)
-        {
-            if (projectStatus == BO.ProjectStatus.Planning)
-            {
-                throw new BO.BlProjectStatusException("A scheduled task date cannot be edited when the project status is in planning!");
-            }
-
-            BO.Task updateTask = Read(id);
-
-            if (projectStatus == BO.ProjectStatus.Execution && updateTask.ScheduledDate != newScheduledDate)
-            {
-                throw new BO.BlProjectStatusException("A scheduled task date cannot be edited when the project status is in Execution!");
-            }
-
-            //If the task has no dependencies - checking whether the new scheduled date is after the project start date
-            if (!updateTask.Dependencies.Any())
-                if (newScheduledDate < _bl.GetProjectStartDate())
-                    throw new BO.BlscheduledDateException("A task's scheduled start date cannot be before the project's start date");
-
-            BO.TaskInList? nullScheduledDateInTask = (from taskInList in updateTask.Dependencies
-                                                      where Read(taskInList.ID).ScheduledDate == null
-                                                      select taskInList).FirstOrDefault();
-            if (nullScheduledDateInTask != null)
-            {
-                throw new BlNullScheduledDateInDependensOnTaskException($"There is no scheduled start date on at least one of the tasks that the task - {id} - depends on");
-            }
-
-            BO.TaskInList? earlyForecastDateInTask = (from taskInList in updateTask.Dependencies
-                                                      where Read(taskInList.ID).ForecastDate.Value.Date > newScheduledDate.Value.Date
-                                                      select taskInList).FirstOrDefault();
-
-            if (earlyForecastDateInTask != null)
-            {
-                throw new BlDependentsTasksException($"The scheduled start date of the depended task - {id} - is earlier than the forecast date of a previous task");
-            }
-        }
-    }
-
-    public void ScheduledDateUpdate(int id, DateTime? newScheduledDate, BO.ProjectStatus projectStatus)
-    {
-        checkScheduledDateField(id, newScheduledDate, projectStatus);
-
-        BO.Task oldTask = Read(id);
-
-        BO.Task updatedTask = oldTask;
-        updatedTask.ScheduledDate = newScheduledDate;
-
-        Update(updatedTask);
     }
 
  
@@ -410,13 +360,14 @@ internal class TaskImplementation : ITask
 
         checkStatusField(task, projectStatus);
 
-        checkScheduledDateField(task.ID, task.ScheduledDate, projectStatus);
-
         checkRequiredEffortTimeField(task, projectStatus);
 
         checkAssignedEngineerField(task, projectStatus);
     }
 
+    /// <summary>
+    /// The function checks that if we are in the execution level then it is not possible to change the RequiredEffortTime
+    /// </summary>
     private void checkRequiredEffortTimeField(BO.Task task, BO.ProjectStatus projectStatus)
     {
         if (task.RequiredEffortTime != null)
@@ -457,16 +408,19 @@ internal class TaskImplementation : ITask
                 case Status.Active:
                 case Status.Complete:
 
+                    //Checks that the task status has not been back updated
                     if (originTask.Status > task.Status)
                         throw new BO.BlStatusException($"A task status cannot be changed from \"{originTask.Status}\" to \"{task.Status}\"!");
 
-
+                    //If a task has no engineer it cannot be active or completed
                     if (projectStatus == BO.ProjectStatus.Execution && task.AssignedEngineer == null)
                     {
                         throw new BO.BlEngineerNotAssignedToTaskException("A task cannot be in active or complete status if no engineer is assigned to the task");
                     }
 
                     BO.Engineer assignedEngineer = _bl.Engineer.Read(task.AssignedEngineer!.ID);
+
+                    //if the task status active or completed when it is not the engineer's current task
                     if (assignedEngineer.EngineerCurrentTask == null || assignedEngineer.EngineerCurrentTask.ID != task.ID)
                     {
                         throw new BO.BlEngineerNotAssignedToTaskException("A task status cannot be changed to active or completed when it is not the engineer's current task");
@@ -495,9 +449,6 @@ internal class TaskImplementation : ITask
     /// <summary>
     /// The function checks that the responsible engineer fields are correct
     /// </summary>
-    /// <param name="task"></param>
-    /// <exception cref="BO.BlIntException"></exception>
-    /// <exception cref="BO.BlEmptyStringException"></exception>
     private void checkAssignedEngineerField(BO.Task task, BO.ProjectStatus projectStatus)
     {
         if (task.AssignedEngineer != null)
@@ -560,7 +511,7 @@ internal class TaskImplementation : ITask
         {
             projectStartDate = pStartDate.Value;
 
-            //If there are no dependencies then the Scheduled date is equal to the project start date plus a day
+            //If there are no dependencies then the Scheduled date is equal to the project start date
             if (!task.Dependencies.Any())
             {
                 scheduledDateAuto = projectStartDate;
@@ -625,8 +576,8 @@ internal class TaskImplementation : ITask
         IEnumerable<TaskInList> allTasks = ReadAll(item => item.ID != currentTaskID);
 
         List<TaskInList> potentialDependencies = (from task in allTasks
-                                 where ChainDependencyTest(task, currentTaskID)
-                                 select task).ToList();
+                                                  where ChainDependencyTest(task, currentTaskID)
+                                                  select task).ToList();
 
         return potentialDependencies;
     }
@@ -642,7 +593,6 @@ internal class TaskImplementation : ITask
                 return false;
             else
                 return ChainDependencyTest(dependency, requestedTaskID);
-
         }
         return true;
     }

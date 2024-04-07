@@ -42,28 +42,42 @@ namespace PL.Users
 
         public SecureString SecurePassword { private get; set; }
 
+
         public LogInWindow()
         {
             InitializeComponent();
-            UserLogIn = new BO.User(0, "", "", BO.UserPermissions.Engineer);
+            UserLogIn = new BO.User(0, "", "", BO.UserPermissions.Engineer);  //default user
         }
 
+
+        #region windows operations
+
+        /// <summary>
+        /// Move a window with a mouse down.
+        /// </summary>
         private void Window_MouseDown(object sender, MouseButtonEventArgs e)
         {
             if (e.LeftButton == MouseButtonState.Pressed)
                 DragMove();
         }
-       
 
+        /// <summary>
+        /// Minimize window
+        /// </summary>
         private void BtnMinimize_Click(object sender, RoutedEventArgs e)
         {
             WindowState = WindowState.Minimized;    
         }
 
+        /// <summary>
+        /// Close window
+        /// </summary>
         private void BtnClose_Click(object sender, RoutedEventArgs e)
         {
             Application.Current.Shutdown();
         }
+
+        #endregion
 
         /// <summary>
         /// The function enters the SecurePassword variable the password entered in the PasswordBox control
@@ -74,7 +88,10 @@ namespace PL.Users
             { ((dynamic)this.DataContext).SecurePassword = ((PasswordBox)sender).SecurePassword; }
         }
 
-        String SecureStringToString(SecureString value)
+        /// <summary>
+        ///  Converts SecureString to string
+        /// </summary>
+        private String SecureStringToString(SecureString value)
         {
             // Declare a pointer to store the address of the unmanaged string. Initialize it to zero (null pointer).
             IntPtr valuePtr = IntPtr.Zero;
@@ -92,6 +109,9 @@ namespace PL.Users
             }
         }
 
+        /// <summary>
+        /// Opens the appropriate window according to the logged in user.
+        /// </summary>
         private void BtnLogIn_Click(object sender, RoutedEventArgs e)
         {
             try
@@ -115,9 +135,12 @@ namespace PL.Users
             }
         }
 
+        /// <summary>
+        /// Button to password that forgotten
+        /// </summary>
         private void Reset_MouseLeftButtonDown(object sender, MouseButtonEventArgs e)
         {
-            MessageBoxResult messageBoxResult = MessageBox.Show("It's your problem that you forgot the password!", "", MessageBoxButton.OK, MessageBoxImage.Information);
+            MessageBoxResult messageBoxResult = MessageBox.Show("It's not our problem that you forgot the password!", "", MessageBoxButton.OK, MessageBoxImage.Information);
         }
     }
 }

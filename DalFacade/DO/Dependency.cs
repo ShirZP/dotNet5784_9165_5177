@@ -12,5 +12,5 @@ public record Dependency
     int DependensOnTask
 )
 {
-    public Dependency() : this(0,0,0) { } //empty ctor for stage 3
+    public Dependency() : this(0,0,0) { } 
 }
