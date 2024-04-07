@@ -4,32 +4,39 @@
              xmlns:local="clr-namespace:PL"
              StartupUri="Users/LogInWindow.xaml">
     <Application.Resources>
+        <!-- Collections -->
         <local:ExperienceCollection x:Key="ExperienceCollectionKey"/>
         <local:EngineerExperienceCollection x:Key="EngineerExperienceCollectionKey"/>
         <local:TaskFieldsToFilterCollection x:Key="TaskFieldsToFilterCollectionKey"/>
         <local:TaskStatusCollection x:Key="TaskStatusCollectionKey"/>
 
-
-        <local:ConvertIdToContent x:Key="ConverIdToContentKey"/>
-        <local:ConvertIdToIsEnabled x:Key="ConvertIdToIsEnabledKey"/>
-        <local:ConvertIdZeroToCollapsed x:Key="ConvertIdZeroToCollapsedKey"/>
-        <local:ConvertIdZeroToVisible x:Key="ConvertIdZeroToVisibleKey"/>
+        <!-- Project Status Converts -->
         <local:ConvertProjectStatusNotPlanningToVisible x:Key="ConvertProjectStatusNotPlanningToVisibleKey"/>
         <local:ConvertProjectStatusPlanningToVisible x:Key="ConvertProjectStatusPlanningToVisibleKey"/>
         <local:ConvertProjectStatusPlanningToEnabled x:Key="ConvertProjectStatusPlanningToEnabledKey"/>
         <local:ConvertProjectStatusNotPlanningToEnabled x:Key="ConvertProjectStatusNotPlanningToEnabledKey"/>
         <local:ConvertProjectStatusExecutionToVisible x:Key="ConvertProjectStatusExecutionToVisibleKey"/>
+        <local:ConvertProjectStatusToContent x:Key="ConvertProjectStatusToContentKey"/>
+
+        <!-- Project StartDate Converts -->
+        <local:ConvertProjectStartDateToVisible x:Key="ConvertProjectStartDateToVisibleKey"/>
+        <local:ConvertProjectStartDateToCollapsed x:Key="ConvertProjectStartDateToCollapsedKey"/>
+        <local:ConvertProjectStartDateToBool x:Key="ConvertProjectStartDateToBoolKey"/>
+
+        <local:ConvertIdToContent x:Key="ConverIdToContentKey"/>
+        <local:ConvertIdToIsEnabled x:Key="ConvertIdToIsEnabledKey"/>
+        <local:ConvertIdZeroToCollapsed x:Key="ConvertIdZeroToCollapsedKey"/>
+        <local:ConvertIdZeroToVisible x:Key="ConvertIdZeroToVisibleKey"/>
+        
         <local:ConvertEngineerCurrentTaskToVisible x:Key="ConvertEngineerCurrentTaskToVisibleKey"/>
         <local:ConvertEmptyEngineerCurrentTaskToVisible x:Key="ConvertEmptyEngineerCurrentTaskToVisibleKey"/>
+        
         <local:ConvertTaskInListIEnumerableToBool x:Key="ConvertTaskInListIEnumerableToBoolKey"/>
         <local:ConvertTaskStatusToColor x:Key="ConvertTaskStatusToColorKey"/>
         <local:ConvertDateToBoolean x:Key="ConvertDateToBooleanKey"/>
         <local:ConvertCurrentTaskToContent x:Key="ConvertCurrentTaskToContentKey"/>
         <local:ConvertButtonToVisible x:Key="ConvertButtonToVisibleKey"/>
-        <local:ConvertProjectStartDateToVisible x:Key="ConvertProjectStartDateToVisibleKey"/>
-        <local:ConvertProjectStartDateToCollapsed x:Key="ConvertProjectStartDateToCollapsedKey"/>
-        <local:ConvertProjectStartDateToBool x:Key="ConvertProjectStartDateToBoolKey"/>
-        <local:ConvertProjectStatusToContent x:Key="ConvertProjectStatusToContentKey"/>
+        
         
         
         <!-- window icon -->
@@ -37,6 +44,10 @@
 
         <!-- window Background Image-->
         <ImageBrush x:Key="windowBackground" ImageSource="/images/background.jpg"/>
+
+        <!-- Back Arrow icon -->
+        <BitmapImage x:Key="BackArrowIcon" UriSource="/pink-back-arrow.png"/>
+
         
         <!-- Border Brush -->
         <LinearGradientBrush x:Key="BorderBrushKey" StartPoint="0,0" EndPoint="1,1">
@@ -45,52 +56,42 @@
             <GradientStop Color="#8A16C1" Offset="1"/>
         </LinearGradientBrush>
 
-        <!-- Background  -->
+        <!-- Background -->
         <LinearGradientBrush x:Key="BackgroundBrushKey" StartPoint="0,1" EndPoint="1,0">
             <GradientStop Color="#060531" Offset="0"/>
             <GradientStop Color="#1B1448" Offset="0.75"/>
         </LinearGradientBrush>
 
-        <!--blue purple Button Style-->
-        <Style TargetType="Button" x:Key ="BluePurpleButtonStyleKey">
+        <!-- Button Style -->
+        <Style TargetType="Button" x:Key ="ButtonStyleKey">
             <Setter Property="RenderTransformOrigin" Value="0.5,0.5"/>
             <Setter Property="FontFamily" Value="Montserrant"/>
             <Setter Property="Cursor" Value="Hand"/>
             <Setter Property="BorderThickness" Value="0"/>
-            <Setter Property="Background" Value="#462AD8"/>
+            <Setter Property="Background" Value="Black"/>
             <Style.Triggers>
                 <Trigger Property="IsMouseOver" Value="True">
                     <Setter Property="Background" Value="#28AEED"/>
                 </Trigger>
             </Style.Triggers>
+        </Style>
+
+        <!--blue purple Button Style-->
+        <Style TargetType="Button" x:Key ="BluePurpleButtonStyleKey"
+               BasedOn="{StaticResource ButtonStyleKey}">
+            <Setter Property="Background" Value="#462AD8"/>
         </Style>
 
         <!--pink Button Style-->
-        <Style TargetType="Button" x:Key ="PinkButtonStyleKey">
-            <Setter Property="RenderTransformOrigin" Value="0.5,0.5"/>
-            <Setter Property="FontFamily" Value="Montserrant"/>
-            <Setter Property="Cursor" Value="Hand"/>
-            <Setter Property="BorderThickness" Value="0"/>
+        <Style TargetType="Button" x:Key ="PinkButtonStyleKey"
+               BasedOn="{StaticResource ButtonStyleKey}">
             <Setter Property="Background" Value="#DA34AE"/>
-            <Style.Triggers>
-                <Trigger Property="IsMouseOver" Value="True">
-                    <Setter Property="Background" Value="#28AEED"/>
-                </Trigger>
-            </Style.Triggers>
         </Style>
 
         <!--purple Button Style-->
-        <Style TargetType="Button" x:Key ="PurpleButtonStyleKey">
-            <Setter Property="RenderTransformOrigin" Value="0.5,0.5"/>
-            <Setter Property="FontFamily" Value="Montserrant"/>
-            <Setter Property="Cursor" Value="Hand"/>
-            <Setter Property="BorderThickness" Value="0"/>
+        <Style TargetType="Button" x:Key ="PurpleButtonStyleKey"
+               BasedOn="{StaticResource ButtonStyleKey}">
             <Setter Property="Background" Value="#8A16C1"/>
-            <Style.Triggers>
-                <Trigger Property="IsMouseOver" Value="True">
-                    <Setter Property="Background" Value="#28AEED"/>
-                </Trigger>
-            </Style.Triggers>
         </Style>
 
         
@@ -121,30 +122,14 @@
         </Style>
         
         <!-- Back button style-->
-        <Style TargetType="Button" x:Key="BackButtonStyleKey">
-            <!-- Remove default mouse-over background change -->
-            <Setter Property="Template">
-                <Setter.Value>
-                    <ControlTemplate TargetType="Button">
-                        <Border Background="{TemplateBinding Background}">
-                            <ContentPresenter HorizontalAlignment="Center" VerticalAlignment="Center"/>
-                        </Border>
-                    </ControlTemplate>
-                </Setter.Value>
-            </Setter>
-            <Setter Property="Background" Value="Transparent"/>
-            <Setter Property="BorderBrush" Value="Transparent"/>
-            <Setter Property="BorderThickness" Value="0"/>
-            <!-- Remove default focus rectangle -->
-            <Setter Property="FocusVisualStyle" Value="{x:Null}"/>
+        <Style TargetType="Button" x:Key="BackButtonStyleKey" 
+               BasedOn="{StaticResource IconButtonStyleKey}">
             <Setter Property="Content">
                 <Setter.Value>
-                    <Image Source="/pink-back-arrow.png"/>
+                    <Image Source="{DynamicResource BackArrowIcon}"/>
                 </Setter.Value>
             </Setter>
         </Style>
-
-
 
 
         <!-- TextBox Style -->

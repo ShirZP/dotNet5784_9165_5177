@@ -80,7 +80,10 @@ namespace PL.Task
         {
             if (UserIDPermission == 0)  //manager user
             {
-                TasksList = s_bl?.Task.ReadAllFullTasksDetails()!;
+                if (SubcategoryFilter_CB.IsEnabled == false)
+                    TasksList = s_bl?.Task.ReadAllFullTasksDetails()!;
+                else
+                    filterTable();
             }
             else  //engineer user
             {
@@ -123,6 +126,10 @@ namespace PL.Task
             new TaskWindow().ShowDialog();
         }
 
+
+        /// <summary>
+        /// The function loads the list of filter values of the checkBox 'SubcategoryFilter_CB' according to the selection of the SelectionChanged
+        /// </summary>
         private void filterChange_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
             
@@ -193,6 +200,11 @@ namespace PL.Task
         }
 
         private void filterTable_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        {
+            filterTable();
+        }
+
+        private void filterTable()
         {
             string subFieldFilter = (SubcategoryFilter_CB.SelectedValue as ComboBoxItem)?.Content?.ToString();
 

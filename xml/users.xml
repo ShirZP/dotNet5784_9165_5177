@@ -1,42 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <ArrayOfUser xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
   <User>
-    <ID>329529006</ID>
-    <UserName>DaniLevi</UserName>
-    <Password>854C6EFA9D699F53FCD67B5BF216D3ADBB4FAA027F45DB1BBD4870C48304300A</Password>
-    <Permission>Engineer</Permission>
-  </User>
-  <User>
-    <ID>354954083</ID>
-    <UserName>EliAmar</UserName>
-    <Password>23C3A677A596FD9D003CAAFE7F4FEA4767070E9BEBD5DDA88CC2C860D6755D05</Password>
-    <Permission>Engineer</Permission>
-  </User>
-  <User>
-    <ID>375685635</ID>
-    <UserName>YairCohen</UserName>
-    <Password>DDE45978E91F1786BB94597007CE63F909272BFCCA441EF7BC6F2BEF32B24AF1</Password>
-    <Permission>Engineer</Permission>
-  </User>
-  <User>
-    <ID>296901275</ID>
-    <UserName>ArielaLevin</UserName>
-    <Password>202422249A1E1682D37BB3AEFCEDC2946871FE1BA694B896875110AD741A90A3</Password>
-    <Permission>Engineer</Permission>
-  </User>
-  <User>
-    <ID>362740439</ID>
-    <UserName>DinaKlein</UserName>
-    <Password>6A8BF624038376915FECF6077617C2793302465E0C7C49DF6ECBE7D9DFFDD1E2</Password>
-    <Permission>Engineer</Permission>
-  </User>
-  <User>
-    <ID>309825181</ID>
-    <UserName>ShiraIsraelof</UserName>
-    <Password>72658C1F1BD68DECE3238F00A3E95EB2D9821D0A98CA4E045FC4295F886C88E8</Password>
-    <Permission>Engineer</Permission>
-  </User>
-  <User>
     <ID>323975177</ID>
     <UserName>shirperez</UserName>
     <Password>1F5913970D0B860725744A865287C5343B83E0AEF8E0A559B864B7E509CE2153</Password>
@@ -47,5 +11,41 @@
     <UserName>yaelizralevitch</UserName>
     <Password>8B593CC4980BE73652789F869237ADA54D3B7E08695C5B97ED95EE078D3BDDF2</Password>
     <Permission>Manager</Permission>
+  </User>
+  <User>
+    <ID>268446295</ID>
+    <UserName>DaniLevi</UserName>
+    <Password>854C6EFA9D699F53FCD67B5BF216D3ADBB4FAA027F45DB1BBD4870C48304300A</Password>
+    <Permission>Engineer</Permission>
+  </User>
+  <User>
+    <ID>320447737</ID>
+    <UserName>EliAmar</UserName>
+    <Password>23C3A677A596FD9D003CAAFE7F4FEA4767070E9BEBD5DDA88CC2C860D6755D05</Password>
+    <Permission>Engineer</Permission>
+  </User>
+  <User>
+    <ID>272585127</ID>
+    <UserName>YairCohen</UserName>
+    <Password>DDE45978E91F1786BB94597007CE63F909272BFCCA441EF7BC6F2BEF32B24AF1</Password>
+    <Permission>Engineer</Permission>
+  </User>
+  <User>
+    <ID>309100559</ID>
+    <UserName>ArielaLevin</UserName>
+    <Password>202422249A1E1682D37BB3AEFCEDC2946871FE1BA694B896875110AD741A90A3</Password>
+    <Permission>Engineer</Permission>
+  </User>
+  <User>
+    <ID>285282034</ID>
+    <UserName>DinaKlein</UserName>
+    <Password>6A8BF624038376915FECF6077617C2793302465E0C7C49DF6ECBE7D9DFFDD1E2</Password>
+    <Permission>Engineer</Permission>
+  </User>
+  <User>
+    <ID>381562135</ID>
+    <UserName>ShiraIsraelof</UserName>
+    <Password>72658C1F1BD68DECE3238F00A3E95EB2D9821D0A98CA4E045FC4295F886C88E8</Password>
+    <Permission>Engineer</Permission>
   </User>
 </ArrayOfUser>

@@ -20,12 +20,16 @@
                 Background="{StaticResource BackgroundBrushKey}">
 
             <Grid>
-                <Button BorderThickness="0" Foreground="White" Style="{StaticResource BackButtonStyleKey}" FontFamily="Montserrant" FontWeight="Medium" Cursor="Hand" 
+                <Button BorderThickness="0" Foreground="White" Style="{StaticResource IconButtonStyleKey}" FontFamily="Montserrant" FontWeight="Medium" Cursor="Hand" 
                         HorizontalAlignment="Left" 
                         VerticalAlignment="Top"
                         Height="28" Width="36" 
-                        FontSize="18" Click="BtnBack_Click" Margin="-2,2,0,0"/>
-               
+                        FontSize="18" Click="BtnBack_Click" Margin="-2,2,0,0">
+                    <Button.Content>
+                        <Image Source="/pink-back-arrow.png"/>
+                    </Button.Content>
+                </Button>
+
 
 
                 <TextBlock Text="Task Details:" Foreground="WhiteSmoke" FontSize="20" FontWeight="Bold" FontFamily="Montserrant" HorizontalAlignment="Left" Height="39" Margin="50,50,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="329"/>

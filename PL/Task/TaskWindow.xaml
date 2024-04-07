@@ -25,10 +25,14 @@
                 </Grid.RowDefinitions>
 
                 <Grid Grid.Row="0">
-                    <Button BorderThickness="0" Foreground="White" Style="{StaticResource BackButtonStyleKey}" FontFamily="Montserrant" FontWeight="Medium" Cursor="Hand" 
+                    <Button BorderThickness="0" Foreground="White" Style="{DynamicResource IconButtonStyleKey}" FontFamily="Montserrant" FontWeight="Medium" Cursor="Hand" 
                             HorizontalAlignment="Left" 
                             Height="30" Width="36" 
-                            FontSize="18" Click="BtnBack_Click"/>
+                            FontSize="18" Click="BtnBack_Click">
+                        <Button.Content>
+                            <Image Source="/pink-back-arrow.png"/>
+                        </Button.Content>
+                    </Button>
 
                 </Grid>
 
