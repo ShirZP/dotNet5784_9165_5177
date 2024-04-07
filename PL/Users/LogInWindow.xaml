@@ -14,27 +14,14 @@
         MouseDown="Window_MouseDown"
         Background="Transparent"
         AllowsTransparency="True">
-    <Border CornerRadius="50">
-        <Border.Background>
-            <ImageBrush ImageSource="/images/background.jpg"/>
-        </Border.Background>
+    <Border CornerRadius="50"
+        Background="{StaticResource windowBackground}">
+        
         <Border CornerRadius="20"  
                 BorderThickness="5"
-                Opacity="0.85">
-            <Border.BorderBrush>
-                <LinearGradientBrush StartPoint="0,0" EndPoint="1,1">
-                    <GradientStop Color="#462AD8" Offset="0"/>
-                    <GradientStop Color="#DA34AE" Offset="0.75"/>
-                    <GradientStop Color="#8A16C1" Offset="1"/>
-                </LinearGradientBrush>
-            </Border.BorderBrush>
-
-            <Border.Background>
-                <LinearGradientBrush StartPoint="0,1" EndPoint="1,0">
-                    <GradientStop Color="#060531" Offset="0"/>
-                    <GradientStop Color="#1B1448" Offset="0.75"/>
-                </LinearGradientBrush>
-            </Border.Background>
+                Opacity="0.85"
+                BorderBrush="{StaticResource BorderBrushKey}"
+                Background="{StaticResource BackgroundBrushKey}">
 
             <Grid>
                 <Grid.RowDefinitions>
@@ -52,7 +39,6 @@
 
                     <TextBlock Text="Log In"
                                Foreground="DarkGray"
-                               
                                Grid.Column="0"
                                VerticalAlignment="Center"
                                Margin="10,0,0,0"/>
@@ -130,13 +116,7 @@
 
                     <TextBox Text="{Binding UserLogIn.UserName, Mode=TwoWay, NotifyOnValidationError=true, ValidatesOnExceptions=true}"
                              MaxLength ="20"
-                             FontSize="13"
-                             FontWeight="Medium"
-                             FontFamily="Montserrant"
-                             Foreground="White"
-                             CaretBrush="LightGray"
-                             BorderBrush="DarkGray"
-                             BorderThickness="0,0,0,1"
+                             Style="{StaticResource TextBoxStyleKey}"
                              Height="28"
                              VerticalAlignment="Bottom"
                              Margin="0,5,0,0"
@@ -183,27 +163,11 @@
                             FontSize="12"
                             FontFamily="Montserrant"
                             Cursor="Hand"
-                            Margin="0,50,0,0">
-
-                        <Button.Style>
-                            <Style TargetType="Button">
-                                <Setter Property="Background" Value="#462AD8"/>
-                                <Style.Triggers>
-                                    <Trigger Property="IsMouseOver" Value="True">
-                                        <Setter Property="Background" Value="#28AEED"/>
-                                    </Trigger>
-                                </Style.Triggers>
-                            </Style>
-                        </Button.Style>
-
-                        <Button.Template>
-                            <ControlTemplate TargetType="Button">
-                                <Border Width="150" Height="40" CornerRadius="9" Background="{TemplateBinding Background}">
-                                    <ContentPresenter VerticalAlignment="Center" HorizontalAlignment="Center"/>
-                                </Border>
-                            </ControlTemplate>
-                        </Button.Template>
-                    </Button>
+                            Margin="0,50,0,0"
+                            Template="{StaticResource ButtonTemplateKey}"
+                            Style="{StaticResource BluePurpleButtonStyleKey}"
+                            Height="40"
+                            Width="150"/>
 
                     <StackPanel Orientation="Horizontal" HorizontalAlignment="Center"  Margin="0,15,0,0">
                         <TextBlock Text="Forget Password?"

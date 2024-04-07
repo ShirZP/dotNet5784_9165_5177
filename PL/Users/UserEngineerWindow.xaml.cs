@@ -44,37 +44,18 @@ namespace PL.Users
             ReadUser(id);
         }
 
-
-        #region Clock methods
-
-        private void BtnAddHour_Click(object sender, RoutedEventArgs e)
-        {
-            SharedDependencyProperties.SetClock(this, s_bl.MoveClockHourForward());
-        }
-
-        private void BtnAddDay_Click(object sender, RoutedEventArgs e)
-        {
-            SharedDependencyProperties.SetClock(this, s_bl.MoveClockDayForward());
-        }
-
-        private void BtnAddYear_Click(object sender, RoutedEventArgs e)
-        {
-            SharedDependencyProperties.SetClock(this, s_bl.MoveClockYearForward());
-        }
-
-        private void BtnResetClock_Click(object sender, RoutedEventArgs e)
-        {
-            SharedDependencyProperties.SetClock(this, s_bl.initializeClock());
-        }
-
-        #endregion
-
+        /// <summary>
+        /// Opening the engineer's current task view window
+        /// </summary>
         private void BtnCurrentTaskView_Click(object sender, RoutedEventArgs e)
         {
             new TaskDetails(EngineerUser.EngineerCurrentTask!.ID).ShowDialog();
-            EngineerUser = s_bl.Engineer.Read(EngineerUser.ID);
         }
 
+
+        /// <summary>
+        /// Clicking on completing a task or selecting a task
+        /// </summary>
         private void BtnSelectOrDoneTask_Click(object sender, RoutedEventArgs e)
         {
             Button? button = sender as Button;
@@ -86,6 +67,7 @@ namespace PL.Users
 
                     if (button.Content.ToString() == "Select Task")
                     {
+                        //Opening the task table window according to the engineer's permission
                         new TaskTableWindow(EngineerUser.ID).ShowDialog();
                         EngineerUser = s_bl.Engineer.Read(EngineerUser.ID);
                     }
@@ -95,11 +77,12 @@ namespace PL.Users
 
                         if(result == MessageBoxResult.Yes) 
                         {
+                            //update the task's status to complete.
                             BO.Task task = s_bl.Task.Read(EngineerUser.EngineerCurrentTask!.ID);
                             task.Status = BO.Status.Complete;
                             s_bl.Task.Update(task);
 
-                            //update the current of the engineer to be empty.  
+                            //update the current task of the engineer to be empty.  
                             s_bl.Engineer.Update(EngineerUser);
                             EngineerUser = s_bl.Engineer.Read(EngineerUser.ID);
                         }
@@ -124,7 +107,7 @@ namespace PL.Users
         }
 
         /// <summary>
-        /// The fuction recieves an engineer id and read it into EngineerUser.
+        /// The function receives an engineer id and read it into EngineerUser.
         /// </summary>
         /// <param name="id">User id</param>
         private void ReadUser(int id)

@@ -23,11 +23,14 @@
         <local:ConvertProjectStartDateToCollapsed x:Key="ConvertProjectStartDateToCollapsedKey"/>
         <local:ConvertProjectStartDateToBool x:Key="ConvertProjectStartDateToBoolKey"/>
 
+
+        <!-- Id Converts -->
         <local:ConvertIdToContent x:Key="ConverIdToContentKey"/>
         <local:ConvertIdToIsEnabled x:Key="ConvertIdToIsEnabledKey"/>
         <local:ConvertIdZeroToCollapsed x:Key="ConvertIdZeroToCollapsedKey"/>
         <local:ConvertIdZeroToVisible x:Key="ConvertIdZeroToVisibleKey"/>
-        
+
+        <!-- EngineerCurrentTask Converts -->
         <local:ConvertEngineerCurrentTaskToVisible x:Key="ConvertEngineerCurrentTaskToVisibleKey"/>
         <local:ConvertEmptyEngineerCurrentTaskToVisible x:Key="ConvertEmptyEngineerCurrentTaskToVisibleKey"/>
         
@@ -122,7 +125,7 @@
         </Style>
         
         <!-- Back button style-->
-        <Style TargetType="Button" x:Key="BackButtonStyleKey" 
+        <Style TargetType="Button" x:Key="BackButtonStyleKey"
                BasedOn="{StaticResource IconButtonStyleKey}">
             <Setter Property="Content">
                 <Setter.Value>

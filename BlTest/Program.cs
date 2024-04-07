@@ -13,8 +13,8 @@
             string? ans = Console.ReadLine() ?? throw new FormatException("Wrong input");
             if (ans == "Y")
             {
-                s_bl.initializationDB();
-                s_bl.initializeProjectStatus();
+                s_bl.InitializationDB();
+                s_bl.InitializeProjectStatus();
             }
 
 
@@ -675,7 +675,7 @@
                         }
 
                         //change the status of the project from Planing to BuildingSchedule
-                        s_bl.changeStatusToBuildingSchedule();
+                        s_bl.ChangeStatusToBuildingSchedule();
                         Console.WriteLine("The status of the project update to BuildingSchedule");
 
                         break;
@@ -690,7 +690,7 @@
 
                         if (calculateProjectStatus == BO.ProjectStatus.Execution)
                         {
-                            s_bl.changeStatusToExecution();
+                            s_bl.ChangeStatusToExecution();
                             Console.WriteLine("The status of the project update to Execution");
                         }
 

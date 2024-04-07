@@ -46,9 +46,12 @@ namespace PL.Task
             }
         }
 
+        /// <summary>
+        /// Double-clicking opens a task view window of the clicked dependency
+        /// </summary>
         private void DgSelectTask_PreviewMouseDoubleClick(object sender, MouseButtonEventArgs e)
         {
-            e.Handled = true;
+            e.Handled = true; //Prevents an additional event on the control (will not edit column text)
             if (sender is DataGrid dataGrid && dataGrid.SelectedItem is BO.TaskInList selectedTask)
             {
                 new TaskDetails(selectedTask.ID).ShowDialog();

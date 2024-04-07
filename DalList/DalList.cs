@@ -18,33 +18,33 @@ sealed internal class DalList : IDal
 
     private DalList() { }
 
-    public DateTime? getProjectStartDate()
+    public DateTime? GetProjectStartDate()
     {
         return DataSource.Config.projectStartDate;
     }
 
-    public DateTime? getProjectEndDate()
+    public DateTime? GetProjectEndDate()
     {
         return DataSource.Config.projectEndDate;
     }
 
-    public ProjectStatus getProjectStatus()
+    public ProjectStatus GetProjectStatus()
     {
         return DataSource.Config.projectStatus;
     }
 
-    public void setProjectStartDate(DateTime startDate)
+    public void SetProjectStartDate(DateTime startDate)
     {
         DataSource.Config.projectStartDate = startDate;
     }
 
-    public void setProjectEndDate(DateTime endDate)
+    public void SetProjectEndDate(DateTime endDate)
     {
 
         DataSource.Config.projectStartDate = endDate;
     }
 
-    public void initializeProjectStatus()
+    public void InitializeProjectStatus()
     {
         DataSource.Config.projectStatus = DO.ProjectStatus.Planning;
         DataSource.Config.projectStartDate = null;
@@ -54,7 +54,7 @@ sealed internal class DalList : IDal
     /// <summary>
     /// The function change the status to status Planning
     /// </summary>
-    public void changeStatusToPlanning()
+    public void ChangeStatusToPlanning()
     {
         DataSource.Config.projectStatus = DO.ProjectStatus.Planning;
     }
@@ -63,7 +63,7 @@ sealed internal class DalList : IDal
     /// The function change the status to status BuildingSchedule
     /// </summary>
     /// <exception cref="DalChangProjectStatusException">If you try to change from status Execution to status BuildingSchedule</exception>
-    public void changeStatusToBuildingSchedule()
+    public void ChangeStatusToBuildingSchedule()
     {
         if (DataSource.Config.projectStatus == DO.ProjectStatus.Execution)
         {
@@ -77,7 +77,7 @@ sealed internal class DalList : IDal
     /// The function change the status to status Execution
     /// </summary>
     /// <exception cref="DalChangProjectStatusException">If you try to change from status planning to status Execution</exception>
-    public void changeStatusToExecution()
+    public void ChangeStatusToExecution()
     {
         if (DataSource.Config.projectStatus == DO.ProjectStatus.Planning)
         {
@@ -97,7 +97,7 @@ sealed internal class DalList : IDal
        return DataSource.Config.clock;
     }
 
-    public void initializeClock()
+    public void InitializeClock()
     {
         DataSource.Config.clock = DateTime.Now;
     }

@@ -200,8 +200,8 @@ public static class Initialization
         s_dal!.Dependency.Clear();
         s_dal!.User.Clear();
 
-        s_dal.initializeProjectStatus();
-        s_dal.initializeClock();
+        s_dal.InitializeProjectStatus();
+        s_dal.InitializeClock();
 
     }
 }

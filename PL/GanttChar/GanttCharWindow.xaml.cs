@@ -65,6 +65,20 @@ namespace PL.GanttChar
         }
 
         #region Methods
+
+        /// <summary>
+        /// The function returns a list of all dates from the beginning to the end of the project
+        /// </summary>
+        private void loadGanttDatesList()
+        {
+            GanttDatesList = new List<DateGantt>();
+
+            for (DateTime date = s_bl.GetProjectStartDate().Value; date.Date <= s_bl.GetProjectEndDate()!.Value.Date; date = date.AddDays(1))
+            {
+                GanttDatesList.Add(new DateGantt() { Date = date });
+            }
+        }
+
         /// <summary>
         /// The function accepts a BO.Task task and returns a TaskGantt task.
         /// </summary>
@@ -88,9 +102,6 @@ namespace PL.GanttChar
 
             double timeToEnd = (projectEndDate - projectStartDate)!.Value.TotalDays - timeFromStart - duration + 2;
 
-            //double end = (projectEndDate - task.ForecastDate)!.Value.TotalDays;
-            //double timeToEnd = (end == 0) ? 0 : end + 1;
-
             return new TaskGantt(){TaskID = task.ID,
                                    TaskName = task.NickName,
                                    TaskStatus = ganttTaskStatus,
@@ -100,19 +111,6 @@ namespace PL.GanttChar
                                    TimeToEnd = timeToEnd * dateDurationSize + timeToEnd + 1};
            
         
-        }
-
-        /// <summary>
-        /// The function returns a list of all dates from the beginning to the end of the project
-        /// </summary>
-        private void loadGanttDatesList()
-        {
-             GanttDatesList = new List<DateGantt>();
-
-            for (DateTime date = s_bl.GetProjectStartDate().Value; date.Date <= s_bl.GetProjectEndDate()!.Value.Date; date = date.AddDays(1))
-            {
-                GanttDatesList.Add(new DateGantt() { Date = date });
-            }
         }
 
         #endregion

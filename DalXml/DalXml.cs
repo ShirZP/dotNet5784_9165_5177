@@ -19,17 +19,17 @@ sealed internal class DalXml : IDal
 
     private DalXml() { }
 
-    public DateTime? getProjectStartDate()
+    public DateTime? GetProjectStartDate()
     {
         return Config.ProjectStartDate;
     }
 
-    public DateTime? getProjectEndDate()
+    public DateTime? GetProjectEndDate()
     {
         return Config.ProjectEndDate;
     }
 
-    public ProjectStatus getProjectStatus()
+    public ProjectStatus GetProjectStatus()
     {
         return Config.ProjectStatus;
     }
@@ -38,7 +38,7 @@ sealed internal class DalXml : IDal
     /// The function updated the project start date in the data configuration xml file
     /// </summary>
     /// <param name="projectStartDate"></param>
-    public void setProjectStartDate(DateTime projectStartDate)
+    public void SetProjectStartDate(DateTime projectStartDate)
     {
         XElement root = XMLTools.LoadListFromXMLElement(Config.s_data_config_xml);
         if (root.Element("ProjectStartDate") is null)
@@ -58,7 +58,7 @@ sealed internal class DalXml : IDal
     /// The function updated the project end date in the data configuration xml file
     /// </summary>
     /// <param name="projectEndDate"></param>
-    public void setProjectEndDate(DateTime projectEndDate)
+    public void SetProjectEndDate(DateTime projectEndDate)
     {
         XElement root = XMLTools.LoadListFromXMLElement(Config.s_data_config_xml);
         if (root.Element("ProjectEndDate") is null)
@@ -78,7 +78,7 @@ sealed internal class DalXml : IDal
     /// <summary>
     /// The function initializes the status of the project to A and resets the start and end dates of the project
     /// </summary>
-    public void initializeProjectStatus()
+    public void InitializeProjectStatus()
     {
         XElement root = XMLTools.LoadListFromXMLElement(Config.s_data_config_xml);
 
@@ -95,7 +95,7 @@ sealed internal class DalXml : IDal
     /// <summary>
     /// The function change the status to status Planning
     /// </summary>
-    public void changeStatusToPlanning()
+    public void ChangeStatusToPlanning()
     {
         XElement root = XMLTools.LoadListFromXMLElement(Config.s_data_config_xml);
         root.Element("ProjectStatus")!.SetValue(DO.ProjectStatus.Planning.ToString());
@@ -107,7 +107,7 @@ sealed internal class DalXml : IDal
     /// The function change the status to status BuildingSchedule
     /// </summary>
     /// <exception cref="DalChangProjectStatusException">If you try to change from status Execution to status BuildingSchedule</exception>
-    public void changeStatusToBuildingSchedule()
+    public void ChangeStatusToBuildingSchedule()
     {
         XElement root = XMLTools.LoadListFromXMLElement(Config.s_data_config_xml);
         if(root.Element("ProjectStatus")!.Value == DO.ProjectStatus.Execution.ToString())
@@ -123,7 +123,7 @@ sealed internal class DalXml : IDal
     /// The function change the status to status Execution
     /// </summary>
     /// <exception cref="DalChangProjectStatusException">If you try to change from status planning to status Execution</exception>
-    public void changeStatusToExecution()
+    public void ChangeStatusToExecution()
     {
         XElement root = XMLTools.LoadListFromXMLElement(Config.s_data_config_xml);
         root.Element("ProjectStatus")!.SetValue(DO.ProjectStatus.Execution.ToString());
@@ -142,7 +142,7 @@ sealed internal class DalXml : IDal
         return Config.Clock;
     }
 
-    public void initializeClock()
+    public void InitializeClock()
     {
         XElement root = XMLTools.LoadListFromXMLElement(Config.s_data_config_xml);
 

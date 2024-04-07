@@ -101,8 +101,8 @@ namespace PL.Task
         private bool taskDependenciesComplete(BO.Task task)
         {
             BO.TaskInList? notCompleteTask = (from dependency in task.Dependencies
-                                       where dependency.Status != BO.Status.Complete
-                                       select dependency).FirstOrDefault(); 
+                                            where dependency.Status != BO.Status.Complete
+                                            select dependency).FirstOrDefault(); 
             if(notCompleteTask != null)
             {
                 return false;   
@@ -111,6 +111,10 @@ namespace PL.Task
             return true;
         }
 
+
+        /// <summary>
+        /// A button that opens the editing window of a task
+        /// </summary>
         private void PenButton_Click(object sender, RoutedEventArgs e)
         {
             var button = sender as Button;
@@ -151,7 +155,7 @@ namespace PL.Task
                 case "AssignedEngineer":
                     SubcategoryFilter_CB.IsEnabled = true;
                     values = (from engineer in s_bl.Engineer.ReadAll()
-                                    select engineer.FullName).ToArray();
+                              select engineer.FullName).ToArray();
 
                     values = addNewItemToArray(values, "All");
                     break;
@@ -178,11 +182,15 @@ namespace PL.Task
                     SubcategoryFilter_CB.Items.Add(new ComboBoxItem { Content = value.ToString() });
                 }
 
+                //Selecting the "All" option
                 SubcategoryFilter_CB.SelectedIndex = values.Length - 1;
             }
                           
         }
 
+        /// <summary>
+        /// The function accepts an array and a string and adds the string to the end of the array
+        /// </summary>
         private Array addNewItemToArray(Array arr, string item)
         {
             string[] newArr = new string[arr.Length + 1];
@@ -199,11 +207,18 @@ namespace PL.Task
             return newArr;
         }
 
+        /// <summary>
+        /// Filtering the task table according to the selection in SubcategoryFilter_CB
+        /// </summary>
         private void filterTable_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
             filterTable();
         }
 
+
+        /// <summary>
+        /// Filtering the task table according to the selection in SubcategoryFilter_CB
+        /// </summary>
         private void filterTable()
         {
             string subFieldFilter = (SubcategoryFilter_CB.SelectedValue as ComboBoxItem)?.Content?.ToString();
@@ -236,16 +251,14 @@ namespace PL.Task
             }
         }
 
-        private void BtnBack_Click(object sender, RoutedEventArgs e)
-        {
-            this.Close();
-        }
-
+        /// <summary>
+        /// Double-clicking opens a task view window of the clicked dependency
+        /// </summary>
         private void DgSelectTask_PreviewMouseDoubleClick(object sender, MouseButtonEventArgs e)
         {
             try
             {
-                e.Handled = true;
+                e.Handled = true; //Prevents an additional event on the control (will not edit column text)
                 if (sender is DataGrid dataGrid && dataGrid.SelectedItem is BO.Task selectedTask)
                 {
                     if (UserIDPermission == 0)
@@ -265,6 +278,10 @@ namespace PL.Task
             {
                 MessageBox.Show(ex.Message, "ERROR :(", MessageBoxButton.OK, MessageBoxImage.Error);
             }
+        }
+        private void BtnBack_Click(object sender, RoutedEventArgs e)
+        {
+            this.Close();
         }
     }
 }

@@ -14,7 +14,7 @@ internal class Bl : IBl
     public BO.ProjectStatus CalculateProjectStatus()
     {
         //If there is no start date for the project yet - the planning stage.
-        if (_dal.getProjectStartDate() == null)
+        if (_dal.GetProjectStartDate() == null)
         {
             return BO.ProjectStatus.Planning;
         }
@@ -38,21 +38,21 @@ internal class Bl : IBl
     /// </summary>
     public BO.ProjectStatus GetProjectStatus()
     {
-        int numStatus = (int)_dal.getProjectStatus();
+        int numStatus = (int)_dal.GetProjectStatus();
 
         return (BO.ProjectStatus)numStatus;
     }
 
     public DateTime? GetProjectStartDate()
     {
-        return _dal.getProjectStartDate();  
+        return _dal.GetProjectStartDate();  
     }
 
     public void SetProjectStartDate(DateTime startDate)
     {
         if (GetProjectStartDate() == null)
         {
-            _dal.setProjectStartDate(startDate);
+            _dal.SetProjectStartDate(startDate);
         }
         else
             throw new Exception("There is already a start date for the project");
@@ -60,7 +60,7 @@ internal class Bl : IBl
 
     public DateTime? GetProjectEndDate()
     {
-        return _dal.getProjectEndDate();
+        return _dal.GetProjectEndDate();
     }
 
     public void SetProjectEndDate()
@@ -75,37 +75,37 @@ internal class Bl : IBl
                     endDate = task.ForecastDate;
             }
 
-            _dal.setProjectEndDate(endDate.Value);
+            _dal.SetProjectEndDate(endDate.Value);
         }
         else
             throw new Exception("The project already has an end date");
     }
-    public void changeStatusToPlanning()
+    public void ChangeStatusToPlanning()
     {
-        _dal.changeStatusToPlanning();
+        _dal.ChangeStatusToPlanning();
     }
 
-    public void changeStatusToBuildingSchedule()
+    public void ChangeStatusToBuildingSchedule()
     {
-        _dal.changeStatusToBuildingSchedule();
+        _dal.ChangeStatusToBuildingSchedule();
     }
 
-    public void changeStatusToExecution()
+    public void ChangeStatusToExecution()
     {
-        _dal.changeStatusToExecution();
+        _dal.ChangeStatusToExecution();
     }
 
-    public void initializeProjectStatus()
+    public void InitializeProjectStatus()
     {
-        _dal.initializeProjectStatus();
+        _dal.InitializeProjectStatus();
     }
 
-    public void initializationDB()
+    public void InitializationDB()
     {
         DalTest.Initialization.Do();
     }
 
-    public void resetDB()
+    public void ResetDB()
     {
         DalTest.Initialization.DoReset();
     }
@@ -140,7 +140,7 @@ internal class Bl : IBl
         return GetClock();
     }
 
-    public DateTime initializeClock()
+    public DateTime InitializeClock()
     {
         _dal.SetClock(DateTime.Now);
         return GetClock();

@@ -26,14 +26,13 @@ namespace PL.Engineer
                                                                                            typeof(IEnumerable<BO.Engineer>),
                                                                                            typeof(EngineerListWindow),
                                                                                            new PropertyMetadata(null));
-        public BO.EngineerExperience Experience { get; set; } = BO.EngineerExperience.All;
-
-
         public IEnumerable<BO.Engineer> EngineerList
         {
             get { return (IEnumerable<BO.Engineer>)GetValue(EngineerListProperty); }
             set { SetValue(EngineerListProperty, value); }
         }
+
+        public BO.EngineerExperience Experience { get; set; } = BO.EngineerExperience.All;
 
         public EngineerListWindow()
         {
@@ -43,7 +42,7 @@ namespace PL.Engineer
         }
 
         /// <summary>
-        /// Combo box ExperienceSelector to engineer.
+        /// ComboBox ExperienceSelector to engineer.
         /// </summary>
         private void cbExperienceSelector_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {

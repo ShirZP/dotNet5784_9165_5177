@@ -8,8 +8,8 @@ public interface IBl
     public ITask Task { get; }
     public IEngineer Engineer { get; }
 
-    public void initializationDB();
-    public void resetDB();
+    public void InitializationDB();
+    public void ResetDB();
 
     #region Project methods
     public BO.ProjectStatus CalculateProjectStatus();
@@ -18,10 +18,10 @@ public interface IBl
     public DateTime? GetProjectStartDate();
     public void SetProjectEndDate();
     public DateTime? GetProjectEndDate();
-    public void changeStatusToPlanning();
-    public void changeStatusToBuildingSchedule();
-    public void changeStatusToExecution();
-    public void initializeProjectStatus();
+    public void ChangeStatusToPlanning();
+    public void ChangeStatusToBuildingSchedule();
+    public void ChangeStatusToExecution();
+    public void InitializeProjectStatus();
     #endregion
 
     #region Clock
@@ -29,6 +29,6 @@ public interface IBl
     public DateTime MoveClockYearForward();
     public DateTime MoveClockDayForward();
     public DateTime MoveClockHourForward();
-    public DateTime initializeClock();
+    public DateTime InitializeClock();
     #endregion
 }

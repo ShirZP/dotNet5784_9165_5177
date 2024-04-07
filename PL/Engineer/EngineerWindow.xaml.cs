@@ -30,59 +30,10 @@ namespace PL.Engineer
                                                                                         typeof(EngineerWindow),
                                                                                         new PropertyMetadata(null));
 
-
         public BO.Engineer CurrentEngineer
         {
             get { return (BO.Engineer)GetValue(EngineerProperty); }
             set { SetValue(EngineerProperty, value); }
-        }
-
-        public static readonly DependencyProperty EngineerTasksNameProperty = DependencyProperty.Register(
-                                                                                                "engineerTasksName",
-                                                                                                typeof(IEnumerable<string>),
-                                                                                                typeof(EngineerWindow),
-                                                                                                new PropertyMetadata(null));
-
-
-        //The list of all the tasks that the engineer is registered for
-        private IEnumerable<BO.TaskInList> engineerTasksInList = new List<BO.TaskInList>();
-
-        //The list of all the names of the tasks that the engineer is registered on
-        public List<string> engineerTasksName
-        {
-            get { return (List<string>)GetValue(EngineerTasksNameProperty); }
-            set { SetValue(EngineerTasksNameProperty, value); }
-        }
-
-        //The name selected in the ComboBox of EngineerCurrentTask
-        private string _selectedTaskName = "None";
-        public string SelectedTaskName
-        {
-            get => _selectedTaskName;
-            set
-            {
-                _selectedTaskName = value;
-                UpdateCurrentEngineerCurrentTask(_selectedTaskName);
-            }
-        }
-
-        /// <summary>
-        /// Updating the EngineerCurrentTask field of the engineer according to the name of the task
-        /// </summary>
-        /// <param name="selectedTaskName">The name selected in the ComboBox of EngineerCurrentTask</param>
-        private void UpdateCurrentEngineerCurrentTask(string selectedTaskName)
-        {
-            if (CurrentEngineer != null && !string.IsNullOrEmpty(selectedTaskName) && selectedTaskName != "None")
-            {
-                BO.TaskInList? taskInList = (from t in engineerTasksInList
-                                             where t.NickName == selectedTaskName
-                                             select t).FirstOrDefault();
-                if (taskInList != null)
-                {
-                    BO.TaskInEngineer taskInEngineer = new TaskInEngineer(taskInList.ID, taskInList.NickName);
-                    CurrentEngineer.EngineerCurrentTask = taskInEngineer;
-                }
-            }
         }
 
 
@@ -107,29 +58,9 @@ namespace PL.Engineer
                 }
             }
 
-            LoadAllTasksInList();
-            if(CurrentEngineer.EngineerCurrentTask != null)
-            {
-                SelectedTaskName = CurrentEngineer.EngineerCurrentTask.NickName;
-
-            }
-            
             this.DataContext = this;
         }
 
-        /// <summary>
-        /// Updating the engineer's task list
-        /// </summary>
-        private void LoadAllTasksInList()
-        {
-            engineerTasksInList = s_bl.Task.ReadAll(item => item.AssignedEngineer != null &&
-                                                            item.AssignedEngineer.ID == CurrentEngineer.ID &&
-                                                            item.Status != BO.Status.Complete);
-
-            engineerTasksName = (from task in engineerTasksInList
-                                 select task.NickName).ToList();
-            engineerTasksName.Add("None");
-        }
 
         /// <summary>
         /// Add/update engineer

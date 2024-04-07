@@ -14,21 +14,21 @@ public interface IDal
     DO.ProjectStatus ProjectStatus { get; set; }
     DateTime Clock { get; set; }
 
-    public DateTime? getProjectStartDate();
-    public DateTime? getProjectEndDate();
-    public DO.ProjectStatus getProjectStatus();
+    public DateTime? GetProjectStartDate();
+    public DateTime? GetProjectEndDate();
+    public DO.ProjectStatus GetProjectStatus();
 
-    public void setProjectStartDate(DateTime projectStartDate);
-    public void setProjectEndDate(DateTime projectEndDate);
-    public void initializeProjectStatus();
-    public void changeStatusToPlanning();
-    public void changeStatusToBuildingSchedule();
-    public void changeStatusToExecution();
+    public void SetProjectStartDate(DateTime projectStartDate);
+    public void SetProjectEndDate(DateTime projectEndDate);
+    public void InitializeProjectStatus();
+    public void ChangeStatusToPlanning();
+    public void ChangeStatusToBuildingSchedule();
+    public void ChangeStatusToExecution();
 
     #region  Clock
     public void SetClock(DateTime clock);
     public DateTime GetClock();
-    public void initializeClock();
+    public void InitializeClock();
     #endregion
 
 }

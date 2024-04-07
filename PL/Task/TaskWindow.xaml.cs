@@ -32,18 +32,24 @@ namespace PL.Task
                                                                                      typeof(BO.Task),
                                                                                      typeof(TaskWindow),
                                                                                      new PropertyMetadata(null));
+        public BO.Task CurrentTask
+        {
+            get { return (BO.Task)GetValue(TaskProperty); }
+            set { SetValue(TaskProperty, value); }
+        }
 
         public static readonly DependencyProperty daysEffortTimeOptionsProperty = DependencyProperty.Register(
                                                                                    "daysEffortTimeOptions",
                                                                                    typeof(List<TimeSpan>),
                                                                                    typeof(TaskWindow),
                                                                                    new PropertyMetadata(null));
+        public List<TimeSpan> daysEffortTimeOptions
+        {
+            get { return (List<TimeSpan>)GetValue(daysEffortTimeOptionsProperty); }
+            set { SetValue(daysEffortTimeOptionsProperty, value); }
+        }
+        public TimeSpan daysEffortTime;
 
-        public static readonly DependencyProperty AssignedEngineerProperty = DependencyProperty.Register(
-                                                                             "AssignedEngineer",
-                                                                             typeof(IEnumerable<string>),
-                                                                             typeof(TaskWindow),
-                                                                             new PropertyMetadata(null));
 
         public static readonly DependencyProperty SelectedDependenciesProperty = DependencyProperty.Register(
                                                                                   "SelectedDependencies",
@@ -51,26 +57,17 @@ namespace PL.Task
                                                                                   typeof(TaskWindow),
                                                                                   new PropertyMetadata(default(IList)));
 
-
+        //The selected dependencies (and appear in the dataGrid)
         public IList SelectedDependencies
         {
             get { return (IList)GetValue(SelectedDependenciesProperty); }
             set { SetValue(SelectedDependenciesProperty, value); }
         }
-        public IList<BO.TaskInList> DependenciesInList { get; set; }
 
-        public BO.Task CurrentTask
-        {
-            get { return (BO.Task)GetValue(TaskProperty); }
-            set { SetValue(TaskProperty, value); }
-        }
-
-        public List<TimeSpan> daysEffortTimeOptions
-        {
-            get { return (List<TimeSpan>)GetValue(daysEffortTimeOptionsProperty); }
-            set { SetValue(daysEffortTimeOptionsProperty, value); }
-        }
-        public TimeSpan daysEffortTime;
+        /// <summary>
+        /// Dependencies that can be selected to the current task
+        /// </summary>
+        public IList<BO.TaskInList> PotentialDependenciesInList { get; set; }
 
 
         public TaskWindow(int id = 0)
@@ -83,7 +80,7 @@ namespace PL.Task
                 SharedDependencyProperties.SetProjectStartDate(this, s_bl.GetProjectStartDate()!.Value);
             }
 
-            //According to the id we will update CurrentEngineer. If id ==0 - an empty engineer will be opened to be added. Otherwise we will pull out the engineer and open a window for updating
+            //According to the id we will update CurrentTask. If id == 0 - an empty Task will be opened to be added. Otherwise we will pull out the Task and open a window for updating
             if (id == 0)
             {
                 List<BO.TaskInList> dependencies = new List<BO.TaskInList>();
@@ -115,23 +112,30 @@ namespace PL.Task
             this.DataContext = this;
         }
 
-        
+        /// <summary>
+        /// The function loads the dependencies list and marks the dependencies of the current task as selected tasks.
+        /// </summary>
         private void LoadDependenciesLists()
         {
             SelectedDependencies = (from dependency in CurrentTask.Dependencies
                                     select dependency).ToList();
 
-            DependenciesInList = s_bl.Task.PotentialDependencies(CurrentTask.ID).ToList();
+            PotentialDependenciesInList = s_bl.Task.PotentialDependencies(CurrentTask.ID).ToList();
 
+            //Any dependency SelectedDependencies that exists in the list of potential dependencies - will be marked as selected in the listBox
             foreach (var task in SelectedDependencies)
             {
-                if (DependenciesInList.Contains(task))
+                if (PotentialDependenciesInList.Contains(task))
                 {
                     listBox.SelectedItems.Add(task);
                 }
             }
         }
 
+
+        /// <summary>
+        /// Updates or adds to the current task
+        /// </summary>
         private void BtnAddOrUpdate_Click(object sender, RoutedEventArgs e)
         {
             Button? button = sender as Button;
@@ -169,6 +173,9 @@ namespace PL.Task
         }
 
 
+        /// <summary>
+        /// Opens and closes the Popup
+        /// </summary>
         private void BtnListBoxPopup_Click(object sender, RoutedEventArgs e)
         {
             if (dependenciesPopup.IsOpen)
@@ -183,22 +190,29 @@ namespace PL.Task
             }
         }
 
+        /// <summary>
+        /// Updates the list of SelectedDependencies that appears in the DataGrid according to the SelectedItems of the ListBox
+        /// </summary>
         private void LBDependencies_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
             SelectedDependencies = ((ListBox)sender).SelectedItems;
         }
-        private void BtnBack_Click(object sender, RoutedEventArgs e)
-        {
-            this.Close();
-        }
 
+        /// <summary>
+        /// Double-clicking opens a task view window of the clicked dependency
+        /// </summary>
         private void DgSelectTask_PreviewMouseDoubleClick(object sender, MouseButtonEventArgs e)
         {
-            e.Handled = true;
+            e.Handled = true; ////Prevents an additional event on the control (will not edit column text)
             if (sender is DataGrid dataGrid && dataGrid.SelectedItem is BO.TaskInList selectedTask)
             {
                 new TaskDetails(selectedTask.ID).ShowDialog();
             }
+        }
+
+        private void BtnBack_Click(object sender, RoutedEventArgs e)
+        {
+            this.Close();
         }
     }
 }

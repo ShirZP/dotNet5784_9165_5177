@@ -42,7 +42,7 @@ public partial class ManagerWindow : Window
     { 
         SharedDependencyProperties.SetProjectStatus(this, s_bl.GetProjectStatus());
 
-        IsButtonVisible = (s_bl.GetProjectStartDate() == default(DateTime)) ? Visibility.Visible : Visibility.Collapsed;
+        IsButtonVisible = (s_bl.GetProjectStartDate() == null || s_bl.GetProjectStartDate() == default(DateTime)) ? Visibility.Visible : Visibility.Collapsed;
 
         InitializeComponent();
         SharedDependencyProperties.SetClock(this, s_bl.GetClock());
@@ -66,7 +66,7 @@ public partial class ManagerWindow : Window
             if (result == MessageBoxResult.Yes)
             {
                 // Initial the DB
-                s_bl.initializationDB();
+                s_bl.InitializationDB();
                 resetData();
                 MessageBoxResult messageBoxResult = MessageBox.Show("Initialization done successfully!", "Happy Message :)", MessageBoxButton.OK, MessageBoxImage.Information);
             }
@@ -91,7 +91,7 @@ public partial class ManagerWindow : Window
             if (result == MessageBoxResult.Yes)
             {
                 // Reset the DB
-                s_bl.resetDB();
+                s_bl.ResetDB();
                 resetData();
                 MessageBoxResult messageBoxResult = MessageBox.Show("Reset DB done successfully!", "Happy Message :)", MessageBoxButton.OK, MessageBoxImage.Information);
             }
@@ -203,7 +203,7 @@ public partial class ManagerWindow : Window
         {
             if(SharedDependencyProperties.GetClock(this) >= s_bl.GetProjectStartDate())
             {
-                s_bl.changeStatusToExecution();
+                s_bl.ChangeStatusToExecution();
                 SharedDependencyProperties.SetProjectStatus(this, s_bl.GetProjectStatus());
 
             }
@@ -212,7 +212,7 @@ public partial class ManagerWindow : Window
         {
             if(SharedDependencyProperties.GetClock(this) < s_bl.GetProjectStartDate())
             {
-                s_bl.changeStatusToPlanning();
+                s_bl.ChangeStatusToPlanning();
                 SharedDependencyProperties.SetProjectStatus(this, s_bl.GetProjectStatus());
             }
         }
@@ -257,7 +257,7 @@ public partial class ManagerWindow : Window
 
     private void BtnResetClock_Click(object sender, RoutedEventArgs e)
     {
-        SharedDependencyProperties.SetClock(this, s_bl.initializeClock());
+        SharedDependencyProperties.SetClock(this, s_bl.InitializeClock());
         ExecuteProjectByClock();
         StartDatePicker.DisplayDateStart = SharedDependencyProperties.GetClock(this).AddDays(1);
     }

@@ -130,7 +130,7 @@
                                     Width="24" Height="25" 
                                     BorderThickness="0" Foreground="White" Template="{StaticResource ButtonTemplateKey}" Style="{StaticResource PinkButtonStyleKey}" FontFamily="Montserrant" FontWeight="Bold" FontSize="18" Cursor="Hand" VerticalAlignment="Top" HorizontalAlignment="Left"  Margin="332,0,0,0"/>
                             <Popup x:Name="dependenciesPopup" Width="345" Height="235" StaysOpen="False" AllowsTransparency="True" Placement="Bottom" OpacityMask="White">
-                                <ListBox x:Name="listBox" ItemsSource="{Binding DependenciesInList}" SelectionChanged="LBDependencies_SelectionChanged" SelectionMode="Multiple">
+                                <ListBox x:Name="listBox" ItemsSource="{Binding PotentialDependenciesInList}" SelectionChanged="LBDependencies_SelectionChanged" SelectionMode="Multiple">
 
                                 </ListBox>
                             </Popup>
